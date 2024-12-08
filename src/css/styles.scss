@@ -1,0 +1,58 @@
+@import "./variables";
+@import "./bootswatch";
+
+$primary:       #202020;
+$secondary:     #707070;
+$success:       #2d6e3d;
+$info:          #33527a;
+$warning:       #aca651;
+$danger:        #923b3b;
+$light:         #9e9e9e;
+$dark:          #141414;
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark,
+    "gray-100":       $gray-100,
+    "gray-200":       $gray-200,
+    "gray-300":       $gray-300,
+    "gray-400":       $gray-400,
+    "gray-500":       $gray-500,
+    "gray-600":       $gray-600,
+    "gray-700":       $gray-700,
+    "gray-800":       $gray-800,
+    "gray-900":       $gray-900
+);
+// scss-docs-end theme-colors-map
+
+// Style anchor elements.
+
+$link-color:                              #FFFFFFA1;
+$link-decoration:                         none;
+$link-shade-percentage:                   20%;
+$link-hover-color:                        #FFFFFF;
+$link-hover-decoration:                   null;
+$link-text-shadow:                        1px 1px 3px #000;
+
+// H1,H2,H3,H4,H5,H6
+$headings-color:              $light;
+$headings-margin-bottom:      1rem;
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// sass styles.scss bootstrap.css (COMANDO PARA TRANSPILAR ARQUIVOS SASS EM CSS)
+
+a {
+    text-shadow: $link-text-shadow;
+}
+
+svg {
+    color: $secondary;
+}

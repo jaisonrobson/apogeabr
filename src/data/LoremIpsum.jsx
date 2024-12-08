@@ -1,0 +1,3 @@
+const LoremIpsum = () => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut erat in dolor faucibus ornare in at odio. Nunc vitae iaculis mi, ac fringilla arcu. Mauris aliquam justo non mi dictum facilisis. Nunc at nisi eu nisl ullamcorper fringilla. Curabitur dictum mauris in nulla elementum, molestie aliquam tellus eleifend. Aliquam a semper eros. Proin maximus nulla ac odio rhoncus dignissim. Donec justo sapien, iaculis id fringilla in, finibus sit amet elit. Quisque elementum placerat nulla, eget aliquet libero ornare nec."
+
+export default LoremIpsum
