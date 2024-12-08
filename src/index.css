@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Martel';
+    src: url('./fonts/martel.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Celtic Garamond the 2nd';
+    src: url('./fonts/celtg.ttf') format('truetype');
+}
+
+  body {
+    font-family: 'Celtic Garamond the 2nd';
+  }
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

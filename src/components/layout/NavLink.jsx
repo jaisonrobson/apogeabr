@@ -5,6 +5,7 @@ import { NavLink as ReactstrapNavLink } from 'reactstrap'
 const StyledNavLink = styled(({ textShadow, color, ...props }) => <ReactstrapNavLink {...props} />)`
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''};
     ${({ color }) => color ? `color: ${color};` : ''};
+    font-family: 'martel';
 `
 
 const NavLink = (props) => {

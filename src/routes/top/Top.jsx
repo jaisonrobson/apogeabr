@@ -21,7 +21,7 @@ const Top = () => (
     <Navbar>
         {({ isShow }) => (
             <Fragment>
-                <NavbarBrand>View</NavbarBrand>
+                <NavbarBrand>Apogea</NavbarBrand>
 
                 <NavbarCollapsible>
                     <NavbarCollapsible.Toggler />
@@ -31,13 +31,25 @@ const Top = () => (
                             <Nav navbar className="justify-content-center">
                                 <NavItem>
                                     <NavLink>
-                                        Movies
+                                        Novidades
                                     </NavLink>
                                 </NavItem>
 
                                 <NavItem>
                                     <NavLink>
-                                        Series
+                                        Biblioteca
+                                    </NavLink>
+                                </NavItem>
+
+                                <NavItem>
+                                    <NavLink>
+                                        Sobre
+                                    </NavLink>
+                                </NavItem>
+
+                                <NavItem>
+                                    <NavLink>
+                                        Ajude nos
                                     </NavLink>
                                 </NavItem>
                             </Nav>

@@ -6,7 +6,7 @@ import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'
 
-import MoviesCarousel from 'components/custom/MoviesCarousel'
+import NewsCarousel from 'components/custom/NewsCarousel'
 import CardsDisplay from 'components/custom/CardsDisplay'
 import PostersDisplay from 'components/custom/PostersDisplay'
 import MovieRibbon from 'components/custom/MovieRibbon'
@@ -50,7 +50,7 @@ const Content = () => {
         <Container fluid>
             <Row>
                 <StyledCol>
-                    <MoviesCarousel payload={carouselPayload} />
+                    <NewsCarousel payload={carouselPayload} />
                 </StyledCol>
             </Row>
 

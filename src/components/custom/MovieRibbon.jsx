@@ -20,14 +20,14 @@ const initialPayload = {
     year: 0,
     duration: 0,
     genre: 'none',
-    synopsis: 'none',
+    content: 'none',
     imageSrc: null,
 }
 
 const MovieRibbon = ({ payload = initialPayload }) => {
     return (
         <Ribbon payload={payload}>
-            {({ title, year, duration, genre, synopsis }) => (
+            {({ title, year, duration, genre, content }) => (
                 <StyledContainer>
                     <Row>
                         <Col>
@@ -44,7 +44,7 @@ const MovieRibbon = ({ payload = initialPayload }) => {
                     <Row marginTop="1rem">
                         <Col>
                             <p className="text-gray-500 unselectable" style={{ fontFamily: 'Poppins, sans-serif', textShadow: '2px 2px 5px #000' }}>
-                                {synopsis}
+                                {content}
                             </p>
                         </Col>
                     </Row>
