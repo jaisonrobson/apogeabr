@@ -1,4 +1,4 @@
-import './Landing.css'
+import './Index.css'
 
 import React, { useContext, useEffect, forwardRef } from 'react'
 import ScrollToTop from "react-scroll-to-top"
@@ -6,9 +6,10 @@ import ScrollToTop from "react-scroll-to-top"
 import { withReducerContext, ReducerContext } from 'contexts/withReducerContext'
 import { withModalContext } from 'contexts/withModalContext'
 
-import Top from '../generic/Top'
+import Top from 'routes/generic/Top'
+import Bottom from 'routes/generic/Bottom'
 import Content from './Content'
-import Bottom from '../generic/Bottom'
+
 import { login, fetchMovies } from 'store/actions'
 
 import Screenshot1 from 'images/screenshots/screenshot1.png'
@@ -168,7 +169,7 @@ const user = {
     name: 'David'
 }
 
-const Landing = forwardRef((props, ref) => {
+const Index = forwardRef((props, ref) => {
     const { dispatch, ...state } = useContext(ReducerContext)
 
     useEffect(() => {
@@ -177,7 +178,7 @@ const Landing = forwardRef((props, ref) => {
     }, [dispatch, state.movies, state.user])
 
     return (
-        <div ref={ref} {...props} className="landing bg-primary">
+        <div ref={ref} {...props} className="index bg-primary">
             <Top />
 
             <Content />
@@ -189,4 +190,4 @@ const Landing = forwardRef((props, ref) => {
     )
 })
 
-export default withReducerContext(withModalContext(Landing))
+export default withReducerContext(withModalContext(Index))

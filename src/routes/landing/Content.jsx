@@ -124,35 +124,6 @@ const Content = () => {
                     </StyledContainer>
                 </StyledCol>
             </StyledRow>
-
-            <StyledRow style={{ backgroundImage: `url(${WoodImage})` }}>
-                <StyledCol>
-                    <StyledContainer
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-end',
-                            height: 'inherit',
-                            width: 'inherit',
-                            flexDirection: 'column',
-                            paddingRight: '500px'
-                        }}
-                    >
-                        <Row>
-                            <Col>
-                                <h2 className="text-gray-100">Biblioteca</h2>
-                            </Col>
-                        </Row>
-                    </StyledContainer>
-                    
-                    <StyledContainer style={{ padding: '2rem' }} fluid>
-                        <Row>
-                            <BookDisplay />
-                        </Row>
-                    </StyledContainer>
-
-                </StyledCol>
-            </StyledRow>
         </Container>
     )
 }

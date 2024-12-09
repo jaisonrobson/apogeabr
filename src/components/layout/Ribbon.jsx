@@ -23,7 +23,7 @@ const StyledOverlay = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    background: linear-gradient(to bottom,rgba(0,0,0,.6) 10%,rgba(0,0,0,.4) 100%);
+    background: linear-gradient(to bottom,rgba(0,0,0,1), rgba(0,0,0,.9) 25%, rgba(0,0,0,.4) 100%);
     z-index: 2;
 `
 
