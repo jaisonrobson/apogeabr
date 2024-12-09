@@ -1,6 +1,7 @@
 import './Landing.css'
 
 import React, { useContext, useEffect, forwardRef } from 'react'
+import ScrollToTop from "react-scroll-to-top"
 
 import { withReducerContext, ReducerContext } from 'contexts/withReducerContext'
 import { withModalContext } from 'contexts/withModalContext'
@@ -27,6 +28,8 @@ import Screenshot14 from 'images/screenshots/screenshot14.png'
 import Screenshot15 from 'images/screenshots/screenshot15.png'
 import Screenshot16 from 'images/screenshots/screenshot16.png'
 import Screenshot17 from 'images/screenshots/screenshot17.png'
+
+import ScrollToTopButton from 'components/custom/ScrollToTopButton'
 
 const movies = [
     {
@@ -180,6 +183,8 @@ const Landing = forwardRef((props, ref) => {
             <Content />
 
             <Bottom />
+
+            <ScrollToTop smooth component={<ScrollToTopButton />} width='35' height='35' style={{ padding: 0, margin: 0, backgroundColor: 'gray', zIndex: '9999999'}} />
         </div>
     )
 })

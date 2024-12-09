@@ -28,7 +28,7 @@ const Top = () => (
 
                     <NavbarCollapsible.Collapse navbar>
                         <Container>
-                            <Nav navbar className="justify-content-center">
+                            <Nav navbar className="justify-content-center" style={{ marginLeft: '-150px' }}>
                                 <NavItem>
                                     <NavLink>
                                         Novidades
@@ -56,39 +56,6 @@ const Top = () => (
                         </Container>
                     </NavbarCollapsible.Collapse>
                 </NavbarCollapsible>
-
-                <Dropdown>
-                    <Dropdown.Toggler
-                        nav
-                    >
-                        <Image
-                            src={userNoAvatarImage}
-                            className="rounded-circle"
-                            objectFit="contain"
-                            width="35px"
-                        />
-
-                        <Span marginLeft="10px" marginRight="5px">User</Span>
-
-                        <Icon paddingTop="1px" icon={faCaretDown} />
-                    </Dropdown.Toggler>
-
-                    <Dropdown.Menu>
-                        <Dropdown.Item>
-                            Option 1
-                        </Dropdown.Item>
-
-                        <Dropdown.Item>
-                            Option 2
-                        </Dropdown.Item>
-
-                        <Dropdown.Item divider />
-
-                        <Dropdown.Item>
-                            Option 3
-                        </Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
             </Fragment>
         )}
     </Navbar>
