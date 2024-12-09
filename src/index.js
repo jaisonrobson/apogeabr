@@ -3,7 +3,7 @@ import 'index.css'
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { createRoot } from 'react-dom/client';
-import App from './routes/app/App'
+import Landing from './routes/landing/Landing'
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -11,7 +11,7 @@ const root = createRoot(container);
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: <Landing />,
         //errorElement: ,
         //loader: ,
         //action: ,

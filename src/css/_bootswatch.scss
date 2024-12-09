@@ -18,6 +18,12 @@ $web-font-path: "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;6
 
   &-nav {
     .nav-link {
+      color: $light !important;
+      padding-top: .715rem;
+      padding-bottom: .715rem;
+    }
+    .nav-link:hover {
+      color: $apogea !important;
       padding-top: .715rem;
       padding-bottom: .715rem;
     }

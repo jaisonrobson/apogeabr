@@ -17,6 +17,17 @@ $gray-600: #919aa1 !default;
 $gray-700: #55595c !default;
 $gray-800: #343a40 !default;
 $gray-900: #1a1a1a !default;
+
+$apogea-100:        #e6eec0;
+$apogea-200:        #e9dea5;
+$apogea-300:        #e5d99c;
+$apogea-400:        #ded18a;
+$apogea-500:        #ddce7d;
+$apogea-600:        #d4bf4e;
+$apogea-700:        #a5932c;
+$apogea-800:        #706316;
+$apogea-900:        #5b400f;
+
 $black:    #000 !default;
 
 $blue:    #007bff !default;
@@ -29,6 +40,7 @@ $yellow:  #f0ad4e !default;
 $green:   #4bbf73 !default;
 $teal:    #20c997 !default;
 $cyan:    #1f9bcf !default;
+$apogea:  #d4bf4e !default;
 
 $primary:       $gray-900 !default;
 $secondary:     $white !default;
@@ -94,7 +106,7 @@ $input-group-addon-bg:                  $gray-300 !default;
 
 $navbar-padding-y:                  1.5rem !default;
 $navbar-dark-hover-color:           $white !default;
-$navbar-light-color:                rgba($black, .3) !default;
+$navbar-light-color:                rgba($white, .3) !default;
 $navbar-light-hover-color:          $gray-900 !default;
 $navbar-light-active-color:         $gray-900 !default;
 

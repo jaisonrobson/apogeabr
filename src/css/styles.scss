@@ -9,6 +9,7 @@ $warning:       #aca651;
 $danger:        #923b3b;
 $light:         #9e9e9e;
 $dark:          #141414;
+$apogea:        #d4bf4e;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
@@ -28,13 +29,22 @@ $theme-colors: (
     "gray-600":       $gray-600,
     "gray-700":       $gray-700,
     "gray-800":       $gray-800,
-    "gray-900":       $gray-900
+    "gray-900":       $gray-900,
+    "apogea-100":       $apogea-100,
+    "apogea-200":       $apogea-200,
+    "apogea-300":       $apogea-300,
+    "apogea-400":       $apogea-400,
+    "apogea-500":       $apogea-500,
+    "apogea-600":       $apogea-600,
+    "apogea-700":       $apogea-700,
+    "apogea-800":       $apogea-800,
+    "apogea-900":       $apogea-900
 );
 // scss-docs-end theme-colors-map
 
 // Style anchor elements.
 
-$link-color:                              #FFFFFFA1;
+$link-color:                              #ffffff;
 $link-decoration:                         none;
 $link-shade-percentage:                   20%;
 $link-hover-color:                        #FFFFFF;

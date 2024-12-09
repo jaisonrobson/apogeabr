@@ -1,12 +1,13 @@
-import './App.css'
+import './Landing.css'
 
 import React, { useContext, useEffect, forwardRef } from 'react'
 
 import { withReducerContext, ReducerContext } from 'contexts/withReducerContext'
 import { withModalContext } from 'contexts/withModalContext'
 
-import Top from '../top/Top'
-import Content from '../content/Content'
+import Top from './Top'
+import Content from './Content'
+import Bottom from './Bottom'
 import { login, fetchMovies } from 'store/actions'
 
 import Screenshot1 from 'images/screenshots/screenshot1.png'
@@ -164,7 +165,7 @@ const user = {
     name: 'David'
 }
 
-const App = forwardRef((props, ref) => {
+const Landing = forwardRef((props, ref) => {
     const { dispatch, ...state } = useContext(ReducerContext)
 
     useEffect(() => {
@@ -173,12 +174,14 @@ const App = forwardRef((props, ref) => {
     }, [dispatch, state.movies, state.user])
 
     return (
-        <div ref={ref} {...props} className="app bg-primary">
+        <div ref={ref} {...props} className="landing bg-primary">
             <Top />
 
             <Content />
+
+            <Bottom />
         </div>
     )
 })
 
-export default withReducerContext(withModalContext(App))
+export default withReducerContext(withModalContext(Landing))
