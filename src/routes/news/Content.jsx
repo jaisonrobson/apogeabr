@@ -6,9 +6,6 @@ import {
     NavItem,
 } from 'reactstrap'
 
-import WoodImage from 'images/layout/oak_planks_1.png'
-import ComunicadosImage from 'images/layout/comunicados.png'
-import ApresentacaoImage from 'images/layout/apresentacao.png'
 import NewsPaperImage from 'images/layout/newspaper.webp'
 
 import Container from 'components/layout/Container'
@@ -17,8 +14,6 @@ import Row from 'components/layout/Row'
 import NavLink from 'components/layout/NavLink'
 
 import CardsDisplay from 'components/custom/CardsDisplay'
-import BookDisplay from 'components/custom/BookDisplay'
-import GoldBoard from 'components/custom/GoldBoard'
 
 import { ReducerContext } from 'contexts/withReducerContext'
 
