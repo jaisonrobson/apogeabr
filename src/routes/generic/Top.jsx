@@ -36,6 +36,12 @@ const Top = () => (
 
                                 <NavItem>
                                     <NavLink>
+                                        Mapa
+                                    </NavLink>
+                                </NavItem>
+
+                                <NavItem>
+                                    <NavLink>
                                         Sobre
                                     </NavLink>
                                 </NavItem>

@@ -22,7 +22,7 @@ const Menu = (props) => <DropdownMenu {...props} />
 
 const Item = (props) => <DropdownItem {...props} />
 
-const Dropdown = (props) => {
+const Dropdown = ({ containerStyle, ...props }) => {
     const ref = useRef(null)
     const { isOpen, setIsOpen } = useContext(FlagContext)
     const toggle = () => setIsOpen(!isOpen)
@@ -47,9 +47,8 @@ const Dropdown = (props) => {
     }, [ref])
 
     return (
-        <div ref={ref}>
-            <UncontrolledDropdown
-                
+        <div ref={ref} style={containerStyle}>
+            <UncontrolledDropdown                
                 isOpen={isOpen}
                 toggle={toggle}
                 {...props}

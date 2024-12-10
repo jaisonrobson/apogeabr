@@ -12,6 +12,7 @@ import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'
 import NavLink from 'components/layout/NavLink'
+import Dropdown from 'components/layout/Dropdown'
 
 import BookDisplay from 'components/custom/BookDisplay'
 
@@ -51,7 +52,7 @@ const StyledNav = styled((props) => <Nav {...props} />)`
 `
 
 const NewsNavLink = (props) => (
-    <NavLink {...props} color="#6c6456" textShadow="1px 1px #a99e89" fontFamily="Celtic Garamond the 2nd" />
+    <NavLink {...props} color="#e5d99c" textShadow="0px 0px" fontFamily="Celtic Garamond the 2nd" />
 )
 
 const Content = () => (
@@ -68,166 +69,119 @@ const Content = () => (
             <Row>
                 <Col>
                     <h2 className='text-gray-100' style={{ display: 'flex', justifyContent: 'center' }}>Biblioteca</h2>
-                </Col>                
-            </Row>            
+                </Col>
+            </Row>
+
+            <Row>
+                <Col>
+                    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem' }}>
+                        <input name="query" style={{ width: '50%' }}/>
+                    </form>
+                </Col>
+            </Row>
         </StyledRow>
 
         <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${LibraryImage2})`}}>
             <StyledCol style={{ maxWidth: '300px', paddingTop: '5rem', paddingBottom: '5rem' }}>
-                <StyledNav bsStyle="pills" stacked className="justify-content-center" style={{ overflow: 'auto', maxHeight: '1000px' }}>
+                <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'yellow' }}>
+                    <Dropdown containerStyle={{ margin: 0, padding: 0}}>
+                        <Dropdown.Toggler style={{ margin: 0, padding: 0, minWidth: '300px'  }}>
+                            Missões
+                        </Dropdown.Toggler>
+
+                        <Dropdown.Menu dark end>
+                            <Dropdown.Item header>
+                                Selecione uma categoria
+                            </Dropdown.Item>
+                            
+                            <Dropdown.Item divider />
+
+                            <Dropdown.Item>
+                                Missões
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                Npcs
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                Monstros
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                Items
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                Eventos
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                Cidades
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                Locais
+                            </Dropdown.Item>
+
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </form>
+
+                <StyledNav bsStyle="pills" stacked className="justify-content-center" style={{ overflow: 'auto', maxHeight: '1000px', textAlign: 'center', margin: '20px' }}>
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 1
+                            Ocultistas
                         </NewsNavLink>
                     </NavItem>
 
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 2
+                            Lanche do Guarda
                         </NewsNavLink>
                     </NavItem>
 
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 3
+                            Brass Armor
                         </NewsNavLink>
                     </NavItem>
 
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 4
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <hr style={{ width: '100%', borderWidth: '3px' }}/>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 1
+                            Old Backpack
                         </NewsNavLink>
                     </NavItem>
 
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 2
+                            Wooden Staff
                         </NewsNavLink>
                     </NavItem>
 
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 3
+                            Skull Ring
                         </NewsNavLink>
                     </NavItem>
 
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 4
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <hr style={{ width: '100%', borderWidth: '3px' }}/>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 1
+                            Pesquisa de Seymour
                         </NewsNavLink>
                     </NavItem>
 
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 2
+                            Entrega das Ferramentas
                         </NewsNavLink>
                     </NavItem>
 
                     <NavItem>
                         <NewsNavLink>
-                            Noticia 3
+                            Dark Robe
                         </NewsNavLink>
                     </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 4
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <hr style={{ width: '100%', borderWidth: '3px' }}/>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 1
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 2
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 3
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 4
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <hr style={{ width: '100%', borderWidth: '3px' }}/>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 1
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 2
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 3
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 4
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <hr style={{ width: '100%', borderWidth: '3px' }}/>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 1
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 2
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 3
-                        </NewsNavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NewsNavLink>
-                            Noticia 4
-                        </NewsNavLink>
-                    </NavItem>                    
                 </StyledNav>
             </StyledCol>
 
