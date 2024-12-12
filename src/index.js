@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 import Landing from './routes/landing/Landing'
 import News from './routes/news/Index'
 import Library from './routes/library/Index'
+import Map from './routes/map/Index'
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
     {
         path: "/library/",
         element: <Library />,
+        //errorElement: ,
+        //loader: ,
+        //action: ,
+        //children: [],
+    },    
+    {
+        path: "/map/",
+        element: <Map />,
         //errorElement: ,
         //loader: ,
         //action: ,

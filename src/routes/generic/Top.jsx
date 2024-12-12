@@ -35,7 +35,7 @@ const Top = () => (
                                 </NavItem>
 
                                 <NavItem>
-                                    <NavLink>
+                                    <NavLink href="/map/">
                                         Mapa
                                     </NavLink>
                                 </NavItem>

@@ -83,7 +83,7 @@ const Content = () => (
 
         <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${LibraryImage2})`}}>
             <StyledCol style={{ maxWidth: '300px', paddingTop: '5rem', paddingBottom: '5rem' }}>
-                <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'yellow' }}>
+                <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <Dropdown containerStyle={{ margin: 0, padding: 0}}>
                         <Dropdown.Toggler style={{ margin: 0, padding: 0, minWidth: '300px'  }}>
                             Missões
