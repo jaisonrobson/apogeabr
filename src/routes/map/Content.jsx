@@ -15,13 +15,8 @@ import {
     ImageOverlay
   } from 'react-leaflet'
 
-import CartographyTopLeft from 'images/layout/cartography_topleft.jpg'
-import CartographyTopMiddle from 'images/layout/cartography_topmidle.png'
-import CartographyItemsTopLeft from 'images/layout/cartography_items_topleft.png'
-import CartographyItemsTopMiddle from 'images/layout/cartography_items_topmiddle.png'
-import CartographyItemsTopRight from 'images/layout/cartography_items_topright.png'
+import CartographyEnvironment from 'images/layout/cartography_environment.png'
 import ForestIsometric from 'images/layout/forest_isometric.jpg'
-import ForestIsometric2 from 'images/layout/forest_isometric2.jpg'
 import ApogeaMap from 'images/layout/apogeamap.png'
 import ApogeaMapOcean from 'images/layout/apogeamapocean.png'
 
@@ -30,8 +25,6 @@ import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'
 import NavLink from 'components/layout/NavLink'
 import Dropdown from 'components/layout/Dropdown'
-
-import BookDisplay from 'components/custom/BookDisplay'
 
 
 const StyledRow = styled((props) => <Row {...props} />)`
@@ -76,11 +69,11 @@ const Content = () => (
     <Container fluid>
         <StyledRow
             style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${CartographyItemsTopRight}), url(${CartographyItemsTopLeft}), url(${CartographyItemsTopMiddle}), url(${CartographyTopLeft}), url(${CartographyTopMiddle})`,
-                backgroundRepeat: 'repeat-x, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x',
-                backgroundPosition: 'center, 35% 10px, 95% 35px, 70% 80px, left, left',
-                backgroundSize: 'contain',
-                paddingTop: '20rem'
+                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${CartographyEnvironment})`,
+                backgroundRepeat: 'repeat-x, repeat',
+                backgroundPosition: 'center, center',
+                backgroundSize: 'contain, 35%',
+                paddingTop: '10rem'
             }}
         >
             <Row>
@@ -168,7 +161,7 @@ const Content = () => (
 
             <StyledCol>
                 <StyledContainer style={{ padding: '2rem' }} fluid>
-                    <Row style={{ backgroundColor: 'red' }}>
+                    <Row>
                         <MapContainer
                             center={[500, 625]}
                             scrollWheelZoom={true}

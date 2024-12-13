@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
 
-import WoodImage from 'images/layout/oak_planks_1.png'
 import ComunicadosImage from 'images/layout/comunicados.png'
 import ApresentacaoImage from 'images/layout/apresentacao.png'
 
@@ -12,7 +11,6 @@ import Row from 'components/layout/Row'
 
 import WeeklyScreenshotCarousel from 'components/custom/WeeklyScreenshotCarousel'
 import CardsDisplay from 'components/custom/CardsDisplay'
-import BookDisplay from 'components/custom/BookDisplay'
 import GoldBoard from 'components/custom/GoldBoard'
 
 import { ReducerContext } from 'contexts/withReducerContext'

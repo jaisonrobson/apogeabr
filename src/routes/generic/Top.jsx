@@ -41,7 +41,7 @@ const Top = () => (
                                 </NavItem>
 
                                 <NavItem>
-                                    <NavLink>
+                                    <NavLink href="/about/">
                                         Sobre
                                     </NavLink>
                                 </NavItem>

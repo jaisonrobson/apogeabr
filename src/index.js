@@ -7,6 +7,7 @@ import Landing from './routes/landing/Landing'
 import News from './routes/news/Index'
 import Library from './routes/library/Index'
 import Map from './routes/map/Index'
+import About from './routes/about/Index'
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -15,34 +16,22 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Landing />,
-        //errorElement: ,
-        //loader: ,
-        //action: ,
-        //children: [],
     },
     {
         path: "/news/",
         element: <News />,
-        //errorElement: ,
-        //loader: ,
-        //action: ,
-        //children: [],
     },    
     {
         path: "/library/",
         element: <Library />,
-        //errorElement: ,
-        //loader: ,
-        //action: ,
-        //children: [],
-    },    
+    },
     {
         path: "/map/",
         element: <Map />,
-        //errorElement: ,
-        //loader: ,
-        //action: ,
-        //children: [],
+    },
+    {
+        path: "/about/",
+        element: <About />,
     },
 ])
 

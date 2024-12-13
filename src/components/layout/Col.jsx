@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { Col as ReactstrapCol } from 'reactstrap'
 
@@ -13,7 +13,7 @@ const StyledCol = styled(({
     height,
     overflowWrap,
     ...props
-}) => <ReactstrapCol {...props} />)`
+}) => <ReactstrapCol {...props}/>)`
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}
@@ -23,9 +23,8 @@ const StyledCol = styled(({
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
-
 `
 
-const Col = (props) => <StyledCol {...props} />
+const Col = forwardRef((props, ref) => <StyledCol {...props} />)
 
 export default Col

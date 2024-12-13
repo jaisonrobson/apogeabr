@@ -7,11 +7,13 @@ import {
 } from 'reactstrap'
 
 import NewsPaperImage from 'images/layout/newspaper.webp'
+import NewsPaperImage2 from 'images/layout/news_top.png'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'
 import NavLink from 'components/layout/NavLink'
+import Board from 'components/layout/Board'
 
 import CardsDisplay from 'components/custom/CardsDisplay'
 
@@ -55,7 +57,15 @@ const Content = () => {
 
     return (
         <Container fluid>
-            <StyledRow style={{ paddingTop: '5rem' }}>
+            <StyledRow
+                style={{
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${NewsPaperImage2})`,
+                    backgroundRepeat: 'repeat-x',
+                    backgroundPosition: 'center',
+                    backgroundSize: 'contain, 60%',
+                    paddingTop: '10rem'
+                }}
+            >
                 <StyledCol>
                     <StyledContainer fluid>
                         <Row>
@@ -74,27 +84,25 @@ const Content = () => {
             </StyledRow>
 
             <StyledRow className="bg-black" style={{ backgroundImage: `linear-gradient(to bottom, transparent, #bab09d), url(${NewsPaperImage})`, backgroundSize: '100%' , backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }}>
-                <StyledCol>
-                    <StyledContainer
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-end',
-                            height: 'inherit',
-                            width: 'inherit',
-                            flexDirection: 'column'
-                        }}
-                    >
-                        <Row>
-                            <Col>
-                                <h2 className="text-gray-700">Notícia</h2>
-                            </Col>
-                        </Row>
-                    </StyledContainer>
-
-                    <StyledContainer fluid>
-                        <Row style={{ borderTop: '3px solid #a99e89' }}>
-                            <Col style={{ padding: '2rem' }}>
+                <StyledContainer fluid>
+                    <Row>
+                        <Col>
+                            <Board
+                                sizingPattern="94px"
+                                contentClassName='text-black'
+                                styling={[
+                                    {height: '85px'},
+                                    {height: '85px'},
+                                    {height: '85px'},
+                                    {width: '94px'},
+                                    {width: '68px'},
+                                    {width: '94px'},
+                                    {height: '85px'},
+                                    {height: '85px'},
+                                    {height: '85px'},
+                                ]}
+                            >
+                                <h2 style={{ textAlign: 'center', paddingBottom: '1rem' }} className="text-black">Notícia</h2>
                                 <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique fermentum est, id porttitor purus vehicula id. Sed non libero id eros viverra condimentum in vitae leo. Aenean at ornare ipsum, eu pellentesque dolor. Sed pellentesque eget risus a pulvinar. Integer in aliquam urna. Nullam at magna rhoncus, venenatis lectus quis, cursus tortor. Integer erat lacus, sodales in nisl ac, interdum gravida mi. Pellentesque ornare, leo at blandit finibus, diam quam interdum lacus, id pellentesque mauris orci a ligula. Donec nisl nulla, ultricies eget lectus at, vestibulum maximus lectus. Nullam posuere metus sed interdum feugiat. Sed ex eros, efficitur ac consectetur sed, hendrerit a massa. Mauris et dolor vel ante dapibus interdum aliquet eget leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut erat congue, porta odio quis, elementum libero.
                                 </p>
@@ -110,9 +118,26 @@ const Content = () => {
                                 <p>
                                 Aliquam erat volutpat. Ut et lorem gravida, convallis nisi faucibus, ornare tellus. In sodales, enim sit amet ornare accumsan, justo nibh ultricies mauris, a pulvinar tellus felis laoreet lorem. Curabitur egestas eros ipsum, ut ornare nulla blandit ut. Ut interdum imperdiet est, sed congue metus laoreet a. Praesent massa odio, malesuada in erat eu, varius molestie magna. Proin at lacus venenatis massa tincidunt vestibulum. Suspendisse posuere, velit eget lacinia molestie, ex nibh hendrerit nisl, pretium dapibus leo lectus id mi. In hac habitasse platea dictumst. Sed posuere ante eu hendrerit posuere. Cras blandit malesuada gravida. Quisque sodales mi et ultrices iaculis.
                                 </p>
-                            </Col>
-                            <Col  style={{ padding: '2rem', maxWidth: '300px', borderLeft: '3px solid #a99e89' }}>
-                                <Nav bsStyle="pills" stacked className="justify-content-center">
+                            </Board>
+                        </Col>
+
+                        <Col  style={{ maxWidth: '400px', borderLeft: '3px solid #a99e89' }}>
+                            <Board
+                                sizingPattern="94px"
+                                contentClassName='text-black'
+                                styling={[
+                                    {height: '85px'},
+                                    {height: '85px'},
+                                    {height: '85px'},
+                                    {width: '94px'},
+                                    {width: '68px'},
+                                    {width: '94px'},
+                                    {height: '85px'},
+                                    {height: '85px'},
+                                    {height: '85px'},
+                                ]}
+                            >
+                                <Nav className="justify-content-center" style={{ paddingLeft: '25px' }}>
                                     <NavItem>
                                         <NewsNavLink>
                                             Noticia 1
@@ -137,7 +162,7 @@ const Content = () => {
                                         </NewsNavLink>
                                     </NavItem>
 
-                                    <hr style={{ width: '100%', borderWidth: '3px' }}/>
+                                    <hr style={{ width: '100%', borderWidth: '3px', marginLeft: '-25px' }}/>
 
                                     <NavItem>
                                         <NewsNavLink>
@@ -163,7 +188,7 @@ const Content = () => {
                                         </NewsNavLink>
                                     </NavItem>
 
-                                    <hr style={{ width: '100%', borderWidth: '3px' }}/>
+                                    <hr style={{ width: '100%', borderWidth: '3px', marginLeft: '-25px' }}/>
 
                                     <NavItem>
                                         <NewsNavLink>
@@ -187,13 +212,12 @@ const Content = () => {
                                         <NewsNavLink>
                                             Noticia 4
                                         </NewsNavLink>
-                                    </NavItem>
-                                    
+                                    </NavItem>                                    
                                 </Nav>
-                            </Col>
-                        </Row>
-                    </StyledContainer>
-                </StyledCol>
+                            </Board>
+                        </Col>
+                    </Row>
+                </StyledContainer>
             </StyledRow>
         </Container>
     )

@@ -62,8 +62,8 @@ const Content = () => (
                 backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${LibraryImage})`,
                 backgroundRepeat: 'repeat-x',
                 backgroundPosition: 'center',
-                backgroundSize: 'contain',
-                paddingTop: '20rem'
+                backgroundSize: 'contain, 30%',
+                paddingTop: '10rem'
             }}
         >
             <Row>
