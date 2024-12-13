@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react'
 
-import SmallParchment_01 from 'images/layout/news/small_parchment_divided/small_parchment_01.png'
-import SmallParchment_02 from 'images/layout/news/small_parchment_divided/small_parchment_02.png'
-import SmallParchment_03 from 'images/layout/news/small_parchment_divided/small_parchment_03.png'
-import SmallParchment_04 from 'images/layout/news/small_parchment_divided/small_parchment_04.png'
-import SmallParchment_05 from 'images/layout/news/small_parchment_divided/small_parchment_05.png'
-import SmallParchment_06 from 'images/layout/news/small_parchment_divided/small_parchment_06.png'
-import SmallParchment_07 from 'images/layout/news/small_parchment_divided/small_parchment_07.png'
-import SmallParchment_08 from 'images/layout/news/small_parchment_divided/small_parchment_08.png'
-import SmallParchment_09 from 'images/layout/news/small_parchment_divided/small_parchment_09.png'
+import WoodParchment_01 from 'images/layout/news/wood_parchment_divided/wood_parchment_01.png'
+import WoodParchment_02 from 'images/layout/news/wood_parchment_divided/wood_parchment_02.png'
+import WoodParchment_03 from 'images/layout/news/wood_parchment_divided/wood_parchment_03.png'
+import WoodParchment_04 from 'images/layout/news/wood_parchment_divided/wood_parchment_04.png'
+import WoodParchment_05 from 'images/layout/news/wood_parchment_divided/wood_parchment_05.png'
+import WoodParchment_06 from 'images/layout/news/wood_parchment_divided/wood_parchment_06.png'
+import WoodParchment_07 from 'images/layout/news/wood_parchment_divided/wood_parchment_07.png'
+import WoodParchment_08 from 'images/layout/news/wood_parchment_divided/wood_parchment_08.png'
+import WoodParchment_09 from 'images/layout/news/wood_parchment_divided/wood_parchment_09.png'
 
 import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'
@@ -16,15 +16,15 @@ import Row from 'components/layout/Row'
 const Board = ({
     contentClassName = "text-gray-400",
     images=[
-        SmallParchment_01,
-        SmallParchment_02,
-        SmallParchment_03,
-        SmallParchment_04,
-        SmallParchment_05,
-        SmallParchment_06,
-        SmallParchment_07,
-        SmallParchment_08,
-        SmallParchment_09
+        WoodParchment_01,
+        WoodParchment_02,
+        WoodParchment_03,
+        WoodParchment_04,
+        WoodParchment_05,
+        WoodParchment_06,
+        WoodParchment_07,
+        WoodParchment_08,
+        WoodParchment_09
     ],
     styling=[
         {},

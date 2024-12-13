@@ -6,8 +6,8 @@ import {
     NavItem,
 } from 'reactstrap'
 
-import NewsPaperImage from 'images/layout/newspaper.webp'
-import NewsPaperImage2 from 'images/layout/news_top.png'
+import NewsBackgroundImage from 'images/layout/wood_bg_1.png'
+import NewsPaperImage from 'images/layout/news_top.png'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
@@ -16,6 +16,7 @@ import NavLink from 'components/layout/NavLink'
 import Board from 'components/layout/Board'
 
 import CardsDisplay from 'components/custom/CardsDisplay'
+import PaperParchmentBoard from 'components/custom/PaperParchmentBoard'
 
 import { ReducerContext } from 'contexts/withReducerContext'
 
@@ -59,7 +60,7 @@ const Content = () => {
         <Container fluid>
             <StyledRow
                 style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${NewsPaperImage2})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${NewsPaperImage})`,
                     backgroundRepeat: 'repeat-x',
                     backgroundPosition: 'center',
                     backgroundSize: 'contain, 60%',
@@ -83,25 +84,19 @@ const Content = () => {
                 </StyledCol>
             </StyledRow>
 
-            <StyledRow className="bg-black" style={{ backgroundImage: `linear-gradient(to bottom, transparent, #bab09d), url(${NewsPaperImage})`, backgroundSize: '100%' , backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }}>
+            <StyledRow
+                className="bg-black"
+                style={{
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.4) 10%, rgba(0,0,0,.4) 90%, rgba(0,0,0,1)), url(${NewsBackgroundImage})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'repeat',
+                    backgroundPosition: 'top'
+                }}
+            >
                 <StyledContainer fluid>
                     <Row>
                         <Col>
-                            <Board
-                                sizingPattern="94px"
-                                contentClassName='text-black'
-                                styling={[
-                                    {height: '85px'},
-                                    {height: '85px'},
-                                    {height: '85px'},
-                                    {width: '94px'},
-                                    {width: '68px'},
-                                    {width: '94px'},
-                                    {height: '85px'},
-                                    {height: '85px'},
-                                    {height: '85px'},
-                                ]}
-                            >
+                            <PaperParchmentBoard>
                                 <h2 style={{ textAlign: 'center', paddingBottom: '1rem' }} className="text-black">Notícia</h2>
                                 <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique fermentum est, id porttitor purus vehicula id. Sed non libero id eros viverra condimentum in vitae leo. Aenean at ornare ipsum, eu pellentesque dolor. Sed pellentesque eget risus a pulvinar. Integer in aliquam urna. Nullam at magna rhoncus, venenatis lectus quis, cursus tortor. Integer erat lacus, sodales in nisl ac, interdum gravida mi. Pellentesque ornare, leo at blandit finibus, diam quam interdum lacus, id pellentesque mauris orci a ligula. Donec nisl nulla, ultricies eget lectus at, vestibulum maximus lectus. Nullam posuere metus sed interdum feugiat. Sed ex eros, efficitur ac consectetur sed, hendrerit a massa. Mauris et dolor vel ante dapibus interdum aliquet eget leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut erat congue, porta odio quis, elementum libero.
@@ -118,10 +113,10 @@ const Content = () => {
                                 <p>
                                 Aliquam erat volutpat. Ut et lorem gravida, convallis nisi faucibus, ornare tellus. In sodales, enim sit amet ornare accumsan, justo nibh ultricies mauris, a pulvinar tellus felis laoreet lorem. Curabitur egestas eros ipsum, ut ornare nulla blandit ut. Ut interdum imperdiet est, sed congue metus laoreet a. Praesent massa odio, malesuada in erat eu, varius molestie magna. Proin at lacus venenatis massa tincidunt vestibulum. Suspendisse posuere, velit eget lacinia molestie, ex nibh hendrerit nisl, pretium dapibus leo lectus id mi. In hac habitasse platea dictumst. Sed posuere ante eu hendrerit posuere. Cras blandit malesuada gravida. Quisque sodales mi et ultrices iaculis.
                                 </p>
-                            </Board>
+                            </PaperParchmentBoard>
                         </Col>
 
-                        <Col  style={{ maxWidth: '400px', borderLeft: '3px solid #a99e89' }}>
+                        <Col  style={{ maxWidth: '400px' }}>
                             <Board
                                 sizingPattern="94px"
                                 contentClassName='text-black'
