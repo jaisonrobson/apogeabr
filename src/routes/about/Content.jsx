@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {
     Nav,
-    NavItem,
 } from 'reactstrap'
 
 import AboutUsTop from 'images/layout/aboutus/about_us_top.png'
@@ -13,7 +12,6 @@ import GoldBoard from 'components/custom/GoldBoard'
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'
-import NavLink from 'components/layout/NavLink'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;

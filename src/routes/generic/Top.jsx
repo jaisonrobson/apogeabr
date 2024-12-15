@@ -62,7 +62,7 @@ const Top = () => (
                                 </NavItem>
 
                                 <NavItem>
-                                    <NavLink href="/famehall/">
+                                    <NavLink href="/halloffame/">
                                         <Particles><p style={{ display: 'flex', position: 'absolute' }}>Hall da Fama</p></Particles>
                                     </NavLink>
                                 </NavItem>

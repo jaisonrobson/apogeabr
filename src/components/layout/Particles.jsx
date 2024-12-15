@@ -1,20 +1,11 @@
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useContext } from "react"
 
-import Particles, { initParticlesEngine } from "@tsparticles/react"
+import Particles from "@tsparticles/react"
 
-import { loadAll } from "@tsparticles/all"
+import { ParticlesContext } from 'contexts/withParticlesContext'
 
-const EnvelopedParticles = ({ id="particles_1", style={ width: '100px', height: "30px" }, children }) => {
-    const [init, setInit] = useState(false)
-
-    // this should be run only once per application lifetime
-    useEffect(() => {
-        initParticlesEngine(async (engine) => {
-            await loadAll(engine)
-        }).then(() => {
-            setInit(true)
-        })
-    }, [])
+const WrappedParticles = ({ id="particles_1", style={ width: '100px', height: "30px" }, children }) => {
+    const { isInitialized } = useContext(ParticlesContext)
 
     const options = useMemo(
         () => ({
@@ -106,20 +97,21 @@ const EnvelopedParticles = ({ id="particles_1", style={ width: '100px', height: 
         [],
     )
 
-    if (init) {
-        return (
-            <div id={id} style={style}>
-                <Particles
-                    id={id}
-                    options={options}
-                />
+    return (
+        <div id={id} style={style}>
+            {
+                isInitialized
+                    ? (
+                        <Particles
+                        id={id}
+                        options={options}
+                    />)
+                    : null
+            }            
 
-                {children}
-            </div>
-        )
-    }
-
-    return <></>
+            {children}
+        </div>
+    )
 }
 
-export default EnvelopedParticles
+export default WrappedParticles

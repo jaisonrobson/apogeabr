@@ -1,14 +1,17 @@
-import './Landing.css'
-
+import './Index.css'
 import React, { useContext, useEffect, forwardRef } from 'react'
-import ScrollToTop from "react-scroll-to-top"
+
+import { initParticlesEngine } from "@tsparticles/react"
+import { loadAll } from "@tsparticles/all"
 
 import { withReducerContext, ReducerContext } from 'contexts/withReducerContext'
 import { withModalContext } from 'contexts/withModalContext'
+import { withParticlesContext, ParticlesContext } from 'contexts/withParticlesContext'
 
-import Top from '../generic/Top'
-import Content from './Content'
-import Bottom from '../generic/Bottom'
+import ScrollToTopButton from 'components/custom/ScrollToTopButton'
+
+import Top from './Top'
+import Bottom from './Bottom'
 import { login, fetchMovies } from 'store/actions'
 
 import Screenshot1 from 'images/screenshots/screenshot1.png'
@@ -27,9 +30,6 @@ import Screenshot13 from 'images/screenshots/screenshot13.png'
 import Screenshot14 from 'images/screenshots/screenshot14.png'
 import Screenshot15 from 'images/screenshots/screenshot15.png'
 import Screenshot16 from 'images/screenshots/screenshot16.png'
-import Screenshot17 from 'images/screenshots/screenshot17.png'
-
-import ScrollToTopButton from 'components/custom/ScrollToTopButton'
 
 const movies = [
     {
@@ -168,25 +168,39 @@ const user = {
     name: 'David'
 }
 
-const Landing = forwardRef((props, ref) => {
+const Index = forwardRef(({children, ...props}, ref) => {
+    const { setIsInitialized } = useContext(ParticlesContext)
+
     const { dispatch, ...state } = useContext(ReducerContext)
 
     useEffect(() => {
         login(dispatch, user)
         fetchMovies(dispatch, movies)
+
+        initParticlesEngine(async (engine) => {
+            await loadAll(engine)
+        }).then(() => {
+            setIsInitialized(true)
+        })
     }, [dispatch, state.movies, state.user])
 
     return (
-        <div ref={ref} {...props} className="landing bg-primary">
+        <div ref={ref} {...props} className="index bg-primary">
             <Top />
 
-            <Content />
+            {children}
 
             <Bottom />
 
-            <ScrollToTop smooth component={<ScrollToTopButton />} width='35' height='35' style={{ padding: 0, margin: 0, backgroundColor: 'gray', zIndex: '9999999'}} />
+            <ScrollToTopButton />
         </div>
     )
 })
 
-export default withReducerContext(withModalContext(Landing))
+export default withReducerContext(
+    withParticlesContext(
+        withModalContext(
+            Index
+        )
+    )    
+)
