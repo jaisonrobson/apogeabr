@@ -5,8 +5,8 @@ import {
     NavItem,
 } from 'reactstrap'
 
-import AboutUsTop from 'images/layout/about_us_top.png'
-import AboutUs from 'images/layout/aboutus.png'
+import AboutUsTop from 'images/layout/aboutus/about_us_top.png'
+import AboutUsContent from 'images/layout/aboutus/about_us_content.png'
 
 import GoldBoard from 'components/custom/GoldBoard'
 
@@ -49,10 +49,6 @@ const StyledNav = styled((props) => <Nav {...props} />)`
     }
 `
 
-const NewsNavLink = (props) => (
-    <NavLink {...props} color="#e5d99c" textShadow="0px 0px" fontFamily="Celtic Garamond the 2nd" />
-)
-
 const Content = () => (
     <Container fluid>
         <StyledRow
@@ -71,7 +67,7 @@ const Content = () => (
             </Row>
         </StyledRow>
 
-        <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${AboutUs})`, backgroundPosition: "center, center" }}>
+        <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${AboutUsContent})`, backgroundPosition: "center, center" }}>
             <StyledCol>
                 <StyledContainer style={{ padding: '2rem' }} fluid>
                     <Row>

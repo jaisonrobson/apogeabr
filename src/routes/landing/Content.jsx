@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
 
-import ComunicadosImage from 'images/layout/comunicados.png'
-import ApresentacaoImage from 'images/layout/apresentacao.png'
+import ComunicadosImage from 'images/layout/landing/comunicados.png'
+import ApresentacaoImage from 'images/layout/landing/apresentacao.png'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'

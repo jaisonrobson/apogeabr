@@ -1,11 +1,11 @@
 import React from 'react'
 
-import GoldBoardHorizontal from 'images/layout/goldboard_horizontal.png'
-import GoldBoardVertical from 'images/layout/goldboard_vertical.png'
-import GoldBoardLeftBottom from 'images/layout/goldboard_leftbottom.png'
-import GoldBoardLeftTop from 'images/layout/goldboard_lefttop.png'
-import GoldBoardRightBottom from 'images/layout/goldboard_rightbottom.png'
-import GoldBoardRightTop from 'images/layout/goldboard_righttop.png'
+import GoldBoardHorizontal from 'images/layout/generic/gold_board_divided/goldboard_horizontal.png'
+import GoldBoardVertical from 'images/layout/generic/gold_board_divided/goldboard_vertical.png'
+import GoldBoardLeftBottom from 'images/layout/generic/gold_board_divided/goldboard_leftbottom.png'
+import GoldBoardLeftTop from 'images/layout/generic/gold_board_divided/goldboard_lefttop.png'
+import GoldBoardRightBottom from 'images/layout/generic/gold_board_divided/goldboard_rightbottom.png'
+import GoldBoardRightTop from 'images/layout/generic/gold_board_divided/goldboard_righttop.png'
 
 import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'

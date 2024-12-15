@@ -8,6 +8,7 @@ import News from './routes/news/Index'
 import Library from './routes/library/Index'
 import Map from './routes/map/Index'
 import About from './routes/about/Index'
+import HelpUs from './routes/helpus/Index'
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
     {
         path: "/about/",
         element: <About />,
+    },
+    {
+        path: "/helpus/",
+        element: <HelpUs />,
     },
 ])
 

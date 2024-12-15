@@ -6,17 +6,17 @@ import {
     NavItem,
 } from 'reactstrap'
 
-import NewsBackgroundImage from 'images/layout/wood_bg_1.png'
-import NewsPaperImage from 'images/layout/news_top.png'
+import NewsContentImage from 'images/layout/news/news_content.png'
+import NewsTopImage from 'images/layout/news/news_top.png'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'
 import NavLink from 'components/layout/NavLink'
-import Board from 'components/layout/Board'
 
 import CardsDisplay from 'components/custom/CardsDisplay'
 import PaperParchmentBoard from 'components/custom/PaperParchmentBoard'
+import WoodParchmentBoard from 'components/custom/WoodParchmentBoard'
 
 import { ReducerContext } from 'contexts/withReducerContext'
 
@@ -60,7 +60,7 @@ const Content = () => {
         <Container fluid>
             <StyledRow
                 style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${NewsPaperImage})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${NewsTopImage})`,
                     backgroundRepeat: 'repeat-x',
                     backgroundPosition: 'center',
                     backgroundSize: 'contain, 60%',
@@ -87,7 +87,7 @@ const Content = () => {
             <StyledRow
                 className="bg-black"
                 style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.4) 10%, rgba(0,0,0,.4) 90%, rgba(0,0,0,1)), url(${NewsBackgroundImage})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.4) 10%, rgba(0,0,0,.4) 90%, rgba(0,0,0,1)), url(${NewsContentImage})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'repeat',
                     backgroundPosition: 'top'
@@ -117,21 +117,7 @@ const Content = () => {
                         </Col>
 
                         <Col  style={{ maxWidth: '400px' }}>
-                            <Board
-                                sizingPattern="94px"
-                                contentClassName='text-black'
-                                styling={[
-                                    {height: '85px'},
-                                    {height: '85px'},
-                                    {height: '85px'},
-                                    {width: '94px'},
-                                    {width: '68px'},
-                                    {width: '94px'},
-                                    {height: '85px'},
-                                    {height: '85px'},
-                                    {height: '85px'},
-                                ]}
-                            >
+                            <WoodParchmentBoard>
                                 <Nav className="justify-content-center" style={{ paddingLeft: '25px' }}>
                                     <NavItem>
                                         <NewsNavLink>
@@ -209,7 +195,7 @@ const Content = () => {
                                         </NewsNavLink>
                                     </NavItem>                                    
                                 </Nav>
-                            </Board>
+                            </WoodParchmentBoard>
                         </Col>
                     </Row>
                 </StyledContainer>

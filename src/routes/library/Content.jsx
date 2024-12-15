@@ -5,8 +5,8 @@ import {
     NavItem,
 } from 'reactstrap'
 
-import LibraryImage from 'images/layout/library1.webp'
-import LibraryImage2 from 'images/layout/library2.webp'
+import LibraryTopImage from 'images/layout/library/library_top.webp'
+import LibraryContentImage from 'images/layout/library/library_content.webp'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
@@ -59,7 +59,7 @@ const Content = () => (
     <Container fluid>
         <StyledRow
             style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${LibraryImage})`,
+                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${LibraryTopImage})`,
                 backgroundRepeat: 'repeat-x',
                 backgroundPosition: 'center',
                 backgroundSize: 'contain, 30%',
@@ -81,7 +81,7 @@ const Content = () => (
             </Row>
         </StyledRow>
 
-        <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${LibraryImage2})`}}>
+        <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${LibraryContentImage})`}}>
             <StyledCol style={{ maxWidth: '300px', paddingTop: '5rem', paddingBottom: '5rem' }}>
                 <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <Dropdown containerStyle={{ margin: 0, padding: 0}}>
@@ -122,6 +122,10 @@ const Content = () => (
 
                             <Dropdown.Item>
                                 Locais
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                Livros
                             </Dropdown.Item>
 
                         </Dropdown.Menu>

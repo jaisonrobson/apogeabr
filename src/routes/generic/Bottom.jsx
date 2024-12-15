@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
 
-import BottomImage from 'images/layout/bottom.png'
+import BottomImage from 'images/layout/generic/bottom.png'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'

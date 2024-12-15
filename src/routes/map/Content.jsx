@@ -15,10 +15,10 @@ import {
     ImageOverlay
   } from 'react-leaflet'
 
-import CartographyEnvironment from 'images/layout/cartography_environment.png'
-import ForestIsometric from 'images/layout/forest_isometric.jpg'
-import ApogeaMap from 'images/layout/apogeamap.png'
-import ApogeaMapOcean from 'images/layout/apogeamapocean.png'
+import MapTopImage from 'images/layout/map/map_top.png'
+import MapContentImage from 'images/layout/map/map_content.jpg'
+import ApogeaMap from 'images/layout/map/apogeamap.png'
+import ApogeaMapOcean from 'images/layout/map/apogeamapocean.png'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
@@ -69,7 +69,7 @@ const Content = () => (
     <Container fluid>
         <StyledRow
             style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${CartographyEnvironment})`,
+                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${MapTopImage})`,
                 backgroundRepeat: 'repeat-x, repeat',
                 backgroundPosition: 'center, center',
                 backgroundSize: 'contain, 35%',
@@ -83,7 +83,7 @@ const Content = () => (
             </Row>
         </StyledRow>
 
-        <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${ForestIsometric})`, backgroundPosition: "center, center" }}>
+        <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${MapContentImage})`, backgroundPosition: "center, center" }}>
             <StyledCol style={{ maxWidth: '300px', paddingTop: '5rem', paddingBottom: '5rem' }}>
                 <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <Dropdown containerStyle={{ margin: 0, padding: 0}}>

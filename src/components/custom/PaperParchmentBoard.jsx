@@ -2,15 +2,15 @@ import React from 'react'
 
 import Board from 'components/layout/Board'
 
-import PaperParchment_01 from 'images/layout/news/paper_parchment_divided/paper_parchment_01.png'
-import PaperParchment_02 from 'images/layout/news/paper_parchment_divided/paper_parchment_02.png'
-import PaperParchment_03 from 'images/layout/news/paper_parchment_divided/paper_parchment_03.png'
-import PaperParchment_04 from 'images/layout/news/paper_parchment_divided/paper_parchment_04.png'
-import PaperParchment_05 from 'images/layout/news/paper_parchment_divided/paper_parchment_05.png'
-import PaperParchment_06 from 'images/layout/news/paper_parchment_divided/paper_parchment_06.png'
-import PaperParchment_07 from 'images/layout/news/paper_parchment_divided/paper_parchment_07.png'
-import PaperParchment_08 from 'images/layout/news/paper_parchment_divided/paper_parchment_08.png'
-import PaperParchment_09 from 'images/layout/news/paper_parchment_divided/paper_parchment_09.png'
+import PaperParchment_01 from 'images/layout/generic/paper_parchment_divided/paper_parchment_01.png'
+import PaperParchment_02 from 'images/layout/generic/paper_parchment_divided/paper_parchment_02.png'
+import PaperParchment_03 from 'images/layout/generic/paper_parchment_divided/paper_parchment_03.png'
+import PaperParchment_04 from 'images/layout/generic/paper_parchment_divided/paper_parchment_04.png'
+import PaperParchment_05 from 'images/layout/generic/paper_parchment_divided/paper_parchment_05.png'
+import PaperParchment_06 from 'images/layout/generic/paper_parchment_divided/paper_parchment_06.png'
+import PaperParchment_07 from 'images/layout/generic/paper_parchment_divided/paper_parchment_07.png'
+import PaperParchment_08 from 'images/layout/generic/paper_parchment_divided/paper_parchment_08.png'
+import PaperParchment_09 from 'images/layout/generic/paper_parchment_divided/paper_parchment_09.png'
 
 const PaperParchmentBoard = (props) => (
     <Board
