@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavbarBrand as ReactstrapNavbarBrand } from 'reactstrap'
 
-import Logotipo from 'images/logotipo.png'
+import Logotipo from 'images/layout/generic/logotipo.png'
 
 import Image from 'components/layout/Image'
 

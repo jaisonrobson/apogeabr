@@ -7,7 +7,7 @@ import {
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-import userNoAvatarImage from 'images/userNoAvatar.png'
+import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
 import Navbar from 'components/layout/Navbar'
 import NavbarBrand from 'components/layout/NavbarBrand'
@@ -22,7 +22,7 @@ const Top = () => (
     <Navbar>
         {({ isShow }) => (
             <Fragment>
-                <NavbarBrand>Apogea</NavbarBrand>
+                <NavbarBrand />
 
                 <NavbarCollapsible>
                     <NavbarCollapsible.Toggler />
