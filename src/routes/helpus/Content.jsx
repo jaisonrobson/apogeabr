@@ -7,7 +7,7 @@ import {
 import HelpUsTopImage from 'images/layout/helpus/help_us_top.png'
 import HelpUsContentImage from 'images/layout/helpus/help_us_content.png'
 
-import GoldBoard from 'components/custom/GoldBoard'
+import { LoremIpsumParagraphs } from 'data/LoremIpsum'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
@@ -60,16 +60,16 @@ const Content = () => (
         >
             <Row>
                 <Col>
-                    <h2 className='text-gray-100' style={{ display: 'flex', justifyContent: 'center' }}>Ajude nos</h2>
+                    <h2 className='text-gray-100 unselectable' style={{ display: 'flex', justifyContent: 'center' }}>Ajude nos</h2>
                 </Col>
             </Row>
         </StyledRow>
 
         <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${HelpUsContentImage})`, backgroundPosition: "center, center" }}>
             <StyledCol>
-                <StyledContainer style={{ padding: '2rem' }} fluid>
-                    <Row>
-                        <GoldBoard className="text-gray-900" />
+                <StyledContainer style={{ padding: '5rem' }} fluid>
+                    <Row className="text-gray-400">
+                        <LoremIpsumParagraphs />
                     </Row>
                 </StyledContainer>
 

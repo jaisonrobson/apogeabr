@@ -38,7 +38,8 @@ const Board = ({
         {},
     ],
     sizingPattern="135px",
-    children
+    children,
+    ...props
 }) => {
     const ref = useRef(null)
 
@@ -46,42 +47,42 @@ const Board = ({
     }, [ref])
 
     return (
-    <>
-        <Row>
-            <Col style={{ backgroundImage: `url(${images[0]})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'left top', maxWidth: sizingPattern, height: sizingPattern, ...styling[0] }} />
+        <div {...props}>
+            <Row>
+                <Col style={{ backgroundImage: `url(${images[0]})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'left top', maxWidth: sizingPattern, height: sizingPattern, ...styling[0] }} />
 
-            <Col style={{ backgroundImage: `url(${images[1]})`, backgroundRepeat: 'repeat-x', backgroundPosition: 'center', height: sizingPattern, ...styling[1] }} />
+                <Col style={{ backgroundImage: `url(${images[1]})`, backgroundRepeat: 'repeat-x', backgroundPosition: 'center', height: sizingPattern, ...styling[1] }} />
 
-            <Col style={{ backgroundImage: `url(${images[2]})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right top', maxWidth: sizingPattern, height: sizingPattern, ...styling[2] }} />
-        </Row>
-        
-        <Row>
-            <Col style={{ backgroundImage: `url(${images[3]})`, backgroundRepeat: 'repeat-y', backgroundPosition: 'left', maxWidth: sizingPattern, height: ref?.current?.height, ...styling[3] }} />
-
-            <Col
-                ref={ref}
-                style={{
-                    backgroundImage: images[4] != null ? `url(${images[4]})` : '',
-                    backgroundPosition: 'left',
-                    backgroundRepeat: 'repeat',
-                    ...styling[4]
-                }}
-                className={contentClassName}
-            >
-                {children}
-            </Col>
-
-            <Col style={{ backgroundImage: `url(${images[5]})`, backgroundRepeat: 'repeat-y', backgroundPosition: 'right', maxWidth: sizingPattern, height: ref?.current?.height, ...styling[5] }} />
-        </Row>
-
-        <Row >
-            <Col style={{ backgroundImage: `url(${images[6]})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'left bottom', maxWidth: sizingPattern, height: sizingPattern, ...styling[6] }} />
-
-            <Col style={{ backgroundImage: `url(${images[7]})`, backgroundRepeat: 'repeat-x', backgroundPosition: 'bottom', height: sizingPattern, ...styling[7] }} />
+                <Col style={{ backgroundImage: `url(${images[2]})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right top', maxWidth: sizingPattern, height: sizingPattern, ...styling[2] }} />
+            </Row>
             
-            <Col style={{ backgroundImage: `url(${images[8]})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right bottom', maxWidth: sizingPattern, height: sizingPattern, ...styling[8] }} />
-        </Row>
-    </>
+            <Row>
+                <Col style={{ backgroundImage: `url(${images[3]})`, backgroundRepeat: 'repeat-y', backgroundPosition: 'left', maxWidth: sizingPattern, height: ref?.current?.height, ...styling[3] }} />
+
+                <Col
+                    ref={ref}
+                    style={{
+                        backgroundImage: images[4] != null ? `url(${images[4]})` : '',
+                        backgroundPosition: 'left',
+                        backgroundRepeat: 'repeat',
+                        ...styling[4]
+                    }}
+                    className={contentClassName}
+                >
+                    {children}
+                </Col>
+
+                <Col style={{ backgroundImage: `url(${images[5]})`, backgroundRepeat: 'repeat-y', backgroundPosition: 'right', maxWidth: sizingPattern, height: ref?.current?.height, ...styling[5] }} />
+            </Row>
+
+            <Row >
+                <Col style={{ backgroundImage: `url(${images[6]})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'left bottom', maxWidth: sizingPattern, height: sizingPattern, ...styling[6] }} />
+
+                <Col style={{ backgroundImage: `url(${images[7]})`, backgroundRepeat: 'repeat-x', backgroundPosition: 'bottom', height: sizingPattern, ...styling[7] }} />
+                
+                <Col style={{ backgroundImage: `url(${images[8]})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right bottom', maxWidth: sizingPattern, height: sizingPattern, ...styling[8] }} />
+            </Row>
+        </div>
     )
 }
 

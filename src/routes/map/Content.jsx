@@ -8,10 +8,6 @@ import { CRS } from 'leaflet'
 
 import {
     MapContainer,
-    TileLayer,
-    Marker,
-    Popup,
-    MapOptions,
     ImageOverlay
   } from 'react-leaflet'
 
@@ -78,7 +74,7 @@ const Content = () => (
         >
             <Row>
                 <Col>
-                    <h2 className='text-gray-100' style={{ display: 'flex', justifyContent: 'center' }}>Mapa</h2>
+                    <h2 className='text-gray-100 unselectable' style={{ display: 'flex', justifyContent: 'center' }}>Mapa</h2>
                 </Col>
             </Row>
         </StyledRow>

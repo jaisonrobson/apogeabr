@@ -71,7 +71,7 @@ const Content = () => {
                     <StyledContainer fluid>
                         <Row>
                             <Col>
-                                <h2 className="text-gray-100">Ultimos posts</h2>
+                                <h2 className="text-gray-100 unselectable">Ultimos posts</h2>
                             </Col>
                         </Row>
 

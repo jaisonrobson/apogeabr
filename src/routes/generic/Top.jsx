@@ -9,7 +9,8 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
-import Particles from 'components/layout/Particles'
+import ParticleButton from 'components/custom/ParticleButton'
+
 import Navbar from 'components/layout/Navbar'
 import NavbarBrand from 'components/layout/NavbarBrand'
 import NavbarCollapsible from 'components/layout/NavbarCollapsible'
@@ -63,7 +64,7 @@ const Top = () => (
 
                                 <NavItem>
                                     <NavLink href="/halloffame/">
-                                        <Particles><p style={{ display: 'flex', position: 'absolute' }}>Hall da Fama</p></Particles>
+                                        <ParticleButton id="halloffame_button_particles">Hall da Fama</ParticleButton>
                                     </NavLink>
                                 </NavItem>
                             </Nav>                            

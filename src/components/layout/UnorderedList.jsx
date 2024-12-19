@@ -5,10 +5,10 @@ const ListItem = (props) => {
     return <li {...props} />
 }
 
-const UnorderedList = () => {
+const UnorderedList = ({ children, ...props }) => {
     return (
-        <ul>
-
+        <ul {...props}>
+            {children}
         </ul>
     )
 }

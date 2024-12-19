@@ -68,7 +68,7 @@ const Content = () => (
         >
             <Row>
                 <Col>
-                    <h2 className='text-gray-100' style={{ display: 'flex', justifyContent: 'center' }}>Biblioteca</h2>
+                    <h2 className='text-gray-100 unselectable' style={{ display: 'flex', justifyContent: 'center' }}>Biblioteca</h2>
                 </Col>
             </Row>
 
