@@ -93,11 +93,12 @@ const Content = () => {
                     backgroundPosition: 'top'
                 }}
             >
-                <StyledContainer fluid>
+                <StyledContainer style={{ fontFamily: 'Papyrus' }} fluid>
                     <Row>
                         <Col>
-                            <PaperParchmentBoard>
-                                <h2 style={{ textAlign: 'center', paddingBottom: '1rem' }} className="text-black">Notícia</h2>
+                            <PaperParchmentBoard style={{ fontSize: '18px', fontWeight: '100' }}>
+                                <h2 style={{ textAlign: 'center', paddingBottom: '1rem', fontFamily: 'Papyrus' }} className="text-black">Notícia</h2>
+
                                 <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique fermentum est, id porttitor purus vehicula id. Sed non libero id eros viverra condimentum in vitae leo. Aenean at ornare ipsum, eu pellentesque dolor. Sed pellentesque eget risus a pulvinar. Integer in aliquam urna. Nullam at magna rhoncus, venenatis lectus quis, cursus tortor. Integer erat lacus, sodales in nisl ac, interdum gravida mi. Pellentesque ornare, leo at blandit finibus, diam quam interdum lacus, id pellentesque mauris orci a ligula. Donec nisl nulla, ultricies eget lectus at, vestibulum maximus lectus. Nullam posuere metus sed interdum feugiat. Sed ex eros, efficitur ac consectetur sed, hendrerit a massa. Mauris et dolor vel ante dapibus interdum aliquet eget leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut erat congue, porta odio quis, elementum libero.
                                 </p>
@@ -118,7 +119,7 @@ const Content = () => {
 
                         <Col  style={{ maxWidth: '400px' }}>
                             <WoodParchmentBoard>
-                                <Nav className="justify-content-center" style={{ paddingLeft: '25px' }}>
+                                <Nav className="justify-content-center" style={{ paddingLeft: '25px', fontSize: '18px', fontWeight: '1000' }}>
                                     <NavItem>
                                         <NewsNavLink>
                                             Noticia 1

@@ -23,7 +23,10 @@ const BookDisplay = () => (
         justifyContent: 'flex-end',
         height: 'inherit',
         width: 'inherit',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        fontFamily: 'Papyrus',
+        fontSize: '18px',
+        fontWeight: '1000'
     }}>
         <Col style={{ background: "linear-gradient(90deg, rgba(198,184,112,1) 0.5%, rgba(229,217,156,1) 0.5%, rgba(229,217,156,1) 0.5%, rgba(198,184,112,1) 1.5%, rgba(229,217,156,1) 1.5%, rgba(198,184,112,1) 2.5%, rgba(229,217,156,1) 2.5%, rgba(198,184,112,1) 3.5%, rgba(229,217,156,1) 3.5%)", paddingLeft: '75px', paddingTop: '50px' }}>
             <p>

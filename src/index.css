@@ -8,8 +8,21 @@
     src: url('./fonts/celtg.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Papyrus';
+  src: url('fonts/papyrus.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Retro Computer';
+  src: url('fonts/retro.ttf') format('truetype');
+}
+
   body {
     font-family: 'Celtic Garamond the 2nd';
+    background-color: black;
+    width: 100%;
+    height: 100%;
   }
 
 .unselectable {
