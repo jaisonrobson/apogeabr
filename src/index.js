@@ -11,6 +11,7 @@ import Map from './routes/map/Index'
 import About from './routes/about/Index'
 import HelpUs from './routes/helpus/Index'
 import HallOfFame from './routes/halloffame/Index'
+import Login from './routes/login/Index'
 
 const container = document.getElementById("root")
 const root = createRoot(container)
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
     {
         path: "/halloffame/",
         element: <HallOfFame />,
+    },    
+    {
+        path: "/login/",
+        element: <Login />,
     },
 ])
 

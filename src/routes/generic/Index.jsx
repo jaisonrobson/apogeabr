@@ -174,7 +174,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
     const { dispatch, ...state } = useContext(ReducerContext)
 
     useEffect(() => {
-        login(dispatch, user)
+        // login(dispatch, user)
         fetchMovies(dispatch, movies)
 
         initParticlesEngine(async (engine) => {
@@ -182,7 +182,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
         }).then(() => {
             setIsInitialized(true)
         })
-    }, [dispatch, state.movies, state.user])
+    }, [dispatch, state.movies/*, state.user*/])
 
     return (
         <div ref={ref} {...props} className="index bg-primary">

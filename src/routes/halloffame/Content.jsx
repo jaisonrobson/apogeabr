@@ -1,14 +1,13 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
+import { ReducerContext } from 'contexts/withReducerContext'
+
 import HallOfFameTop from 'images/layout/halloffame/hall_of_fame_top.png'
 import HallOfFameContent from 'images/layout/halloffame/hall_of_fame_content.png'
 import StoneWall from 'images/layout/halloffame/stone_wall.png'
 
 import AdornedStoneWallBoard from 'components/custom/AdornedStoneWallBoard'
-
-import { ReducerContext } from 'contexts/withReducerContext'
-
 import VideoCarousel from 'components/custom/VideoCarousel'
 import ImageCarousel from 'components/custom/ImageCarousel'
 
@@ -154,7 +153,10 @@ const Content = () => {
 
                     <StyledContainer
                         fluid
-                        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '500px' }}
+                        style={{
+                            display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '500px',
+                            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,0))`
+                        }}
                     >
                         <Row>
                             <h5
@@ -169,11 +171,11 @@ const Content = () => {
                                 Quer aparecer aqui?
                             </h5>
                             
-                            <p className='text-gray-400'>
+                            <div className='text-gray-400'>
                                 <p>Faça uma doação de R$ 10,00 reais para deixar seu video de até 2 minutos na seção de videos.</p>
                                 <p>Uma doação de R$ 5,00 reais para deixar sua foto na seção de screenshots.</p>
                                 <p>Os maiores doadores aparecem no top 10 prestigiados.</p>
-                            </p>
+                            </div>
                         </Row>
                     </StyledContainer>
                 </StyledCol>

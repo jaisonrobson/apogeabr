@@ -1,7 +1,7 @@
 const LoremIpsum = () => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut erat in dolor faucibus ornare in at odio. Nunc vitae iaculis mi, ac fringilla arcu. Mauris aliquam justo non mi dictum facilisis. Nunc at nisi eu nisl ullamcorper fringilla. Curabitur dictum mauris in nulla elementum, molestie aliquam tellus eleifend. Aliquam a semper eros. Proin maximus nulla ac odio rhoncus dignissim. Donec justo sapien, iaculis id fringilla in, finibus sit amet elit. Quisque elementum placerat nulla, eget aliquet libero ornare nec."
 
 export const LoremIpsumParagraphs = () => (
-    <p>
+    <div>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique fermentum est, id porttitor purus vehicula id. Sed non libero id eros viverra condimentum in vitae leo. Aenean at ornare ipsum, eu pellentesque dolor. Sed pellentesque eget risus a pulvinar. Integer in aliquam urna. Nullam at magna rhoncus, venenatis lectus quis, cursus tortor. Integer erat lacus, sodales in nisl ac, interdum gravida mi. Pellentesque ornare, leo at blandit finibus, diam quam interdum lacus, id pellentesque mauris orci a ligula. Donec nisl nulla, ultricies eget lectus at, vestibulum maximus lectus. Nullam posuere metus sed interdum feugiat. Sed ex eros, efficitur ac consectetur sed, hendrerit a massa. Mauris et dolor vel ante dapibus interdum aliquet eget leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ut erat congue, porta odio quis, elementum libero.
         </p>
@@ -21,7 +21,7 @@ export const LoremIpsumParagraphs = () => (
         <p>
             Aliquam erat volutpat. Ut et lorem gravida, convallis nisi faucibus, ornare tellus. In sodales, enim sit amet ornare accumsan, justo nibh ultricies mauris, a pulvinar tellus felis laoreet lorem. Curabitur egestas eros ipsum, ut ornare nulla blandit ut. Ut interdum imperdiet est, sed congue metus laoreet a. Praesent massa odio, malesuada in erat eu, varius molestie magna. Proin at lacus venenatis massa tincidunt vestibulum. Suspendisse posuere, velit eget lacinia molestie, ex nibh hendrerit nisl, pretium dapibus leo lectus id mi. In hac habitasse platea dictumst. Sed posuere ante eu hendrerit posuere. Cras blandit malesuada gravida. Quisque sodales mi et ultrices iaculis.
         </p>
-    </p>
+    </div>
 )
 
 export default LoremIpsum
