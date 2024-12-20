@@ -9,7 +9,7 @@ import {
 
 import LoginContentImage from 'images/layout/login/login_content.png'
 
-import WoodParchmentBoard from 'components/custom/WoodParchmentBoard'
+import StoneTabletBoard from 'components/custom/StoneTabletBoard'
 
 import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
@@ -63,48 +63,52 @@ const Content = () => {
             </StyledRow>
 
             <StyledRow
-                style={{                    
-                    
+                style={{
                     paddingLeft: '30%',
                     paddingRight: '30%',
                     paddingTop: '10%',
                     flex: 1
                 }}
             >
-                    <Col
-                        // style={{ backgroundColor: 'red' }}
-                    >
-                        <WoodParchmentBoard>
+                    <Col>
+                        <StoneTabletBoard>
                             <div
                                 style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
+                                className='unselectable'
                             >
                                 <h2 className='text-black' style={{ fontFamily: 'Papyrus' }}>Acesso</h2>
 
                                 <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', fontFamily: 'Retro Computer' }}>
-                                    <Row>
+                                    <Row style={{ margin: '15px 0px' }}>
                                         <Col>
                                             Usuario:
                                         </Col>
 
                                         <Col>
-                                            <input {...register("login")} />
+                                            <input
+                                                style={{ border: 0, backgroundColor: '#00000010', borderBottom: '2px solid gray' }}
+                                                {...register("login")}
+                                            />
                                         </Col>
                                     </Row>
                                     
-                                    <Row>
+                                    <Row style={{ margin: '15px 0px' }}>
                                         <Col>
                                             Senha:
                                         </Col>
 
                                         <Col>
-                                            <input {...register("password")} />
+                                            <input
+                                                style={{ border: 0, backgroundColor: '#00000010', borderBottom: '2px solid gray' }}
+                                                {...register("password")}
+                                            />
                                         </Col>
                                     </Row>
                                     
-                                    <input style={{ marginTop: '25px' }} value='Entrar' type="submit" />
+                                    <input style={{ marginTop: '25px', border: 0, backgroundColor: '#00000010', border: '2px solid gray' }} value='Entrar' type="submit" />
                                 </form>
                             </div>
-                        </WoodParchmentBoard>
+                        </StoneTabletBoard>
                     </Col>
             </StyledRow>
         </Container>
