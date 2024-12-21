@@ -15,6 +15,9 @@ import Container from 'components/layout/Container'
 import Col from 'components/layout/Col'
 import Row from 'components/layout/Row'
 
+import Input from 'components/form/Input'
+import Form from 'components/form/Form'
+
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset
     width: 100vw;
@@ -78,17 +81,14 @@ const Content = () => {
                             >
                                 <h2 className='text-black' style={{ fontFamily: 'Papyrus' }}>Acesso</h2>
 
-                                <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', fontFamily: 'Retro Computer' }}>
+                                <Form onSubmit={handleSubmit(onSubmit)}>
                                     <Row style={{ margin: '15px 0px' }}>
                                         <Col>
                                             Usuario:
                                         </Col>
 
                                         <Col>
-                                            <input
-                                                style={{ border: 0, backgroundColor: '#00000010', borderBottom: '2px solid gray' }}
-                                                {...register("login")}
-                                            />
+                                            <Input {...register("login")} />
                                         </Col>
                                     </Row>
                                     
@@ -98,15 +98,27 @@ const Content = () => {
                                         </Col>
 
                                         <Col>
-                                            <input
-                                                style={{ border: 0, backgroundColor: '#00000010', borderBottom: '2px solid gray' }}
-                                                {...register("password")}
-                                            />
+                                            <Input {...register("password")} />
                                         </Col>
                                     </Row>
                                     
-                                    <input style={{ marginTop: '25px', border: 0, backgroundColor: '#00000010', border: '2px solid gray' }} value='Entrar' type="submit" />
-                                </form>
+                                    <Input
+                                        value='Entrar'
+                                        type="submit"
+                                        marginTop='25px'
+                                        backgroundColor='#00000010'
+                                        border='2px solid gray'
+                                        onHover={{
+                                            animation: {
+                                                property: 'loginButtonAnimation 0.5s linear 0s infinite alternate',
+                                                corpse: `@keyframes loginButtonAnimation {
+                                                    0%  {transform: scale3d(1,1,1);}
+                                                    100%  {transform: scale3d(1.03,1.03,1.03); background-color: lightgray; border-radius: 8px}
+                                                }`
+                                            }
+                                        }}                                        
+                                    />
+                                </Form>
                             </div>
                         </StoneTabletBoard>
                     </Col>
