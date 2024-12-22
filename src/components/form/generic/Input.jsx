@@ -8,12 +8,20 @@ const StyledInput = styled(({
     marginRight,
     marginTop,
     marginBottom,
+    minWidth,
     width,
     height,
     overflowWrap,
     boxShadow,
     border,
     backgroundColor,
+    borderBottom,
+    borderTop,
+    borderLeft,
+    borderRight,
+    fontFamily,
+    flex,
+    flexGrow,
     innerRef,
     onHover = false,
     animation = false,
@@ -25,6 +33,7 @@ const StyledInput = styled(({
     ${({ marginRight }) => marginRight ? `margin-right: ${marginRight};` : ``}
     ${({ marginBottom }) => marginBottom ? `margin-bottom: ${marginBottom};` : ``}
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
+    ${({ minWidth }) => minWidth ? `min-width: ${minWidth};` : ``}
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
@@ -35,6 +44,9 @@ const StyledInput = styled(({
     ${({ borderTop }) => borderTop ? `border-top: ${borderTop};` : ``}
     ${({ borderLeft }) => borderLeft ? `border-left: ${borderLeft};` : ``}
     ${({ borderRight }) => borderRight ? `border-right: ${borderRight};` : ``}
+    ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
+    ${({ flex }) => flex ? `flex: ${flex};` : ``}
+    ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
 
     ${({ onHover }) => onHover ? `&:hover {
         ${onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``}
