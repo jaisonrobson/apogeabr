@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Particles from 'components/layout/Particles'
+import { Particles } from 'components'
 
 const ParticleButton = ({ children, ...props }) => (
     <Particles

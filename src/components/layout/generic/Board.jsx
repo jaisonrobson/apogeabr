@@ -10,8 +10,7 @@ import WoodParchment_07 from 'images/layout/generic/wood_parchment_divided/wood_
 import WoodParchment_08 from 'images/layout/generic/wood_parchment_divided/wood_parchment_08.png'
 import WoodParchment_09 from 'images/layout/generic/wood_parchment_divided/wood_parchment_09.png'
 
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
+import { Col, Row } from 'components'
 
 const Board = ({
     contentClassName = "text-gray-400",

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Board from 'components/layout/Board'
+import { Board } from 'components'
 
 import WoodParchment_01 from 'images/layout/generic/wood_parchment_divided/wood_parchment_01.png'
 import WoodParchment_02 from 'images/layout/generic/wood_parchment_divided/wood_parchment_02.png'

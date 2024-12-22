@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { Collapse as ReactstrapCollapse, NavbarToggler as ReactstrapNavbarToggler } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { FlagContext, withFlagContext } from '../../contexts/withFlagContext'
+
+import { FlagContext, withFlagContext } from 'contexts'
 
 const StyledNavbarToggler = styled(({ color, ...props }) => <ReactstrapNavbarToggler {...props} />)`
     ${({ color }) => color ? `color: ${color};` : ''}

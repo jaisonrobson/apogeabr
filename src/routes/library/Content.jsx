@@ -8,14 +8,7 @@ import {
 import LibraryTopImage from 'images/layout/library/library_top.webp'
 import LibraryContentImage from 'images/layout/library/library_content.webp'
 
-import Container from 'components/layout/Container'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
-import NavLink from 'components/layout/NavLink'
-import Dropdown from 'components/layout/Dropdown'
-
-import BookDisplay from 'components/custom/BookDisplay'
-
+import { Container, Col, Row, NavLink, Dropdown, BookDisplay } from 'components'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;

@@ -9,9 +9,7 @@ import HelpUsContentImage from 'images/layout/helpus/help_us_content.png'
 
 import { LoremIpsumParagraphs } from 'data/LoremIpsum'
 
-import Container from 'components/layout/Container'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
+import { Container, Col, Row } from 'components'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;

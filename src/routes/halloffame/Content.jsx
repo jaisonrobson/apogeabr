@@ -1,21 +1,22 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
-import { ReducerContext } from 'contexts/withReducerContext'
+import { ReducerContext } from 'contexts'
 
 import HallOfFameTop from 'images/layout/halloffame/hall_of_fame_top.png'
 import HallOfFameContent from 'images/layout/halloffame/hall_of_fame_content.png'
 import StoneWall from 'images/layout/halloffame/stone_wall.png'
 
-import AdornedStoneWallBoard from 'components/custom/AdornedStoneWallBoard'
-import VideoCarousel from 'components/custom/VideoCarousel'
-import ImageCarousel from 'components/custom/ImageCarousel'
-
-import Particles from 'components/layout/Particles'
-import Container from 'components/layout/Container'
-import OrderedList from 'components/layout/OrderedList'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
+import {
+    AdornedStoneWallBoard,
+    VideoCarousel,
+    ImageCarousel,
+    Particles,
+    Container,
+    OrderedList,
+    Col,
+    Row
+ } from 'components'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;

@@ -1,10 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Image from 'components/layout/Image'
-import Container from 'components/layout/Container'
-import Row from 'components/layout/Row'
-import Col from 'components/layout/Col'
+import { Image, Container, Row, Col } from 'components'
 
 const Wrapper = styled.div`
     position: relative;

@@ -7,20 +7,21 @@ import {
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-import { ReducerContext } from 'contexts/withReducerContext'
+import { ReducerContext } from 'contexts'
 
 import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
-import ParticleButton from 'components/custom/ParticleButton'
-
-import Navbar from 'components/layout/Navbar'
-import NavbarBrand from 'components/layout/NavbarBrand'
-import NavbarCollapsible from 'components/layout/NavbarCollapsible'
-import NavLink from 'components/layout/NavLink'
-import Dropdown from 'components/layout/Dropdown'
-import Icon from 'components/layout/Icon'
-import Span from 'components/layout/Span'
-import Image from 'components/layout/Image'
+import {
+    ParticleButton,
+    Navbar,
+    NavbarBrand,
+    NavbarCollapsible,
+    NavLink,
+    Dropdown,
+    Icon,
+    Span,
+    Image
+} from 'components'
 
 const Top = () => {
     const state = useContext(ReducerContext)

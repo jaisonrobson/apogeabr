@@ -1,10 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Col from 'components/layout/Col'
-import Container from 'components/layout/Container'
-import Row from 'components/layout/Row'
-import Carousel from 'components/layout/Carousel'
+import { Container, Row, Col, Carousel } from 'components'
 
 const initialPayload = [
     {

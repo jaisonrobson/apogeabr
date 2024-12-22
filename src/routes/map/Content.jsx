@@ -16,12 +16,7 @@ import MapContentImage from 'images/layout/map/map_content.jpg'
 import ApogeaMap from 'images/layout/map/apogeamap.png'
 import ApogeaMapOcean from 'images/layout/map/apogeamapocean.png'
 
-import Container from 'components/layout/Container'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
-import NavLink from 'components/layout/NavLink'
-import Dropdown from 'components/layout/Dropdown'
-
+import { Container, Col, Row, NavLink, Dropdown } from 'components'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;

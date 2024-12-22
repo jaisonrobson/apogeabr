@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
+import * as z from 'zod'
 import {
     Nav,
     NavItem,
@@ -9,14 +10,7 @@ import {
 
 import LoginContentImage from 'images/layout/login/login_content.png'
 
-import StoneTabletBoard from 'components/custom/StoneTabletBoard'
-
-import Container from 'components/layout/Container'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
-
-import Input from 'components/form/Input'
-import Form from 'components/form/Form'
+import { StoneTabletBoard, Container, Col, Row, Input, Form } from 'components'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset

@@ -9,8 +9,7 @@ import GoldBoardRightTop from 'images/layout/generic/gold_board_divided/goldboar
 
 import { LoremIpsumParagraphs } from 'data/LoremIpsum'
 
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
+import { Row, Col } from 'components'
 
 const GoldBoard = ({ contentClassName = "text-gray-400", children = <LoremIpsumParagraphs /> }) => (
     <>

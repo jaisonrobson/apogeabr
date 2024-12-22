@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Board from 'components/layout/Board'
+import { Board } from 'components'
 
 import Image_01 from 'images/layout/generic/stone_wall_adorned_divided/stone_wall_adorned_01.png'
 import Image_02 from 'images/layout/generic/stone_wall_adorned_divided/stone_wall_adorned_02.png'

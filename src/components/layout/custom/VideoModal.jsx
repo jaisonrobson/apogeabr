@@ -1,9 +1,7 @@
 import React, { useRef, forwardRef } from 'react'
 import styled from 'styled-components'
 
-import ModalCover from 'components/custom/ModalCover'
-
-import Button from 'components/layout/Button'
+import { ModalCover, Button } from 'components'
 
 const BackgroundWrapper = styled(({ display, innerRef, ...props }) => <div ref={innerRef} {...props} />)`
     ${({ display }) => display ? `display: block;` : 'display: none;'}

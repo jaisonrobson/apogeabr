@@ -4,7 +4,7 @@ import { NavbarBrand as ReactstrapNavbarBrand } from 'reactstrap'
 
 import Logotipo from 'images/layout/generic/logotipo.png'
 
-import Image from 'components/layout/Image'
+import { Image } from 'components'
 
 const StyledNavbarBrand = styled(ReactstrapNavbarBrand)`
     color: #d4bf4e;

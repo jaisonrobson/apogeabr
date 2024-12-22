@@ -4,11 +4,7 @@ import _ from 'lodash'
 
 import BottomImage from 'images/layout/generic/bottom.png'
 
-import Container from 'components/layout/Container'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
-
-import BottomRibbon from 'components/custom/BottomRibbon'
+import { Container, Col, Row, BottomRibbon } from 'components'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;

@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { createPortal } from 'react-dom'
 
-import { withModalContextConsumer } from 'contexts/withModalContext'
+import { withModalContextConsumer } from 'contexts'
 
-import Cover from 'components/layout/Cover'
+import { Cover } from 'components'
 
 const withModalCover = (WrappedComponent) => withModalContextConsumer(
     class ModalCover extends React.Component {

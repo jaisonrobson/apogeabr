@@ -2,7 +2,7 @@ import { useState, useContext, useRef, useEffect } from "react"
 
 import Particles from "@tsparticles/react"
 
-import { ParticlesContext } from 'contexts/withParticlesContext'
+import { ParticlesContext } from 'contexts'
 
 import { options } from 'particles/starsFlowingTop'
 

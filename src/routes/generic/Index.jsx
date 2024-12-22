@@ -4,11 +4,9 @@ import React, { useContext, useEffect, forwardRef } from 'react'
 import { initParticlesEngine } from "@tsparticles/react"
 import { loadAll } from "@tsparticles/all"
 
-import { withReducerContext, ReducerContext } from 'contexts/withReducerContext'
-import { withModalContext } from 'contexts/withModalContext'
-import { withParticlesContext, ParticlesContext } from 'contexts/withParticlesContext'
+import { withReducerContext, ReducerContext, withModalContext, withParticlesContext, ParticlesContext } from 'contexts'
 
-import ScrollToTopButton from 'components/custom/ScrollToTopButton'
+import { ScrollToTopButton  } from 'components'
 
 import Top from './Top'
 import Bottom from './Bottom'

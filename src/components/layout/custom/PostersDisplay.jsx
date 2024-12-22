@@ -1,7 +1,6 @@
 import React from 'react'
 
-import HorizontalScroll from 'components/layout/HorizontalScroll'
-import VideoModal from 'components/custom/VideoModal'
+import { HorizontalScroll, VideoModal } from 'components'
 
 const PostersDisplay = ({ payload }) => (
     <HorizontalScroll items={payload}>

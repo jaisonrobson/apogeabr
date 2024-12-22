@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Container from 'components/layout/Container'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
+import { Container, Row, Col } from 'components'
 
 const StyledLink = styled((props) => <a {...props} />)`
     color: black;

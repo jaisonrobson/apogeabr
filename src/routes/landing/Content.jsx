@@ -5,15 +5,9 @@ import _ from 'lodash'
 import ComunicadosImage from 'images/layout/landing/comunicados.png'
 import ApresentacaoImage from 'images/layout/landing/apresentacao.png'
 
-import Container from 'components/layout/Container'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
+import { Container, Col, Row, WeeklyScreenshotCarousel, CardsDisplay, GoldBoard } from 'components'
 
-import WeeklyScreenshotCarousel from 'components/custom/WeeklyScreenshotCarousel'
-import CardsDisplay from 'components/custom/CardsDisplay'
-import GoldBoard from 'components/custom/GoldBoard'
-
-import { ReducerContext } from 'contexts/withReducerContext'
+import { ReducerContext } from 'contexts'
 
 import { randomSliceIntoNGivenValues } from 'util/array'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-import Carousel from 'components/layout/CarouselMaterialUI'
+import { CarouselMaterialUI } from 'components'
 
 const Item = ({
     divProps = { style: { paddingLeft: '150px', paddingRight: '150px' } },
@@ -16,7 +16,7 @@ const Item = ({
 )
 
 const ImageCarousel = (props) => (
-    <Carousel height={"700px"} item={Item} {...props}/>
+    <CarouselMaterialUI height={"700px"} item={Item} {...props}/>
 )
 
 export default ImageCarousel

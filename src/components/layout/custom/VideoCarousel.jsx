@@ -3,10 +3,9 @@ import _ from 'lodash'
 import ReactPlayer from 'react-player/lazy'
 import styled from 'styled-components'
 
-import Carousel from 'components/layout/CarouselMaterialUI'
-import Button from 'components/layout/Button'
+import { CarouselMaterialUI, Button } from 'components'
 
-import { withCarouselContext, CarouselContext } from 'contexts/withCarouselContext'
+import { withCarouselContext, CarouselContext } from 'contexts'
 
 const initialPayload = [
     {
@@ -99,7 +98,7 @@ const VideoCarousel = (props) => {
     const { isAutoPlaying } = useContext(CarouselContext)
 
     return (
-        <Carousel height={"500px"} item={Item} items={initialPayload} autoPlay={isAutoPlaying} NavButton={NavButton} {...props}/>
+        <CarouselMaterialUI height={"500px"} item={Item} items={initialPayload} autoPlay={isAutoPlaying} NavButton={NavButton} {...props}/>
     )
 }
 

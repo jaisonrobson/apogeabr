@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { isDesktop } from 'react-device-detect'
 
-import Icon from 'components/layout/Icon'
+import { Icon } from 'components'
 
 const Wrapper = styled.div`
     position: relative;

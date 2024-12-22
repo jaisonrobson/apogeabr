@@ -9,16 +9,9 @@ import {
 import NewsContentImage from 'images/layout/news/news_content.png'
 import NewsTopImage from 'images/layout/news/news_top.png'
 
-import Container from 'components/layout/Container'
-import Col from 'components/layout/Col'
-import Row from 'components/layout/Row'
-import NavLink from 'components/layout/NavLink'
+import { Container, Col, Row, NavLink, CardsDisplay, PaperParchmentBoard, WoodParchmentBoard } from 'components'
 
-import CardsDisplay from 'components/custom/CardsDisplay'
-import PaperParchmentBoard from 'components/custom/PaperParchmentBoard'
-import WoodParchmentBoard from 'components/custom/WoodParchmentBoard'
-
-import { ReducerContext } from 'contexts/withReducerContext'
+import { ReducerContext } from 'contexts'
 
 import { randomSliceIntoNGivenValues } from 'util/array'
 

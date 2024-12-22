@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Carousel from 'react-material-ui-carousel'
 
-import Button from 'components/layout/Button'
+import { Button } from 'components'
 
 const StyledButton = styled((props) => <Button {...props} />)`
     height: 100%;
