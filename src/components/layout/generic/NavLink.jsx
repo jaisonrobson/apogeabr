@@ -6,6 +6,7 @@ const StyledNavLink = styled(({ textShadow, color, hoverColor, hoverTextShadow, 
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''};
     ${({ color }) => color ? `color: ${color};` : ''};
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : 'font-family: martel;'};
+    ${({ fontSize }) => fontSize ? `font-size: ${fontSize};` : ''};
 
     &:hover {
         ${({ hoverColor }) => hoverColor ? `color: ${hoverColor};` : ''};
@@ -13,13 +14,11 @@ const StyledNavLink = styled(({ textShadow, color, hoverColor, hoverTextShadow, 
     }
 `
 
-const NavLink = (props) => {
-    return (
-        <StyledNavLink
-            href="/"
-            {...props}
-        />
-    )
-}
+const NavLink = (props) => (
+    <StyledNavLink
+        href="/"
+        {...props}
+    />
+)
 
 export default NavLink

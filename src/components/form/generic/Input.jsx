@@ -54,6 +54,13 @@ const StyledInput = styled(({
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
-const Input = (props, ref) => <StyledInput onHover={{ backgroundColor: 'lightgray' }} innerRef={ref} {...props} />
+const Input = ({ validation, ...props }, ref) => (
+    <StyledInput
+        backgroundColor={validation ? '#FFA5A560' : ''}
+        onHover={{ backgroundColor: 'lightgray' }}
+        innerRef={ref}
+        {...props}
+    />
+)
 
 export default forwardRef(Input)

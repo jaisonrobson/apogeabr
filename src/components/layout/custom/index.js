@@ -9,6 +9,7 @@ export { default as ScrollToTopButton } from "./ScrollToTopButton"
 export { default as VideoCarousel } from "./VideoCarousel"
 export { default as VideoModal } from "./VideoModal"
 export { default as WeeklyScreenshotCarousel } from "./WeeklyScreenshotCarousel"
+export { default as UnrestrictedNavLink } from "./UnrestrictedNavLink"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"
