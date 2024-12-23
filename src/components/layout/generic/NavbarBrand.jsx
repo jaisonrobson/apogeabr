@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { NavbarBrand as ReactstrapNavbarBrand } from 'reactstrap'
+import { NavLink } from 'react-router-dom'
 
 import Logotipo from 'images/layout/generic/logotipo.png'
 
 import { Image } from 'components'
 
-const StyledNavbarBrand = styled(ReactstrapNavbarBrand)`
+const StyledNavbarBrand = styled(NavLink)`
     color: #d4bf4e;
     font-family: 'Martel';
     font-weight: 1;
@@ -24,8 +24,9 @@ const StyledNavbarBrand = styled(ReactstrapNavbarBrand)`
 const NavbarBrand = (props) => {
     return (
         <StyledNavbarBrand
-            href="/"
-            {...props}            
+            to="/"
+            className="unselectable"
+            {...props}
         >
             <Image
                 src={Logotipo}

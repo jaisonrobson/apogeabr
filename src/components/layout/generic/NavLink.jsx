@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { NavLink as ReactstrapNavLink } from 'reactstrap'
+import { NavLink as ReactRouterNavLink } from 'react-router-dom'
 
-const StyledNavLink = styled(({ textShadow, color, hoverColor, hoverTextShadow, fontFamily, ...props }) => <ReactstrapNavLink {...props} />)`
+const StyledNavLink = styled(({ textShadow, color, hoverColor, hoverTextShadow, fontFamily, ...props }) => <ReactRouterNavLink {...props} />)`
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''};
     ${({ color }) => color ? `color: ${color};` : ''};
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : 'font-family: martel;'};
@@ -16,7 +16,7 @@ const StyledNavLink = styled(({ textShadow, color, hoverColor, hoverTextShadow, 
 
 const NavLink = (props) => (
     <StyledNavLink
-        href="/"
+        to="/"
         {...props}
     />
 )

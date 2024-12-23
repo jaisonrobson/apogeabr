@@ -4,11 +4,9 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
-import { login } from 'store/actions'
-
 import { Form, Row, Col, Input, FormattedInput } from 'components'
 
-import { ReducerContext } from 'contexts'
+import { UserContext } from 'contexts'
 
 const loginValidationSchema = z.object({
     login: z.string()
@@ -36,11 +34,10 @@ const loginValidationSchema = z.object({
 
 const LoginForm = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(loginValidationSchema) })
-    const { dispatch, ...state } = useContext(ReducerContext)
+    const { user, login } = useContext(UserContext)
 
     const onSubmit = (data) => {
-        // login(dispatch, data)
-        console.log(data)
+        login({ id: 666 })
     }
 
     return (

@@ -39,37 +39,37 @@ const Top = () => {
                             <Container>
                                 <Nav navbar className="justify-content-center" style={{ marginLeft: '-150px' }}>
                                     <NavItem>
-                                        <NavLink href="/news/">
+                                        <NavLink to="/news/">
                                             Novidades
                                         </NavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink href="/library/">
+                                        <NavLink to="/library/">
                                             Biblioteca
                                         </NavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink href="/map/">
+                                        <NavLink to="/map/">
                                             Mapa
                                         </NavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink href="/about/">
+                                        <NavLink to="/about/">
                                             Sobre
                                         </NavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink href="/helpus/">
+                                        <NavLink to="/helpus/">
                                             Ajude nos
                                         </NavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink href="/halloffame/">
+                                        <NavLink to="/halloffame/">
                                             <ParticleButton id="halloffame_button_particles">Hall da Fama</ParticleButton>
                                         </NavLink>
                                     </NavItem>
@@ -117,7 +117,7 @@ const Top = () => {
                         : (
                             <Nav navbar className="justify-content-end">
                                 <NavItem>
-                                    <NavLink href="/login/">
+                                    <NavLink to="/login/">
                                         Entrar
                                     </NavLink>
                                 </NavItem>

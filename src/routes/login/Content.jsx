@@ -32,7 +32,7 @@ const Content = () => (
         >
             <Col>
                 <UnrestrictedNavLink
-                    href="/"
+                    to="/"
                     style={{
                         width: '150px',
                         display:'flex',
