@@ -1,49 +1,26 @@
 import React from 'react'
-import styled from 'styled-components'
-import {
-    Nav,
-    NavItem,
-} from 'reactstrap'
 
-import LibraryTopImage from 'images/layout/library/library_top.webp'
-import LibraryContentImage from 'images/layout/library/library_content.webp'
+import LibraryTopImage from 'images/layout/library/library_top.png'
+import LibraryContentImage from 'images/layout/library/library_content.png'
 import MagnifyingGlassImage from 'images/layout/library/magnifying_glass.png'
 
-import { Container, Col, Row, NavLink, Dropdown, BookDisplay, Input, Form, Image, Button, SectionBackdrop } from 'components'
-
-const StyledRow = styled((props) => <Row {...props} />)`
-    box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;
-`
-
-const StyledCol = styled((props) => <Col {...props} />)`
-    padding: 0px;
-`
-
-const StyledContainer = styled((props) => <Container {...props} />)`
-    margin-top: 2rem;
-`
-
-const StyledNav = styled((props) => <Nav {...props} />)`
-    /* width */
-    &::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    /* Track */
-    &::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-    }
-
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-        background: #888; 
-    }
-
-    /* Handle on hover */
-    &::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-    }
-`
+import {
+    Container,
+    Col,
+    Row,
+    NavLink,
+    Dropdown,
+    BookDisplay,
+    Input,
+    Form,
+    Image,
+    Button,
+    SectionBackdrop,
+    ScrollbarWrapperStyling,
+    TitleH2,
+    Nav,
+    DrawerNavItem,
+} from 'components'
 
 const NewsNavLink = (props) => (
     <NavLink {...props} color="#e5d99c" textShadow="0px 0px" fontFamily="Celtic Garamond the 2nd" />
@@ -53,20 +30,20 @@ const Content = () => (
     <Container fluid>
         <SectionBackdrop
             backgroundImage={`url(${LibraryTopImage})`}
-            backgroundSize="30%"
-            backgroundRepeat="repeat-x"
+            backgroundSize="cover"
+            backgroundRepeat="repeat"
             backgroundPosition="center"
-            contentAlignmentProps={{ padding: "0px", paddingTop: '10rem' }}
+            contentAlignmentProps={{ paddingBottom: "0px", paddingTop: '10rem' }}
         >
             <Row>
                 <Col>
-                    <h2 className='text-gray-100 unselectable' style={{ display: 'flex', justifyContent: 'center' }}>Biblioteca</h2>
+                    <TitleH2>Biblioteca</TitleH2>
                 </Col>
             </Row>
 
             <Row>
                 <Col>
-                    <Form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem' }}>
+                    <Form alignItems="center" padding="1rem">
                         <Input name="query" width="50%" backgroundColor="#E5D99C" borderRadius="8px" />
 
                         <Button
@@ -81,7 +58,7 @@ const Content = () => (
                                 opacity: '1',
                             }}
                         >
-                            <Image style={{  }} src={MagnifyingGlassImage} />
+                            <Image src={MagnifyingGlassImage} />
                         </Button>
                     </Form>
                 </Col>
@@ -96,8 +73,8 @@ const Content = () => (
             contentAlignmentProps={{ paddingTop: '2rem' }}
         >
             <Row>
-                <StyledCol style={{ maxWidth: '300px', padding: '2rem'}}>
-                    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <Col padding="0px" paddingTop="2rem" maxWidth="300px">
+                    <Form alignItems="center">
                         <Dropdown containerStyle={{ margin: 0, padding: 0}}>
                             <Dropdown.Toggler style={{ margin: 0, padding: 0, minWidth: '300px'  }}>
                                 Missões
@@ -144,73 +121,80 @@ const Content = () => (
 
                             </Dropdown.Menu>
                         </Dropdown>
-                    </form>
+                    </Form>
+                    
+                    <ScrollbarWrapperStyling marginTop="15px">
+                        <Nav
+                            display="flex"
+                            flexDirection="column"
+                            className="justify-content-center"
+                            textAlign='center'
+                            margin="0px"
+                            marginTop='20px'
+                            padding="0px"
+                        >
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Ocultistas
+                                </NewsNavLink>
+                            </DrawerNavItem>
 
-                    <StyledNav className="justify-content-center" style={{ overflow: 'auto', maxHeight: '1000px', textAlign: 'center', margin: '20px' }}>
-                        <NavItem>
-                            <NewsNavLink>
-                                Ocultistas
-                            </NewsNavLink>
-                        </NavItem>
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Lanche do Guarda
+                                </NewsNavLink>
+                            </DrawerNavItem>
 
-                        <NavItem>
-                            <NewsNavLink>
-                                Lanche do Guarda
-                            </NewsNavLink>
-                        </NavItem>
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Brass Armor
+                                </NewsNavLink>
+                            </DrawerNavItem>
 
-                        <NavItem>
-                            <NewsNavLink>
-                                Brass Armor
-                            </NewsNavLink>
-                        </NavItem>
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Old Backpack
+                                </NewsNavLink>
+                            </DrawerNavItem>
 
-                        <NavItem>
-                            <NewsNavLink>
-                                Old Backpack
-                            </NewsNavLink>
-                        </NavItem>
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Wooden Staff
+                                </NewsNavLink>
+                            </DrawerNavItem>
 
-                        <NavItem>
-                            <NewsNavLink>
-                                Wooden Staff
-                            </NewsNavLink>
-                        </NavItem>
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Skull Ring
+                                </NewsNavLink>
+                            </DrawerNavItem>
 
-                        <NavItem>
-                            <NewsNavLink>
-                                Skull Ring
-                            </NewsNavLink>
-                        </NavItem>
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Pesquisa de Seymour
+                                </NewsNavLink>
+                            </DrawerNavItem>
 
-                        <NavItem>
-                            <NewsNavLink>
-                                Pesquisa de Seymour
-                            </NewsNavLink>
-                        </NavItem>
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Entrega das Ferramentas
+                                </NewsNavLink>
+                            </DrawerNavItem>
 
-                        <NavItem>
-                            <NewsNavLink>
-                                Entrega das Ferramentas
-                            </NewsNavLink>
-                        </NavItem>
+                            <DrawerNavItem>
+                                <NewsNavLink>
+                                    Dark Robe
+                                </NewsNavLink>
+                            </DrawerNavItem>
+                        </Nav>
+                    </ScrollbarWrapperStyling>
+                </Col>
 
-                        <NavItem>
-                            <NewsNavLink>
-                                Dark Robe
-                            </NewsNavLink>
-                        </NavItem>
-                    </StyledNav>
-                </StyledCol>
-
-                <StyledCol>
-                    <StyledContainer style={{ padding: '2rem', paddingTop: '0' }} fluid>
-                        <Row>
-                            <BookDisplay />
-                        </Row>
-                    </StyledContainer>
-
-                </StyledCol>
+                <Col padding="2rem">
+                    <Row>
+                        <BookDisplay />
+                    </Row>
+                </Col>
             </Row>
         </SectionBackdrop>
     </Container>

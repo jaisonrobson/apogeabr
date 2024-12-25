@@ -17,10 +17,15 @@ const StyledForm = styled(({
     innerRef,
     onHover = false,
     animation = false,
+    display,
+    flexDirection,
+    alignItems,
+    fontFamily,
     ...props
 }) => <form ref={innerRef} {...props} />)`
     ${({ display }) => display ? `display: ${display};` : `display: flex;`}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : `flex-direction: column;`}
+    ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : `font-family: Retro Computer;`}
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
     ${({ margin }) => margin ? `margin: ${margin};` : ``}

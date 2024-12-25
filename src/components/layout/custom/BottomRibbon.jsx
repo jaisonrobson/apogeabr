@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Row, Ribbon } from 'components'
-
-import { Container } from 'components'
+import { Row, Ribbon, Container } from 'components'
 
 const StyledContainer = styled(Container)`
     display: flex;

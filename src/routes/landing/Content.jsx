@@ -4,7 +4,16 @@ import _ from 'lodash'
 import StatementImage from 'images/layout/landing/statement.png'
 import PresentationImage from 'images/layout/landing/presentation.png'
 
-import { Container, Col, Row, WeeklyScreenshotCarousel, CardsDisplay, GoldBoard, SectionBackdrop } from 'components'
+import {
+    Container,
+    Col,
+    Row,
+    WeeklyScreenshotCarousel,
+    GoldBoard,
+    SectionBackdrop,
+    TitleH2,
+    NewsCardsDisplay,
+} from 'components'
 
 import { ReducerContext } from 'contexts'
 
@@ -35,23 +44,10 @@ const Content = () => {
                 </Col>
             </Row>
 
-            <Row>
-                <Col>
-                    <Row>
-                        <Col>
-                            <h2 className="text-gray-100">Ultimos posts</h2>
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col>
-                            <CardsDisplay payload={cardsPayload} />
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
+            <NewsCardsDisplay payload={cardsPayload} />
             
             <SectionBackdrop
+                gradientBackground="linear-gradient(to bottom, #000000, #00000099 10%, #00000099 90%, #000000);"
                 backgroundImage={`url(${PresentationImage})`}
                 backgroundSize="cover"
                 backgroundRepeat="repeat"
@@ -59,7 +55,7 @@ const Content = () => {
             >
                 <Row>
                     <Col>
-                        <h2 className='text-gray-100 unselectable' style={{ display: 'flex', justifyContent: 'center' }}>Apresentação</h2>                        
+                        <TitleH2>Apresentação</TitleH2>                        
                     </Col>
                 </Row>
 
@@ -71,6 +67,7 @@ const Content = () => {
             </SectionBackdrop>
 
             <SectionBackdrop
+                gradientBackground="linear-gradient(to bottom, #000000, #00000099 10%, #00000099 90%, #000000);"
                 backgroundImage={`url(${StatementImage})`}
                 backgroundSize="cover"
                 backgroundRepeat="repeat"
@@ -78,13 +75,13 @@ const Content = () => {
             >
                 <Row>
                     <Col>
-                        <h2 className='text-gray-100 unselectable' style={{ display: 'flex', justifyContent: 'center' }}>Comunicado</h2>
+                        <TitleH2>Comunicado</TitleH2>
                     </Col>
                 </Row>
                 
                 <Row>
                     <Col>
-                        <GoldBoard />
+                        <GoldBoard contentClassName="text-gray-300" />
                     </Col>
                 </Row>
             </SectionBackdrop>

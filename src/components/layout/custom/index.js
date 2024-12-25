@@ -12,6 +12,10 @@ export { default as WeeklyScreenshotCarousel } from "./WeeklyScreenshotCarousel"
 export { default as ApogeaHoverNavLink } from "./ApogeaHoverNavLink"
 export { default as GradientOverlay } from "./GradientOverlay"
 export { default as SectionBackdrop } from "./SectionBackdrop"
+export { default as ApogeaMap } from "./ApogeaMap"
+export { default as TitleH2 } from "./TitleH2"
+export { default as NewsCardsDisplay } from "./NewsCardsDisplay"
+export { default as DrawerNavItem } from "./DrawerNavItem"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"

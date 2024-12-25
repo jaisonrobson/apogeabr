@@ -1,14 +1,22 @@
 import React, { useContext } from 'react'
 import _ from 'lodash'
-import {
-    Nav,
-    NavItem,
-} from 'reactstrap'
 
 import NewsContentImage from 'images/layout/news/news_content.png'
 import NewsTopImage from 'images/layout/news/news_top.png'
 
-import { Container, Col, Row, NavLink, CardsDisplay, PaperParchmentBoard, WoodParchmentBoard, SectionBackdrop } from 'components'
+import {
+    Container,
+    Col,
+    Row,
+    NavLink,
+    PaperParchmentBoard,
+    WoodParchmentBoard,
+    SectionBackdrop,
+    TitleH2,
+    NewsCardsDisplay,
+    Nav,
+    DrawerNavItem,
+} from 'components'
 
 import { ReducerContext } from 'contexts'
 
@@ -17,7 +25,7 @@ import { randomSliceIntoNGivenValues } from 'util/array'
 import { LoremIpsumParagraphs } from 'data/LoremIpsum'
 
 const NewsNavLink = (props) => (
-    <NavLink {...props} color="#6c6456" textShadow="1px 1px #a99e89" fontFamily="Celtic Garamond the 2nd" />
+    <NavLink {...props} color="#6c6456" textShadow="1px 1px #a99e89" hoverColor="white" hoverTextShadow="1px 1px 3px #000000" fontFamily="Celtic Garamond the 2nd" />
 )
 
 const Content = () => {
@@ -49,21 +57,7 @@ const Content = () => {
                     paddingTop: "8rem",
                 }}
             >
-                <Col>
-                    <Container fluid>
-                        <Row>
-                            <Col>
-                                <h2 className="text-gray-100 unselectable">Ultimos posts</h2>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <CardsDisplay payload={cardsPayload} />
-                            </Col>
-                        </Row>
-                    </Container>
-                </Col>
+                <NewsCardsDisplay payload={cardsPayload} />
             </SectionBackdrop>
 
             <SectionBackdrop
@@ -76,7 +70,7 @@ const Content = () => {
                 <Row>
                     <Col>
                         <PaperParchmentBoard style={{ fontSize: '18px', fontWeight: '100' }}>
-                            <h2 style={{ textAlign: 'center', paddingBottom: '1rem', fontFamily: 'Papyrus' }} className="text-black">Notícia</h2>
+                            <TitleH2 className="text-black" textAlign="center" paddingBottom="1rem" fontFamily="Papyrus">Notícia</TitleH2>
 
                             <LoremIpsumParagraphs />
                         </PaperParchmentBoard>
@@ -84,82 +78,89 @@ const Content = () => {
 
                     <Col style={{ maxWidth: '400px' }}>
                         <WoodParchmentBoard>
-                            <Nav className="justify-content-center" style={{ paddingLeft: '25px', fontSize: '18px', fontWeight: '1000' }}>
-                                <NavItem>
+                            <Nav
+                                display="flex"
+                                flexDirection="column"
+                                className="justify-content-center"
+                                textAlign="center"                                
+                                fontSize='18px'
+                                fontWeight='1000'
+                            >
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 1
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 2
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 3
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 4
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <hr style={{ width: '100%', borderWidth: '3px', marginLeft: '-25px' }}/>
+                                <hr style={{ width: '100%', borderWidth: '3px' }}/>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 1
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 2
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 3
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 4
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <hr style={{ width: '100%', borderWidth: '3px', marginLeft: '-25px' }}/>
+                                <hr style={{ width: '100%', borderWidth: '3px' }}/>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 1
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 2
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 3
                                     </NewsNavLink>
-                                </NavItem>
+                                </DrawerNavItem>
 
-                                <NavItem>
+                                <DrawerNavItem>
                                     <NewsNavLink>
                                         Noticia 4
                                     </NewsNavLink>
-                                </NavItem>                                    
+                                </DrawerNavItem>                                    
                             </Nav>
                         </WoodParchmentBoard>
                     </Col>

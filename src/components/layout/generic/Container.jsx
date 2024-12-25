@@ -21,6 +21,9 @@ const StyledContainer = styled(({
     display,
     backgroundColor,
     fontFamily,
+    backgroundImage,
+    backgroundRepeat,
+    backgroundSize,
     ...props
 }) => <ReactstrapContainer {...props} />)`    
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
@@ -44,6 +47,10 @@ const StyledContainer = styled(({
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
     ${({ display }) => display ? `display: ${display};` : ``}
+
+    ${({ backgroundImage }) => backgroundImage ? `background-image: ${backgroundImage};` : ``}
+    ${({ backgroundRepeat }) => backgroundRepeat ? `background-repeat: ${backgroundRepeat};` : ``}
+    ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
 `
 
 const Container = (props) => <StyledContainer {...props} />
