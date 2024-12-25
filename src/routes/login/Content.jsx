@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import LoginContentImage from 'images/layout/login/login_content.png'
 
-import { StoneTabletBoard, Container, Col, Row, LoginForm, UnrestrictedNavLink } from 'components'
+import { StoneTabletBoard, Container, Col, Row, LoginForm, ApogeaHoverNavLink } from 'components'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset
@@ -31,7 +31,7 @@ const Content = () => (
             style={{ flex: 0, paddingLeft: '25px' }}
         >
             <Col>
-                <UnrestrictedNavLink
+                <ApogeaHoverNavLink
                     to="/"
                     style={{
                         width: '150px',
@@ -40,7 +40,7 @@ const Content = () => (
                     }}
                 >
                     <div style={{ fontFamily: 'arial black' }}>{`<-`}</div>-Voltar
-                </UnrestrictedNavLink>
+                </ApogeaHoverNavLink>
             </Col>
         </StyledRow>
 

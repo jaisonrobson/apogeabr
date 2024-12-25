@@ -1,19 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import Carousel from 'react-material-ui-carousel'
 
 import { Button } from 'components'
 
-const StyledButton = styled((props) => <Button {...props} />)`
-    height: 100%;
-    width: 100px;
-    border-radius: 75%;
-    opacity: .7;
-
-    &:hover {
-        opacity: 100;
-    }
-`
 const WrappedCarousel = ({ items, item: Item, itemProps, ...props }) => (
     <Carousel
         autoPlay={true}
@@ -32,10 +21,10 @@ const WrappedCarousel = ({ items, item: Item, itemProps, ...props }) => (
 )
 
 const NavButton = ({onClick, className, style, next, prev}) => (
-    <StyledButton onClick={onClick} className={className} style={style}>
+    <Button onClick={onClick} className={className} style={style} width="100px" height="100%" borderRadius="75%" opacity=".7">
         {next && <p style={{ textAlign: 'center', fontSize: 50, paddingTop: '15px', color: 'white' }}>{`>`}</p>}
         {prev && <p style={{ textAlign: 'center', fontSize: 50, paddingTop: '15px', color: 'white' }}>{`<`}</p>}
-    </StyledButton>
+    </Button>
 )
 
 export default WrappedCarousel

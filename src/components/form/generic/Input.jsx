@@ -14,6 +14,7 @@ const StyledInput = styled(({
     overflowWrap,
     boxShadow,
     border,
+    borderRadius,
     backgroundColor,
     borderBottom,
     borderTop,
@@ -39,6 +40,7 @@ const StyledInput = styled(({
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
     ${({ border }) => border ? `border: ${border};` : `border: 0;`}
+    ${({ borderRadius }) => borderRadius ? `border-radius: ${borderRadius};` : ``}
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #00000010;`}
     ${({ borderBottom }) => borderBottom ? `border-bottom: ${borderBottom};` : `border-bottom: 2px solid gray;`}
     ${({ borderTop }) => borderTop ? `border-top: ${borderTop};` : ``}

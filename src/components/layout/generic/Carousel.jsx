@@ -2,6 +2,8 @@ import React, { useEffect, useState, forwardRef, createRef } from 'react'
 import styled from 'styled-components'
 import { isDesktop } from 'react-device-detect'
 
+import { GradientOverlay, Overlay } from 'components'
+
 const StyledItem = styled(({ backgroundImage, opacity, ...props }) => <div {...props} />)`
     background-image: url(${({ backgroundImage }) => backgroundImage});
     -webkit-background-size: cover;
@@ -76,29 +78,11 @@ const StyledBackground = styled.div`
 
 const StyledCarousel = styled(({ width, height, innerRef, ...props }) => <div ref={innerRef} {...props} />)`
     position: relative;
-    ${({ width }) => width ? `width: ${width};` : ''}
+    ${({ width }) => width ? `width: ${width};` : ''}    
     ${({ height }) => height ? `height: ${height};` : ''}
 `
 
 const ReferredCarousel = forwardRef((props, ref) => <StyledCarousel innerRef={ref} {...props} />)
-
-const StyledGradient = styled(({ backgroundColor, backgroundTo, ...props }) => <div {...props} />)`
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background: linear-gradient(to ${({ backgroundTo }) => backgroundTo ? backgroundTo : 'bottom'},rgba(0,0,0,0) 0%,rgba(0,0,0,0) 75%,${({ backgroundColor }) => backgroundColor ? backgroundColor : '#000'} 100%);
-`
-
-const StyledOverlay = styled.div`
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background: linear-gradient(to bottom,rgba(0,0,0,.7) 0%,rgba(0,0,0,.5) 25%);
-`
 
 const initialPayload = [
     {
@@ -174,16 +158,20 @@ const Carousel = ({
                 ))}
             </StyledBackground>
 
-            <StyledOverlay />
-
-            <StyledGradient
-                backgroundColor="#202020"
-                backgroundTo="bottom"
+            <Overlay
+                position='absolute'
+                width='100%'
+                top='0'
+                left='0'
+                height='100%'
             />
 
-            <StyledGradient
-                backgroundColor="#202020"
-                backgroundTo="top"
+            <GradientOverlay
+                position='absolute'
+                width='100%'
+                top='0'
+                left='0'
+                height='100%'
             />
         </ReferredCarousel>
     )

@@ -4,6 +4,10 @@ import { Col as ReactstrapCol } from 'reactstrap'
 
 const StyledCol = styled(({
     padding,
+    paddingLeft,
+    paddingRight,
+    paddingTop,
+    paddingBottom,
     margin,
     marginLeft,
     marginRight,
@@ -13,13 +17,19 @@ const StyledCol = styled(({
     height,
     overflowWrap,
     ...props
-}) => <ReactstrapCol {...props}/>)`
-    ${({ padding }) => padding ? `padding: ${padding};` : ``}
+}) => <ReactstrapCol {...props}/>)`    
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}
     ${({ marginRight }) => marginRight ? `margin-right: ${marginRight};` : ``}
     ${({ marginBottom }) => marginBottom ? `margin-bottom: ${marginBottom};` : ``}
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
+
+    ${({ padding }) => padding ? `padding: ${padding};` : ``}
+    ${({ paddingLeft }) => paddingLeft ? `margin-left: ${paddingLeft};` : ``}
+    ${({ paddingRight }) => paddingRight ? `padding-right: ${paddingRight};` : ``}
+    ${({ paddingBottom }) => paddingBottom ? `padding-bottom: ${paddingBottom};` : ``}
+    ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ``}
+
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}

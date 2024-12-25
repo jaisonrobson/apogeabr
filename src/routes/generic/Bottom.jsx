@@ -4,26 +4,30 @@ import _ from 'lodash'
 
 import BottomImage from 'images/layout/generic/bottom.png'
 
-import { Container, Col, Row, BottomRibbon } from 'components'
+import { Container, SectionBackdrop, Row } from 'components'
 
-const StyledRow = styled((props) => <Row {...props} />)`
-    box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;
-`
-
-const StyledCol = styled((props) => <Col {...props} />)`
-    padding: 0px;
-`
-
-const Bottom = () => {
-    return (
-        <Container fluid>
-            <StyledRow>
-                <StyledCol>
-                    <BottomRibbon payload={{ imageSrc:BottomImage }} />
-                </StyledCol>
-            </StyledRow>
-        </Container>
-    )
-}
+const Bottom = () => (
+    <Container fluid>
+        <SectionBackdrop
+            backgroundImage={`url(${BottomImage})`}
+            backgroundSize="cover"
+            backgroundRepeat="repeat"
+            backgroundPosition="center"
+            height="35rem"
+            contentAlignmentProps={{
+                height: '100%',
+                display:"flex",
+                flexDirection:"column",
+                justifyContent:"flex-end"
+            }}
+        >
+            <Container display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                <Row>
+                    <h2 className="text-apogea-600 unselectable">@ApogeaBR</h2>
+                </Row>
+            </Container>
+        </SectionBackdrop>
+    </Container>
+)
 
 export default Bottom

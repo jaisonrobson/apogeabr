@@ -7,7 +7,7 @@ import {
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-import { ReducerContext } from 'contexts'
+import { UserContext } from 'contexts'
 
 import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
@@ -16,7 +16,7 @@ import {
     Navbar,
     NavbarBrand,
     NavbarCollapsible,
-    NavLink,
+    ApogeaHoverNavLink,
     Dropdown,
     Icon,
     Span,
@@ -24,7 +24,7 @@ import {
 } from 'components'
 
 const Top = () => {
-    const state = useContext(ReducerContext)
+    const state = useContext(UserContext)
 
     return (
         <Navbar>
@@ -39,39 +39,39 @@ const Top = () => {
                             <Container>
                                 <Nav navbar className="justify-content-center" style={{ marginLeft: '-150px' }}>
                                     <NavItem>
-                                        <NavLink to="/news/">
+                                        <ApogeaHoverNavLink to="/news/">
                                             Novidades
-                                        </NavLink>
+                                        </ApogeaHoverNavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink to="/library/">
+                                        <ApogeaHoverNavLink to="/library/">
                                             Biblioteca
-                                        </NavLink>
+                                        </ApogeaHoverNavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink to="/map/">
+                                        <ApogeaHoverNavLink to="/map/">
                                             Mapa
-                                        </NavLink>
+                                        </ApogeaHoverNavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink to="/about/">
+                                        <ApogeaHoverNavLink to="/about/">
                                             Sobre
-                                        </NavLink>
+                                        </ApogeaHoverNavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink to="/helpus/">
+                                        <ApogeaHoverNavLink to="/helpus/">
                                             Ajude nos
-                                        </NavLink>
+                                        </ApogeaHoverNavLink>
                                     </NavItem>
 
                                     <NavItem>
-                                        <NavLink to="/halloffame/">
+                                        <ApogeaHoverNavLink to="/halloffame/">
                                             <ParticleButton id="halloffame_button_particles">Hall da Fama</ParticleButton>
-                                        </NavLink>
+                                        </ApogeaHoverNavLink>
                                     </NavItem>
                                 </Nav>
                             </Container>
@@ -79,7 +79,7 @@ const Top = () => {
                     </NavbarCollapsible>
 
                     {
-                        state?.user
+                        state.user.isLogged
                         ? (
                             <Dropdown>
                                 <Dropdown.Toggler
@@ -117,9 +117,9 @@ const Top = () => {
                         : (
                             <Nav navbar className="justify-content-end">
                                 <NavItem>
-                                    <NavLink to="/login/">
+                                    <ApogeaHoverNavLink to="/login/">
                                         Entrar
-                                    </NavLink>
+                                    </ApogeaHoverNavLink>
                                 </NavItem>
                             </Nav>
                         )

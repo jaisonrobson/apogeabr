@@ -7,8 +7,9 @@ import {
 
 import LibraryTopImage from 'images/layout/library/library_top.webp'
 import LibraryContentImage from 'images/layout/library/library_content.webp'
+import MagnifyingGlassImage from 'images/layout/library/magnifying_glass.png'
 
-import { Container, Col, Row, NavLink, Dropdown, BookDisplay } from 'components'
+import { Container, Col, Row, NavLink, Dropdown, BookDisplay, Input, Form, Image, Button, SectionBackdrop } from 'components'
 
 const StyledRow = styled((props) => <Row {...props} />)`
     box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset;
@@ -50,14 +51,12 @@ const NewsNavLink = (props) => (
 
 const Content = () => (
     <Container fluid>
-        <StyledRow
-            style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${LibraryTopImage})`,
-                backgroundRepeat: 'repeat-x',
-                backgroundPosition: 'center',
-                backgroundSize: 'contain, 30%',
-                paddingTop: '10rem'
-            }}
+        <SectionBackdrop
+            backgroundImage={`url(${LibraryTopImage})`}
+            backgroundSize="30%"
+            backgroundRepeat="repeat-x"
+            backgroundPosition="center"
+            contentAlignmentProps={{ padding: "0px", paddingTop: '10rem' }}
         >
             <Row>
                 <Col>
@@ -67,130 +66,153 @@ const Content = () => (
 
             <Row>
                 <Col>
-                    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem' }}>
-                        <input name="query" style={{ width: '50%' }}/>
-                    </form>
+                    <Form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem' }}>
+                        <Input name="query" width="50%" backgroundColor="#E5D99C" borderRadius="8px" />
+
+                        <Button
+                            type="submit"
+                            margin="15px"
+                            backgroundColor="transparent"
+                            border="0"
+                            opacity="0.5"
+                            onHover={{
+                                backgroundColor: 'transparent',
+                                color: 'transparent',
+                                opacity: '1',
+                            }}
+                        >
+                            <Image style={{  }} src={MagnifyingGlassImage} />
+                        </Button>
+                    </Form>
                 </Col>
             </Row>
-        </StyledRow>
+        </SectionBackdrop>
 
-        <StyledRow style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5), rgba(0,0,0,.5) 90%, rgba(0,0,0,1)), url(${LibraryContentImage})`}}>
-            <StyledCol style={{ maxWidth: '300px', paddingTop: '5rem', paddingBottom: '5rem' }}>
-                <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                    <Dropdown containerStyle={{ margin: 0, padding: 0}}>
-                        <Dropdown.Toggler style={{ margin: 0, padding: 0, minWidth: '300px'  }}>
-                            Missões
-                        </Dropdown.Toggler>
-
-                        <Dropdown.Menu dark end>
-                            <Dropdown.Item header>
-                                Selecione uma categoria
-                            </Dropdown.Item>
-                            
-                            <Dropdown.Item divider />
-
-                            <Dropdown.Item>
+        <SectionBackdrop
+            backgroundImage={`url(${LibraryContentImage})`}
+            backgroundSize="30%"
+            backgroundRepeat="repeat"
+            backgroundPosition="center"
+            contentAlignmentProps={{ paddingTop: '2rem' }}
+        >
+            <Row>
+                <StyledCol style={{ maxWidth: '300px', padding: '2rem'}}>
+                    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                        <Dropdown containerStyle={{ margin: 0, padding: 0}}>
+                            <Dropdown.Toggler style={{ margin: 0, padding: 0, minWidth: '300px'  }}>
                                 Missões
-                            </Dropdown.Item>
+                            </Dropdown.Toggler>
 
-                            <Dropdown.Item>
-                                Npcs
-                            </Dropdown.Item>
+                            <Dropdown.Menu dark end>
+                                <Dropdown.Item header>
+                                    Selecione uma categoria
+                                </Dropdown.Item>
+                                
+                                <Dropdown.Item divider />
 
-                            <Dropdown.Item>
-                                Monstros
-                            </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Missões
+                                </Dropdown.Item>
 
-                            <Dropdown.Item>
-                                Items
-                            </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Npcs
+                                </Dropdown.Item>
 
-                            <Dropdown.Item>
-                                Eventos
-                            </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Monstros
+                                </Dropdown.Item>
 
-                            <Dropdown.Item>
-                                Cidades
-                            </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Items
+                                </Dropdown.Item>
 
-                            <Dropdown.Item>
-                                Locais
-                            </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Eventos
+                                </Dropdown.Item>
 
-                            <Dropdown.Item>
-                                Livros
-                            </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Cidades
+                                </Dropdown.Item>
 
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </form>
+                                <Dropdown.Item>
+                                    Locais
+                                </Dropdown.Item>
 
-                <StyledNav bsStyle="pills" stacked className="justify-content-center" style={{ overflow: 'auto', maxHeight: '1000px', textAlign: 'center', margin: '20px' }}>
-                    <NavItem>
-                        <NewsNavLink>
-                            Ocultistas
-                        </NewsNavLink>
-                    </NavItem>
+                                <Dropdown.Item>
+                                    Livros
+                                </Dropdown.Item>
 
-                    <NavItem>
-                        <NewsNavLink>
-                            Lanche do Guarda
-                        </NewsNavLink>
-                    </NavItem>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </form>
 
-                    <NavItem>
-                        <NewsNavLink>
-                            Brass Armor
-                        </NewsNavLink>
-                    </NavItem>
+                    <StyledNav className="justify-content-center" style={{ overflow: 'auto', maxHeight: '1000px', textAlign: 'center', margin: '20px' }}>
+                        <NavItem>
+                            <NewsNavLink>
+                                Ocultistas
+                            </NewsNavLink>
+                        </NavItem>
 
-                    <NavItem>
-                        <NewsNavLink>
-                            Old Backpack
-                        </NewsNavLink>
-                    </NavItem>
+                        <NavItem>
+                            <NewsNavLink>
+                                Lanche do Guarda
+                            </NewsNavLink>
+                        </NavItem>
 
-                    <NavItem>
-                        <NewsNavLink>
-                            Wooden Staff
-                        </NewsNavLink>
-                    </NavItem>
+                        <NavItem>
+                            <NewsNavLink>
+                                Brass Armor
+                            </NewsNavLink>
+                        </NavItem>
 
-                    <NavItem>
-                        <NewsNavLink>
-                            Skull Ring
-                        </NewsNavLink>
-                    </NavItem>
+                        <NavItem>
+                            <NewsNavLink>
+                                Old Backpack
+                            </NewsNavLink>
+                        </NavItem>
 
-                    <NavItem>
-                        <NewsNavLink>
-                            Pesquisa de Seymour
-                        </NewsNavLink>
-                    </NavItem>
+                        <NavItem>
+                            <NewsNavLink>
+                                Wooden Staff
+                            </NewsNavLink>
+                        </NavItem>
 
-                    <NavItem>
-                        <NewsNavLink>
-                            Entrega das Ferramentas
-                        </NewsNavLink>
-                    </NavItem>
+                        <NavItem>
+                            <NewsNavLink>
+                                Skull Ring
+                            </NewsNavLink>
+                        </NavItem>
 
-                    <NavItem>
-                        <NewsNavLink>
-                            Dark Robe
-                        </NewsNavLink>
-                    </NavItem>
-                </StyledNav>
-            </StyledCol>
+                        <NavItem>
+                            <NewsNavLink>
+                                Pesquisa de Seymour
+                            </NewsNavLink>
+                        </NavItem>
 
-            <StyledCol>
-                <StyledContainer style={{ padding: '2rem' }} fluid>
-                    <Row>
-                        <BookDisplay />
-                    </Row>
-                </StyledContainer>
+                        <NavItem>
+                            <NewsNavLink>
+                                Entrega das Ferramentas
+                            </NewsNavLink>
+                        </NavItem>
 
-            </StyledCol>
-        </StyledRow>
+                        <NavItem>
+                            <NewsNavLink>
+                                Dark Robe
+                            </NewsNavLink>
+                        </NavItem>
+                    </StyledNav>
+                </StyledCol>
+
+                <StyledCol>
+                    <StyledContainer style={{ padding: '2rem', paddingTop: '0' }} fluid>
+                        <Row>
+                            <BookDisplay />
+                        </Row>
+                    </StyledContainer>
+
+                </StyledCol>
+            </Row>
+        </SectionBackdrop>
     </Container>
 )
 

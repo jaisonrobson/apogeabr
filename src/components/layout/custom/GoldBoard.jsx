@@ -9,10 +9,10 @@ import GoldBoardRightTop from 'images/layout/generic/gold_board_divided/goldboar
 
 import { LoremIpsumParagraphs } from 'data/LoremIpsum'
 
-import { Row, Col } from 'components'
+import { Container, Row, Col } from 'components'
 
 const GoldBoard = ({ contentClassName = "text-gray-400", children = <LoremIpsumParagraphs /> }) => (
-    <>
+    <Container fluid>
         <Row >
             <Col style={{ backgroundImage: `url(${GoldBoardLeftTop})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'left top', maxWidth: '135px', height: '135px' }} />
             <Col style={{ backgroundImage: `url(${GoldBoardHorizontal})`, backgroundRepeat: 'repeat-x', backgroundPosition: 'top', height: '135px' }} />
@@ -28,7 +28,7 @@ const GoldBoard = ({ contentClassName = "text-gray-400", children = <LoremIpsumP
             <Col style={{ backgroundImage: `url(${GoldBoardHorizontal})`, backgroundRepeat: 'repeat-x', backgroundPosition: 'bottom', height: '170px' }} />
             <Col style={{ backgroundImage: `url(${GoldBoardRightBottom})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right bottom', maxWidth: '165px', height: '165px' }} />
         </Row>
-    </>
+    </Container>
 )
 
 export default GoldBoard

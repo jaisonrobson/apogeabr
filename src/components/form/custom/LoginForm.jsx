@@ -1,12 +1,16 @@
-import React, { forwardRef, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
-import { Form, Row, Col, Input, FormattedInput } from 'components'
+import { Form, Row, Col, Input, FormattedInput, ApogeaHoverNavLink } from 'components'
 
 import { UserContext } from 'contexts'
+
+const StyledRow = styled((props) => <Row {...props} />)`
+    margin: 10px 0px;
+`
 
 const loginValidationSchema = z.object({
     login: z.string()
@@ -34,7 +38,7 @@ const loginValidationSchema = z.object({
 
 const LoginForm = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(loginValidationSchema) })
-    const { user, login } = useContext(UserContext)
+    const { login } = useContext(UserContext)
 
     const onSubmit = (data) => {
         login({ id: 666 })
@@ -44,6 +48,13 @@ const LoginForm = (props) => {
         <Form onSubmit={handleSubmit(onSubmit)}>
             <FormattedInput register={register} name="login" label="Usuario:" errorMessage={errors.login?.message} fontFamily="arial"/>
             <FormattedInput register={register} name="password" label="Senha:" errorMessage={errors.password?.message} fontFamily="arial"/>
+
+            <StyledRow>
+                <Col style={{ textAlign: 'center' }}>
+                    {`Não possui uma conta? `}
+                    <ApogeaHoverNavLink fontFamily="Retro Computer" to="/register/">Registre-se</ApogeaHoverNavLink>
+                </Col>
+            </StyledRow>
             
             <Input
                 value='Entrar'
