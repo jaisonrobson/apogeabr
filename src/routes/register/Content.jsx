@@ -7,7 +7,7 @@ import {
     Container,
     Col,
     Row,
-    LoginForm,
+    RegisterForm,
     ApogeaHoverNavLink,
     SectionBackdrop,
     TitleH2,
@@ -61,7 +61,7 @@ const Content = () => (
                         >
                             <TitleH2 className='text-black' fontFamily='Papyrus'>Registro</TitleH2>
 
-                            {/* <LoginForm /> */}
+                            <RegisterForm />
                         </Container>
                     </StoneTabletBoard>
                 </Col>

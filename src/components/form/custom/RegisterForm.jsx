@@ -1,43 +1,48 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
-import { Form, Row, Col, Input, FormattedInput, ApogeaHoverNavLink } from 'components'
-
-import { UserContext } from 'contexts'
+import { Form, Input, FormattedInput } from 'components'
 
 import { userPasswordValidation } from 'validations'
 
-const loginValidationSchema = z.object({
+const registerValidationSchema = z.object({
     login: z.string()
         .min(8, { message: 'Necessário ao menos 8 caracteres' })
-        .max(15, { message: 'Máximo de 15 caracteres atingido' }),        
+        .max(15, { message: 'Máximo de 15 caracteres atingido' }),
     password: userPasswordValidation,
+    confirmPassword: userPasswordValidation,
+    email: z.string()
+        .min(1, { message: "Necessário ao menos 1 caractere" })
+        .email("Email não é válido"),
+        // .refine(async (data) => await checkIfEmailIsValid(data), "Este email já existe em nossa base de dados"),
+}).superRefine(({ confirmPassword, password }, ctx) => {
+    if (confirmPassword !== password) {
+        ctx.addIssue({
+            code: "custom",
+            message: "A senha não confere com a confirmação",
+            path: ['confirmPassword']
+        })
+    }
 })
 
-const LoginForm = (props) => {
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(loginValidationSchema) })
-    const { login } = useContext(UserContext)
+const RegisterForm = (props) => {
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(registerValidationSchema) })
 
     const onSubmit = (data) => {
-        login({ id: 666 })
+        console.log(data)
     }
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <FormattedInput register={register} name="login" label="Usuario:" errorMessage={errors.login?.message} fontFamily="arial"/>
             <FormattedInput register={register} name="password" label="Senha:" errorMessage={errors.password?.message} fontFamily="arial"/>
+            <FormattedInput register={register} name="confirmPassword" label="Confirme a senha:" errorMessage={errors.confirmPassword?.message} fontFamily="arial"/>
+            <FormattedInput register={register} name="email" label="Email:" errorMessage={errors.email?.message} fontFamily="arial"/>
 
-            <Row margin="10px 0px">
-                <Col textAlign='center'>
-                    {`Não possui uma conta? `}
-                    <ApogeaHoverNavLink hoverTextShadow="1px 1px 2px black" fontFamily="Retro Computer" to="/login/register/">Registre-se</ApogeaHoverNavLink>
-                </Col>
-            </Row>
-            
             <Input
-                value='Entrar'
+                value='Registrar'
                 type="submit"
                 marginTop='15px'
                 backgroundColor='#00000010'
@@ -56,4 +61,4 @@ const LoginForm = (props) => {
     )
 }
 
-export default LoginForm
+export default RegisterForm

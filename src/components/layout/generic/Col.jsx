@@ -24,8 +24,9 @@ const StyledCol = styled(({
     backgroundImage,
     backgroundRepeat,
     backgroundSize,
+    textAlign,
     ...props
-}) => <ReactstrapCol {...props}/>)`    
+}) => <ReactstrapCol {...props}/>)`
     ${({ display }) => display ? `display: ${display};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
 
@@ -50,6 +51,7 @@ const StyledCol = styled(({
     ${({ backgroundImage }) => backgroundImage ? `background-image: ${backgroundImage};` : ``}
     ${({ backgroundRepeat }) => backgroundRepeat ? `background-repeat: ${backgroundRepeat};` : ``}
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
+    ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
 `
 
 const Col = forwardRef((props, ref) => <StyledCol {...props} />)
