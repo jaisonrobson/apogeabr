@@ -1,71 +1,71 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import LoginContentImage from 'images/layout/login/login_content.png'
 
-import { StoneTabletBoard, Container, Col, Row, LoginForm, ApogeaHoverNavLink } from 'components'
-
-const StyledRow = styled((props) => <Row {...props} />)`
-    box-shadow: 0 -10px 15px rgba(0,0,0,.1) inset
-    width: 100vw;
-    margin: 0;
-`
+import {
+    StoneTabletBoard,
+    Container,
+    Col,
+    Row,
+    LoginForm,
+    ApogeaHoverNavLink,
+    SectionBackdrop,
+    TitleH2,
+} from 'components'
 
 const Content = () => (
-    <Container
-        style={{
-            margin: 0,
-            padding: 0,
-            position: 'absolute',
-            display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'stretch',
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.5), rgba(0,0,0,1)), url(${LoginContentImage})`,
-            backgroundRepeat: 'repeat-x, repeat-x',
-            backgroundPosition: 'center, 50% 35%',
-            backgroundSize: 'contain, cover',
-            height: '100%',
-            width: '100%',
-        }}
-        fluid
+    <SectionBackdrop
+        backgroundImage={`url(${LoginContentImage})`}
+        backgroundSize="cover"
+        backgroundRepeat="repeat-x"
+        backgroundPosition="50% 50%"
+        margin="0px"
+        padding="0px"
+        position="absolute"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="stretch"
+        height="100%"
+        width="100%"
+        contentAlignmentProps={{ paddingTop: '2rem' }}
     >
-        <StyledRow
-            style={{ flex: 0, paddingLeft: '25px' }}
-        >
+        <Row>
             <Col>
                 <ApogeaHoverNavLink
                     to="/"
-                    style={{
-                        width: '150px',
-                        display:'flex',
-                        justifyContent: 'center'
-                    }}
+                    width="150px"
+                    display="flex"
+                    justifyContent="center"
                 >
                     <div style={{ fontFamily: 'arial black' }}>{`<-`}</div>-Voltar
                 </ApogeaHoverNavLink>
             </Col>
-        </StyledRow>
+        </Row>
 
-        <StyledRow
-            style={{
-                paddingLeft: '30%',
-                paddingRight: '30%',
-                paddingTop: '10%',
-                flex: 1
-            }}
+        <Row
+            display="flex"
+            paddingLeft="30%"
+            paddingRight="30%"
+            paddingTop="10%"
         >
                 <Col>
                     <StoneTabletBoard>
-                        <div
-                            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
-                            className='unselectable'
+                        <Container
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="center"
+                            alignItems="center"
+                            className="unselectable"
                         >
-                            <h2 className='text-black' style={{ fontFamily: 'Papyrus' }}>Acesso</h2>
+                            <TitleH2 className='text-black' fontFamily='Papyrus'>Acesso</TitleH2>
 
                             <LoginForm />
-                        </div>
+                        </Container>
                     </StoneTabletBoard>
                 </Col>
-        </StyledRow>
-    </Container>
+        </Row>
+    </SectionBackdrop>
 )
 
 export default Content

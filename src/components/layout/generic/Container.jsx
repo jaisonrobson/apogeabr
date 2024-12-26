@@ -24,6 +24,7 @@ const StyledContainer = styled(({
     backgroundImage,
     backgroundRepeat,
     backgroundSize,
+    position,
     ...props
 }) => <ReactstrapContainer {...props} />)`    
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
@@ -48,9 +49,11 @@ const StyledContainer = styled(({
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
     ${({ display }) => display ? `display: ${display};` : ``}
 
+    ${({ position }) => position ? `position: ${position};` : ``}
     ${({ backgroundImage }) => backgroundImage ? `background-image: ${backgroundImage};` : ``}
     ${({ backgroundRepeat }) => backgroundRepeat ? `background-repeat: ${backgroundRepeat};` : ``}
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
+    ${({ backgroundPosition }) => backgroundPosition ? `background-position: ${backgroundPosition};` : ``}
 `
 
 const Container = (props) => <StyledContainer {...props} />

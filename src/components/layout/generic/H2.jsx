@@ -47,7 +47,6 @@ const StyledH2 = styled(({
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
     ${({ display }) => display ? `display: ${display};` : ``}
 `
-// eslint-disable-next-line jsx-a11y/heading-has-content
 const H2 = (props) => <StyledH2 {...props} />
 
 export default H2

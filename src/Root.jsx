@@ -1,4 +1,3 @@
-import { useState, createContext } from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import { UserContextProvider } from 'contexts'
@@ -11,6 +10,7 @@ import About from './routes/about/Index'
 import HelpUs from './routes/helpus/Index'
 import HallOfFame from './routes/halloffame/Index'
 import Login from './routes/login/Index'
+import Register from './routes/register/Index'
 
 const router = createBrowserRouter([
     {
@@ -44,6 +44,10 @@ const router = createBrowserRouter([
     {
         path: "/login/",
         element: <Login />,
+    },
+    {
+        path: "/login/register/",
+        element: <Register />,
     },
 ])
 

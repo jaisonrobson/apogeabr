@@ -52,7 +52,7 @@ const LoginForm = (props) => {
             <StyledRow>
                 <Col style={{ textAlign: 'center' }}>
                     {`Não possui uma conta? `}
-                    <ApogeaHoverNavLink fontFamily="Retro Computer" to="/register/">Registre-se</ApogeaHoverNavLink>
+                    <ApogeaHoverNavLink fontFamily="Retro Computer" to="/login/register/">Registre-se</ApogeaHoverNavLink>
                 </Col>
             </StyledRow>
             

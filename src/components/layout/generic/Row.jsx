@@ -25,8 +25,11 @@ const StyledRow = styled(({
     flexDirection,
     alignItems,
     display,
+    position,
     ...props
 }) => <ReactstrapRow {...props} />)`
+    ${({ position }) => position ? `position: ${position};` : ``}
+
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
 
