@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AllPagesLayout from 'routes/generic/Index'
+import AllPagesLayout from 'router/routes/generic/Index'
 
 import Content from './Content'
 

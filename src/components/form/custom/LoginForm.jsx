@@ -5,8 +5,6 @@ import * as z from 'zod'
 
 import { Form, Row, Col, Input, FormattedInput, ApogeaHoverNavLink } from 'components'
 
-import { UserContext } from 'contexts'
-
 import { userPasswordValidation } from 'validations'
 
 const loginValidationSchema = z.object({
@@ -18,10 +16,9 @@ const loginValidationSchema = z.object({
 
 const LoginForm = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(loginValidationSchema) })
-    const { login } = useContext(UserContext)
 
     const onSubmit = (data) => {
-        login({ id: 666 })
+        
     }
 
     return (
@@ -32,7 +29,7 @@ const LoginForm = (props) => {
             <Row margin="10px 0px">
                 <Col textAlign='center'>
                     {`Não possui uma conta? `}
-                    <ApogeaHoverNavLink hoverTextShadow="1px 1px 2px black" fontFamily="Retro Computer" to="/login/register/">Registre-se</ApogeaHoverNavLink>
+                    <ApogeaHoverNavLink hoverTextShadow="1px 1px 2px black" fontFamily="Retro Computer" to="/user/register/">Registre-se</ApogeaHoverNavLink>
                 </Col>
             </Row>
             

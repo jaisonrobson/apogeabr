@@ -1,13 +1,12 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment } from 'react'
 import {
     Container,
     Nav,
     NavItem,
 } from 'reactstrap'
+import { useRouteLoaderData } from 'react-router-dom'
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
-
-import { UserContext } from 'contexts'
 
 import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
@@ -24,7 +23,7 @@ import {
 } from 'components'
 
 const Top = () => {
-    const state = useContext(UserContext)
+    const session = useRouteLoaderData("root")
 
     return (
         <Navbar>
@@ -79,7 +78,7 @@ const Top = () => {
                     </NavbarCollapsible>
 
                     {
-                        state.user.isLogged
+                        session.user.isLogged
                         ? (
                             <Dropdown>
                                 <Dropdown.Toggler
@@ -117,7 +116,7 @@ const Top = () => {
                         : (
                             <Nav navbar className="justify-content-end">
                                 <NavItem>
-                                    <ApogeaHoverNavLink to="/login/">
+                                    <ApogeaHoverNavLink to="/user/">
                                         Entrar
                                     </ApogeaHoverNavLink>
                                 </NavItem>

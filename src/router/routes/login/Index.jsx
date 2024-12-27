@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, forwardRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useRouteLoaderData } from 'react-router-dom'
 import { initParticlesEngine } from "@tsparticles/react"
 import { loadAll } from "@tsparticles/all"
 
 import { withReducerContext, withModalContext, withParticlesContext, ParticlesContext } from 'contexts'
-
-import { UserContext } from 'contexts'
 
 import Content from './Content'
 
@@ -15,11 +13,11 @@ import { login, fetchMovies } from 'store/actions'
 
 const Index = forwardRef(({children, ...props}, ref) => {
     const navigate = useNavigate()
+    const session = useRouteLoaderData("root")
     const { setIsInitialized } = useContext(ParticlesContext)
-    const { user } = useContext(UserContext)
 
     useEffect(() => {
-        if (user.isLogged)
+        if (session.user.isLogged)
             navigate('/')
 
         initParticlesEngine(async (engine) => {
@@ -27,7 +25,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
         }).then(() => {
             setIsInitialized(true)
         })
-    }, [user.isLogged])
+    }, [session.user.isLogged])
 
     return (
         <div ref={ref} {...props} className="index bg-primary">

@@ -1,60 +1,75 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import { UserContextProvider } from 'contexts'
+import Landing from './router/routes/landing/Index'
+import News from './router/routes/news/Index'
+import Library from './router/routes/library/Index'
+import Map from './router/routes/map/Index'
+import About from './router/routes/about/Index'
+import HelpUs from './router/routes/helpus/Index'
+import HallOfFame from './router/routes/halloffame/Index'
+import Login from './router/routes/login/Index'
+import Register from './router/routes/register/Index'
+import Profile from './router/routes/profile/Index'
 
-import Landing from './routes/landing/Index'
-import News from './routes/news/Index'
-import Library from './routes/library/Index'
-import Map from './routes/map/Index'
-import About from './routes/about/Index'
-import HelpUs from './routes/helpus/Index'
-import HallOfFame from './routes/halloffame/Index'
-import Login from './routes/login/Index'
-import Register from './routes/register/Index'
+import { sessionLoader } from 'router/loaders'
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Landing />,
-    },
-    {
-        path: "/news/",
-        element: <News />,
-    },    
-    {
-        path: "/library/",
-        element: <Library />,
-    },
-    {
-        path: "/map/",
-        element: <Map />,
-    },
-    {
-        path: "/about/",
-        element: <About />,
-    },
-    {
-        path: "/helpus/",
-        element: <HelpUs />,
-    },    
-    {
-        path: "/halloffame/",
-        element: <HallOfFame />,
-    },    
-    {
-        path: "/login/",
-        element: <Login />,
-    },
-    {
-        path: "/login/register/",
-        element: <Register />,
-    },
+        loader: sessionLoader,
+        id: "root",
+        children: [
+            {
+                index: true,
+                element: <Landing />,
+            },
+            {
+                path: "/news/",
+                element: <News />,
+            },
+            {
+                path: "/library/",
+                element: <Library />,
+            },
+            {
+                path: "/map/",
+                element: <Map />,
+            },
+            {
+                path: "/about/",
+                element: <About />,
+            },
+            {
+                path: "/helpus/",
+                element: <HelpUs />,
+            },
+            {
+                path: "/halloffame/",
+                element: <HallOfFame />,
+            },
+            {
+                path: "/user/",
+                children: [
+                    {
+                        index: true,
+                        element: <Login />,
+                    },
+                    {
+                        path: "profile/",
+                        element: <Profile />,
+                    },
+                    {
+                        path: "register/",
+                        element: <Register />,
+                    },
+                ]
+            },  
+        ],
+    },      
 ])
 
 const Root = (props) => (
-    <UserContextProvider>
-        <RouterProvider router={router} {...props} />
-    </UserContextProvider>
+    <RouterProvider router={router} {...props} />
 )
 
 export default Root

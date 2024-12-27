@@ -1,13 +1,13 @@
 import React from 'react'
 
-import RegisterContentImage from 'images/layout/register/register_content.png'
+import LoginContentImage from 'images/layout/login/login_content.png'
 
 import {
     StoneTabletBoard,
     Container,
     Col,
     Row,
-    RegisterForm,
+    LoginForm,
     ApogeaHoverNavLink,
     SectionBackdrop,
     TitleH2,
@@ -15,10 +15,10 @@ import {
 
 const Content = () => (
     <SectionBackdrop
-        backgroundImage={`url(${RegisterContentImage})`}
+        backgroundImage={`url(${LoginContentImage})`}
         backgroundSize="cover"
         backgroundRepeat="repeat-x"
-        backgroundPosition="50% 70%"
+        backgroundPosition="50% 50%"
         margin="0px"
         padding="0px"
         position="absolute"
@@ -33,11 +33,10 @@ const Content = () => (
         <Row>
             <Col>
                 <ApogeaHoverNavLink
-                    to="/login/"
+                    to="/"
                     width="150px"
                     display="flex"
                     justifyContent="center"
-                    activeColor="white"
                 >
                     <div style={{ fontFamily: 'arial black' }}>{`<-`}</div>-Voltar
                 </ApogeaHoverNavLink>
@@ -59,9 +58,9 @@ const Content = () => (
                             alignItems="center"
                             className="unselectable"
                         >
-                            <TitleH2 className='text-black' fontFamily='Papyrus'>Registro</TitleH2>
+                            <TitleH2 className='text-black' fontFamily='Papyrus'>Acesso</TitleH2>
 
-                            <RegisterForm />
+                            <LoginForm />
                         </Container>
                     </StoneTabletBoard>
                 </Col>
