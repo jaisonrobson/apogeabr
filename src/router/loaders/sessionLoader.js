@@ -1,6 +1,4 @@
-import React from 'react'
-
-import { getOrCreateSession, commitSession, destroySession } from 'router/sessions/session'
+import { getOrCreateSession } from 'router/sessions/session'
 
 const loadData = async ({ request }) => {
     const session = await getOrCreateSession(request)

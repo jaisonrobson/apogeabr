@@ -16,7 +16,7 @@ const FormattedInput = ({ register, name, label, errorMessage, ...props }) => (
             </Col>
 
             <Col>
-                <Input {...register(name)} validation={errorMessage} width="100%" minWidth="300px" {...props} />
+                <Input name={name} {...register(name)} validation={errorMessage} width="100%" minWidth="300px" {...props} />
             </Col>
         </Row>
 

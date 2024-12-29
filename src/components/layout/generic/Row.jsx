@@ -26,6 +26,7 @@ const StyledRow = styled(({
     alignItems,
     display,
     position,
+    textAlign,
     ...props
 }) => <ReactstrapRow {...props} />)`
     ${({ position }) => position ? `position: ${position};` : ``}
@@ -57,6 +58,7 @@ const StyledRow = styled(({
     ${({ display }) => display ? `display: ${display};` : ``}
 
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
+    ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
 `
 
 const Row = (props) => <StyledRow {...props} />

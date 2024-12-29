@@ -31,7 +31,7 @@ const RegisterForm = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(registerValidationSchema) })
 
     const onSubmit = (data) => {
-        console.log(data)
+        
     }
 
     return (

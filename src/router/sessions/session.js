@@ -10,7 +10,7 @@ const { getSession, commitSession, destroySession } =
             maxAge: 15 * 60,
             path: "/",
             sameSite: "lax",
-            secrets: [process.env.SESSION_SECRET],
+            secrets: [process.env.REACT_APP_SESSION_SECRET],
         },
     })
 

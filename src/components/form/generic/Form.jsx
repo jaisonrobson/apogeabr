@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import { useFetcher } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledForm = styled(({
@@ -21,8 +22,9 @@ const StyledForm = styled(({
     flexDirection,
     alignItems,
     fontFamily,
+    FormComponent,
     ...props
-}) => <form ref={innerRef} {...props} />)`
+}) => <FormComponent ref={innerRef} {...props} />)`
     ${({ display }) => display ? `display: ${display};` : `display: flex;`}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : `flex-direction: column;`}
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
@@ -62,6 +64,10 @@ const StyledForm = styled(({
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
-const Form = (props, ref) => <StyledForm innerRef={ref} {...props} />
+const Form = (props, ref) => {
+    const fetcher = useFetcher()
+
+    return <StyledForm FormComponent={fetcher.Form} innerRef={ref} {...props} />
+}
 
 export default forwardRef(Form)

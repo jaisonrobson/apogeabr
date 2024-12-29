@@ -9,8 +9,6 @@ import Content from './Content'
 
 import { ScrollToTopButton } from 'components'
 
-import { login, fetchMovies } from 'store/actions'
-
 const Index = forwardRef(({children, ...props}, ref) => {
     const navigate = useNavigate()
     const session = useRouteLoaderData("root")
@@ -25,7 +23,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
         }).then(() => {
             setIsInitialized(true)
         })
-    }, [session.user.isLogged])
+    }, [session.user.isLogged, navigate, setIsInitialized])
 
     return (
         <div ref={ref} {...props} className="index bg-primary">
