@@ -1,11 +1,19 @@
 import React from 'react'
-import { useForm } from "react-hook-form"
-import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
 import * as z from 'zod'
 
 import { FetcherForm, Input, FormattedInput, Row } from 'components'
 
 import { userPasswordValidation, userLoginValidation } from 'validations'
+
+const checkIfEmailExists = async (email) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/users/email_exists/${email}`, { params: { email } })
+        return !response.data.exists
+    } catch (error) {
+        throw new Error("Erro ao validar o email. Tente novamente mais tarde.")
+    }
+}
 
 const registerValidationSchema = z.object({
     login: userLoginValidation,
@@ -13,8 +21,8 @@ const registerValidationSchema = z.object({
     confirmPassword: userPasswordValidation,
     email: z.string()
         .min(1, { message: "Necessário ao menos 1 caractere" })
-        .email("Email não é válido"),
-        // .refine(async (data) => await checkIfEmailIsValid(data), "Este email já existe em nossa base de dados"),
+        .email("Email não é válido")
+        .refine(checkIfEmailExists, "Este email já existe em nossa base de dados"),
 }).superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
         ctx.addIssue({
@@ -31,12 +39,12 @@ const RegisterForm = (props) => (
         validationSchema={registerValidationSchema}
         action="/user/register/submit"
     >
-        {(register, errors) => (
+        {(register, errors, backendErrors) => (
             <Row>
                 <FormattedInput register={register} name="login" label="Usuario:" errorMessage={errors.login?.message} fontFamily="arial"/>
                 <FormattedInput register={register} name="password" label="Senha:" errorMessage={errors.password?.message} fontFamily="arial"/>
                 <FormattedInput register={register} name="confirmPassword" label="Confirme a senha:" errorMessage={errors.confirmPassword?.message} fontFamily="arial"/>
-                <FormattedInput register={register} name="email" label="Email:" errorMessage={errors.email?.message} fontFamily="arial"/>
+                <FormattedInput register={register} name="email" label="Email:" errorMessage={errors.email?.message || backendErrors?.email?.[0]} fontFamily="arial"/>
 
                 <Input
                     value='Registrar'

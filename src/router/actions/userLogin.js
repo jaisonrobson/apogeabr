@@ -1,8 +1,6 @@
 import { redirect } from 'react-router-dom'
 import axios from 'axios'
 
-const validateCredentials = async () => ({ id: 666 })
-
 const action = async ({ request }) => {
     const form = await request.formData()
 

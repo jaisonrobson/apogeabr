@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { useFetcher } from 'react-router-dom'
+import { useFetcher, useSearchParams } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -8,8 +8,11 @@ import { Form, Row, Col } from 'components'
 
 const FetcherForm = ({ onSubmit : onSubmitParam = () => {}, allowedProperties = [], validationSchema, action, children, ...props }) => {
     const fetcher = useFetcher()
+    const [ searchParams ] = useSearchParams()
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(validationSchema) })
 
+    const backendErrors = JSON.parse(searchParams.get("errors") || "{}")
+    
     const onSubmit = (data) => {
         let mutatedData = onSubmitParam(data)
 
@@ -41,7 +44,7 @@ const FetcherForm = ({ onSubmit : onSubmitParam = () => {}, allowedProperties = 
             <Row>
                 <Col>
                     <Form onSubmit={handleSubmit(onSubmit)} method="POST">
-                        {children(register, errors)}
+                        {children(register, errors, backendErrors)}
                     </Form>
                 </Col>
             </Row>

@@ -1,8 +1,6 @@
 import { redirect } from 'react-router-dom'
 import axios from 'axios'
 
-const validateCredentials = async () => ({ id: 666 })
-
 const action = async ({ request }) => {
     const form = await request.formData()
 
@@ -20,14 +18,11 @@ const action = async ({ request }) => {
             }
         })
 
-        console.log(response)
-        
-        if (response == null)
-            return redirect("/user/register/")        
-
-        return redirect("/user/")
+        return redirect(`/user/register?success=${encodeURIComponent(JSON.stringify(response.data))}`)
     } catch (error) {
-        return redirect("/user/register/")
+        const resultingError = error?.response?.data || { message: error.message }
+
+        return redirect(`/user/register?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
     }    
 }
 

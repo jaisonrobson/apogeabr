@@ -19,6 +19,11 @@ const StyledRow = styled(({
     backgroundSize,
     backgroundRepeat,
     backgroundPosition,
+    borderBottom,
+    borderTop,
+    borderLeft,
+    borderRight,
+    fontFamily,
     width,
     height,
     justifyContent,
@@ -51,6 +56,12 @@ const StyledRow = styled(({
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
     ${({ backgroundRepeat }) => backgroundRepeat ? `background-repeat: ${backgroundRepeat};` : ``}
     ${({ backgroundPosition }) => backgroundPosition ? `background-position: ${backgroundPosition};` : ``}
+
+    ${({ borderBottom }) => borderBottom ? `border-bottom: ${borderBottom};` : ``}
+    ${({ borderTop }) => borderTop ? `border-top: ${borderTop};` : ``}
+    ${({ borderLeft }) => borderLeft ? `border-left: ${borderLeft};` : ``}
+    ${({ borderRight }) => borderRight ? `border-right: ${borderRight};` : ``}
+    ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
 
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
