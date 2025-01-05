@@ -13,10 +13,12 @@ import HallOfFame from './router/routes/halloffame/Index'
 import Login from './router/routes/login/Index'
 import LoginSubmit from './router/routes/login/Submit'
 import Register from './router/routes/register/Index'
+import RegisterSubmit from './router/routes/register/Submit'
 import Profile from './router/routes/profile/Index'
 
 import { sessionLoader } from 'router/loaders'
 import { userLogin } from "router/actions"
+import { userRegister } from "router/actions"
 
 const router = createBrowserRouter([
     {
@@ -76,6 +78,11 @@ const router = createBrowserRouter([
                     {
                         path: "register/",
                         element: <Register />,
+                    },
+                    {
+                        path: "register/submit/",
+                        action: userRegister,
+                        element: <RegisterSubmit />,
                     },
                 ]
             },  

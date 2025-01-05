@@ -2,11 +2,10 @@ import { createCookieSessionStorage } from "react-router"
 
 const { getSession, commitSession, destroySession } =
     createCookieSessionStorage({
-        // a Cookie from `createCookie` or the CookieOptions to create one
         cookie: {
             name: "__session",
             secure: false,
-            httpOnly: true,
+            httpOnly: false,
             maxAge: 15 * 60,
             path: "/",
             sameSite: "lax",

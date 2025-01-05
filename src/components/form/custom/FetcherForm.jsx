@@ -1,23 +1,31 @@
 import React from 'react'
+import _ from 'lodash'
 import { useFetcher } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Form, Row, Col } from 'components'
 
-const FetcherForm = ({ onSubmitParam = () => {}, validationSchema, action, children, ...props }) => {
+const FetcherForm = ({ onSubmit : onSubmitParam = () => {}, allowedProperties = [], validationSchema, action, children, ...props }) => {
     const fetcher = useFetcher()
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(validationSchema) })
 
     const onSubmit = (data) => {
-        onSubmitParam(data)
+        let mutatedData = onSubmitParam(data)
 
-        const formData = new FormData()
-        formData.append("login", data.login)
-        formData.append("password", data.password)
+        if (!mutatedData)
+            mutatedData = data
+       
+        let result = {}
+
+        if (!_.isEmpty(allowedProperties))
+            _.forEach(allowedProperties, (property) => {
+                result = { ...result, [property]: mutatedData[property]}
+            })
+
 
         return fetcher.submit(
-            formData,
+            result,
             {
                 method: "POST",
                 headers: {

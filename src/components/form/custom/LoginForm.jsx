@@ -3,17 +3,15 @@ import * as z from 'zod'
 
 import { FetcherForm, Row, Col, Input, FormattedInput, ApogeaHoverNavLink } from 'components'
 
-import { userPasswordValidation } from 'validations'
+import { userPasswordValidation, userLoginValidation } from 'validations'
 
 const loginValidationSchema = z.object({
-    login: z.string()
-        .min(8, { message: 'Necessário ao menos 8 caracteres' })
-        .max(15, { message: 'Máximo de 15 caracteres atingido' }),        
+    login: userLoginValidation,
     password: userPasswordValidation,
 })
 
 const LoginForm = (props) => (
-    <FetcherForm validationSchema={loginValidationSchema} action="/user/login/submit">
+    <FetcherForm allowedProperties={['login', 'password']} validationSchema={loginValidationSchema} action="/user/login/submit">
         {(register, errors) => (
             <Row>
                 <FormattedInput register={register} name="login" label="Usuario:" errorMessage={errors.login?.message} fontFamily="arial"/>
