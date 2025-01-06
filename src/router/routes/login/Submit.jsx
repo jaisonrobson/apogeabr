@@ -6,7 +6,7 @@ const Submit = (props) => {
 
     return (
         <div>
-            {session.user.isLogged ? "Login Succeded" : "Login Failed"}
+            {session?.token ? "Login Succeded" : "Login Failed"}
         </div>
     )
 }

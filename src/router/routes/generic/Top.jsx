@@ -78,7 +78,7 @@ const Top = () => {
                     </NavbarCollapsible>
 
                     {
-                        session.user.isLogged
+                        session?.token
                         ? (
                             <Dropdown>
                                 <Dropdown.Toggler

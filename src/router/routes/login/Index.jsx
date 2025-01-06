@@ -15,7 +15,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
     const { setIsInitialized } = useContext(ParticlesContext)
 
     useEffect(() => {
-        if (session.user.isLogged)
+        if (session?.token)
             navigate('/')
 
         initParticlesEngine(async (engine) => {
@@ -23,7 +23,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
         }).then(() => {
             setIsInitialized(true)
         })
-    }, [session.user.isLogged, session, navigate, setIsInitialized])
+    }, [session?.token, navigate, setIsInitialized])
 
     return (
         <div ref={ref} {...props} className="index bg-primary">

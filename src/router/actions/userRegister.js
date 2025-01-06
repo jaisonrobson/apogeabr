@@ -12,7 +12,7 @@ const action = async ({ request }) => {
     const payload = { user: { login, password, email, countryCode } }
 
     try {
-        const response = await axios.post('http://localhost:3001/users', payload, {
+        const response = await axios.post(`${[process.env.REACT_APP_BACKEND_HOST]}/users`, payload, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -23,7 +23,7 @@ const action = async ({ request }) => {
         const resultingError = error?.response?.data || { message: error.message }
 
         return redirect(`/user/register?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
-    }    
+    }
 }
 
 export default action

@@ -6,12 +6,15 @@ import { FetcherForm, Input, FormattedInput, Row } from 'components'
 
 import { userPasswordValidation, userLoginValidation } from 'validations'
 
-const checkIfEmailExists = async (email) => {
+const checkIfEmailNotExists = async (email) => {
     try {
-        const response = await axios.get(`http://localhost:3001/users/email_exists/${email}`, { params: { email } })
+        const validEntry = email === "" ? { email: "validEntry" } : { email }
+
+        const response = await axios.get(`${[process.env.REACT_APP_BACKEND_HOST]}/users/email_exists/email`, { params: { ...validEntry } })
+
         return !response.data.exists
     } catch (error) {
-        throw new Error("Erro ao validar o email. Tente novamente mais tarde.")
+        throw new Error("Erro ao validar email, o servidor não responde.")
     }
 }
 
@@ -22,7 +25,7 @@ const registerValidationSchema = z.object({
     email: z.string()
         .min(1, { message: "Necessário ao menos 1 caractere" })
         .email("Email não é válido")
-        .refine(checkIfEmailExists, "Este email já existe em nossa base de dados"),
+        .refine(checkIfEmailNotExists, "Este email já existe em nossa base de dados"),
 }).superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
         ctx.addIssue({

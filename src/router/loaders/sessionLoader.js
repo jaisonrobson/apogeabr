@@ -1,9 +1,7 @@
-import { getOrCreateSession } from 'router/sessions/session'
-
 const loadData = async ({ request }) => {
-    const session = await getOrCreateSession(request)
+    const session = { token: localStorage.getItem('token') }
 
-    return session.data
+    return session
 }
 
 export default loadData

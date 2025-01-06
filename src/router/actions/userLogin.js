@@ -5,22 +5,20 @@ const action = async ({ request }) => {
     const form = await request.formData()
 
     try {
-        const response = await axios.post('http://localhost:3001/login', form, {
+        const response = await axios.post(`${[process.env.REACT_APP_BACKEND_HOST]}/login`, form, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
 
-        console.log(response)
-        
-        if (response == null)
-            return redirect("/user/")
+        localStorage.setItem('token', response.data.token)
 
-        localStorage.setItem('token', response.token)
-        return redirect("/")
+        return redirect(`/`)
     } catch (error) {
-        return redirect("/user/")
-    }    
+        const resultingError = error?.response?.data || { message: error.message }
+
+        return redirect(`/user?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
+    }
 }
 
 export default action
