@@ -28,7 +28,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
 
     return (
         <div ref={ref} {...props} className="index bg-primary">
-            <CollapsibleSidebar customSidebar={StoneTabletSidebar} sidebarChildren={<Sidebar />} useControls>
+            <CollapsibleSidebar customSidebar={StoneTabletSidebar} sidebarChildren={<Sidebar />}>
                 <Content />
 
                 <ScrollToTopButton />

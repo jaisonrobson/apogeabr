@@ -7,7 +7,7 @@ import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
 import { Dropdown, Image, Span, Icon } from 'components'
 
-const UserDropdown = ({ userName }) => {
+const UserDropdown = ({ userName, togglerProperties = {}, noProfile = false, ...props }) => {
     const navigate = useNavigate()
 
     const onEnterProfile = () => {
@@ -23,9 +23,25 @@ const UserDropdown = ({ userName }) => {
     }
 
     return (
-        <Dropdown>
+        <Dropdown {...props}>
             <Dropdown.Toggler
-                nav
+                style={{
+                    margin: 0,
+                    padding: 0,
+                }}
+                width="100%"
+                color="black"
+                backgroundColor="transparent"
+                hoverColor="gray"
+                hoverBackgroundColor="transparent"
+                hoverOpacity=".5"
+                fontSize="12px"
+                componentColor="none"
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="space-evenly"
+                {...togglerProperties}
             >
                 <Image
                     src={userNoAvatarImage}
@@ -34,15 +50,21 @@ const UserDropdown = ({ userName }) => {
                     width="35px"
                 />
 
-                <Span marginLeft="10px" marginRight="5px" className="text-gray-400">{userName}</Span>
+                <Span>{userName ? userName : 'Usuário'}</Span>
 
-                <Icon paddingTop="1px" icon={faCaretDown} />
+                <Icon icon={faCaretDown} size="xl" color="inherit" marginTop="-4px" />
             </Dropdown.Toggler>
 
-            <Dropdown.Menu>
-                <Dropdown.Item onClick={onEnterProfile}>
-                    Perfil
-                </Dropdown.Item>
+            <Dropdown.Menu className="unselectable" style={{ width: '100%' }} dark>
+                {
+                    !noProfile
+                    ? (
+                        <Dropdown.Item onClick={onEnterProfile}>
+                            Perfil
+                        </Dropdown.Item>
+                    )
+                    : null
+                }
 
                 <Dropdown.Item>
                     Afiliar-se

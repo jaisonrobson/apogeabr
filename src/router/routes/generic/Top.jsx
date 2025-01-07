@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import {
-    Container,
     Nav,
     NavItem,
 } from 'reactstrap'
@@ -10,7 +9,6 @@ import {
     ParticleButton,
     Navbar,
     NavbarBrand,
-    NavbarCollapsible,
     ApogeaHoverNavLink,
     UserDropdown
 } from 'components'
@@ -24,56 +22,55 @@ const Top = () => {
                 <Fragment>
                     <NavbarBrand />
 
-                    <NavbarCollapsible>
-                        <NavbarCollapsible.Toggler />
+                    <Nav navbar className="justify-content-center">
+                        <NavItem>
+                            <ApogeaHoverNavLink to="/news/">
+                                Novidades
+                            </ApogeaHoverNavLink>
+                        </NavItem>
 
-                        <NavbarCollapsible.Collapse navbar>
-                            <Container>
-                                <Nav navbar className="justify-content-center" style={{ marginLeft: '-150px' }}>
-                                    <NavItem>
-                                        <ApogeaHoverNavLink to="/news/">
-                                            Novidades
-                                        </ApogeaHoverNavLink>
-                                    </NavItem>
+                        <NavItem>
+                            <ApogeaHoverNavLink to="/library/">
+                                Biblioteca
+                            </ApogeaHoverNavLink>
+                        </NavItem>
 
-                                    <NavItem>
-                                        <ApogeaHoverNavLink to="/library/">
-                                            Biblioteca
-                                        </ApogeaHoverNavLink>
-                                    </NavItem>
+                        <NavItem>
+                            <ApogeaHoverNavLink to="/map/">
+                                Mapa
+                            </ApogeaHoverNavLink>
+                        </NavItem>
 
-                                    <NavItem>
-                                        <ApogeaHoverNavLink to="/map/">
-                                            Mapa
-                                        </ApogeaHoverNavLink>
-                                    </NavItem>
+                        <NavItem>
+                            <ApogeaHoverNavLink to="/about/">
+                                Sobre
+                            </ApogeaHoverNavLink>
+                        </NavItem>
 
-                                    <NavItem>
-                                        <ApogeaHoverNavLink to="/about/">
-                                            Sobre
-                                        </ApogeaHoverNavLink>
-                                    </NavItem>
+                        <NavItem>
+                            <ApogeaHoverNavLink to="/helpus/">
+                                Ajude nos
+                            </ApogeaHoverNavLink>
+                        </NavItem>
 
-                                    <NavItem>
-                                        <ApogeaHoverNavLink to="/helpus/">
-                                            Ajude nos
-                                        </ApogeaHoverNavLink>
-                                    </NavItem>
-
-                                    <NavItem>
-                                        <ApogeaHoverNavLink to="/halloffame/">
-                                            <ParticleButton id="halloffame_button_particles">Hall da Fama</ParticleButton>
-                                        </ApogeaHoverNavLink>
-                                    </NavItem>
-                                </Nav>
-                            </Container>
-                        </NavbarCollapsible.Collapse>
-                    </NavbarCollapsible>
+                        <NavItem>
+                            <ApogeaHoverNavLink to="/halloffame/">
+                                <ParticleButton id="halloffame_button_particles">Hall da Fama</ParticleButton>
+                            </ApogeaHoverNavLink>
+                        </NavItem>
+                    </Nav>
 
                     {
                         session?.token
                         ? (
-                            <UserDropdown userName={session?.user?.name ? session?.user?.name : 'Novo Usuário'} />
+                            <UserDropdown
+                                userName={session?.user?.name}
+                                togglerProperties={{
+                                    color: "white",
+                                    justifyContent: 'space-around',
+                                    width: '200px',
+                                }}
+                            />
                         )
                         : (
                             <Nav navbar className="justify-content-end">

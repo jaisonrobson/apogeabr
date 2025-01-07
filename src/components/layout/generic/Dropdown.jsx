@@ -5,14 +5,43 @@ import { isDesktop } from 'react-device-detect'
 
 import { FlagContext, withFlagContext } from 'contexts'
 
-const StyledDropdownToggle = styled(({ color, textShadow, hoverColor, ...props }) => <DropdownToggle {...props} />)`
+const StyledDropdownToggle = styled(({
+    width,
+    color,
+    textShadow,
+    hoverColor,
+    backgroundColor,
+    hoverOpacity,
+    hoverBackgroundColor,
+    fontFamily,
+    fontSize,
+    componentColor = "secondary",
+    display,
+    flexDirection,
+    flexGrow,
+    justifyContent,
+    alignItems,
+    ...props
+}) => <DropdownToggle color={componentColor} {...props} />)`
+    ${({ width }) => width ? `width: ${width};` : ''}
     ${({ color }) => color ? `color: ${color};` : ''}
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''}
+    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ''}
+    ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ''}
+    ${({ fontSize }) => fontSize ? `font-size: ${fontSize};` : ''}
+
+    ${({ display }) => display ? `display: ${display};` : ``}
+    ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
+    ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
+    ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
+    ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
 
     &:hover,
     &:focus,
     &:active {
         ${({ hoverColor }) => hoverColor ? `color: ${hoverColor};` : ''}
+        ${({ hoverOpacity }) => hoverOpacity ? `opacity: ${hoverOpacity};` : ''}
+        ${({ hoverBackgroundColor }) => hoverBackgroundColor ? `background-color: ${hoverBackgroundColor};` : ''}
     }
 `
 
@@ -33,18 +62,20 @@ const Dropdown = ({ containerStyle, ...props }) => {
         const over = () => setIsOpen(true)
         const leave = () => setIsOpen(false)
 
-        if (ref && ref.current) {
-            ref.current.addEventListener("mouseover", over)
-            ref.current.addEventListener("mouseleave", leave)
+        const current = ref.current
+
+        if (ref && current) {
+            current.addEventListener("mouseover", over)
+            current.addEventListener("mouseleave", leave)
         }
 
         return () => {
-            if (ref && ref.current) {
-                ref.current.removeEventListener("mouseover", over)
-                ref.current.removeEventListener("mouseleave", leave)
+            if (ref && current) {
+                current.removeEventListener("mouseover", over)
+                current.removeEventListener("mouseleave", leave)
             }
         }
-    }, [ref])
+    }, [ref, setIsOpen])
 
     return (
         <div ref={ref} style={containerStyle}>

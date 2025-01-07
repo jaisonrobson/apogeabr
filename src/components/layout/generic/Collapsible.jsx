@@ -29,12 +29,12 @@ const Sidebar = ({ children, ...props }) => {
 }
 
 const SidebarControl = () => {
-    const { isOpen, marginLeft, toogle, setWidth, setMarginLeft } = useContext(CollapsibleContext)
+    const { isOpen, marginLeft, toggle, setWidth, setMarginLeft } = useContext(CollapsibleContext)
 
-    const onToogle = () => {
+    const onToggle = () => {
         setWidth(isOpen ? "0px" : "300px")
         setMarginLeft(isOpen ? "0px" : "300px")
-        toogle()
+        toggle()
     }
 
     return (
@@ -51,7 +51,7 @@ const SidebarControl = () => {
         >
             <Nav>
                 <NavItem>
-                    <NavLink to="#" onClick={onToogle}>
+                    <NavLink to="#" onClick={onToggle}>
                         {
                             isOpen
                             ? <Icon icon={faArrowLeft} color="white" size="2x" opacity=".3" onHover={{ opacity: 1 }} />

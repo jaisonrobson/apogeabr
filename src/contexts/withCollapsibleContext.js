@@ -19,7 +19,7 @@ export const withCollapsibleContext = (WrappedComponent, defaultValues={}) => {
             setIsOpen: (newValue) => setState((oldState) => ({...oldState, isOpen: newValue})),
             setWidth: (newValue) => setState((oldState) => ({...oldState, width: newValue})),
             setMarginLeft: (newValue) => setState((oldState) => ({...oldState, marginLeft: newValue})),
-            toogle: () => setState((oldState) => ({...oldState, isOpen: !oldState.isOpen})),
+            toggle: () => setState((oldState) => ({...oldState, isOpen: !oldState.isOpen})),
         }
 
         return (
