@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { NavLink as ReactRouterNavLink } from 'react-router-dom'
 
 const StyledNavLink = styled(({
+    animation,
     textShadow,
     width,
     height,
@@ -13,12 +14,21 @@ const StyledNavLink = styled(({
     fontFamily,
     activeColor,
     activeTextShadow,
+    activeBackgroundColor,
+    activeBorderRadius,
     display,
+    flexDirection,
     justifyContent,
+    alignItems,
+    opacity,
+    fontSize,
+    onHover = {},
     ...props
 }) => <ReactRouterNavLink {...props} />)`
     ${({ display }) => display ? `display: ${display};` : ''};
+    ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ''};
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ''};
+    ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ''};
     
     ${({ width }) => width ? `width: ${width};` : ''};
     ${({ height }) => height ? `height: ${height};` : ''};
@@ -28,21 +38,32 @@ const StyledNavLink = styled(({
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ''};
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : 'font-family: martel;'};
     ${({ fontSize }) => fontSize ? `font-size: ${fontSize};` : ''};
+    ${({ opacity }) => opacity ? `opacity: ${opacity};` : ''};
 
     &:hover {
         ${({ hoverColor }) => hoverColor ? `color: ${hoverColor};` : ''};
         ${({ hoverTextShadow }) => hoverTextShadow ? `text-shadow: ${hoverTextShadow};` : ''};
+        ${({ onHover }) => onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``};
+        ${({ onHover }) => onHover?.opacity ? `opacity: ${onHover?.opacity};` : ``};
+        ${({ onHover }) => onHover?.animation ? `animation: ${onHover?.animation?.property}; ${onHover?.animation?.corpse}` : ``};
     };
 
     &.active:first-child {
         ${({ activeColor }) => activeColor ? `color: ${activeColor};` : ''};
         ${({ activeTextShadow }) => activeTextShadow ? `text-shadow: ${activeTextShadow};` : ''};
+        ${({ activeBackgroundColor }) => activeBackgroundColor ? `background-color: ${activeBackgroundColor};` : ''};
+        ${({ activeBorderRadius }) => activeBorderRadius ? `border-radius: ${activeBorderRadius};` : ''};
     };
     
     &.active:hover {
         ${({ hoverColor }) => hoverColor ? `color: ${hoverColor};` : ''};
         ${({ hoverTextShadow }) => hoverTextShadow ? `text-shadow: ${hoverTextShadow};` : ''};
+        ${({ onHover }) => onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``};
+        ${({ onHover }) => onHover?.opacity ? `opacity: ${onHover?.opacity};` : ``};
+        ${({ onHover }) => onHover?.animation ? `animation: ${onHover?.animation?.property}; ${onHover?.animation?.corpse}` : ``};
     };
+
+    ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
 const NavLink = (props) => (

@@ -19,6 +19,9 @@ export { default as TitleH3 } from "./TitleH3"
 export { default as TitleH4 } from "./TitleH4"
 export { default as NewsCardsDisplay } from "./NewsCardsDisplay"
 export { default as DrawerNavItem } from "./DrawerNavItem"
+export { default as UserDropdown } from "./UserDropdown"
+export { default as StoneTabletSidebar } from "./StoneTabletSidebar"
+export { default as CollapsibleSidebar } from "./CollapsibleSidebar"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"

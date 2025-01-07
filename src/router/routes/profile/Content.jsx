@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LoginContentImage from 'images/layout/login/login_content.png'
+import ProfileContentImage from 'images/layout/profile/profile_content.png'
 
 import {
     StoneTabletBoard,
@@ -15,34 +15,19 @@ import {
 
 const Content = () => (
     <SectionBackdrop
-        backgroundImage={`url(${LoginContentImage})`}
+        backgroundImage={`url(${ProfileContentImage})`}
+        gradientBackground="transparent"
         backgroundSize="cover"
-        backgroundRepeat="repeat-x"
-        backgroundPosition="50% 50%"
+        backgroundPosition="center"
         margin="0px"
         padding="0px"
-        position="absolute"
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="stretch"
-        height="100%"
-        width="100%"
+        flexGrow="1"
         contentAlignmentProps={{ paddingTop: '2rem' }}
     >
-        <Row>
-            <Col>
-                <ApogeaHoverNavLink
-                    to="/"
-                    width="150px"
-                    display="flex"
-                    justifyContent="center"
-                >
-                    <div style={{ fontFamily: 'arial black' }}>{`<-`}</div>-Voltar
-                </ApogeaHoverNavLink>
-            </Col>
-        </Row>
-
         <Row
             display="flex"
             paddingLeft="30%"
@@ -58,9 +43,7 @@ const Content = () => (
                             alignItems="center"
                             className="unselectable"
                         >
-                            <TitleH2 className='text-black' fontFamily='Papyrus'>Acesso</TitleH2>
-
-                            <LoginForm />
+                            <TitleH2 className='text-black' fontFamily='Papyrus'>Perfil</TitleH2>
                         </Container>
                     </StoneTabletBoard>
                 </Col>

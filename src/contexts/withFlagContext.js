@@ -23,6 +23,7 @@ export const withFlagContext = (WrappedComponent, { flag, initialValue }) => {
                 [flag]: value,
             }),
         }
+
         return (
             <FlagContext.Provider value={value}>
                 <WrappedComponent {...props} />

@@ -5,9 +5,10 @@ import { loadAll } from "@tsparticles/all"
 
 import { withReducerContext, withModalContext, withParticlesContext, ParticlesContext } from 'contexts'
 
+import Sidebar from './Sidebar'
 import Content from './Content'
 
-import { ScrollToTopButton } from 'components'
+import { ScrollToTopButton, CollapsibleSidebar, StoneTabletSidebar } from 'components'
 
 const Index = forwardRef(({children, ...props}, ref) => {
     const navigate = useNavigate()
@@ -15,7 +16,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
     const { setIsInitialized } = useContext(ParticlesContext)
 
     useEffect(() => {
-        if (session?.token)
+        if (!session?.token)
             navigate('/')
 
         initParticlesEngine(async (engine) => {
@@ -27,9 +28,11 @@ const Index = forwardRef(({children, ...props}, ref) => {
 
     return (
         <div ref={ref} {...props} className="index bg-primary">
-            <Content />
-            
-            <ScrollToTopButton />
+            <CollapsibleSidebar customSidebar={StoneTabletSidebar} sidebarChildren={<Sidebar />} useControls>
+                <Content />
+
+                <ScrollToTopButton />
+            </CollapsibleSidebar>
         </div>
     )
 })

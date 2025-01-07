@@ -6,20 +6,13 @@ import {
 } from 'reactstrap'
 import { useRouteLoaderData } from 'react-router-dom'
 
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
-
-import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
-
 import {
     ParticleButton,
     Navbar,
     NavbarBrand,
     NavbarCollapsible,
     ApogeaHoverNavLink,
-    Dropdown,
-    Icon,
-    Span,
-    Image
+    UserDropdown
 } from 'components'
 
 const Top = () => {
@@ -80,38 +73,7 @@ const Top = () => {
                     {
                         session?.token
                         ? (
-                            <Dropdown>
-                                <Dropdown.Toggler
-                                    nav
-                                >
-                                    <Image
-                                        src={userNoAvatarImage}
-                                        className="rounded-circle"
-                                        objectFit="contain"
-                                        width="35px"
-                                    />
-
-                                    <Span marginLeft="10px" marginRight="5px">User</Span>
-
-                                    <Icon paddingTop="1px" icon={faCaretDown} />
-                                </Dropdown.Toggler>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item>
-                                        Perfil
-                                    </Dropdown.Item>
-
-                                    <Dropdown.Item>
-                                        Afiliar-se
-                                    </Dropdown.Item>
-
-                                    <Dropdown.Item divider />
-
-                                    <Dropdown.Item>
-                                        Sair
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <UserDropdown userName={session?.user?.name ? session?.user?.name : 'Novo Usuário'} />
                         )
                         : (
                             <Nav navbar className="justify-content-end">

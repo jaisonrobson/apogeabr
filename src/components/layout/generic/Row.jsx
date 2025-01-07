@@ -26,8 +26,10 @@ const StyledRow = styled(({
     fontFamily,
     width,
     height,
+    minHeight,
     justifyContent,
     flexDirection,
+    flexGrow,
     alignItems,
     display,
     position,
@@ -38,6 +40,8 @@ const StyledRow = styled(({
 
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
+
+    ${({ minHeight }) => minHeight ? `min-height: ${minHeight};` : ``}
 
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}
@@ -64,8 +68,9 @@ const StyledRow = styled(({
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
 
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
-    ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
+    ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
+    ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
     ${({ display }) => display ? `display: ${display};` : ``}
 
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}

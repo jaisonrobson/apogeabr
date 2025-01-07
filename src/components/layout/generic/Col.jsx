@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Col as ReactstrapCol } from 'reactstrap'
 
 const StyledCol = styled(({
+    position,
     padding,
     paddingLeft,
     paddingRight,
@@ -21,14 +22,21 @@ const StyledCol = styled(({
     backgroundColor,
     display,
     flexDirection,
+    flexGrow,
+    justifyContent,
+    alignItems,
     backgroundImage,
     backgroundRepeat,
     backgroundSize,
     textAlign,
     ...props
 }) => <ReactstrapCol {...props}/>)`
+    ${({ position }) => position ? `position: ${position};` : ``}
     ${({ display }) => display ? `display: ${display};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
+    ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
+    ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
+    ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
 
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}

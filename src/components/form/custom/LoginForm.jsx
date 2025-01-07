@@ -17,6 +17,18 @@ const LoginForm = (props) => (
                 <FormattedInput register={register} name="login" label="Usuario:" errorMessage={errors.login?.message} fontFamily="arial"/>
                 <FormattedInput register={register} name="password" label="Senha:" errorMessage={errors.password?.message} fontFamily="arial"/>
 
+                <Row>
+                    {
+                        backendErrors?.error
+                        ? (
+                            <Col style={{ color: '#FF0000', backgroundColor: '#FFA5A560', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
+                                { backendErrors?.error }
+                            </Col>
+                        )
+                        : <Col />
+                    }
+                </Row>
+
                 <Row margin="10px 0px">
                     <Col textAlign='center'>
                         {`Não possui uma conta? `}
