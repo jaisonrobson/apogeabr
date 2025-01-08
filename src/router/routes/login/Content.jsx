@@ -2,6 +2,8 @@ import React from 'react'
 
 import LoginContentImage from 'images/layout/login/login_content.png'
 
+import ROUTES from 'router/routes'
+
 import {
     StoneTabletBoard,
     Container,
@@ -33,7 +35,7 @@ const Content = () => (
         <Row>
             <Col>
                 <ApogeaHoverNavLink
-                    to="/"
+                    to={ROUTES.HOME.path}
                     width="150px"
                     display="flex"
                     justifyContent="center"

@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useRouteLoaderData } from 'react-router-dom'
 import { faCircleUser, faGear, faPeopleGroup, faHouse, faHandshake, faImages, faPhotoFilm, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 
-import { CollapsibleContext } from 'contexts'
+import ROUTES from 'router/routes'
 
 import {
     Container,
@@ -17,7 +17,6 @@ import {
 
 const Sidebar = () => {
     const session = useRouteLoaderData("root")
-    const { setNavigatedRouteNickname } = useContext(CollapsibleContext)
     
     return (
         <Container height="100%" width="100%" paddingLeft="20px" display="flex" flexDirection="column">
@@ -47,7 +46,7 @@ const Sidebar = () => {
             <Nav display="flex" flexDirection="column">
                 <NavItem width="100%" margin="7px 0px">
                     <NavLink
-                        to="/"
+                        to={ROUTES.HOME.path}
                         display="flex"
                         justifyContent="space-evenly"
                         alignItems="center"
@@ -82,7 +81,7 @@ const Sidebar = () => {
                     <Nav display="flex" flexDirection="column">
                         <NavItem width="100%" margin="7px 0px">
                             <NavLink
-                                to="/user/profile/overview/"
+                                to={ROUTES.USER_PROFILE_OVERVIEW.path}
                                 display="flex"
                                 justifyContent="space-evenly"
                                 alignItems="center"
@@ -98,7 +97,6 @@ const Sidebar = () => {
                                 className="unselectable"
                                 fontFamily="Retro Computer"
                                 fontSize="12px"
-                                onClick={() => setNavigatedRouteNickname("Geral")}
                             >
                                 <Icon
                                     icon={faAddressCard}
@@ -112,7 +110,7 @@ const Sidebar = () => {
 
                         <NavItem width="100%" margin="7px 0px">
                             <NavLink
-                                to="configuration/"
+                                to={ROUTES.USER_PROFILE_CONFIGURATION.path}
                                 display="flex"
                                 justifyContent="space-evenly"
                                 alignItems="center"
@@ -128,7 +126,6 @@ const Sidebar = () => {
                                 className="unselectable"
                                 fontFamily="Retro Computer"
                                 fontSize="12px"
-                                onClick={() => setNavigatedRouteNickname("Configurações")}
                             >
                                 <Icon
                                     icon={faGear}
@@ -142,7 +139,7 @@ const Sidebar = () => {
 
                         <NavItem width="100%" margin="7px 0px">
                             <NavLink
-                                to="characters/"
+                                to={ROUTES.USER_PROFILE_CHARACTERS.path}
                                 display="flex"
                                 justifyContent="space-evenly"
                                 alignItems="center"
@@ -158,7 +155,6 @@ const Sidebar = () => {
                                 className="unselectable"
                                 fontFamily="Retro Computer"
                                 fontSize="12px"
-                                onClick={() => setNavigatedRouteNickname("Personagens")}
                             >
                                 <Icon
                                     icon={faPeopleGroup}
@@ -172,7 +168,7 @@ const Sidebar = () => {
 
                         <NavItem width="100%" margin="7px 0px">
                             <NavLink
-                                to="affiliated/"
+                                to={ROUTES.USER_PROFILE_AFFILIATED.path}
                                 display="flex"
                                 justifyContent="space-evenly"
                                 alignItems="center"
@@ -188,7 +184,6 @@ const Sidebar = () => {
                                 className="unselectable"
                                 fontFamily="Retro Computer"
                                 fontSize="12px"
-                                onClick={() => setNavigatedRouteNickname("Afiliado")}
                             >
                                 <Icon
                                     icon={faHandshake}
@@ -202,7 +197,7 @@ const Sidebar = () => {
 
                         <NavItem width="100%" margin="7px 0px">
                             <NavLink
-                                to="images/"
+                                to={ROUTES.USER_PROFILE_IMAGES.path}
                                 display="flex"
                                 justifyContent="space-evenly"
                                 alignItems="center"
@@ -218,7 +213,6 @@ const Sidebar = () => {
                                 className="unselectable"
                                 fontFamily="Retro Computer"
                                 fontSize="12px"
-                                onClick={() => setNavigatedRouteNickname("Imagens")}
                             >
                                 <Icon
                                     icon={faImages}
@@ -232,7 +226,7 @@ const Sidebar = () => {
 
                         <NavItem width="100%" margin="7px 0px">
                             <NavLink
-                                to="videos/"
+                                to={ROUTES.USER_PROFILE_VIDEOS.path}
                                 display="flex"
                                 justifyContent="space-evenly"
                                 alignItems="center"
@@ -248,7 +242,6 @@ const Sidebar = () => {
                                 className="unselectable"
                                 fontFamily="Retro Computer"
                                 fontSize="12px"
-                                onClick={() => setNavigatedRouteNickname("Vídeos")}
                             >
                                 <Icon
                                     icon={faPhotoFilm}

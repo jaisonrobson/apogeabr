@@ -26,13 +26,15 @@ import { sessionLoader } from 'router/loaders'
 import { userLogin } from "router/actions"
 import { userRegister } from "router/actions"
 
+import ROUTES from 'router/routes'
+
 const router = createBrowserRouter([
     {
-        path: "*",
+        path: ROUTES.NOTFOUND.path,
         element: <NotFound />,
     },
     {
-        path: "/",
+        path: ROUTES.HOME.path,
         loader: sessionLoader,        
         id: "root",
         errorElement: <ErrorBoundary />,
@@ -42,43 +44,43 @@ const router = createBrowserRouter([
                 element: <Landing />,
             },            
             {
-                path: "/news/",
+                path: ROUTES.NEWS.path,
                 element: <News />,
             },
             {
-                path: "/library/",
+                path: ROUTES.LIBRARY.path,
                 element: <Library />,
             },
             {
-                path: "/map/",
+                path: ROUTES.MAP.path,
                 element: <Map />,
             },
             {
-                path: "/about/",
+                path: ROUTES.ABOUT.path,
                 element: <About />,
             },
             {
-                path: "/helpus/",
+                path: ROUTES.HELP_US.path,
                 element: <HelpUs />,
             },
             {
-                path: "/halloffame/",
+                path: ROUTES.HALL_OF_FAME.path,
                 element: <HallOfFame />,
             },
             {
-                path: "/user/",
+                path: ROUTES.USER_LOGIN.path,
                 children: [
                     {
                         index: true,
                         element: <Login />,
                     },
                     {
-                        path: "login/submit/",
+                        path: ROUTES.USER_LOGIN_SUBMIT.path,
                         action: userLogin,
                         element: <LoginSubmit />,
                     },
                     {
-                        path: "profile/",
+                        path: ROUTES.USER_PROFILE.path,
                         element: <Profile />,
                         children: [
                             {
@@ -86,37 +88,37 @@ const router = createBrowserRouter([
                                 element: <ProfileOverview />,
                             },
                             {
-                                path: "overview/",
+                                path: ROUTES.USER_PROFILE_OVERVIEW.path,
                                 element: <ProfileOverview />,
                             },
                             {
-                                path: "configuration/",
+                                path: ROUTES.USER_PROFILE_CONFIGURATION.path,
                                 element: <ProfileConfiguration />,
                             },
                             {
-                                path: "characters/",
+                                path: ROUTES.USER_PROFILE_CHARACTERS.path,
                                 element: <ProfileCharacters />,
                             },
                             {
-                                path: "affiliated/",
+                                path: ROUTES.USER_PROFILE_AFFILIATED.path,
                                 element: <ProfileAffiliated />,
                             },
                             {
-                                path: "images/",
+                                path: ROUTES.USER_PROFILE_IMAGES.path,
                                 element: <ProfileImages />,
                             },
                             {
-                                path: "videos/",
+                                path: ROUTES.USER_PROFILE_VIDEOS.path,
                                 element: <ProfileVideos />,
                             },
                         ],
                     },
                     {
-                        path: "register/",
+                        path: ROUTES.USER_REGISTER.path,
                         element: <Register />,
                     },
                     {
-                        path: "register/submit/",
+                        path: ROUTES.USER_REGISTER_SUBMIT.path,
                         action: userRegister,
                         element: <RegisterSubmit />,
                     },

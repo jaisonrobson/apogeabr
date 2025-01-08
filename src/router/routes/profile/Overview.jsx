@@ -16,8 +16,6 @@ import {
 const Overview = () => {
     const { user } = useRouteLoaderData("root")
 
-    console.log(user)
-
     return (
         <Row padding="0px 50px">
             <Col padding="0px 2rem">

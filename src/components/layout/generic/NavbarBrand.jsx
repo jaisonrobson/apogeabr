@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom'
 
 import Logotipo from 'images/layout/generic/logotipo.png'
 
+import ROUTES from 'router/routes'
+
 import { Image } from 'components'
 
 const StyledNavbarBrand = styled(NavLink)`
@@ -24,7 +26,7 @@ const StyledNavbarBrand = styled(NavLink)`
 const NavbarBrand = (props) => {
     return (
         <StyledNavbarBrand
-            to="/"
+            to={ROUTES.HOME.path}
             className="unselectable"
             {...props}
         >

@@ -11,7 +11,6 @@ export const withCollapsibleContext = (WrappedComponent, defaultValues={}) => {
             isOpen: false,
             marginLeft: "0px",
             width: "0px",
-            navigatedRouteNickname: "Geral",
             ...defaultValues,
         })
 
@@ -20,7 +19,6 @@ export const withCollapsibleContext = (WrappedComponent, defaultValues={}) => {
             setIsOpen: (newValue) => setState((oldState) => ({...oldState, isOpen: newValue})),
             setWidth: (newValue) => setState((oldState) => ({...oldState, width: newValue})),
             setMarginLeft: (newValue) => setState((oldState) => ({...oldState, marginLeft: newValue})),
-            setNavigatedRouteNickname: (newValue) => setState((oldState) => ({...oldState, navigatedRouteNickname: newValue})),
             toggle: () => setState((oldState) => ({...oldState, isOpen: !oldState.isOpen})),
         }
 

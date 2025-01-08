@@ -1,4 +1,8 @@
 import React, { useContext } from 'react'
+import _ from 'lodash'
+import { useLocation } from 'react-router-dom'
+
+import ROUTES from 'router/routes'
 
 import { CollapsibleContext } from 'contexts'
 
@@ -12,7 +16,8 @@ import {
 } from 'components'
 
 const Top = () => {
-    const { marginLeft, navigatedRouteNickname } = useContext(CollapsibleContext)
+    const { marginLeft } = useContext(CollapsibleContext)
+    const location = useLocation()
 
     return (
         <Navbar marginLeft={marginLeft} padding="0px 10rem" backgroundColor="transparent">
@@ -33,7 +38,7 @@ const Top = () => {
                                 alignItems="center"
                                 className="unselectable"
                             >
-                                <TitleH2 className='text-black' fontFamily='Papyrus'>{navigatedRouteNickname}</TitleH2>
+                                <TitleH2 className='text-black' fontFamily='Papyrus'>{_.find(ROUTES, { path: location.pathname }).nickname || "Erro"}</TitleH2>
                             </Container>
                         </NavItem>
                     </Nav>

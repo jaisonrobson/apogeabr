@@ -9,6 +9,8 @@ import Sidebar from './Sidebar'
 import Content from './Content'
 import Top from './Top'
 
+import ROUTES from 'router/routes'
+
 import { ScrollToTopButton, CollapsibleSidebar, StoneTabletSidebar } from 'components'
 
 const Index = forwardRef(({children, ...props}, ref) => {
@@ -18,7 +20,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
 
     useEffect(() => {
         if (!session?.token)
-            navigate('/')
+            navigate(ROUTES.HOME.path)
 
         initParticlesEngine(async (engine) => {
             await loadAll(engine)

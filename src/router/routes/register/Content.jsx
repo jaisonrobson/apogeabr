@@ -4,6 +4,8 @@ import { useSearchParams } from 'react-router-dom'
 
 import RegisterContentImage from 'images/layout/register/register_content.png'
 
+import ROUTES from 'router/routes'
+
 import {
     StoneTabletBoard,
     Container,
@@ -42,7 +44,7 @@ const Content = () => {
             <Row>
                 <Col>
                     <ApogeaHoverNavLink
-                        to="/user/"
+                        to={ROUTES.USER_LOGIN.path}
                         width="150px"
                         display="flex"
                         justifyContent="center"
@@ -75,7 +77,7 @@ const Content = () => {
                                     : (
                                         <Row paddingTop="25px" borderTop="2px solid gray">
                                             <TitleH4 className="text-black">{backendResponse?.message}</TitleH4>
-                                            <TimedRedirect redirectTo="/user/" />
+                                            <TimedRedirect redirectTo={ROUTES.USER_LOGIN.path} />
                                         </Row>
                                     )
                                 }

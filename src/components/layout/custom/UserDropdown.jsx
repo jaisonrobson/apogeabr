@@ -5,23 +5,25 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
+import ROUTES from 'router/routes'
+
 import { Dropdown, Image, Span, Icon } from 'components'
 
 const UserDropdown = ({ userName, togglerProperties = {}, noProfile = false, ...props }) => {
     const navigate = useNavigate()
 
     const onEnterAffiliated = () => {
-        navigate('/user/profile/affiliated/')
+        navigate(ROUTES.USER_PROFILE_AFFILIATED.path)
     }
 
     const onEnterProfile = () => {
-        navigate('/user/profile/overview/')
+        navigate(ROUTES.USER_PROFILE_OVERVIEW.path)
     }
 
     const onLogout = () => {
         localStorage.removeItem('token')
 
-        navigate('/', { replace: true })
+        navigate(ROUTES.HOME.path, { replace: true })
 
         window.location.reload()
     }

@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavLink as ReactRouterNavLink } from 'react-router-dom'
 
+import ROUTES from 'router/routes'
+
 const StyledNavLink = styled(({
     animation,
     textShadow,
@@ -68,7 +70,7 @@ const StyledNavLink = styled(({
 
 const NavLink = (props) => (
     <StyledNavLink
-        to="/"
+        to={ROUTES.HOME.path}
         {...props}
     />
 )

@@ -7,6 +7,8 @@ import { withReducerContext, withModalContext, withParticlesContext, ParticlesCo
 
 import Content from './Content'
 
+import ROUTES from 'router/routes'
+
 import { ScrollToTopButton } from 'components'
 
 const Index = forwardRef(({children, ...props}, ref) => {
@@ -16,7 +18,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
 
     useEffect(() => {
         if (session?.token)
-            navigate('/')
+            navigate(ROUTES.HOME.path)
 
         initParticlesEngine(async (engine) => {
             await loadAll(engine)

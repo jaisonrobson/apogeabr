@@ -1,6 +1,8 @@
 import { redirect } from 'react-router-dom'
 import axios from 'axios'
 
+import ROUTES from 'router/routes'
+
 const action = async ({ request }) => {
     const form = await request.formData()
 
@@ -18,11 +20,11 @@ const action = async ({ request }) => {
             }
         })
 
-        return redirect(`/user/register?success=${encodeURIComponent(JSON.stringify(response.data))}`)
+        return redirect(`${ROUTES.USER_REGISTER.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
     } catch (error) {
         const resultingError = error?.response?.data || { message: error.message }
 
-        return redirect(`/user/register?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
+        return redirect(`${ROUTES.USER_REGISTER.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
     }
 }
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import * as z from 'zod'
 
+import ROUTES from 'router/routes'
+
 import { FetcherForm, Row, Col, Input, FormattedInput, ApogeaHoverNavLink } from 'components'
 
 import { userPasswordValidation, userLoginValidation } from 'validations'
@@ -32,7 +34,7 @@ const LoginForm = (props) => (
                 <Row margin="10px 0px">
                     <Col textAlign='center'>
                         {`Não possui uma conta? `}
-                        <ApogeaHoverNavLink hoverTextShadow="1px 1px 2px black" fontFamily="Retro Computer" to="/user/register/">Registre-se</ApogeaHoverNavLink>
+                        <ApogeaHoverNavLink hoverTextShadow="1px 1px 2px black" fontFamily="Retro Computer" to={ROUTES.USER_REGISTER.path}>Registre-se</ApogeaHoverNavLink>
                     </Col>
                 </Row>
 

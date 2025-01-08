@@ -1,0 +1,23 @@
+const ROUTES = {
+    NOTFOUND: { path: "*", nickname: "404 - Não encontrado"},
+    HOME: { path: "/", nickname: "Início"},
+    NEWS: { path: "/news/", nickname: "Novidades"},
+    LIBRARY: { path: "/library/", nickname: "Biblioteca"},
+    MAP: { path: "/map/", nickname: "Mapa"},
+    ABOUT: { path: "/about/", nickname: "Sobre"},
+    HELP_US: { path: "/helpus/", nickname: "Ajude nos"},
+    HALL_OF_FAME: { path: "/halloffame/", nickname: "Hall da Fama"},
+    USER_LOGIN: { path: "/user/", nickname: "Acesso"},
+    USER_LOGIN_SUBMIT: { path: "/user/login/submit/", nickname: "Acesso"},
+    USER_PROFILE: { path: "/user/profile/", nickname: "Perfil"},
+    USER_PROFILE_OVERVIEW: { path: "/user/profile/overview/", nickname: "Geral"},
+    USER_PROFILE_CONFIGURATION: { path: "/user/profile/configuration/", nickname: "Configurações"},
+    USER_PROFILE_CHARACTERS: { path: "/user/profile/characters/", nickname: "Personagens"},
+    USER_PROFILE_AFFILIATED: { path: "/user/profile/affiliated/", nickname: "Afiliado"},
+    USER_PROFILE_IMAGES: { path: "/user/profile/images/", nickname: "Imagens"},
+    USER_PROFILE_VIDEOS: { path: "/user/profile/videos/", nickname: "Videos"},
+    USER_REGISTER: { path: "/user/register/", nickname: "Registro"},
+    USER_REGISTER_SUBMIT: { path: "/user/register/submit/", nickname: "Registro"},
+}
+
+export default ROUTES

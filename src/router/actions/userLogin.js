@@ -1,6 +1,8 @@
 import { redirect } from 'react-router-dom'
 import axios from 'axios'
 
+import ROUTES from 'router/routes'
+
 const action = async ({ request }) => {
     const form = await request.formData()
 
@@ -13,11 +15,11 @@ const action = async ({ request }) => {
 
         localStorage.setItem('token', response.data.token)
 
-        return redirect(`/`)
+        return redirect(ROUTES.HOME.path)
     } catch (error) {
         const resultingError = error?.response?.data || { message: error.message }
 
-        return redirect(`/user?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
+        return redirect(`${ROUTES.USER_LOGIN.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
     }
 }
 

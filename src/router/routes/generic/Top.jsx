@@ -5,6 +5,8 @@ import {
 } from 'reactstrap'
 import { useRouteLoaderData } from 'react-router-dom'
 
+import ROUTES from 'router/routes'
+
 import {
     ParticleButton,
     Navbar,
@@ -24,37 +26,37 @@ const Top = () => {
 
                     <Nav navbar className="justify-content-center">
                         <NavItem>
-                            <ApogeaHoverNavLink to="/news/">
+                            <ApogeaHoverNavLink to={ROUTES.NEWS.path}>
                                 Novidades
                             </ApogeaHoverNavLink>
                         </NavItem>
 
                         <NavItem>
-                            <ApogeaHoverNavLink to="/library/">
+                            <ApogeaHoverNavLink to={ROUTES.LIBRARY.path}>
                                 Biblioteca
                             </ApogeaHoverNavLink>
                         </NavItem>
 
                         <NavItem>
-                            <ApogeaHoverNavLink to="/map/">
+                            <ApogeaHoverNavLink to={ROUTES.MAP.path}>
                                 Mapa
                             </ApogeaHoverNavLink>
                         </NavItem>
 
                         <NavItem>
-                            <ApogeaHoverNavLink to="/about/">
+                            <ApogeaHoverNavLink to={ROUTES.ABOUT.path}>
                                 Sobre
                             </ApogeaHoverNavLink>
                         </NavItem>
 
                         <NavItem>
-                            <ApogeaHoverNavLink to="/helpus/">
+                            <ApogeaHoverNavLink to={ROUTES.HELP_US.path}>
                                 Ajude nos
                             </ApogeaHoverNavLink>
                         </NavItem>
 
                         <NavItem>
-                            <ApogeaHoverNavLink to="/halloffame/">
+                            <ApogeaHoverNavLink to={ROUTES.HALL_OF_FAME.path}>
                                 <ParticleButton id="halloffame_button_particles">Hall da Fama</ParticleButton>
                             </ApogeaHoverNavLink>
                         </NavItem>
@@ -75,7 +77,7 @@ const Top = () => {
                         : (
                             <Nav navbar className="justify-content-end">
                                 <NavItem>
-                                    <ApogeaHoverNavLink to="/user/">
+                                    <ApogeaHoverNavLink to={ROUTES.USER_LOGIN.path}>
                                         Entrar
                                     </ApogeaHoverNavLink>
                                 </NavItem>
