@@ -15,6 +15,12 @@ import LoginSubmit from './router/routes/login/Submit'
 import Register from './router/routes/register/Index'
 import RegisterSubmit from './router/routes/register/Submit'
 import Profile from './router/routes/profile/Index'
+import ProfileOverview from './router/routes/profile/Overview'
+import ProfileConfiguration from './router/routes/profile/Configuration'
+import ProfileCharacters from './router/routes/profile/Characters'
+import ProfileAffiliated from './router/routes/profile/Affiliated'
+import ProfileImages from './router/routes/profile/Images'
+import ProfileVideos from './router/routes/profile/Videos'
 
 import { sessionLoader } from 'router/loaders'
 import { userLogin } from "router/actions"
@@ -74,6 +80,36 @@ const router = createBrowserRouter([
                     {
                         path: "profile/",
                         element: <Profile />,
+                        children: [
+                            {
+                                index: true,
+                                element: <ProfileOverview />,
+                            },
+                            {
+                                path: "overview/",
+                                element: <ProfileOverview />,
+                            },
+                            {
+                                path: "configuration/",
+                                element: <ProfileConfiguration />,
+                            },
+                            {
+                                path: "characters/",
+                                element: <ProfileCharacters />,
+                            },
+                            {
+                                path: "affiliated/",
+                                element: <ProfileAffiliated />,
+                            },
+                            {
+                                path: "images/",
+                                element: <ProfileImages />,
+                            },
+                            {
+                                path: "videos/",
+                                element: <ProfileVideos />,
+                            },
+                        ],
                     },
                     {
                         path: "register/",
@@ -84,8 +120,8 @@ const router = createBrowserRouter([
                         action: userRegister,
                         element: <RegisterSubmit />,
                     },
-                ]
-            },  
+                ],
+            },
         ],
     },      
 ])

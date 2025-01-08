@@ -51,7 +51,7 @@ const StyledDiv = styled(({
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
 
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
-    ${({ paddingLeft }) => paddingLeft ? `margin-left: ${paddingLeft};` : ``}
+    ${({ paddingLeft }) => paddingLeft ? `padding-left: ${paddingLeft};` : ``}
     ${({ paddingRight }) => paddingRight ? `padding-right: ${paddingRight};` : ``}
     ${({ paddingBottom }) => paddingBottom ? `padding-bottom: ${paddingBottom};` : ``}
     ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ``}

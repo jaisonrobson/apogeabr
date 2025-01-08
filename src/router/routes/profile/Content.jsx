@@ -1,16 +1,12 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 import ProfileContentImage from 'images/layout/profile/profile_content.png'
 
 import {
-    StoneTabletBoard,
-    Container,
     Col,
     Row,
-    LoginForm,
-    ApogeaHoverNavLink,
     SectionBackdrop,
-    TitleH2,
 } from 'components'
 
 const Content = () => (
@@ -35,17 +31,7 @@ const Content = () => (
             paddingTop="10%"
         >
                 <Col>
-                    <StoneTabletBoard>
-                        <Container
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="center"
-                            alignItems="center"
-                            className="unselectable"
-                        >
-                            <TitleH2 className='text-black' fontFamily='Papyrus'>Perfil</TitleH2>
-                        </Container>
-                    </StoneTabletBoard>
+                    <Outlet />
                 </Col>
         </Row>
     </SectionBackdrop>

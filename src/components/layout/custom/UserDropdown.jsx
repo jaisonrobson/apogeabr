@@ -10,8 +10,12 @@ import { Dropdown, Image, Span, Icon } from 'components'
 const UserDropdown = ({ userName, togglerProperties = {}, noProfile = false, ...props }) => {
     const navigate = useNavigate()
 
+    const onEnterAffiliated = () => {
+        navigate('/user/profile/affiliated/')
+    }
+
     const onEnterProfile = () => {
-        navigate('/user/profile/')
+        navigate('/user/profile/overview/')
     }
 
     const onLogout = () => {
@@ -66,7 +70,7 @@ const UserDropdown = ({ userName, togglerProperties = {}, noProfile = false, ...
                     : null
                 }
 
-                <Dropdown.Item>
+                <Dropdown.Item onClick={onEnterAffiliated}>
                     Afiliar-se
                 </Dropdown.Item>
 
