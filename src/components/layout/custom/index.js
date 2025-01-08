@@ -26,6 +26,7 @@ export { default as CollapsibleSidebar } from "./CollapsibleSidebar"
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"
 export { default as StoneTabletBoard } from "./StoneTabletBoard"
+export { default as StoneTabletTwoBoard } from "./StoneTabletTwoBoard"
 export { default as PaperParchmentBoard } from "./PaperParchmentBoard"
 export { default as AdornedStoneWallBoard } from "./AdornedStoneWallBoard"
 export { default as GoldBoard } from "./GoldBoard"

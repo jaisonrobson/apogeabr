@@ -23,18 +23,23 @@ const StyledCol = styled(({
     display,
     flexDirection,
     flexGrow,
+    flexShrink,
+    flexBasis,
     justifyContent,
     alignItems,
     backgroundImage,
     backgroundRepeat,
     backgroundSize,
     textAlign,
+    gap,
     ...props
 }) => <ReactstrapCol {...props}/>)`
     ${({ position }) => position ? `position: ${position};` : ``}
     ${({ display }) => display ? `display: ${display};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
+    ${({ flexShrink }) => flexShrink ? `flex-shrink: ${flexShrink};` : ``}
+    ${({ flexBasis }) => flexBasis ? `flex-basis: ${flexBasis};` : ``}
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
 
@@ -45,7 +50,7 @@ const StyledCol = styled(({
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
 
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
-    ${({ paddingLeft }) => paddingLeft ? `margin-left: ${paddingLeft};` : ``}
+    ${({ paddingLeft }) => paddingLeft ? `padding-left: ${paddingLeft};` : ``}
     ${({ paddingRight }) => paddingRight ? `padding-right: ${paddingRight};` : ``}
     ${({ paddingBottom }) => paddingBottom ? `padding-bottom: ${paddingBottom};` : ``}
     ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ``}
@@ -60,6 +65,7 @@ const StyledCol = styled(({
     ${({ backgroundRepeat }) => backgroundRepeat ? `background-repeat: ${backgroundRepeat};` : ``}
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
+    ${({ gap }) => gap ? `gap: ${gap};` : ``}
 `
 
 const Col = forwardRef((props, ref) => <StyledCol {...props} />)

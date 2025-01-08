@@ -26,13 +26,14 @@ const Content = () => (
     >
         <Row
             display="flex"
-            paddingLeft="30%"
-            paddingRight="30%"
+            flexBasis="auto"
+            paddingLeft="8%"
+            paddingRight="8%"
             paddingTop="10%"
         >
-                <Col>
-                    <Outlet />
-                </Col>
+            <Col>
+                <Outlet />
+            </Col>
         </Row>
     </SectionBackdrop>
 )

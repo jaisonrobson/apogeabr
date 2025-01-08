@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Container as ReactstrapContainer } from 'reactstrap'
 
 const StyledContainer = styled(({
+    gap,
     padding,
     paddingLeft,
     paddingRight,
@@ -26,7 +27,9 @@ const StyledContainer = styled(({
     backgroundSize,
     position,
     ...props
-}) => <ReactstrapContainer {...props} />)`    
+}) => <ReactstrapContainer {...props} />)`
+    ${({ gap }) => gap ? `gap: ${gap};` : ``}
+
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}
     ${({ marginRight }) => marginRight ? `margin-right: ${marginRight};` : ``}
@@ -34,7 +37,7 @@ const StyledContainer = styled(({
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
 
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
-    ${({ paddingLeft }) => paddingLeft ? `margin-left: ${paddingLeft};` : ``}
+    ${({ paddingLeft }) => paddingLeft ? `padding-left: ${paddingLeft};` : ``}
     ${({ paddingRight }) => paddingRight ? `padding-right: ${paddingRight};` : ``}
     ${({ paddingBottom }) => paddingBottom ? `padding-bottom: ${paddingBottom};` : ``}
     ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ``}

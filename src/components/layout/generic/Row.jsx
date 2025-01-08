@@ -24,16 +24,19 @@ const StyledRow = styled(({
     borderLeft,
     borderRight,
     fontFamily,
+    fontSize,
     width,
     height,
     minHeight,
     justifyContent,
     flexDirection,
     flexGrow,
+    flexBasis,
     alignItems,
     display,
     position,
     textAlign,
+    gap,
     ...props
 }) => <ReactstrapRow {...props} />)`
     ${({ position }) => position ? `position: ${position};` : ``}
@@ -50,7 +53,7 @@ const StyledRow = styled(({
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
 
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
-    ${({ paddingLeft }) => paddingLeft ? `margin-left: ${paddingLeft};` : ``}
+    ${({ paddingLeft }) => paddingLeft ? `padding-left: ${paddingLeft};` : ``}
     ${({ paddingRight }) => paddingRight ? `padding-right: ${paddingRight};` : ``}
     ${({ paddingBottom }) => paddingBottom ? `padding-bottom: ${paddingBottom};` : ``}
     ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ``}
@@ -66,15 +69,18 @@ const StyledRow = styled(({
     ${({ borderLeft }) => borderLeft ? `border-left: ${borderLeft};` : ``}
     ${({ borderRight }) => borderRight ? `border-right: ${borderRight};` : ``}
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
+    ${({ fontSize }) => fontSize ? `font-size: ${fontSize};` : ``}
 
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
+    ${({ flexBasis }) => flexBasis ? `flex-basis: ${flexBasis};` : ``}
     ${({ display }) => display ? `display: ${display};` : ``}
 
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
+    ${({ gap }) => gap ? `gap: ${gap};` : ``}
 `
 
 const Row = (props) => <StyledRow {...props} />
