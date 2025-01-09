@@ -11,7 +11,7 @@ import {
     Container,
     Col,
     Row,
-    RegisterForm,
+    UserRegisterForm,
     ApogeaHoverNavLink,
     SectionBackdrop,
     TitleH2,
@@ -73,7 +73,7 @@ const Content = () => {
                                 <TitleH2 className='text-black' fontFamily='Papyrus'>Registro</TitleH2>
 
                                 {_.isEmpty(backendResponse)
-                                    ? <RegisterForm />
+                                    ? <UserRegisterForm />
                                     : (
                                         <Row paddingTop="25px" borderTop="2px solid gray">
                                             <TitleH4 className="text-black">{backendResponse?.message}</TitleH4>

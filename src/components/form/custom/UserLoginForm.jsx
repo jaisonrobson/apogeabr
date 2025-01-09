@@ -12,8 +12,8 @@ const loginValidationSchema = z.object({
     password: userPasswordValidation,
 })
 
-const LoginForm = (props) => (
-    <FetcherForm allowedProperties={['login', 'password']} validationSchema={loginValidationSchema} action="/user/login/submit">
+const UserLoginForm = (props) => (
+    <FetcherForm allowedProperties={['login', 'password']} validationSchema={loginValidationSchema} action={ROUTES.USER_LOGIN_SUBMIT.path}>
         {(register, errors, backendErrors) => (
             <Row>
                 <FormattedInput register={register} name="login" label="Usuario:" errorMessage={errors.login?.message} fontFamily="arial"/>
@@ -59,4 +59,4 @@ const LoginForm = (props) => (
     </FetcherForm>
 )
 
-export default LoginForm
+export default UserLoginForm

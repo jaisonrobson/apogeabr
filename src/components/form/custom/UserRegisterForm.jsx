@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import * as z from 'zod'
 
+import ROUTES from 'router/routes'
+
 import { FetcherForm, Input, FormattedInput, Row } from 'components'
 
 import { userPasswordValidation, userLoginValidation } from 'validations'
@@ -36,11 +38,11 @@ const registerValidationSchema = z.object({
     }
 })
 
-const RegisterForm = (props) => (
+const UserRegisterForm = (props) => (
     <FetcherForm
         allowedProperties={['login', 'password', 'email']}
         validationSchema={registerValidationSchema}
-        action="/user/register/submit"
+        action={ROUTES.USER_REGISTER_SUBMIT.path}
     >
         {(register, errors, backendErrors) => (
             <Row>
@@ -70,4 +72,4 @@ const RegisterForm = (props) => (
     </FetcherForm>
 )
 
-export default RegisterForm
+export default UserRegisterForm

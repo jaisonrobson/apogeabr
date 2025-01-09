@@ -22,14 +22,13 @@ const Content = () => (
         justifyContent="center"
         alignItems="stretch"
         flexGrow="1"
-        contentAlignmentProps={{ paddingTop: '2rem' }}
+        contentAlignmentProps={{ paddingTop: '10rem' }}
     >
         <Row
             display="flex"
             flexBasis="auto"
             paddingLeft="8%"
             paddingRight="8%"
-            paddingTop="10%"
         >
             <Col>
                 <Outlet />

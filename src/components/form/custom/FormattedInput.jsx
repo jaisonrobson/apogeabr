@@ -1,37 +1,93 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState, useRef, Fragment } from 'react'
 import parse from 'html-react-parser'
 
-import { Row, Col, Input } from 'components'
+import { Row, Col, Input, Image } from 'components'
 
-const StyledRow = styled((props) => <Row {...props} />)`
-    margin: 10px 0px;
-`
+const FormattedInput = ({ register, setValue, name, label, errorMessage, type, defaultImage = undefined, imageProps = {}, inputContainerProps = {}, ...props }) => {
+    const fieldRef = useRef(null)
+    const [ selectedImage, setSelectedImage ] = useState(undefined)
+    const { ref: registerRef, ...registerRest } = register(name)
 
-const FormattedInput = ({ register, name, label, errorMessage, ...props }) => (
-    <StyledRow>
-        <Row>
-            <Col style={{ textAlign: 'center' }}>
-                {label}
-            </Col>
+    const onReceiveImage = (event) => {
+        const image = event.target.files?.[0]
 
-            <Col>
-                <Input name={name} {...register(name)} validation={errorMessage} width="100%" minWidth="300px" {...props} />
-            </Col>
+        setValue(name, image, { shouldDirty: true, shouldTouch: true })
+
+        setSelectedImage(image ? URL.createObjectURL(image) : undefined)
+    }
+
+    const onClickImage = () => fieldRef?.current && fieldRef.current.click()
+
+    return (
+        <Row margin="15px 0px">
+            <Row>
+                {
+                    label !== undefined
+                        ? (
+                            <Col style={{ textAlign: 'center' }}>
+                                {label}
+                            </Col>
+                        )
+                        : null
+                }
+
+                <Col {...inputContainerProps}>
+                    {
+                        type === "image"
+                            ? (
+                                <Fragment>
+                                    <Input
+                                        {...registerRest}
+                                        innerRef={(e) => {
+                                            registerRef(e)
+                                            fieldRef.current = e
+                                        }}
+                                        name={name}
+                                        validation={errorMessage}
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={onReceiveImage}                                        
+                                        {...props}
+                                        height="0"
+                                        width="0"
+                                        minWidth="0px"
+                                    />
+
+                                    <Image {...imageProps} src={selectedImage || defaultImage} onClick={onClickImage} />
+                                </Fragment>
+                            )
+                            : (
+                                <Input
+                                    {...registerRest}
+                                    name={name}
+                                    validation={errorMessage}
+                                    width="100%"
+                                    minWidth="300px"
+                                    type={type}
+                                    innerRef={(ref) => {
+                                        registerRef(ref)
+                                        fieldRef.current = ref
+                                    }}
+                                    {...props}
+                                />
+                            )
+                    }
+                </Col>
+            </Row>
+
+            <Row>
+                {
+                    errorMessage
+                        ? (
+                            <Col style={{ color: '#FF0000', backgroundColor: '#FFA5A560', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
+                                { parse(errorMessage) }
+                            </Col>
+                        )
+                        : <Col />
+                }
+            </Row>
         </Row>
-
-        <Row>
-            {
-                errorMessage
-                    ? (
-                        <Col style={{ color: '#FF0000', backgroundColor: '#FFA5A560', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
-                            { parse(errorMessage) }
-                        </Col>
-                    )
-                    : <Col />
-            }
-        </Row>
-    </StyledRow>
-)
+    )
+}
 
 export default FormattedInput

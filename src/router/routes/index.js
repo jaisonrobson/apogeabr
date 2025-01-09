@@ -12,6 +12,7 @@ const ROUTES = {
     USER_PROFILE: { path: "/user/profile/", nickname: "Perfil"},
     USER_PROFILE_OVERVIEW: { path: "/user/profile/overview/", nickname: "Geral"},
     USER_PROFILE_CONFIGURATION: { path: "/user/profile/configuration/", nickname: "Configurações"},
+    USER_PROFILE_CONFIGURATION_SUBMIT: { path: "/user/profile/configuration/submit/", nickname: "Configurações"},
     USER_PROFILE_CHARACTERS: { path: "/user/profile/characters/", nickname: "Personagens"},
     USER_PROFILE_AFFILIATED: { path: "/user/profile/affiliated/", nickname: "Afiliado"},
     USER_PROFILE_IMAGES: { path: "/user/profile/images/", nickname: "Imagens"},

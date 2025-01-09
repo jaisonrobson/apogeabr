@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 
 const StyledInput = styled(({
+    visibility,
     padding,
     margin,
     marginLeft,
@@ -21,13 +22,14 @@ const StyledInput = styled(({
     borderLeft,
     borderRight,
     fontFamily,
-    flex,
+    display,
     flexGrow,
     innerRef,
     onHover = false,
     animation = false,
     ...props
 }) => <input ref={innerRef} {...props} />)`
+    ${({ visibility }) => visibility ? `visibility: ${visibility};` : ``}
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}
@@ -47,7 +49,7 @@ const StyledInput = styled(({
     ${({ borderLeft }) => borderLeft ? `border-left: ${borderLeft};` : ``}
     ${({ borderRight }) => borderRight ? `border-right: ${borderRight};` : ``}
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
-    ${({ flex }) => flex ? `flex: ${flex};` : ``}
+    ${({ display }) => display ? `display: ${display};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
 
     ${({ onHover }) => onHover ? `&:hover {
