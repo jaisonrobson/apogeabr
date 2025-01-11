@@ -22,3 +22,6 @@ export const randomSliceIntoNGivenValues = (array, sliceArray) => {
 
     return result
 }
+
+export const enforceJsonNotFalseyValues = (json, enforcedProperties) =>
+    _.every(enforcedProperties, (property) => _.has(json, property) && !_.isNil(json[property]) && !!json[property])

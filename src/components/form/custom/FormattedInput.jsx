@@ -3,7 +3,7 @@ import parse from 'html-react-parser'
 
 import { Row, Col, Input, Image } from 'components'
 
-const FormattedInput = ({ register, setValue, name, label, errorMessage, type, defaultImage = undefined, imageProps = {}, inputContainerProps = {}, ...props }) => {
+const FormattedInput = ({ register, setValue, name, label, errorMessage, infoMessage, type, defaultImage = undefined, imageProps = {}, inputContainerProps = {}, ...props }) => {
     const fieldRef = useRef(null)
     const [ selectedImage, setSelectedImage ] = useState(undefined)
     const { ref: registerRef, ...registerRest } = register(name)
@@ -81,6 +81,18 @@ const FormattedInput = ({ register, setValue, name, label, errorMessage, type, d
                         ? (
                             <Col style={{ color: '#FF0000', backgroundColor: '#FFA5A560', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
                                 { parse(errorMessage) }
+                            </Col>
+                        )
+                        : <Col />
+                }
+            </Row>
+
+            <Row>
+                {
+                    infoMessage
+                        ? (
+                            <Col style={{ color: '#0000FF', backgroundColor: '#B1B2FA', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
+                                { parse(infoMessage) }
                             </Col>
                         )
                         : <Col />

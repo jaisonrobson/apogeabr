@@ -1,13 +1,13 @@
 import * as z from 'zod'
 
-const userLoginValidation = z.string()
+const validation = z.string()
     .min(8, { message: 'Necessário ao menos 8 caracteres' })
     .max(15, { message: 'Máximo de 15 caracteres atingido' })
     .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,15}$/,
         {
             message: `
-            <p>O login deve incluir: </p>
+            <p>O campo deve incluir: </p>
             <ul>
                 <li>Uma letra maiúscula</li>
                 <li>Uma letra minúscula</li>
@@ -18,4 +18,4 @@ const userLoginValidation = z.string()
         }
     )
 
-export default userLoginValidation
+export default validation

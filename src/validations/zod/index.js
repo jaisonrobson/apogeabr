@@ -1,2 +1,5 @@
-export { default as userPasswordValidation } from './userPasswordValidation'
-export { default as userLoginValidation } from './userLoginValidation'
+export { default as loginPasswordValidation } from './loginPasswordValidation'
+export { default as emailValidation } from './emailValidation'
+export { default as userImageValidation } from './userImageValidation'
+export { default as nameValidation } from './nameValidation'
+export { default as userPhoneNumberValidation } from './userPhoneNumberValidation'

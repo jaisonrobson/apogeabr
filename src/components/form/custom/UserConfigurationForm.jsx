@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import * as z from 'zod'
+import { useRouteLoaderData } from 'react-router-dom'
 
 import ROUTES from 'router/routes'
 
@@ -8,21 +9,7 @@ import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
 import { FetcherForm, Input, FormattedInput, Row, Col } from 'components'
 
-import { userPasswordValidation, userLoginValidation } from 'validations'
-
-const userUpdateValidationSchema = z.object({
-    login: userLoginValidation.nullish(),
-    password: userPasswordValidation.or(z.string().nullish()),
-    confirmPassword: userPasswordValidation.or(z.string().nullish()),
-}).superRefine(({ confirmPassword, password }, ctx) => {
-    if (confirmPassword !== password) {
-        ctx.addIssue({
-            code: "custom",
-            message: "A senha não confere com a confirmação",
-            path: ['confirmPassword']
-        })
-    }
-})
+import { loginPasswordValidation, userImageValidation, userPhoneNumberValidation, nameValidation } from 'validations'
 
 const SubmitButton = (props) => (
     <Input
@@ -45,18 +32,44 @@ const SubmitButton = (props) => (
     />
 )
 
-const UserConfigurationForm = ({ children, ...props }) => (
-    <FetcherForm
-        allowedProperties={['name', 'login', 'password', 'phone_number', 'image']}
-        validationSchema={userUpdateValidationSchema}
-        action={ROUTES.USER_PROFILE_CONFIGURATION_SUBMIT.path}
-        defaultForm={false}
-        onlyTouchedFields={true}
-        {...props}
-    >
-        {(register, errors, backendErrors, fetcher, setValue) => children(register, errors, backendErrors, fetcher, setValue)}
-    </FetcherForm>
-)
+const UserConfigurationForm = ({ children, ...props }) => {
+    const { user } = useRouteLoaderData("root")
+
+    const userUpdateValidationSchema = z.object({
+        name: nameValidation.optional(),
+        phone_number: userPhoneNumberValidation(user?.country_code).optional(),
+        image: userImageValidation.optional(),
+        login: loginPasswordValidation.optional(),
+        password: loginPasswordValidation.optional(),
+        confirmPassword: loginPasswordValidation.optional(),
+    }).superRefine(({ confirmPassword, password }, ctx) => {
+        if (confirmPassword !== password) {
+            ctx.addIssue({
+                code: "custom",
+                message: "A senha não confere com a confirmação",
+                path: ['confirmPassword']
+            })
+        }
+    })
+
+    const onSubmit = (data) => ({ ...data, user_id: user?.id })
+    
+    return (
+        <FetcherForm
+            allowedProperties={['name', 'login', 'password', 'phone_number', 'image', 'user_id']}
+            enforceProperties={['user_id']}
+            externalSchema={userUpdateValidationSchema}
+            validationSchema={z.object({})}
+            action={ROUTES.USER_PROFILE_CONFIGURATION_SUBMIT.path}
+            defaultForm={false}
+            onlyTouchedFields={true}
+            onSubmit={onSubmit}
+            {...props}
+        >
+            {(register, errors, backendErrors, fetcher, setValue) => children(register, errors, backendErrors, fetcher, setValue)}
+        </FetcherForm>
+    )
+}
 
 UserConfigurationForm.SubmitButton = SubmitButton
 UserConfigurationForm.SubmissionInfo = FetcherForm.SubmissionInfo

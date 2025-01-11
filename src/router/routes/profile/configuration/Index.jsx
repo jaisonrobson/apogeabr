@@ -85,7 +85,7 @@ const Configuration = () => {
                                     >
                                         <UserConfigurationForm.SubmitButton width="200px" />
 
-                                        <UserConfigurationForm.SubmissionInfo fetcher={fetcher} />
+                                        <UserConfigurationForm.SubmissionInfo fetcher={fetcher} errors={errors} />
                                     </Container>
                                 </StoneTabletTwoBoard>
                             </Col>

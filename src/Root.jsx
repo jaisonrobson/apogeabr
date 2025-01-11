@@ -11,20 +11,17 @@ import About from './router/routes/about/Index'
 import HelpUs from './router/routes/helpus/Index'
 import HallOfFame from './router/routes/halloffame/Index'
 import Login from './router/routes/login/Index'
-import LoginSubmit from './router/routes/login/Submit'
 import Register from './router/routes/register/Index'
-import RegisterSubmit from './router/routes/register/Submit'
 import Profile from './router/routes/profile/Index'
-import ProfileOverview from './router/routes/profile/Overview'
-import ProfileConfiguration from './router/routes/profile/Configuration'
-import ProfileCharacters from './router/routes/profile/Characters'
-import ProfileAffiliated from './router/routes/profile/Affiliated'
-import ProfileImages from './router/routes/profile/Images'
-import ProfileVideos from './router/routes/profile/Videos'
+import ProfileOverview from './router/routes/profile/overview/Index'
+import ProfileConfiguration from './router/routes/profile/configuration/Index'
+import ProfileCharacters from './router/routes/profile/characters/Index'
+import ProfileAffiliated from './router/routes/profile/affiliated/Index'
+import ProfileImages from './router/routes/profile/images/Index'
+import ProfileVideos from './router/routes/profile/videos/Index'
 
 import { sessionLoader } from 'router/loaders'
-import { userLogin } from "router/actions"
-import { userRegister } from "router/actions"
+import { userConfigurationSubmit, userLogin, userRegister } from "router/actions"
 
 import ROUTES from 'router/routes'
 
@@ -77,7 +74,6 @@ const router = createBrowserRouter([
                     {
                         path: ROUTES.USER_LOGIN_SUBMIT.path,
                         action: userLogin,
-                        element: <LoginSubmit />,
                     },
                     {
                         path: ROUTES.USER_PROFILE.path,
@@ -94,6 +90,10 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_PROFILE_CONFIGURATION.path,
                                 element: <ProfileConfiguration />,
+                            },                            
+                            {
+                                path: ROUTES.USER_PROFILE_CONFIGURATION_SUBMIT.path,
+                                action: userConfigurationSubmit,
                             },
                             {
                                 path: ROUTES.USER_PROFILE_CHARACTERS.path,
@@ -120,7 +120,6 @@ const router = createBrowserRouter([
                     {
                         path: ROUTES.USER_REGISTER_SUBMIT.path,
                         action: userRegister,
-                        element: <RegisterSubmit />,
                     },
                 ],
             },

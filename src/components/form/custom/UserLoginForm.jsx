@@ -5,11 +5,11 @@ import ROUTES from 'router/routes'
 
 import { FetcherForm, Row, Col, Input, FormattedInput, ApogeaHoverNavLink } from 'components'
 
-import { userPasswordValidation, userLoginValidation } from 'validations'
+import { loginPasswordValidation } from 'validations'
 
 const loginValidationSchema = z.object({
-    login: userLoginValidation,
-    password: userPasswordValidation,
+    login: loginPasswordValidation,
+    password: loginPasswordValidation,
 })
 
 const UserLoginForm = (props) => (

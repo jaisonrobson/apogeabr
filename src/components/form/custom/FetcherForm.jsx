@@ -3,11 +3,20 @@ import _ from 'lodash'
 import { useFetcher, useSearchParams } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import parse from 'html-react-parser'
 
 import { Form, Row, Col } from 'components'
 
-const SubmissionInfo = ({ fetcher }) => (
+import { enforceJsonNotFalseyValues } from 'util/array'
+
+const SubmissionInfo = ({ fetcher, errors }) => (
     <Row>
+        {errors?.customError && (
+            <Col style={{ color: '#FF0000', backgroundColor: '#FFA5A560', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
+                { parse(errors?.customError.message) }
+            </Col>
+        )}
         {fetcher.state === "submitting" && <p>Enviando dados...</p>}
         {fetcher.state === "loading" && <p>Carregando próxima página...</p>}
     </Row>
@@ -16,6 +25,7 @@ const SubmissionInfo = ({ fetcher }) => (
 const FetcherForm = ({
     onSubmit : onSubmitParam = () => {},
     allowedProperties = [],
+    enforceProperties = [],
     validationSchema,
     action,
     children,
@@ -23,11 +33,27 @@ const FetcherForm = ({
     defaultForm = true,
     onlyTouchedFields = false,
     defaultValues = {},
+    useFormProps = {},
+    externalSchema,
     ...props
 }) => {
     const fetcher = useFetcher()
     const [ searchParams ] = useSearchParams()
-    const { register, handleSubmit, formState: { errors, touchedFields }, trigger, getValues, setValue } = useForm({ resolver: zodResolver(validationSchema), mode: "onChange", defaultValues: defaultValues })
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, touchedFields },
+        trigger,
+        getValues,
+        setValue,
+        setError,
+        clearErrors
+    } = useForm({
+        resolver: zodResolver(validationSchema),
+        mode: "onChange",
+        defaultValues: defaultValues,
+        ...useFormProps
+    })
 
     const backendErrors = JSON.parse(searchParams.get("errors") || "{}")
     
@@ -38,24 +64,35 @@ const FetcherForm = ({
         if (onlyTouchedFields) {
             const touchedKeys = Object.keys(touchedFields)
 
-            // Valida apenas os campos tocados e armazena os valores válidos
-            const validData = {}
+            const touchedValues = {}
             for (const field of touchedKeys) {
-                const isValid = await trigger(field) // Valida o campo individualmente
-                if (isValid) {
-                    validData[field] = getValues(field) // Coleta o valor válido
+                await trigger(field)
+
+                touchedValues[field] = getValues(field)
+            }
+
+            if (externalSchema) {
+                try {
+                    await externalSchema.parseAsync(touchedValues)
+                } catch (error) {
+                    if (error instanceof z.ZodError) {
+                        error.errors.forEach(({ path, message }) => {
+                            setError(path[0], { type: "manual", message }, { shouldFocus: true })
+                        })
+
+                        return false
+                    }
                 }
             }
 
-            dataToValidate = validData
+            dataToValidate = touchedFields
         }
 
         // Permitir manipulação adicional dos dados através do `onSubmitParam`
         let mutatedData = onSubmitParam(dataToValidate)
 
-        if (!mutatedData) {
+        if (!mutatedData)
             mutatedData = dataToValidate
-        }
 
         // Restrição às propriedades permitidas, se configurado
         let result = {}
@@ -65,9 +102,20 @@ const FetcherForm = ({
                     result[property] = mutatedData[property]
                 }
             })
-        } else {
+        } else
             result = mutatedData
+
+        if (!_.isEmpty(enforceProperties) && !enforceJsonNotFalseyValues(result, enforceProperties)) {
+            setError("customError", {
+                type: 'manual',
+                message: "Falha no envio do formulario, algum valor obrigatório não foi passado."
+            })
+
+            return false //algum valor obrigatorio nao foi passado para o payload da requisicao
         }
+        else
+            clearErrors("customError")
+        
 
         // Enviar os dados filtrados e validados ao backend
         return fetcher.submit(result, {
