@@ -14,14 +14,19 @@ const action = async ({ request }) => {
     const payload = { user: requestValues }
 
     try {
-        const response = await axios.put(`${[process.env.REACT_APP_BACKEND_HOST]}/users/${user_id}`, payload, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            }
-        })
+        if (!_.isEmpty(requestValues)) {
+            const response = await axios.put(`${[process.env.REACT_APP_BACKEND_HOST]}/users/${user_id}`, payload, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                }
+            })
+            
 
-        return redirect(`${ROUTES.USER_PROFILE_CONFIGURATION.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
+            return redirect(`${ROUTES.USER_PROFILE_CONFIGURATION.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
+        }
+        else
+            return redirect(ROUTES.USER_PROFILE_CONFIGURATION.path.slice(0, -1))
     } catch (error) {
         const resultingError = error?.response?.data || { message: error.message }
 
