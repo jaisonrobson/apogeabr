@@ -78,6 +78,10 @@ const FetcherForm = ({
                 touchedValues[field] = getValues(field)
             }
 
+            //Se nenhum campo foi tocando, evitar o envio do formulario
+            if (_.isEmpty(touchedValues))
+                return false
+
             if (externalSchema) {
                 try {
                     await externalSchema.parseAsync(touchedValues)
