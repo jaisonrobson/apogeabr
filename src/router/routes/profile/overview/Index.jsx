@@ -30,7 +30,7 @@ const Overview = () => {
                     >
                         <Row justifyContent="center" margin="20px 0px">
                             <Image
-                                src={userNoAvatarImage}
+                                src={user?.image || userNoAvatarImage}
                                 className="rounded-circle"
                                 objectFit="contain"
                                 width="150px"

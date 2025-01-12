@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useRouteLoaderData } from 'react-router'
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,8 +9,9 @@ import ROUTES from 'router/routes'
 
 import { Dropdown, Image, Span, Icon } from 'components'
 
-const UserDropdown = ({ userName, togglerProperties = {}, noProfile = false, ...props }) => {
+const UserDropdown = ({ togglerProperties = {}, noProfile = false, ...props }) => {
     const navigate = useNavigate()
+    const { user } = useRouteLoaderData("root")
 
     const onEnterAffiliated = () => {
         navigate(ROUTES.USER_PROFILE_AFFILIATED.path)
@@ -50,13 +51,13 @@ const UserDropdown = ({ userName, togglerProperties = {}, noProfile = false, ...
                 {...togglerProperties}
             >
                 <Image
-                    src={userNoAvatarImage}
+                    src={user?.image || userNoAvatarImage}
                     className="rounded-circle"
                     objectFit="contain"
                     width="35px"
                 />
 
-                <Span>{userName ? userName : 'Usuário'}</Span>
+                <Span>{user?.name ? user?.name : 'Usuário'}</Span>
 
                 <Icon icon={faCaretDown} size="xl" color="inherit" marginTop="-4px" />
             </Dropdown.Toggler>

@@ -66,7 +66,8 @@ const UserConfigurationForm = ({ children, ...props }) => {
             onSubmit={onSubmit}
             {...props}
         >
-            {(register, errors, backendErrors, fetcher, setValue) => children(register, errors, backendErrors, fetcher, setValue)}
+            {({ register, errors, backendErrors, fetcher, setValue, backendSuccess }) =>
+                children({ register, errors, backendErrors, fetcher, setValue, backendSuccess })}
         </FetcherForm>
     )
 }

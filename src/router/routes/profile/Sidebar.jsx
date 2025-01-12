@@ -262,7 +262,6 @@ const Sidebar = () => {
                 <Col>
                     <UserDropdown
                         direction="up"
-                        userName={session?.user?.name}
                         noProfile
                     />
                 </Col>

@@ -28,7 +28,7 @@ const UserRegisterForm = (props) => (
         validationSchema={registerValidationSchema}
         action={ROUTES.USER_REGISTER_SUBMIT.path}
     >
-        {(register, errors, backendErrors) => (
+        {({ register, errors, backendErrors }) => (
             <Row>
                 <FormattedInput register={register} name="login" label="Usuario:" errorMessage={errors.login?.message} fontFamily="arial"/>
                 <FormattedInput register={register} name="password" label="Senha:" errorMessage={errors.password?.message} fontFamily="arial"/>

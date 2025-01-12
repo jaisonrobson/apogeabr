@@ -10,11 +10,17 @@ import { Form, Row, Col } from 'components'
 
 import { enforceJsonNotFalseyValues } from 'util/array'
 
-const SubmissionInfo = ({ fetcher, errors }) => (
+const SubmissionInfo = ({ fetcher, errors, success }) => (
     <Row>
         {errors?.customError && (
             <Col style={{ color: '#FF0000', backgroundColor: '#FFA5A560', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
                 { parse(errors?.customError.message) }
+            </Col>
+        )}
+
+        {success?.message && (
+            <Col style={{ color: '#00B114', backgroundColor: '#B6FFC060', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
+                { parse(success?.message) }
             </Col>
         )}
         {fetcher.state === "submitting" && <p>Enviando dados...</p>}
@@ -56,6 +62,7 @@ const FetcherForm = ({
     })
 
     const backendErrors = JSON.parse(searchParams.get("errors") || "{}")
+    const backendSuccess = JSON.parse(searchParams.get("success") || "{}")
     
     const onSubmit = async (dataParam) => {
         let dataToValidate = dataParam
@@ -85,7 +92,7 @@ const FetcherForm = ({
                 }
             }
 
-            dataToValidate = touchedFields
+            dataToValidate = touchedValues
         }
 
         // Permitir manipulação adicional dos dados através do `onSubmitParam`
@@ -115,13 +122,29 @@ const FetcherForm = ({
         }
         else
             clearErrors("customError")
-        
+
+        //Tratamento do resultado para que seja aceito passagem de campos do tipo arquivo
+        const formData = new FormData()
+
+        // Adicione todos os campos ao FormData
+        for (const key in result) {
+            if (result[key] instanceof FileList) {
+            // Para campos de arquivo, adicione cada arquivo individualmente
+                Array.from(result[key]).forEach((file) => {
+                    formData.append(key, file) //Verificar uma abordagem melhor do que essa, pois esta sobreescrevendo a chave toda vez que um novo arquivo e encontrado no vetor
+                })
+            }
+            else {
+                formData.append(key, result[key])
+            }
+        }
 
         // Enviar os dados filtrados e validados ao backend
-        return fetcher.submit(result, {
+        return fetcher.submit(formData, {
             method: "POST",
+            encType: 'multipart/form-data',
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
             },
             action: action,
         })
@@ -132,7 +155,7 @@ const FetcherForm = ({
             <Row>
                 <Col>
                     <Form {...props} onSubmit={handleSubmit(onSubmit)} method="POST">
-                        {children(register, errors, backendErrors, fetcher, setValue)}
+                        {children({ register, errors, backendErrors, fetcher, setValue, backendSuccess })}
                     </Form>
                 </Col>
             </Row>

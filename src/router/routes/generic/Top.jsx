@@ -66,7 +66,6 @@ const Top = () => {
                         session?.token
                         ? (
                             <UserDropdown
-                                userName={session?.user?.name}
                                 togglerProperties={{
                                     color: "white",
                                     justifyContent: 'space-around',

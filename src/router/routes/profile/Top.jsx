@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom'
 
 import ROUTES from 'router/routes'
 
+import { addSlashIfNeeded } from 'util/string'
+
 import { CollapsibleContext } from 'contexts'
 
 import {
@@ -38,7 +40,7 @@ const Top = () => {
                                 alignItems="center"
                                 className="unselectable"
                             >
-                                <TitleH2 className='text-black' fontFamily='Papyrus'>{_.find(ROUTES, { path: location.pathname }).nickname || "Erro"}</TitleH2>
+                                <TitleH2 className='text-black' fontFamily='Papyrus'>{_.find(ROUTES, { path: addSlashIfNeeded(location.pathname) }).nickname || "Erro"}</TitleH2>
                             </Container>
                         </NavItem>
                     </Nav>

@@ -14,7 +14,7 @@ const loginValidationSchema = z.object({
 
 const UserLoginForm = (props) => (
     <FetcherForm allowedProperties={['login', 'password']} validationSchema={loginValidationSchema} action={ROUTES.USER_LOGIN_SUBMIT.path}>
-        {(register, errors, backendErrors) => (
+        {({ register, errors, backendErrors }) => (
             <Row>
                 <FormattedInput register={register} name="login" label="Usuario:" errorMessage={errors.login?.message} fontFamily="arial"/>
                 <FormattedInput register={register} name="password" label="Senha:" errorMessage={errors.password?.message} fontFamily="arial"/>

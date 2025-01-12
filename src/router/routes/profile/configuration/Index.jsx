@@ -28,7 +28,7 @@ const Configuration = () => {
                 image: user?.image || null,
             }}
         >
-            {(register, errors, backendErrors, fetcher, setValue) => (
+            {({ register, errors, backendErrors, fetcher, setValue, backendSuccess }) => (
                 <Row padding="0px 2rem" className="row-cols-2" justifyContent="center">
                     <Col xs="12" sm="6" md="4">
                         <StoneTabletTwoBoard>
@@ -85,7 +85,7 @@ const Configuration = () => {
                                     >
                                         <UserConfigurationForm.SubmitButton width="200px" />
 
-                                        <UserConfigurationForm.SubmissionInfo fetcher={fetcher} errors={errors} />
+                                        <UserConfigurationForm.SubmissionInfo fetcher={fetcher} errors={errors} success={backendSuccess} />
                                     </Container>
                                 </StoneTabletTwoBoard>
                             </Col>
