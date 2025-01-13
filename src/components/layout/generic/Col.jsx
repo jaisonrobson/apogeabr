@@ -15,8 +15,10 @@ const StyledCol = styled(({
     marginTop,
     marginBottom,
     width,
+    minWidth,
     maxWidth,
     height,
+    minHeight,
     maxHeight,
     overflowWrap,
     backgroundColor,
@@ -30,6 +32,7 @@ const StyledCol = styled(({
     backgroundImage,
     backgroundRepeat,
     backgroundSize,
+    backgroundPosition,
     textAlign,
     gap,
     ...props
@@ -56,14 +59,17 @@ const StyledCol = styled(({
     ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ``}
 
     ${({ width }) => width ? `width: ${width};` : ``}
+    ${({ minWidth }) => minWidth ? `min-width: ${minWidth};` : ``}
     ${({ maxWidth }) => maxWidth ? `max-width: ${maxWidth};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
+    ${({ minHeight }) => minHeight ? `min-height: ${minHeight};` : ``}
     ${({ maxHeight }) => maxHeight ? `max-height: ${maxHeight};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
     ${({ backgroundImage }) => backgroundImage ? `background-image: ${backgroundImage};` : ``}
     ${({ backgroundRepeat }) => backgroundRepeat ? `background-repeat: ${backgroundRepeat};` : ``}
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
+    ${({ backgroundPosition }) => backgroundPosition ? `background-position: ${backgroundPosition};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
     ${({ gap }) => gap ? `gap: ${gap};` : ``}
 `
