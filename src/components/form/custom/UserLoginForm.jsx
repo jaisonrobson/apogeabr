@@ -21,10 +21,10 @@ const UserLoginForm = (props) => (
 
                 <Row>
                     {
-                        backendErrors?.error
+                        backendErrors?.friendlyMessage
                         ? (
                             <Col style={{ color: '#FF0000', backgroundColor: '#FFA5A560', fontFamily: '"arial black"', borderRadius: '8px', margin: '0px 15px', marginTop: '5px' }}>
-                                { backendErrors?.error }
+                                { backendErrors?.friendlyMessage }
                             </Col>
                         )
                         : <Col />

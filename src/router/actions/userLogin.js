@@ -17,7 +17,15 @@ const action = async ({ request }) => {
 
         return redirect(ROUTES.HOME.path)
     } catch (error) {
-        const resultingError = error?.response?.data || { message: error.message }
+        const resultingError = {
+            backendError: error?.response?.data,
+            friendlyMessage: "Impossivel recuperar usuario, é necessário fazer o login novamente.",
+        }
+        ||
+        {
+            backendError: error.message,
+            friendlyMessage: "Impossivel recuperar usuario, é necessário fazer o login novamente.",
+        }
 
         return redirect(`${ROUTES.USER_LOGIN.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
     }
