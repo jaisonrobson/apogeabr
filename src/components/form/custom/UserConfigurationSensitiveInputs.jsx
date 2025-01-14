@@ -6,8 +6,6 @@ import { FormattedInput } from 'components'
 const UserConfigurationSensitiveInputs = ({ register, errors, backendErrors, ...props }) => (
     <Fragment>
         <FormattedInput
-            minWidth="0px"
-            width="auto"
             register={register}
             name="login"
             label="Usuario:"
@@ -16,8 +14,6 @@ const UserConfigurationSensitiveInputs = ({ register, errors, backendErrors, ...
         />
 
         <FormattedInput
-            minWidth="0px"
-            width="auto"
             register={register}
             name="password"
             label="Senha:"
@@ -26,8 +22,6 @@ const UserConfigurationSensitiveInputs = ({ register, errors, backendErrors, ...
         />
 
         <FormattedInput
-            minWidth="0px"
-            width="auto"
             register={register}
             name="confirmPassword"
             label="Confirme a senha:"

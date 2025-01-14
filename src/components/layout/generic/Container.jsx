@@ -18,6 +18,7 @@ const StyledContainer = styled(({
     height,
     justifyContent,
     flexDirection,
+    flexGrow,
     alignItems,
     display,
     backgroundColor,
@@ -49,6 +50,7 @@ const StyledContainer = styled(({
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
+    ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
     ${({ display }) => display ? `display: ${display};` : ``}
 

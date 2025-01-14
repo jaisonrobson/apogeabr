@@ -27,6 +27,7 @@ const StyledImage = styled(({
     fontFamily,
     flex,
     flexGrow,
+    opacity,
     innerRef,
     onHover = false,
     animation = false,
@@ -57,8 +58,10 @@ const StyledImage = styled(({
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
     ${({ flex }) => flex ? `flex: ${flex};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
+    ${({ opacity }) => opacity ? `opacity: ${opacity};` : ``}
 
     ${({ onHover }) => onHover ? `&:hover {
+        ${onHover?.opacity ? `opacity: ${onHover?.opacity};` : ``}
         ${onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``}
         ${onHover?.color ? `color: ${onHover?.color};` : ``}
         ${onHover?.border ? `border: ${onHover?.border};` : ``}

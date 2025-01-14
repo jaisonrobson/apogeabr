@@ -31,7 +31,7 @@ const FormattedInput = ({ register, setValue, name, label, errorMessage, infoMes
                         : null
                 }
 
-                <Col {...inputContainerProps}>
+                <Col {...inputContainerProps} display="flex" justifyContent={type === "image" ? "center" : "flex-end"}>
                     {
                         type === "image"
                             ? (
@@ -61,6 +61,7 @@ const FormattedInput = ({ register, setValue, name, label, errorMessage, infoMes
                                     {...registerRest}
                                     name={name}
                                     validation={errorMessage}
+                                    height="28px"
                                     width="100%"
                                     minWidth="300px"
                                     type={type}

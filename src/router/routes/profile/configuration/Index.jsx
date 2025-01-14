@@ -17,7 +17,6 @@ const Configuration = () => {
 
     return (
         <UserConfigurationForm
-            parentContainerProps={{ marginTop: '20rem' }}
             defaultValues={{
                 name: user?.name || '',
                 email: user?.email || '',
@@ -29,8 +28,16 @@ const Configuration = () => {
             }}
         >
             {({ register, errors, backendErrors, fetcher, setValue, backendSuccess }) => (
-                <Row padding="0px 2rem" className="row-cols-2" justifyContent="center">
-                    <Col xs="12" sm="6" md="4">
+                <Row className="row-cols-2" justifyContent="center" alignItems="center" gap="2rem">
+                    <Col
+                        xs="12"
+                        sm="12"
+                        md="8"
+                        lg="6"
+                        xl="4"
+                        xxl="2"
+                        minWidth="400px"
+                    >
                         <StoneTabletTwoBoard>
                             <Container
                                 display="flex"
@@ -44,7 +51,15 @@ const Configuration = () => {
                         </StoneTabletTwoBoard>
                     </Col>
 
-                    <Col xs="12" sm="8" md="7" paddingLeft="5rem">
+                    <Col
+                        xs="12"
+                        sm="12"
+                        md="8"
+                        lg="6"
+                        xl="4"
+                        xxl="4"
+                        minWidth="600px"
+                    >
                         <StoneTabletTwoBoard>
                             <Container
                                 display="flex"
@@ -58,7 +73,15 @@ const Configuration = () => {
                         </StoneTabletTwoBoard>
                     </Col>
 
-                    <Col xs="12" sm="8" md="7" paddingTop="2rem">
+                    <Col
+                        xs="12"
+                        sm="12"
+                        md="8"
+                        lg="6"
+                        xl="4"
+                        xxl="6"
+                        minWidth="600px"
+                    >
                         <StoneTabletTwoBoard>
                             <Container
                                 display="flex"
@@ -72,9 +95,12 @@ const Configuration = () => {
                         </StoneTabletTwoBoard>
                     </Col>
 
-                    <Col xs="12" paddingTop="2rem">
+                    <Col xs="12">
                         <Row display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-                            <Col xs="4">
+                            <Col
+                                xs="3"
+                                minWidth="350px"
+                            >
                                 <StoneTabletTwoBoard>
                                     <Container
                                         display="flex"
@@ -83,7 +109,7 @@ const Configuration = () => {
                                         alignItems="flex-end"
                                         className="unselectable"
                                     >
-                                        <UserConfigurationForm.SubmitButton width="200px" />
+                                        <UserConfigurationForm.SubmitButton width="100%" />
 
                                         <UserConfigurationForm.SubmissionInfo fetcher={fetcher} errors={errors} success={backendSuccess} />
                                     </Container>

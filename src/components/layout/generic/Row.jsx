@@ -26,7 +26,10 @@ const StyledRow = styled(({
     fontFamily,
     fontSize,
     width,
+    minWidth,
+    maxWidth,
     height,
+    maxHeight,
     minHeight,
     justifyContent,
     flexDirection,
@@ -44,6 +47,10 @@ const StyledRow = styled(({
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
 
+    ${({ minWidth }) => minWidth ? `min-width: ${minWidth};` : ``}
+    ${({ maxWidth }) => maxWidth ? `max-width: ${maxWidth};` : ``}
+    
+    ${({ maxHeight }) => maxHeight ? `max-height: ${maxHeight};` : ``}
     ${({ minHeight }) => minHeight ? `min-height: ${minHeight};` : ``}
 
     ${({ margin }) => margin ? `margin: ${margin};` : ``}

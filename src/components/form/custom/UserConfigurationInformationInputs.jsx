@@ -11,8 +11,6 @@ const UserConfigurationInformationInputs = ({ register, errors, backendErrors, .
     return (
         <Fragment>
             <FormattedInput
-                minWidth="0px"
-                width="auto"
                 register={register}
                 name="name"
                 label="Nome:"
@@ -21,8 +19,6 @@ const UserConfigurationInformationInputs = ({ register, errors, backendErrors, .
             />
 
             <FormattedInput
-                minWidth="0px"
-                width="auto"
                 register={register}
                 name="phone_number"
                 label={`Telefone:`}
@@ -34,8 +30,6 @@ const UserConfigurationInformationInputs = ({ register, errors, backendErrors, .
 
             <FormattedInput
                 disabled
-                minWidth="0px"
-                width="auto"
                 register={register}
                 name="email"
                 label="Email:"

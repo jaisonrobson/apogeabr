@@ -7,33 +7,38 @@ import {
     Col,
     Row,
     SectionBackdrop,
+    Div,
+    Overlay,
 } from 'components'
 
 const Content = () => (
     <SectionBackdrop
+        height="100vh"
         backgroundImage={`url(${ProfileContentImage})`}
         gradientBackground="transparent"
         backgroundSize="cover"
         backgroundPosition="center"
         margin="0px"
         padding="0px"
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="stretch"
-        flexGrow="1"
-        contentAlignmentProps={{ paddingTop: '10rem' }}
+        contentAlignmentProps={{ padding: '0', margin:"0" }}
     >
-        <Row
-            display="flex"
-            flexBasis="auto"
-            paddingLeft="8%"
-            paddingRight="8%"
+        <SectionBackdrop
+            backgroundImage={`url(${ProfileContentImage})`}
+            gradientBackground="transparent"
+            backgroundSize="cover"
+            backgroundPosition="center"
+            margin="0px"
+            padding="0px"
         >
-            <Col>
-                <Outlet />
-            </Col>
-        </Row>
+            <Row>
+                <Col
+                    padding="0rem 3rem"
+                    paddingTop="8rem"
+                >
+                    <Outlet />
+                </Col>
+            </Row>
+        </SectionBackdrop>
     </SectionBackdrop>
 )
 

@@ -17,8 +17,17 @@ const Overview = () => {
     const { user } = useRouteLoaderData("root")
 
     return (
-        <Row padding="0px 50px">
-            <Col padding="0px 2rem">
+        <Row justifyContent="center">
+            <Col
+                xs="12"
+                sm="12"
+                md="8"
+                lg="6"
+                xl="4"
+                xxl="2"
+                margin="0px 50px"
+                minWidth="300px"
+            >
                 <StoneTabletTwoBoard padding="0px">
                     <Container
                         display="flex"
@@ -28,12 +37,13 @@ const Overview = () => {
                         className="unselectable"
                         gap="7px"
                     >
-                        <Row justifyContent="center" margin="20px 0px">
+                        <Row justifyContent="center">
                             <Image
                                 src={user?.image || userNoAvatarImage}
                                 className="rounded-circle"
                                 objectFit="contain"
                                 width="150px"
+                                minWidth="150px"
                             />
                         </Row>
 
@@ -52,8 +62,17 @@ const Overview = () => {
                 </StoneTabletTwoBoard>
             </Col>
 
-            <Col padding="0px 2rem" flexGrow="2">
-                <StoneTabletTwoBoard padding="0px 75px">
+            <Col
+                xs="12"
+                sm="12"
+                md="12"
+                lg="10"
+                xl="6"
+                xxl="4"
+                margin="0px 50px"
+                minWidth="550px"
+            >
+                <StoneTabletTwoBoard>
                     <Container
                         display="flex"
                         flexDirection="column"
