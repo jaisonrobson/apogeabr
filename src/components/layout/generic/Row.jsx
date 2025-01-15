@@ -40,8 +40,11 @@ const StyledRow = styled(({
     position,
     textAlign,
     gap,
+    transition,
     ...props
 }) => <ReactstrapRow {...props} />)`
+    ${({ transition }) => transition ? `transition: ${transition};` : ``}
+
     ${({ position }) => position ? `position: ${position};` : ``}
 
     ${({ width }) => width ? `width: ${width};` : ``}

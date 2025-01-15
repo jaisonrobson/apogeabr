@@ -34,6 +34,7 @@ const StyledCol = styled(({
     backgroundSize,
     backgroundPosition,
     textAlign,
+    transition,
     gap,
     ...props
 }) => <ReactstrapCol {...props}/>)`
@@ -72,6 +73,8 @@ const StyledCol = styled(({
     ${({ backgroundPosition }) => backgroundPosition ? `background-position: ${backgroundPosition};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
     ${({ gap }) => gap ? `gap: ${gap};` : ``}
+
+    ${({ transition }) => transition ? `transition: ${transition};` : ``}
 `
 
 const Col = forwardRef((props, ref) => <StyledCol {...props} />)
