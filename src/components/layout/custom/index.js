@@ -22,6 +22,7 @@ export { default as DrawerNavItem } from "./DrawerNavItem"
 export { default as UserDropdown } from "./UserDropdown"
 export { default as StoneTabletSidebar } from "./StoneTabletSidebar"
 export { default as CollapsibleSidebar } from "./CollapsibleSidebar"
+export { default as HoverableButton } from "./HoverableButton"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"

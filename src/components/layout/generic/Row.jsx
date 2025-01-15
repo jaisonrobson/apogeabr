@@ -41,6 +41,10 @@ const StyledRow = styled(({
     textAlign,
     gap,
     transition,
+    animation,
+    opacity,
+    cursor,
+    onHover = false,
     ...props
 }) => <ReactstrapRow {...props} />)`
     ${({ transition }) => transition ? `transition: ${transition};` : ``}
@@ -91,6 +95,29 @@ const StyledRow = styled(({
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
     ${({ gap }) => gap ? `gap: ${gap};` : ``}
+    ${({ opacity }) => opacity ? `opacity: ${opacity};` : ``}
+    ${({ cursor }) => cursor ? `cursor: ${cursor};` : ``}
+
+    ${({ onHover }) => onHover ? `&:hover {
+        ${onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``}
+        ${onHover?.color ? `color: ${onHover?.color};` : ``}
+        ${onHover?.border ? `border: ${onHover?.border};` : ``}
+        ${onHover?.borderBottom ? `border-bottom: ${onHover?.borderBottom};` : ``}
+        ${onHover?.borderTop ? `border-top: ${onHover?.borderTop};` : ``}
+        ${onHover?.borderLeft ? `border-left: ${onHover?.borderLeft};` : ``}
+        ${onHover?.borderRight ? `border-right: ${onHover?.borderRight};` : ``}
+        ${onHover?.boxShadow ? `box-shadow: ${onHover?.boxShadow};` : ``}
+        ${onHover?.height ? `height: ${onHover?.height};` : ``}
+        ${onHover?.width ? `width: ${onHover?.width};` : ``}
+        ${onHover?.padding ? `padding: ${onHover?.padding};` : ``}
+        ${onHover?.opacity ? `opacity: ${onHover?.opacity};` : ``}
+        ${onHover?.margin ? `margin: ${onHover?.margin};` : ``}
+        ${onHover?.cursor ? `cursor: ${onHover?.cursor};` : ``}
+        ${onHover?.animation ? `animation: ${onHover?.animation?.property}; ${onHover?.animation?.corpse}` : ``}
+        
+    };`: ``}
+
+    ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
 const Row = (props) => <StyledRow {...props} />

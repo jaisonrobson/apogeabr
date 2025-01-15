@@ -53,7 +53,7 @@ const FormattedInput = ({ register, setValue, name, label, errorMessage, infoMes
                                         minWidth="0px"
                                     />
 
-                                    <Image {...imageProps} src={selectedImage || defaultImage} onClick={onClickImage} />
+                                    <Image cursor="pointer" {...imageProps} src={selectedImage || defaultImage} onClick={onClickImage} />
                                 </Fragment>
                             )
                             : (

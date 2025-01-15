@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 import LevelStatusImage from 'images/layout/generic/icons/level.png'
 import HealthStatusImage from 'images/layout/generic/icons/health.png'
@@ -31,6 +32,8 @@ import {
     Span,
     Icon,
     Image,
+    Collapse,
+    HoverableButton,
 } from 'components'
 
 const getIconByClassNickname = (iconNickname) => {
@@ -49,8 +52,8 @@ const getIconByClassNickname = (iconNickname) => {
     }
 }
 
-const CharacterPortrait = ({ image }) => (
-    <Row>
+const CharacterPortrait = ({ image, ...props }) => (
+    <Row {...props}>
         <Col
             backgroundImage={`url(${CharacterPortraitImage})`}
             backgroundPosition="center"
@@ -65,6 +68,30 @@ const CharacterPortrait = ({ image }) => (
             alignItems="center"
         >
             <Image src={image} width="125px" borderRadius="300px" marginBottom="15px" marginRight="4px" />
+        </Col>
+    </Row>
+)
+
+const CharacterOptions = ({ image }) => (
+    <Row justifyContent="center">
+        <Col
+            minHeight="50px"
+            maxHeight="50px"
+            minWidth="200px"
+            maxWidth="200px"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            gap="15px"
+        >
+            <HoverableButton>
+                <Icon icon={faPenToSquare} />
+            </HoverableButton>
+
+            <HoverableButton>
+                <Icon icon={faTrashCan} />
+            </HoverableButton>
         </Col>
     </Row>
 )
@@ -104,210 +131,236 @@ const CharacterBoard = ({
             justifyContent="center"
             alignItems="center"
         >
-            <CharacterPortrait image={characterInfo.image} />
+            <Collapse
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Collapse.Button
+                    Component={CharacterPortrait}
+                    image={characterInfo.image}
+                    cursor="pointer"
+                    onHover={{
+                        opacity: '0.5',
+                        animation: {
+                            property: 'hoverableAnimation 0.5s linear 0s infinite alternate',
+                            corpse: `@keyframes hoverableAnimation {
+                                0%  {transform: scale3d(1,1,1);}
+                                100%  {transform: scale3d(1.03,1.03,1.03); background-color: lightgray; border-radius: 8px}
+                            }`
+                        }
+                    }}
+                    opacity="1"
+                />
 
-            <Row padding="15px 0px">
-                <StoneTabletFourBoard padding="0px" minWidth="200px">
-                    <Row
-                        className="unselectable text-gray-100"
-                        fontFamily="Retro Computer"
-                    >
-                        <Col display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-                            <Span>{characterInfo.name}</Span>
-                        </Col>
+                <Collapse.Content width="100%">
+                    <CharacterOptions />
+
+                    <Row padding="10px 0px" transition="0.5s">
+                        <StoneTabletFourBoard padding="0px 24px" minWidth="250px" transition="0.5s">
+                            <Row
+                                className="unselectable text-gray-100"
+                                fontFamily="Retro Computer"
+                            >
+                                <Col display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                                    <Span>{characterInfo.name}</Span>
+                                </Col>
+                            </Row>
+
+                            <Row
+                                className="row-cols-2 unselectable text-gray-100"
+                                fontFamily="Retro Computer"
+                                padding="1rem 0px"
+                            >
+                                <Col display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap="10px">
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={LevelStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={HealthStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={ManaStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={MagicStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={DamageStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={MoveSpeedStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={WeaponSkillStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={AttackSpeedStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={HpRegenStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={MpRegenStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={RangeStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={ArmorStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={DefenseStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={CapacityStatusImage} />
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Image width="20px" height="20px" src={getIconByClassNickname(characterInfo.classNickname)} />
+                                        </Col>
+                                    </Row>
+                                </Col>
+
+                                <Col display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap="10px">
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.level}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.health}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.mana}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.magic}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.damage}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.moveSpeed}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.weaponSkill}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.attackSpeed}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.hpRegen}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.mpRegen}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.range}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.armor}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.defense}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.capacity}</Span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <Span>{characterInfo.classNickname}</Span>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </StoneTabletFourBoard>
                     </Row>
-
-                    <Row
-                        className="row-cols-2 unselectable text-gray-100"
-                        fontFamily="Retro Computer"
-                        padding="1rem 0px"
-                    >
-                        <Col display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap="10px">
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={LevelStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={HealthStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={ManaStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={MagicStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={DamageStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={MoveSpeedStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={WeaponSkillStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={AttackSpeedStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={HpRegenStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={MpRegenStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={RangeStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={ArmorStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={DefenseStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={CapacityStatusImage} />
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Image width="20px" height="20px" src={getIconByClassNickname(characterInfo.classNickname)} />
-                                </Col>
-                            </Row>
-                        </Col>
-
-                        <Col display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap="10px">
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.level}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.health}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.mana}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.magic}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.damage}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.moveSpeed}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.weaponSkill}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.attackSpeed}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.hpRegen}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.mpRegen}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.range}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.armor}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.defense}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.capacity}</Span>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Span>{characterInfo.classNickname}</Span>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </StoneTabletFourBoard>
-            </Row>                
+                </Collapse.Content>
+            </Collapse>
         </Col>
     )
 }
