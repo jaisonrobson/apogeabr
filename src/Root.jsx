@@ -119,7 +119,7 @@ const router = createBrowserRouter([
                                         action: userProfileCharacterCreationSubmit,
                                     },
                                     {
-                                        path: ROUTES.USER_PROFILE_CHARACTERS_CREATE.path,
+                                        path: ROUTES.USER_PROFILE_CHARACTERS_UPDATE.path,
                                         element: <ProfileCharactersUpdate />,
                                     },
                                     {

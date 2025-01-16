@@ -87,11 +87,11 @@ const CharacterOptions = ({ image }) => (
             alignItems="center"
             gap="15px"
         >
-            <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_CREATE.path} navigationOptions={{ replace: true, state: { id: 999 } }}>
+            <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_UPDATE.path} navigationOptions={{ replace: true, state: { id: 999 } }}>
                 <Icon icon={faPenToSquare} />
             </HoverableButton>
 
-            <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_UPDATE.path} navigationOptions={{ replace: true, state: { id: 999 } }}>
+            <HoverableButton>
                 <Icon icon={faTrashCan} />
             </HoverableButton>
         </Col>
