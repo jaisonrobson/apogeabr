@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
+import ROUTES from 'router/routes'
+
 import LevelStatusImage from 'images/layout/generic/icons/level.png'
 import HealthStatusImage from 'images/layout/generic/icons/health.png'
 import ManaStatusImage from 'images/layout/generic/icons/mana.png'
@@ -85,11 +87,11 @@ const CharacterOptions = ({ image }) => (
             alignItems="center"
             gap="15px"
         >
-            <HoverableButton>
+            <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_CREATE.path} navigationOptions={{ replace: true, state: { id: 999 } }}>
                 <Icon icon={faPenToSquare} />
             </HoverableButton>
 
-            <HoverableButton>
+            <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_UPDATE.path} navigationOptions={{ replace: true, state: { id: 999 } }}>
                 <Icon icon={faTrashCan} />
             </HoverableButton>
         </Col>

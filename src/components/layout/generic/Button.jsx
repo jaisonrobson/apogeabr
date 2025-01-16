@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledButton = styled(({
@@ -76,6 +77,24 @@ const StyledButton = styled(({
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
-const Button = (props) => <StyledButton {...props} />
+const Button = ({
+    to = undefined,
+    navigationOptions = {},
+    onClick: onClickParam = () => {},
+    ...props
+}) => {
+    const navigate = useNavigate()
+
+    const onClick = (e) => {
+        onClickParam(e)
+
+        if (to)
+            navigate(to, navigationOptions)
+    }
+
+    return (
+        <StyledButton {...props} onClick={onClick} />
+    )
+}
 
 export default Button

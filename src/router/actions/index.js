@@ -1,3 +1,5 @@
 export { default as userLogin } from './userLogin'
 export { default as userRegister } from './userRegister'
 export { default as userConfigurationSubmit } from './userConfigurationSubmit'
+export { default as userProfileCharacterCreationSubmit } from './userProfileCharacterCreationSubmit'
+export { default as userProfileCharacterUpdateSubmit } from './userProfileCharacterUpdateSubmit'

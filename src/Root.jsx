@@ -16,12 +16,20 @@ import Profile from './router/routes/profile/Index'
 import ProfileOverview from './router/routes/profile/overview/Index'
 import ProfileConfiguration from './router/routes/profile/configuration/Index'
 import ProfileCharacters from './router/routes/profile/characters/Index'
+import ProfileCharactersCreate from './router/routes/profile/characters/Create'
+import ProfileCharactersUpdate from './router/routes/profile/characters/Update'
 import ProfileAffiliated from './router/routes/profile/affiliated/Index'
 import ProfileImages from './router/routes/profile/images/Index'
 import ProfileVideos from './router/routes/profile/videos/Index'
 
 import { sessionLoader } from 'router/loaders'
-import { userConfigurationSubmit, userLogin, userRegister } from "router/actions"
+import {
+    userConfigurationSubmit,
+    userLogin,
+    userRegister,
+    userProfileCharacterCreationSubmit,
+    userProfileCharacterUpdateSubmit,
+} from "router/actions"
 
 import ROUTES from 'router/routes'
 
@@ -97,7 +105,28 @@ const router = createBrowserRouter([
                             },
                             {
                                 path: ROUTES.USER_PROFILE_CHARACTERS.path,
-                                element: <ProfileCharacters />,
+                                children: [
+                                    {
+                                        index: true,
+                                        element: <ProfileCharacters />,
+                                    },
+                                    {
+                                        path: ROUTES.USER_PROFILE_CHARACTERS_CREATE.path,
+                                        element: <ProfileCharactersCreate />,
+                                    },
+                                    {
+                                        path: ROUTES.USER_PROFILE_CHARACTERS_CREATE_SUBMIT.path,
+                                        action: userProfileCharacterCreationSubmit,
+                                    },
+                                    {
+                                        path: ROUTES.USER_PROFILE_CHARACTERS_CREATE.path,
+                                        element: <ProfileCharactersUpdate />,
+                                    },
+                                    {
+                                        path: ROUTES.USER_PROFILE_CHARACTERS_UPDATE_SUBMIT.path,
+                                        action: userProfileCharacterUpdateSubmit,
+                                    },
+                                ],
                             },
                             {
                                 path: ROUTES.USER_PROFILE_AFFILIATED.path,
