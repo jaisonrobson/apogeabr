@@ -4,6 +4,7 @@ import { useRouteLoaderData } from 'react-router-dom'
 import {
     Row,
     CharacterBoard,
+    CreateCharacterButton,
 } from 'components'
 
 const Characters = () => {
@@ -20,6 +21,8 @@ const Characters = () => {
             <CharacterBoard />
 
             <CharacterBoard />
+
+            <CreateCharacterButton />
         </Row>
     )
 }

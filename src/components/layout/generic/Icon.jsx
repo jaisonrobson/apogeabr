@@ -4,13 +4,30 @@ import styled from 'styled-components'
 import { faAngry } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const StyledIcon = styled(({ paddingTop, marginTop, color, opacity, onHover = false, animation, textShadow, ...props }) => <FontAwesomeIcon {...props} />)`
+const StyledIcon = styled(({
+    paddingTop,
+    marginTop,
+    marginBottom,
+    marginRight,
+    color,
+    opacity,
+    onHover = false,
+    animation,
+    textShadow,
+    width,
+    height,    
+    ...props
+}) => <FontAwesomeIcon {...props} />)`
     ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ''}
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ''}
+    ${({ marginBottom }) => marginBottom ? `margin-bottom: ${marginBottom};` : ''}
+    ${({ marginRight }) => marginRight ? `margin-right: ${marginRight};` : ''}
 
     ${({ opacity }) => opacity ? `opacity: ${opacity};` : ''}
     ${({ color }) => color ? `color: ${color};` : ''}
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''}
+    ${({ width }) => width ? `width: ${width};` : ''}
+    ${({ height }) => height ? `height: ${height};` : ''}
     
     ${({ onHover }) => onHover ? `&:hover {
         ${onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``}

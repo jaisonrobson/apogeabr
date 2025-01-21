@@ -26,7 +26,7 @@ const Top = () => {
             {({ isShow }) => (
                 <StoneTabletBoard
                     width="100%"
-                    height="100%"                    
+                    height="100%"
                     cutPieces={[0, 1, 2]}
                 >
                     <Nav navbar className="justify-content-center">
