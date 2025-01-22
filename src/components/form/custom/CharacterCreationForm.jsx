@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import * as z from 'zod'
+import _ from 'lodash'
 
 import ROUTES from 'router/routes'
 
@@ -12,15 +13,18 @@ import { characterNumberValidation, characterNameValidation, userImageValidation
 
 const characterCreationValidationSchema = z.object({
     name: characterNameValidation,
-    image: userImageValidation.optional(),
+    image: userImageValidation.nullable(),
     creation_date: z.string()
         .refine(date => {
+            if (_.isEmpty(date))
+                return true
+
             const newDate = new Date(date)
 
             return !isNaN(newDate.getDate()) && newDate < new Date()
         }, { message: "A data deve ser valida e estar no passado." })
         .optional(),
-    classtype: characterNumberValidation,
+    classtype: z.number().min(0, "Valor minimo deve ser 0").max(999999, "Valor maximo atingido"),
     level: characterNumberValidation,
     health: characterNumberValidation,
     mana: characterNumberValidation,
