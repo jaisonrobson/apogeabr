@@ -10,6 +10,8 @@ const action = async ({ request }) => {
     const user_id = form.get('user_id')
 
     const requestValues = _.omit(Object.fromEntries(form.entries()), 'user_id')
+
+    console.log(requestValues)
     
     const payload = { user: requestValues }
 

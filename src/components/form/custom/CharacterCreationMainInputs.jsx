@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import { FormattedInput } from 'components'
 
-const CharacterCreationMainInputs = ({ register, errors, backendErrors, ...props }) => (
+const CharacterCreationMainInputs = ({ register, errors, backendErrors, setValue, ...props }) => (
     <Fragment>
         <FormattedInput
             register={register}
@@ -23,8 +23,11 @@ const CharacterCreationMainInputs = ({ register, errors, backendErrors, ...props
 
         <FormattedInput
             register={register}
+            setValue={setValue}
             name="classtype"
             label="Classe:"
+            type="dropdown"
+            options={["Escudeiro", "Cavaleiro", "Arqueiro", "Mago"]}
             errorMessage={errors?.classtype?.message}
             fontFamily="arial"
         />

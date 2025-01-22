@@ -79,7 +79,7 @@ const CharactersCreate = () => {
                                 alignItems="flex-end"
                                 className="unselectable"
                             >
-                                <CharacterCreationMainInputs register={register} errors={errors} backendErrors={backendErrors} />
+                                <CharacterCreationMainInputs register={register} errors={errors} setValue={setValue} backendErrors={backendErrors} />
                             </Container>
                         </StoneTabletTwoBoard>
                     </Col>
