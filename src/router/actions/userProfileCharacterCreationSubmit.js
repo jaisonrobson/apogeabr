@@ -7,17 +7,14 @@ import ROUTES from 'router/routes'
 const action = async ({ request }) => {
     const form = await request.formData()
 
-    const user_id = form.get('user_id')
-
-    const requestValues = _.omit(Object.fromEntries(form.entries()), 'user_id')
-
-    console.log(requestValues)
+    const requestValues = Object.fromEntries(form.entries())
     
-    const payload = { user: requestValues }
+    const payload = { character: requestValues }
+
+    console.log(payload)
 
     try {
-        /*
-        const response = await axios.put(`${[process.env.REACT_APP_BACKEND_HOST]}/users/${user_id}`, payload, {
+        const response = await axios.post(`${[process.env.REACT_APP_BACKEND_HOST]}/characters`, payload, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -25,12 +22,11 @@ const action = async ({ request }) => {
         })
         
 
-        return redirect(`${ROUTES.USER_PROFILE_CONFIGURATION.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
-        */
+        return redirect(`${ROUTES.USER_PROFILE_CHARACTERS.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
     } catch (error) {
         const resultingError = error?.response?.data || { message: error.message }
 
-        // return redirect(`${ROUTES.USER_PROFILE_CONFIGURATION.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
+        return redirect(`${ROUTES.USER_PROFILE_CHARACTERS_CREATE.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
     }
 }
 

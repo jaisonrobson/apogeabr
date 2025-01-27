@@ -82,7 +82,8 @@ const CharacterCreationForm = ({ children, ...props }) => (
             'range',
             'armor',
             'defense',
-            'capacity'
+            'capacity',
+            'image'
         ]}
         validationSchema={characterCreationValidationSchema}
         action={ROUTES.USER_PROFILE_CHARACTERS_CREATE_SUBMIT.path}

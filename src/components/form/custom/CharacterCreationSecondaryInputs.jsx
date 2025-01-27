@@ -107,7 +107,7 @@ const CharacterCreationSecondaryInputs = ({ register, errors, backendErrors, ...
         <FormattedInput
             register={register}
             name="armor"
-            label="Nível:"
+            label="Armadura:"
             errorMessage={errors?.armor?.message}
             type="number"
             fontFamily="arial"
