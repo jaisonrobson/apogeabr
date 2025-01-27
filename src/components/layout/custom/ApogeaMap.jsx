@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { Map } from 'components'
+import { MapCanvas } from 'components'
 
 import ApogeaMapImage from 'images/layout/map/apogeamap.png'
 import ApogeaMapOceanImage from 'images/layout/map/apogeamapocean.png'
 
 const ApogeaMap = (props) => (
-    <Map
+    <MapCanvas
         mapImage={ApogeaMapImage}
         mapBackgroundImage={ApogeaMapOceanImage}
         {...props}

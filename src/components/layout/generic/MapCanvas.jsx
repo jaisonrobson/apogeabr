@@ -5,7 +5,7 @@ import {
     ImageOverlay
 } from 'react-leaflet'
 
-const Map = ({ mapBackgroundImage, mapImage, contentProps, ...props }) => (
+const MapCanvas = ({ mapBackgroundImage, mapImage, contentProps, ...props }) => (
     <MapContainer
         center={[500, 625]}
         scrollWheelZoom={true}
@@ -27,4 +27,4 @@ const Map = ({ mapBackgroundImage, mapImage, contentProps, ...props }) => (
     </MapContainer>
 )
 
-export default Map
+export default MapCanvas

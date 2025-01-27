@@ -6,7 +6,7 @@ import NotFound from './router/routes/404/Index'
 import Landing from './router/routes/landing/Index'
 import News from './router/routes/news/Index'
 import Library from './router/routes/library/Index'
-import Map from './router/routes/map/Index'
+import MapPage from './router/routes/map/Index'
 import About from './router/routes/about/Index'
 import HelpUs from './router/routes/helpus/Index'
 import HallOfFame from './router/routes/halloffame/Index'
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
             },
             {
                 path: ROUTES.MAP.path,
-                element: <Map />,
+                element: <MapPage />,
             },
             {
                 path: ROUTES.ABOUT.path,
