@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import React, { useContext, Fragment } from 'react'
+import { faPenToSquare, faTrashCan, faCertificate, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import ROUTES from 'router/routes'
 
@@ -54,7 +54,7 @@ const getIconByClassNickname = (iconNickname) => {
     }
 }
 
-const CharacterPortrait = ({ image, ...props }) => (
+const CharacterPortrait = ({ image, isVerified, ...props }) => (
     <Row {...props}>
         <Col
             backgroundImage={`url(${CharacterPortraitImage})`}
@@ -70,6 +70,24 @@ const CharacterPortrait = ({ image, ...props }) => (
             alignItems="center"
         >
             <Image src={image} width="125px" borderRadius="300px" marginBottom="15px" marginRight="4px" />
+
+            {
+                isVerified
+                    ? (
+                        <Fragment>
+                            <Icon icon={faCertificate} width="30px" height="30px" color="lightgreen" style={{ position: 'absolute', marginLeft: '8rem', marginTop: '8rem' }} />
+
+                            <Icon icon={faCheck} width="20px" height="20px" color="green" style={{ position: 'absolute', marginLeft: '8rem', marginTop: '8rem' }} />
+                        </Fragment>
+                    )
+                    : (
+                        <Fragment>
+                            <Icon icon={faCertificate} width="30px" height="30px" color="#EE9C9C" style={{ position: 'absolute', marginLeft: '8rem', marginTop: '8rem' }} />
+
+                            <Icon icon={faXmark} width="20px" height="20px" color="red" style={{ position: 'absolute', marginLeft: '8rem', marginTop: '8rem' }} />
+                        </Fragment>
+                    )
+            }
         </Col>
     </Row>
 )
@@ -117,6 +135,7 @@ const CharacterBoard = ({
         defense: 0,
         capacity: 0,
         classNickname: 'Squire',
+        isVerified: false,
     },
 }) => {
     const { isOpen, setIsOpen } = useContext(FlagContext)
@@ -154,6 +173,7 @@ const CharacterBoard = ({
                         }
                     }}
                     opacity="1"
+                    isVerified={characterInfo.isVerified}
                 />
 
                 <Collapse.Content width="100%">

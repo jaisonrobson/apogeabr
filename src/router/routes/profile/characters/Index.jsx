@@ -1,6 +1,8 @@
 import React from 'react'
 import { useRouteLoaderData } from 'react-router-dom'
 
+import { getClassNicknameByNumber } from 'util/characterClasses'
+
 import {
     Row,
     CharacterBoard,
@@ -9,18 +11,37 @@ import {
 
 const Characters = () => {
     const { user } = useRouteLoaderData("root")
-    
+    const { characters } = useRouteLoaderData("characters")
+
     return (
         <Row justifyContent="center">
-            <CharacterBoard />
-
-            <CharacterBoard />
-
-            <CharacterBoard />
-
-            <CharacterBoard />
-
-            <CharacterBoard />
+            {
+                characters.map(character => (
+                    <CharacterBoard
+                        key={character.id}
+                        characterInfo={{
+                            image: character.image_url,
+                            name: character.name,
+                            level: character.level,
+                            health: character.health,
+                            mana: character.mana,
+                            magic: character.magic,
+                            damage: character.damage,
+                            moveSpeed: character.movespeed,
+                            weaponSkill: character.weapon_skill,
+                            attackSpeed: character.attack_speed,
+                            hpRegen: character.hp_regen,
+                            mpRegen: character.mp_regen,
+                            range: character.range,
+                            armor: character.armor,
+                            defense: character.defense,
+                            capacity: character.capacity,
+                            classNickname: getClassNicknameByNumber(character.classtype),
+                            isVerified: character.unique_validation_code.is_verified,
+                        }}
+                    />
+                ))
+            }
 
             <CreateCharacterButton />
         </Row>

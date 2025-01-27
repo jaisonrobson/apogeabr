@@ -11,8 +11,6 @@ const action = async ({ request }) => {
     
     const payload = { character: requestValues }
 
-    console.log(payload)
-
     try {
         const response = await axios.post(`${[process.env.REACT_APP_BACKEND_HOST]}/characters`, payload, {
             headers: {

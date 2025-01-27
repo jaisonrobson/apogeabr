@@ -22,7 +22,11 @@ import ProfileAffiliated from './router/routes/profile/affiliated/Index'
 import ProfileImages from './router/routes/profile/images/Index'
 import ProfileVideos from './router/routes/profile/videos/Index'
 
-import { sessionLoader } from 'router/loaders'
+import {
+    sessionLoader,
+    charactersLoader,
+} from 'router/loaders'
+
 import {
     userConfigurationSubmit,
     userLogin,
@@ -43,7 +47,7 @@ const router = createBrowserRouter([
         loader: sessionLoader,        
         id: "root",
         errorElement: <ErrorBoundary />,
-        children: [            
+        children: [
             {
                 index: true,
                 element: <Landing />,
@@ -105,6 +109,8 @@ const router = createBrowserRouter([
                             },
                             {
                                 path: ROUTES.USER_PROFILE_CHARACTERS.path,
+                                loader: charactersLoader,
+                                id: "characters",
                                 children: [
                                     {
                                         index: true,

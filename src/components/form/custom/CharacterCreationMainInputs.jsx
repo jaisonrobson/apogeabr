@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react'
 
+import { CLASSES_NICKNAMES } from 'util/characterClasses'
+
 import { FormattedInput } from 'components'
 
 const CharacterCreationMainInputs = ({ register, errors, backendErrors, setValue, ...props }) => (
@@ -27,7 +29,7 @@ const CharacterCreationMainInputs = ({ register, errors, backendErrors, setValue
             name="classtype"
             label="Classe:"
             type="dropdown"
-            options={["Escudeiro", "Cavaleiro", "Arqueiro", "Mago"]}
+            options={CLASSES_NICKNAMES}
             errorMessage={errors?.classtype?.message}
             fontFamily="arial"
         />
