@@ -25,6 +25,8 @@ import SquireClassStatusImage from 'images/layout/generic/icons/squire_class.png
 import CharacterPortraitImage from 'images/layout/profile/characters/character_portrait.jpg'
 import NoAvatar from 'images/layout/user/userNoAvatar.png'
 
+import { CLASSES_NICKNAMES } from 'util/characterClasses'
+
 import { withFlagContext, FlagContext } from 'contexts'
 
 import {
@@ -38,16 +40,16 @@ import {
     HoverableButton,
 } from 'components'
 
-const getIconByClassNickname = (iconNickname) => {
-    switch (iconNickname) {
-        case "Knight":
+const getIconByClasstype = (classtype) => {
+    switch (classtype) {
+        case 1:
             return KnightClassStatusImage
 
-        case "Mage":
-            return MageClassStatusImage
-
-        case "Rogue":
+        case 2:
             return RogueClassStatusImage
+
+        case 3:
+            return MageClassStatusImage
     
         default:
             return SquireClassStatusImage
@@ -135,6 +137,7 @@ const CharacterBoard = ({
         defense: 0,
         capacity: 0,
         classNickname: 'Squire',
+        classtype: 0,
         isVerified: false,
     },
 }) => {
@@ -282,7 +285,7 @@ const CharacterBoard = ({
 
                                     <Row>
                                         <Col>
-                                            <Image width="20px" height="20px" src={getIconByClassNickname(characterInfo.classNickname)} />
+                                            <Image width="20px" height="20px" src={getIconByClasstype(characterInfo.classtype)} />
                                         </Col>
                                     </Row>
                                 </Col>

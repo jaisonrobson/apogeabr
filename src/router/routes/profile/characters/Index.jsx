@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouteLoaderData } from 'react-router-dom'
+import _ from 'lodash'
 
 import { getClassNicknameByNumber } from 'util/characterClasses'
 
@@ -21,7 +22,10 @@ const Characters = () => {
                         key={character.id}
                         characterInfo={{
                             image: character.image_url,
-                            name: character.name,
+                            name: _.truncate(character.name, {
+                                length: 10,
+                                omission: '...'
+                              }),
                             level: character.level,
                             health: character.health,
                             mana: character.mana,
@@ -36,7 +40,11 @@ const Characters = () => {
                             armor: character.armor,
                             defense: character.defense,
                             capacity: character.capacity,
-                            classNickname: getClassNicknameByNumber(character.classtype),
+                            classNickname: _.truncate(getClassNicknameByNumber(character.classtype), {
+                                length: 8,
+                                omission: '...'
+                              }),
+                            classtype: character.classtype,
                             isVerified: character.unique_validation_code.is_verified,
                         }}
                     />
