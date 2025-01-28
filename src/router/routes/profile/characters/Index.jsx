@@ -21,6 +21,7 @@ const Characters = () => {
                     <CharacterBoard
                         key={character.id}
                         characterInfo={{
+                            id: character.id,
                             image: character.image_url,
                             name: _.truncate(character.name, {
                                 length: 10,

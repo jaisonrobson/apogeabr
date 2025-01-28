@@ -5,7 +5,7 @@ import {
     CharacterCreationForm,
     ImageInput,
     CharacterCreationMainInputs,
-    CharacterCreationSecondaryInputs,
+    CharacterPersistanceSecondaryInputs,
     StoneTabletTwoBoard,
     Container,
     Row,
@@ -101,7 +101,7 @@ const CharactersCreate = () => {
                                 alignItems="flex-end"
                                 className="unselectable"
                             >
-                                <CharacterCreationSecondaryInputs register={register} errors={errors} backendErrors={backendErrors} />
+                                <CharacterPersistanceSecondaryInputs register={register} errors={errors} backendErrors={backendErrors} />
                             </Container>
                         </StoneTabletTwoBoard>
                     </Col>

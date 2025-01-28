@@ -4,7 +4,7 @@ import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
 import { FormattedInput } from 'components'
 
-const ImageInput = ({ register, setValue, errors, backendErrors, ...props }) => (
+const ImageInput = ({ register, setValue, errors, backendErrors, defaultImage = userNoAvatarImage, ...props }) => (
     <FormattedInput
         register={register}
         setValue={setValue}
@@ -12,7 +12,7 @@ const ImageInput = ({ register, setValue, errors, backendErrors, ...props }) => 
         errorMessage={errors?.image?.message}
         fontFamily="arial"
         type="image"
-        defaultImage={userNoAvatarImage}
+        defaultImage={defaultImage}
         imageProps={{
             className: "rounded-circle",
             objectFit: "contain",

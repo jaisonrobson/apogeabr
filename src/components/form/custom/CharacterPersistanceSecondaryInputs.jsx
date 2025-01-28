@@ -3,7 +3,7 @@ import { useRouteLoaderData } from 'react-router-dom'
 
 import { FormattedInput } from 'components'
 
-const CharacterCreationSecondaryInputs = ({ register, errors, backendErrors, ...props }) => (
+const CharacterPersistanceSecondaryInputs = ({ register, errors, backendErrors, ...props }) => (
     <Fragment>
         <FormattedInput
             register={register}
@@ -134,4 +134,4 @@ const CharacterCreationSecondaryInputs = ({ register, errors, backendErrors, ...
     </Fragment>
 )
 
-export default CharacterCreationSecondaryInputs
+export default CharacterPersistanceSecondaryInputs

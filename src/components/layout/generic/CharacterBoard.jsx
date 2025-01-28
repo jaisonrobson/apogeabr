@@ -94,7 +94,7 @@ const CharacterPortrait = ({ image, isVerified, ...props }) => (
     </Row>
 )
 
-const CharacterOptions = ({ image }) => (
+const CharacterOptions = ({ characterId }) => (
     <Row justifyContent="center">
         <Col
             minHeight="50px"
@@ -107,7 +107,7 @@ const CharacterOptions = ({ image }) => (
             alignItems="center"
             gap="15px"
         >
-            <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_UPDATE.path} navigationOptions={{ replace: true, state: { id: 999 } }}>
+            <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_UPDATE.path} navigationOptions={{ replace: true, state: { characterId } }}>
                 <Icon icon={faPenToSquare} />
             </HoverableButton>
 
@@ -120,6 +120,7 @@ const CharacterOptions = ({ image }) => (
 
 const CharacterBoard = ({
     characterInfo = {
+        id: -1,
         image: NoAvatar,
         name: 'Character',
         level: 0,
@@ -180,7 +181,7 @@ const CharacterBoard = ({
                 />
 
                 <Collapse.Content width="100%">
-                    <CharacterOptions />
+                    <CharacterOptions characterId={characterInfo.id} />
 
                     <Row padding="10px 0px" transition="0.5s">
                         <StoneTabletFourBoard padding="0px 24px" minWidth="250px" transition="0.5s">
