@@ -67,7 +67,8 @@ const CharacterUpdateForm = ({ children, characterId, ...props }) => {
                 'armor',
                 'defense',
                 'capacity',
-                'image'
+                'image',
+                'character_id'
             ]}
             enforceProperties={['character_id']}
             validationSchema={characterUpdateValidationSchema}

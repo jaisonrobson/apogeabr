@@ -22,8 +22,6 @@ const CharactersUpdate = () => {
     const destructureCharacterDefaultValues = () => {
         const values = actualUpdatingCharacter()
 
-        console.log(values)
-
         let result = _.pick(
             values,
             [
@@ -46,7 +44,7 @@ const CharactersUpdate = () => {
 
         result = _.mapValues(result, value => value.toString())
 
-        return { ...result, image: values.image_url }
+        return { ...result, image: null }
     }
     
     return (
