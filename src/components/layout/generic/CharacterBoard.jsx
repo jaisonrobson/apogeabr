@@ -1,4 +1,6 @@
 import React, { useContext, Fragment } from 'react'
+import { redirect } from 'react-router-dom'
+import axios from 'axios'
 import { faPenToSquare, faTrashCan, faCertificate, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import ROUTES from 'router/routes'
@@ -38,6 +40,8 @@ import {
     Image,
     Collapse,
     HoverableButton,
+    Modal,
+    Button,
 } from 'components'
 
 const getIconByClasstype = (classtype) => {
@@ -94,29 +98,74 @@ const CharacterPortrait = ({ image, isVerified, ...props }) => (
     </Row>
 )
 
-const CharacterOptions = ({ characterId }) => (
-    <Row justifyContent="center">
-        <Col
-            minHeight="50px"
-            maxHeight="50px"
-            minWidth="200px"
-            maxWidth="200px"
-            display="flex"
-            flexDirection="row"
-            justifyContent="center"
-            alignItems="center"
-            gap="15px"
-        >
-            <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_UPDATE.path} navigationOptions={{ replace: true, state: { characterId } }}>
-                <Icon icon={faPenToSquare} />
-            </HoverableButton>
-
-            <HoverableButton>
-                <Icon icon={faTrashCan} />
-            </HoverableButton>
-        </Col>
-    </Row>
+const CharacterDeleteButton = (props) => (
+    <HoverableButton {...props}>
+        <Icon icon={faTrashCan} />
+    </HoverableButton>
 )
+
+const CharacterOptions = ({ characterId }) => {
+    const onDelete = async () => {
+        try {
+            const response = await axios.delete(`${[process.env.REACT_APP_BACKEND_HOST]}/characters/${characterId}`, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                }
+            })
+
+            redirect(`${ROUTES.USER_PROFILE_CHARACTERS.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
+
+            return window.location.reload()
+        } catch (error) {
+            const resultingError = error?.response?.data || { message: error.message }
+
+            redirect(`${ROUTES.USER_PROFILE_CHARACTERS.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
+
+            return window.location.reload()
+        }
+    }
+
+    return (
+        <Row justifyContent="center">
+            <Col
+                minHeight="50px"
+                maxHeight="50px"
+                minWidth="200px"
+                maxWidth="200px"
+                display="flex"
+                flexDirection="row"
+                justifyContent="center"
+                alignItems="center"
+                gap="15px"
+            >
+                <HoverableButton to={ROUTES.USER_PROFILE_CHARACTERS_UPDATE.path} navigationOptions={{ replace: true, state: { characterId } }}>
+                    <Icon icon={faPenToSquare} />
+                </HoverableButton>
+
+                <Modal ButtonComponent={CharacterDeleteButton}>
+                    {({ isOpen, toggle }) => (
+                        <Fragment>
+                            <Modal.Body>
+                                <Span fontFamily="Arial" fontSize="15px">
+                                    Voce deseja realmente remover o personagem?
+
+                                    Esta ação é irreversível e você terá que validar o personagem novamente caso voce o recrie.
+                                </Span>
+                            </Modal.Body>
+
+                            <Modal.Footer>
+                                <Button onClick={onDelete}>Sim</Button>
+
+                                <Button onClick={toggle}>Não</Button>
+                            </Modal.Footer>
+                        </Fragment>
+                    )}
+                </Modal>
+            </Col>
+        </Row>
+    )
+}
 
 const CharacterBoard = ({
     characterInfo = {

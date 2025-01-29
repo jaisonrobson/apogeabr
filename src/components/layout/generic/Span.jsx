@@ -8,6 +8,8 @@ const StyledSpan = styled(({
     marginBottom,
     margin,
     padding,
+    fontFamily,
+    fontSize,
     ...props
 }) => <span {...props} />)`
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ''}
@@ -16,6 +18,8 @@ const StyledSpan = styled(({
     ${({ marginBottom }) => marginBottom ? `margin-bottom: ${marginBottom};` : ''}
     ${({ margin }) => margin ? `margin: ${margin};` : ''}
     ${({ padding }) => padding ? `padding: ${padding};` : ''}
+    ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ''}
+    ${({ fontSize }) => fontSize ? `font-size: ${fontSize};` : ''}
 `
 
 const Span = (props) => <StyledSpan {...props} />
