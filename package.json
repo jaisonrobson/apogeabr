@@ -7,6 +7,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@hookform/resolvers": "^3.9.1",
+    "@mercadopago/sdk-react": "^0.0.23",
     "@mui/icons-material": "^6.2.0",
     "@mui/material": "^6.2.1",
     "@mui/styles": "^6.2.0",
