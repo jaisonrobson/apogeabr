@@ -1,10 +1,10 @@
 import React, { useState, Fragment } from "react"
 import axios from "axios"
-import _, { set } from 'lodash'
+import _ from 'lodash'
 
 import { Button, Span } from 'components'
 
-const SubscriptionButton = () => {
+const AffiliatedSubscriptionButton = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
@@ -35,7 +35,22 @@ const SubscriptionButton = () => {
 
   return (
     <Fragment>
-      <Button onClick={handleSubscription} disabled={loading}>
+      <Button
+        onClick={handleSubscription} disabled={loading}
+        width="400px"
+        color="#543728"
+        backgroundColor='#FFFFFF20'
+        border='2px solid #B97A5740'
+        onHover={{
+            animation: {
+                property: 'loginButtonAnimation 0.5s linear 0s infinite alternate',
+                corpse: `@keyframes loginButtonAnimation {
+                    0%  {transform: scale3d(1,1,1);}
+                    100%  {transform: scale3d(1.03,1.03,1.03); background-color: #FCA67750; border-radius: 8px}
+                }`
+            }
+        }}
+      >
         {loading ? "Processando..." : "Assinar"}
       </Button>
 
@@ -44,4 +59,4 @@ const SubscriptionButton = () => {
   )
 }
 
-export default SubscriptionButton
+export default AffiliatedSubscriptionButton

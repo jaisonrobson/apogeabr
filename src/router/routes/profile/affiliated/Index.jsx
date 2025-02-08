@@ -3,9 +3,9 @@ import { useLocation } from 'react-router'
 import axios from "axios"
 
 import {
-    StoneTabletBoard,
+    StoneTabletTwoBoard,
     Container,
-    AffiliatedSubscriptionButton,
+    AffiliatedSubscriptionCard,
     Row,
     Col,
     Span,
@@ -36,12 +36,12 @@ const Affiliated = () => {
             }
         }
 
-        if (preApprovalIdParam !== "")
+        if (preApprovalIdParam)
             checkLastSubscription()
     }, [preApprovalIdParam])
 
     return (
-        <StoneTabletBoard>
+        <StoneTabletTwoBoard>
             <Container
                 display="flex"
                 flexDirection="column"
@@ -49,15 +49,27 @@ const Affiliated = () => {
                 alignItems="center"
                 className="unselectable"
             >
-                <Row>
-                    <Col>
-                        <AffiliatedSubscriptionButton />
+                <Row width="100%" gap="2rem">
+                    <Col
+                        display="flex"
+                        alignItems='center'
+                        justifyContent='center'
+                    >
+                        <AffiliatedSubscriptionCard />
                     </Col>
-                    <Col>
-                    
+                    <Col
+                        display="flex"
+                        alignItems='center'
+                        justifyContent='center'
+                    >
+                        <AffiliatedSubscriptionCard />
                     </Col>
-                    <Col>
-                    
+                    <Col
+                        display="flex"
+                        alignItems='center'
+                        justifyContent='center'
+                    >
+                        <AffiliatedSubscriptionCard />
                     </Col>
                 </Row>
                 <Row>
@@ -71,7 +83,7 @@ const Affiliated = () => {
                     </Col>
                 </Row>
             </Container>
-        </StoneTabletBoard>
+        </StoneTabletTwoBoard>
     )
 }
 

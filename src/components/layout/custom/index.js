@@ -24,6 +24,7 @@ export { default as StoneTabletSidebar } from "./StoneTabletSidebar"
 export { default as CollapsibleSidebar } from "./CollapsibleSidebar"
 export { default as HoverableButton } from "./HoverableButton"
 export { default as CreateCharacterButton } from "./CreateCharacterButton"
+export { default as AffiliatedSubscriptionCard } from "./AffiliatedSubscriptionCard"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"
