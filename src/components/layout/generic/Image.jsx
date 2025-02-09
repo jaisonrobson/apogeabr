@@ -29,6 +29,7 @@ const StyledImage = styled(({
     flexGrow,
     opacity,
     cursor,
+    maskImage,
     innerRef,
     onHover = false,
     animation = false,
@@ -61,6 +62,7 @@ const StyledImage = styled(({
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
     ${({ opacity }) => opacity ? `opacity: ${opacity};` : ``}
     ${({ cursor }) => cursor ? `cursor: ${cursor};` : ``}
+    ${({ maskImage }) => maskImage ? `mask-image: ${maskImage};` : ``}
 
     ${({ onHover }) => onHover ? `&:hover {
         ${onHover?.opacity ? `opacity: ${onHover?.opacity};` : ``}

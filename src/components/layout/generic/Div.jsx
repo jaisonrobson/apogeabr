@@ -28,6 +28,7 @@ const StyledDiv = styled(({
     backgroundImage,
     backgroundRepeat,
     backgroundSize,
+    backgroundPosition,
     textAlign,
     position,
     zIndex,
@@ -37,7 +38,11 @@ const StyledDiv = styled(({
     bottom,
     overflowX,
     transition,
+    maskImage,
+    maskSize,
+    animation,
     innerRef,
+    onHover = false,
     ...props
 }) => <div ref={innerRef} {...props}/>)`
     ${({ display }) => display ? `display: ${display};` : ``}
@@ -65,10 +70,12 @@ const StyledDiv = styled(({
     ${({ minHeight }) => minHeight ? `min-height: ${minHeight};` : ``}
     ${({ maxHeight }) => maxHeight ? `max-height: ${maxHeight};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
+    ${({ background }) => background ? `background: ${background};` : ``}
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
     ${({ backgroundImage }) => backgroundImage ? `background-image: ${backgroundImage};` : ``}
     ${({ backgroundRepeat }) => backgroundRepeat ? `background-repeat: ${backgroundRepeat};` : ``}
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
+    ${({ backgroundPosition }) => backgroundPosition ? `background-position: ${backgroundPosition};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
     ${({ position }) => position ? `position: ${position};` : ``}
     ${({ zIndex }) => zIndex ? `z-index: ${zIndex};` : ``}
@@ -81,6 +88,27 @@ const StyledDiv = styled(({
     ${({ overflowX }) => overflowX ? `overflow-x: ${overflowX};` : ``}
 
     ${({ transition }) => transition ? `transition: ${transition};` : ``}
+    ${({ maskImage }) => maskImage ? `mask-image: ${maskImage};` : ``}
+    ${({ maskSize }) => maskSize ? `mask-size: ${maskSize};` : ``}
+
+    ${({ onHover }) => onHover ? `&:hover {
+        ${onHover?.opacity ? `opacity: ${onHover?.opacity};` : ``}
+        ${onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``}
+        ${onHover?.color ? `color: ${onHover?.color};` : ``}
+        ${onHover?.border ? `border: ${onHover?.border};` : ``}
+        ${onHover?.borderBottom ? `border-bottom: ${onHover?.borderBottom};` : ``}
+        ${onHover?.borderTop ? `border-top: ${onHover?.borderTop};` : ``}
+        ${onHover?.borderLeft ? `border-left: ${onHover?.borderLeft};` : ``}
+        ${onHover?.borderRight ? `border-right: ${onHover?.borderRight};` : ``}
+        ${onHover?.boxShadow ? `box-shadow: ${onHover?.boxShadow};` : ``}
+        ${onHover?.height ? `height: ${onHover?.height};` : ``}
+        ${onHover?.width ? `width: ${onHover?.width};` : ``}
+        ${onHover?.padding ? `padding: ${onHover?.padding};` : ``}
+        ${onHover?.margin ? `margin: ${onHover?.margin};` : ``}
+        ${onHover?.animation ? `animation: ${onHover?.animation?.property}; ${onHover?.animation?.corpse}` : ``}
+    };`: ``}
+
+    ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 const Div = forwardRef((props, ref) => <StyledDiv innerRef={ref} {...props} />)
 

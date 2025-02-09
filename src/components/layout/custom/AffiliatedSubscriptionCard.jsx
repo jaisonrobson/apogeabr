@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react"
+import _ from 'lodash'
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 
 import {
@@ -7,10 +8,29 @@ import {
     Card,
     ListGroup,
     Image,
+    Div,
     AffiliatedSubscriptionButton,    
 } from 'components'
 
-const AffiliatedSubscriptionCard = (props) => {
+const AffiliatedSubscriptionCard = ({
+    level="level_one",
+    cardItems=["Item 1", "Item 2", "Item 3"],
+    cardTitle="Titulo",
+    cardSubtitle="Subtitulo",
+    cardImageBackground="linear-gradient(-45deg, #B97A5750, #8F5E4350, #DE926850)",
+    cardBackground="linear-gradient(-45deg, #B97A57, #8F5E43, #DE9268)",
+    cardColor="white",
+    cardBorder="1px solid #B97A5770",
+    listGroupBorderColor="#D18A62",
+    listGroupBackgroundColor="#B97A5770",
+    listGroupColorVariantOne="#B97A5740",
+    listGroupColorVariantTwo="#B97A5720",
+    buttonColor="#543728",
+    buttonBackgroundColor="#FFFFFF20",
+    buttonHoverBackgroundColor="#FCA67750",
+    buttonBorder="2px solid #B97A5740",
+    image=null,
+}) => {
     const x = useMotionValue(0)
     const y = useMotionValue(0)
     const mouseXSpring = useSpring(x)
@@ -48,44 +68,73 @@ const AffiliatedSubscriptionCard = (props) => {
         >
             <Card
                 width='18rem'
-                background="linear-gradient(-45deg, #B97A57, #8F5E43, #DE9268)"
+                background={cardBackground}
                 backgroundSize="400% 400%"
-                color='white'
+                color={cardColor}
                 borderRadius='5px'
-                border="1px solid #B97A5770"
+                border={cardBorder}
                 animation={{
-                    property: 'subscriptionCardAnimation 5s ease infinite',
-                    corpse: `@keyframes subscriptionCardAnimation {
+                    property: `subscriptionCardAnimation_${level} 5s ease infinite`,
+                    corpse: `@keyframes subscriptionCardAnimation_${level} {
                         0% { background-position: 0% 25%; }
                         50% { background-position: 100% 100%; }
                         100% { background-position: 0% 25%; }
                     }`
                 }}
                 style={{ transform: "translateZ(-50px)", transformStyle: "preserve-3d" }}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
             >
-                {/* <Image /> */}
+                {image ? (
+                    <Div
+                        width="200px"
+                        height="200px"
+                        backgroundImage={`${cardImageBackground}, url(${image})`}
+                        backgroundSize="400%, 100%"
+                        backgroundRepeat="none, none"
+                        backgroundPosition="center, center"
+                        maskImage={`url(${image})`}
+                        maskSize="100%"
+                        animation={{
+                            property: `subscriptionCardInternalAnimation_${level} 4s ease infinite`,
+                            corpse: `@keyframes subscriptionCardInternalAnimation_${level} {
+                                0% { background-position: 0% 25%; }
+                                50% { background-position: 100% 100%; }
+                                100% { background-position: 0% 25%; }
+                            }`
+                        }}
+                        style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }}
+                    />
+                ): null}
 
                 <Card.Body>
-                    <Card.Title tag="h5">
-                        Titulo do card
+                    <Card.Title tag="h5" style={{ textAlign: "center" }}>
+                        <Span>{cardTitle}</Span>
                     </Card.Title>
-                    <Card.Text>
-                        Descricao do card
+
+                    <Card.Text style={{ textAlign: "center" }}>
+                        <Span>{cardSubtitle}</Span>
                     </Card.Text>
                 </Card.Body>
-                <ListGroup flush style={{ backgroundColor: '#B97A5770', borderTop: '1px solid #D18A62', borderBottom: '1px solid #D18A62', borderLeft:"0px", borderRight: '0px' }}>
-                    <ListGroup.Item style={{ backgroundColor: '#B97A5740', color:'white', borderBottom: '1px solid #D18A62' }}>
-                        Item 1
-                    </ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: '#B97A5720', color:'white', borderBottom: '1px solid #D18A62' }}>
-                        Item 2
-                    </ListGroup.Item>
-                    <ListGroup.Item style={{ backgroundColor: '#B97A5740', color:'white' }}>
-                        Item 3
-                    </ListGroup.Item>
+
+                <ListGroup flush style={{ backgroundColor: listGroupBackgroundColor, borderTop: `1px solid ${listGroupBorderColor}`, borderBottom: `1px solid ${listGroupBorderColor}`, borderLeft:"0px", borderRight: '0px', width: "100%" }}>
+                    {_.map(cardItems, (item, idx) => (
+                        <ListGroup.Item key={item} style={{ backgroundColor: idx % 2 === 0 ? listGroupColorVariantOne : listGroupColorVariantTwo, color:'white', borderBottom: idx !== cardItems.length-1 ? `1px solid ${listGroupBorderColor}` : '0px' }}>
+                            {item}
+                        </ListGroup.Item>
+                    ))}
                 </ListGroup>
+
                 <Card.Footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '2rem', paddingBottom: '1rem' }}>
-                    <AffiliatedSubscriptionButton />
+                    <AffiliatedSubscriptionButton
+                        level={level}
+                        color={buttonColor}
+                        backgroundColor={buttonBackgroundColor}
+                        hoverBackgroundColor={buttonHoverBackgroundColor}
+                        border={buttonBorder}
+                    />
                 </Card.Footer>
             </Card>
         </motion.div>

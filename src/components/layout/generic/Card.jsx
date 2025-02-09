@@ -34,7 +34,10 @@ const StyledCard = styled(({
     borderLeft,
     borderRight,
     fontFamily,
-    flex,
+    display,
+    alignItems,
+    justifyContent,
+    flexDirection,
     flexGrow,
     innerRef,
     opacity,
@@ -65,9 +68,13 @@ const StyledCard = styled(({
     ${({ borderLeft }) => borderLeft ? `border-left: ${borderLeft};` : ``}
     ${({ borderRight }) => borderRight ? `border-right: ${borderRight};` : ``}
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
-    ${({ flex }) => flex ? `flex: ${flex};` : ``}
+    ${({ display }) => display ? `display: ${display};` : ``}
+    ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
+    ${({ justifyContent }) => justifyContent ? `align-items: ${justifyContent};` : ``}
+    ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
     ${({ opacity }) => opacity ? `opacity: ${opacity};` : ``}
+
 
     ${({ onHover }) => onHover ? `&:hover {
         ${onHover?.background ? `background: ${onHover?.background};` : ``}
