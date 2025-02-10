@@ -211,7 +211,7 @@ const Affiliated = () => {
                                         alignItems='center'
                                         justifyContent='center'
                                     >
-                                        <TitleH2 className="text-gray-900">
+                                        <TitleH2 className="text-gray-800">
                                             Histórico de pagamentos
                                         </TitleH2>
                                     </Col>
