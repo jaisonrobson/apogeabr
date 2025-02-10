@@ -10,6 +10,7 @@ import {
     Col,
     Span,
     TitleH2,
+    Table,
 } from 'components'
 
 import TowerImage from 'images/layout/profile/subscriptions/tower_1.png'
@@ -212,7 +213,7 @@ const Affiliated = () => {
                                         justifyContent='center'
                                     >
                                         <TitleH2 className="text-gray-800">
-                                            Histórico de pagamentos
+                                            Assinaturas
                                         </TitleH2>
                                     </Col>
                                 </Row>
@@ -223,7 +224,33 @@ const Affiliated = () => {
                                         alignItems='center'
                                         justifyContent='center'
                                     >
-                                        montar a tabela aqui
+                                        <Table>
+                                            <Table.Header>
+                                                <Table.Row>
+                                                    <Table.CellHeader>
+                                                        #
+                                                    </Table.CellHeader>
+                                                    <Table.CellHeader>
+                                                        Criação
+                                                    </Table.CellHeader>
+                                                    <Table.CellHeader>
+                                                        Última atualização
+                                                    </Table.CellHeader>
+                                                    <Table.CellHeader>
+                                                        Status
+                                                    </Table.CellHeader>
+                                                    <Table.CellHeader>
+                                                        Tipo
+                                                    </Table.CellHeader>
+                                                    <Table.CellHeader>
+                                                        Ultimo pagamento bem sucedido
+                                                    </Table.CellHeader>
+                                                </Table.Row>
+                                            </Table.Header>
+                                            <Table.Body>
+
+                                            </Table.Body>
+                                        </Table>
                                     </Col>
                                 </Row>
                             </Container>

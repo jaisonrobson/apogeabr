@@ -4,3 +4,4 @@ export { withModalContext, withModalContextConsumer, ModalContext } from './with
 export { withParticlesContext, withParticlesContextConsumer, ParticlesContext } from './withParticlesContext'
 export { withReducerContext, ReducerContext } from './withReducerContext'
 export { withCollapsibleContext, CollapsibleContext } from './withCollapsibleContext'
+export { withDefaultPaginationContext, DefaultPaginationContext } from './withDefaultPaginationContext'
