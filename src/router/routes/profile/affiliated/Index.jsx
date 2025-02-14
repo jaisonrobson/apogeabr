@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
+import _ from 'lodash'
 import { useLocation } from 'react-router'
 import axios from "axios"
 
@@ -11,6 +12,7 @@ import {
     Span,
     TitleH2,
     Table,
+    ConnectedPaginatedTable,
 } from 'components'
 
 import TowerImage from 'images/layout/profile/subscriptions/tower_1.png'
@@ -224,33 +226,59 @@ const Affiliated = () => {
                                         alignItems='center'
                                         justifyContent='center'
                                     >
-                                        <Table>
-                                            <Table.Header>
-                                                <Table.Row>
-                                                    <Table.CellHeader>
-                                                        #
-                                                    </Table.CellHeader>
-                                                    <Table.CellHeader>
-                                                        Criação
-                                                    </Table.CellHeader>
-                                                    <Table.CellHeader>
-                                                        Última atualização
-                                                    </Table.CellHeader>
-                                                    <Table.CellHeader>
-                                                        Status
-                                                    </Table.CellHeader>
-                                                    <Table.CellHeader>
-                                                        Tipo
-                                                    </Table.CellHeader>
-                                                    <Table.CellHeader>
-                                                        Ultimo pagamento bem sucedido
-                                                    </Table.CellHeader>
-                                                </Table.Row>
-                                            </Table.Header>
-                                            <Table.Body>
+                                        <ConnectedPaginatedTable endpoint={`${[process.env.REACT_APP_BACKEND_HOST]}/subscriptions`}>
+                                            {({ payload, isLoading }) => (
+                                                <Fragment>
+                                                    <Table.Header>
+                                                        <Table.Row>
+                                                            <Table.CellHeader>
+                                                                #
+                                                            </Table.CellHeader>
+                                                            <Table.CellHeader>
+                                                                Criação
+                                                            </Table.CellHeader>
+                                                            <Table.CellHeader>
+                                                                Última atualização
+                                                            </Table.CellHeader>
+                                                            <Table.CellHeader>
+                                                                Status
+                                                            </Table.CellHeader>
+                                                            <Table.CellHeader>
+                                                                Tipo
+                                                            </Table.CellHeader>
+                                                            <Table.CellHeader>
+                                                                Ultimo pagamento bem sucedido
+                                                            </Table.CellHeader>
+                                                        </Table.Row>
+                                                    </Table.Header>
 
-                                            </Table.Body>
-                                        </Table>
+                                                    <Table.Body>
+                                                        {_.map(payload, (subscription, index) => (
+                                                            <Table.Row key={subscription.id}>
+                                                                <Table.CellHeader>
+                                                                    {subscription.id}
+                                                                </Table.CellHeader>
+                                                                <Table.Cell>
+                                                                    {subscription.created_at}
+                                                                </Table.Cell>
+                                                                <Table.Cell>
+                                                                    {subscription.updated_at}
+                                                                </Table.Cell>
+                                                                <Table.Cell>
+                                                                    {subscription.status}
+                                                                </Table.Cell>
+                                                                <Table.Cell>
+                                                                    {subscription.level}
+                                                                </Table.Cell>
+                                                                <Table.Cell>
+                                                                    {subscription.last_successful_payment_date}
+                                                                </Table.Cell>
+                                                            </Table.Row>
+                                                        ))}
+                                                    </Table.Body>
+                                                </Fragment>
+                                            )}
+                                        </ConnectedPaginatedTable>
                                     </Col>
                                 </Row>
                             </Container>

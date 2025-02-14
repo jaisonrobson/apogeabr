@@ -9,9 +9,9 @@ export const withDefaultPaginationContext = (WrappedComponent, defaultValues={})
     const WithDefaultPaginationContext = (props) => {
         const [state, setState] = useState({
             isLoading: false,
-            page: 0,
+            page: 1,
             perPage: 5,
-            totalPages: 0,
+            totalPages: 1,
             payload: {},
             ...defaultValues,
         })
@@ -23,7 +23,7 @@ export const withDefaultPaginationContext = (WrappedComponent, defaultValues={})
             setTotalPages: (newValue) => setState((oldState) => ({...oldState, totalPages: newValue})),
             setPayload: (newValue) => setState((oldState) => ({...oldState, payload: newValue})),
             enableLoading: (newValue) => setState((oldState) => ({...oldState, isLoading: true})),
-            disableLoading: (newValue) => setState((oldState) => ({...oldState, isLoading: true})),
+            disableLoading: (newValue) => setState((oldState) => ({...oldState, isLoading: false})),
         }
 
         return (

@@ -25,6 +25,8 @@ export { default as CollapsibleSidebar } from "./CollapsibleSidebar"
 export { default as HoverableButton } from "./HoverableButton"
 export { default as CreateCharacterButton } from "./CreateCharacterButton"
 export { default as AffiliatedSubscriptionCard } from "./AffiliatedSubscriptionCard"
+export { default as ConnectedPagination } from "./ConnectedPagination"
+export { default as ConnectedPaginatedTable } from "./ConnectedPaginatedTable"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"

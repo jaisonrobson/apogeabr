@@ -211,8 +211,19 @@ const StyledPaginationLink = styled(({
     onHover = false,
     animation = false,
     active = false,
+    onClick: onClickParam = () => {},
     ...props
-}) => <ReactstrapPaginationLink ref={innerRef} {...props} />)`
+}) => (
+        <ReactstrapPaginationLink
+            ref={innerRef}
+            onClick={(event) => {
+                event.preventDefault()
+
+                return onClickParam(event)
+            }}
+            {...props}
+        />
+    ))`
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}

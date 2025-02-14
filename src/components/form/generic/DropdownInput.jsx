@@ -8,7 +8,7 @@ import { Dropdown, Image, Span, Icon } from 'components'
 const DropdownInput = ({
     togglerProperties = {},
     options = ["Option 1"],
-    setValue,
+    setValue = () => {},
     name,
     ...props
 }) => {
