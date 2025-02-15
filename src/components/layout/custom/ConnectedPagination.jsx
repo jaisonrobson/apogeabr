@@ -55,9 +55,15 @@ const PerPageDropdown = ({
     return (
         <DropdownInput
             containerStyle={{
-                height:"28px",
-                width:"100%",
-                minWidth:"300px",
+                maxHeight: '38px',
+                width: '100px',
+                minWidth:"200px",
+                backgroundColor: '#00000020',                
+            }}
+            togglerProperties={{
+                height:"38px",
+                maxHeight: '38px',
+                fontSize: '14px',
             }}
             setValue={onSelect}
             options={options}

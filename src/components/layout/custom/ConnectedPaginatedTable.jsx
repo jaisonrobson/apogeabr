@@ -18,11 +18,11 @@ const ConnectedPaginatedTable = ({ endpoint, children, ...props }) => {
             </Row>
 
             <Row>
-                <Col>
+                <Col display="flex" justifyContent="center">
                     <ConnectedPagination context={DefaultPaginationContext} endpoint={endpoint} />
                 </Col>
 
-                <Col>
+                <Col display="flex" justifyContent="center">
                     <ConnectedPagination.PerPageDropdown context={DefaultPaginationContext} endpoint={endpoint} />
                 </Col>
             </Row>

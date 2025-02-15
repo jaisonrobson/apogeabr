@@ -52,10 +52,10 @@ const StyledPagination = styled(({
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
-    ${({ border }) => border ? `border: ${border};` : `border: 2px solid gray;`}
+    ${({ border }) => border ? `border: ${border};` : ``}
     ${({ borderRadius }) => borderRadius ? `border-radius: ${borderRadius};` : ``}
     ${({ background }) => background ? `background: ${background};` : ``}
-    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #00000030;`}
+    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
     ${({ color }) => color ? `color: ${color};` : ``}
     ${({ borderBottom }) => borderBottom ? `border-bottom: ${borderBottom};` : ``}
@@ -138,10 +138,10 @@ const StyledPaginationItem = styled(({
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
-    ${({ border }) => border ? `border: ${border};` : `border: 2px solid gray;`}
+    ${({ border }) => border ? `border: ${border};` : ``}
     ${({ borderRadius }) => borderRadius ? `border-radius: ${borderRadius};` : ``}
     ${({ background }) => background ? `background: ${background};` : ``}
-    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #00000030;`}
+    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
     ${({ color }) => color ? `color: ${color};` : ``}
     ${({ borderBottom }) => borderBottom ? `border-bottom: ${borderBottom};` : ``}
@@ -235,12 +235,12 @@ const StyledPaginationLink = styled(({
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
-    ${({ border }) => border ? `border: ${border};` : `border: 2px solid gray;`}
+    ${({ border }) => border ? `border: ${border};` : ``}
     ${({ borderRadius }) => borderRadius ? `border-radius: ${borderRadius};` : ``}
     ${({ background }) => background ? `background: ${background};` : ``}
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #00000030;`}
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
-    ${({ color }) => color ? `color: ${color};` : ``}
+    ${({ color }) => color ? `color: ${color};` : `color: black;`}
     ${({ borderBottom }) => borderBottom ? `border-bottom: ${borderBottom};` : ``}
     ${({ borderTop }) => borderTop ? `border-top: ${borderTop};` : ``}
     ${({ borderLeft }) => borderLeft ? `border-left: ${borderLeft};` : ``}
@@ -270,7 +270,10 @@ const StyledPaginationLink = styled(({
         ${onHover?.margin ? `margin: ${onHover?.margin};` : ``}
         ${onHover?.animation ? `animation: ${onHover?.animation?.property}; ${onHover?.animation?.corpse}` : ``}
         
-    };`: ``}
+    };`: `&:hover {
+        color: white;
+        background-color: #00000080;
+    };`}
 
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `

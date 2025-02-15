@@ -38,7 +38,7 @@ const DropdownInput = ({
                 display="flex"
                 flexDirection="row"
                 alignItems="center"
-                justifyContent="space-evenly"
+                justifyContent="space-around"
                 {...togglerProperties}
             >
                 <Span>{options[selectedOption]}</Span>

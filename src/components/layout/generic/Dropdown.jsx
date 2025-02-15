@@ -6,6 +6,8 @@ import { isDesktop } from 'react-device-detect'
 import { FlagContext, withFlagContext } from 'contexts'
 
 const StyledDropdownToggle = styled(({
+    maxHeight,
+    height,
     width,
     color,
     textShadow,
@@ -23,6 +25,8 @@ const StyledDropdownToggle = styled(({
     alignItems,
     ...props
 }) => <DropdownToggle color={componentColor} {...props} />)`
+    ${({ maxHeight }) => maxHeight ? `max-height: ${maxHeight};` : ''}
+    ${({ height }) => height ? `height: ${height};` : ''}
     ${({ width }) => width ? `width: ${width};` : ''}
     ${({ color }) => color ? `color: ${color};` : ''}
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''}
