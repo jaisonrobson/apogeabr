@@ -1,0 +1,14 @@
+{
+    "pending": "pendente",
+    "paid": "pago",
+    "processing": "processando",
+    "rejected": "rejeitado",
+    "paused": "pausado",
+    "cancelled": "cancelado",
+    "chargeback": "estorno",
+    "refunded": "reembolso",
+    "never": "nunca",
+    "newbie": "novato",
+    "bishop": "bispo",
+    "king": "rei"
+}

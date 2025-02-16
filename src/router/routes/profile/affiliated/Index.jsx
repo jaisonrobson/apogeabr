@@ -1,7 +1,12 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, useContext, Fragment } from 'react'
 import _ from 'lodash'
 import { useLocation } from 'react-router'
 import axios from "axios"
+
+import { compareDates } from 'util/intl'
+import { typeAsDescription } from 'util/string'
+
+import { I18nContext } from 'contexts'
 
 import {
     StoneTabletTwoBoard,
@@ -21,6 +26,7 @@ import BishopImage from 'images/layout/profile/subscriptions/bishop.png'
 import KingImage from 'images/layout/profile/subscriptions/king.png'
 
 const Affiliated = () => {
+    const { formatDateTime, translate } = useContext(I18nContext)
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
     const location = useLocation()
@@ -259,19 +265,19 @@ const Affiliated = () => {
                                                                     {subscription.id}
                                                                 </Table.CellHeader>
                                                                 <Table.Cell>
-                                                                    {subscription.created_at}
+                                                                    {formatDateTime(subscription.created_at)}
                                                                 </Table.Cell>
                                                                 <Table.Cell>
-                                                                    {subscription.updated_at}
+                                                                    {formatDateTime(subscription.updated_at)}
                                                                 </Table.Cell>
                                                                 <Table.Cell>
-                                                                    {subscription.status}
+                                                                    {translate(subscription.status)}
                                                                 </Table.Cell>
                                                                 <Table.Cell>
-                                                                    {subscription.level}
+                                                                    {translate(typeAsDescription(subscription.level))}
                                                                 </Table.Cell>
                                                                 <Table.Cell>
-                                                                    {subscription.last_successful_payment_date}
+                                                                    {compareDates(subscription.last_successful_payment_date, "1970-01-01T00:00:00.000Z", (one, two) => one <= two) ? translate("never") : formatDateTime(subscription.last_successful_payment_date)}
                                                                 </Table.Cell>
                                                             </Table.Row>
                                                         ))}

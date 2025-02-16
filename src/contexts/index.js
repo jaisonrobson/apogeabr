@@ -5,3 +5,4 @@ export { withParticlesContext, withParticlesContextConsumer, ParticlesContext } 
 export { withReducerContext, ReducerContext } from './withReducerContext'
 export { withCollapsibleContext, CollapsibleContext } from './withCollapsibleContext'
 export { withDefaultPaginationContext, DefaultPaginationContext } from './withDefaultPaginationContext'
+export { withI18nContext, I18nContext } from './withI18nContext'

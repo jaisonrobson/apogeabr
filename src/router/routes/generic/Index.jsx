@@ -2,7 +2,7 @@ import React, { useContext, useEffect, forwardRef } from 'react'
 import { initParticlesEngine } from "@tsparticles/react"
 import { loadAll } from "@tsparticles/all"
 
-import { withReducerContext, ReducerContext, withModalContext, withParticlesContext, ParticlesContext } from 'contexts'
+import { withReducerContext, ReducerContext, withModalContext, withParticlesContext, ParticlesContext, withI18nContext } from 'contexts'
 
 import { ScrollToTopButton  } from 'components'
 import Top from './Top'
@@ -40,9 +40,11 @@ const Index = forwardRef(({children, ...props}, ref) => {
 })
 
 export default withReducerContext(
-    withParticlesContext(
-        withModalContext(
-            Index
+    withI18nContext(
+        withParticlesContext(
+            withModalContext(
+                Index
+            )
         )
-    )    
+    )
 )

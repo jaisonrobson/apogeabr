@@ -1,0 +1,14 @@
+{
+    "pending": "pending",
+    "paid": "paid",
+    "processing": "processing",
+    "rejected": "rejected",
+    "paused": "paused",
+    "cancelled": "cancelled",
+    "chargeback": "chargeback",
+    "refunded": "refunded",
+    "never": "never",
+    "newbie": "newbie",
+    "bishop": "bishop",
+    "king": "king"
+}
