@@ -240,18 +240,23 @@ const Affiliated = () => {
                                                             <Table.CellHeader>
                                                                 #
                                                             </Table.CellHeader>
+
                                                             <Table.CellHeader>
                                                                 Criação
                                                             </Table.CellHeader>
+
                                                             <Table.CellHeader>
                                                                 Última atualização
                                                             </Table.CellHeader>
+
                                                             <Table.CellHeader>
                                                                 Status
                                                             </Table.CellHeader>
+
                                                             <Table.CellHeader>
                                                                 Tipo
                                                             </Table.CellHeader>
+                                                            
                                                             <Table.CellHeader>
                                                                 Ultimo pagamento bem sucedido
                                                             </Table.CellHeader>
@@ -264,18 +269,23 @@ const Affiliated = () => {
                                                                 <Table.CellHeader>
                                                                     {subscription.id}
                                                                 </Table.CellHeader>
+
                                                                 <Table.Cell>
                                                                     {formatDateTime(subscription.created_at)}
                                                                 </Table.Cell>
+
                                                                 <Table.Cell>
                                                                     {formatDateTime(subscription.updated_at)}
                                                                 </Table.Cell>
+
                                                                 <Table.Cell>
                                                                     {translate(subscription.status)}
                                                                 </Table.Cell>
+
                                                                 <Table.Cell>
                                                                     {translate(typeAsDescription(subscription.level))}
                                                                 </Table.Cell>
+
                                                                 <Table.Cell>
                                                                     {compareDates(subscription.last_successful_payment_date, "1970-01-01T00:00:00.000Z", (one, two) => one <= two) ? translate("never") : formatDateTime(subscription.last_successful_payment_date)}
                                                                 </Table.Cell>

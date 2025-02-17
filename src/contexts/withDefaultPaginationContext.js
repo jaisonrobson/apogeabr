@@ -13,6 +13,7 @@ export const withDefaultPaginationContext = (WrappedComponent, defaultValues={})
             perPage: 5,
             totalPages: 1,
             payload: {},
+            params: {},
             ...defaultValues,
         })
 
@@ -22,6 +23,7 @@ export const withDefaultPaginationContext = (WrappedComponent, defaultValues={})
             setPerPage: (newValue) => setState((oldState) => ({...oldState, perPage: newValue})),
             setTotalPages: (newValue) => setState((oldState) => ({...oldState, totalPages: newValue})),
             setPayload: (newValue) => setState((oldState) => ({...oldState, payload: newValue})),
+            setParams: (newValue) => setState((oldState) => ({...oldState, params: { ...oldState.params, ...newValue }})),
             enableLoading: (newValue) => setState((oldState) => ({...oldState, isLoading: true})),
             disableLoading: (newValue) => setState((oldState) => ({...oldState, isLoading: false})),
         }

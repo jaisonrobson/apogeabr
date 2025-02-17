@@ -15,6 +15,7 @@ const PerPageDropdown = ({
     const {
         isLoading,
         page,
+        params,
         setPage,
         setPerPage,
         setTotalPages,
@@ -37,6 +38,7 @@ const PerPageDropdown = ({
                 params: {
                     page: 1,
                     per_page: options[value],
+                    ...params,
                 },
             })
 
@@ -76,6 +78,7 @@ const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, max
     const {
         payload,
         page,
+        params,
         perPage,
         totalPages,
         setPage,
@@ -98,6 +101,7 @@ const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, max
                     params: {
                         page,
                         per_page: perPage,
+                        ...params,
                     },
                 })
     
@@ -114,7 +118,7 @@ const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, max
         }
 
         initialize()
-    }, [])    
+    }, [params])
 
     const onNavigate = async (toPage) => {
         enableLoading()
@@ -128,11 +132,13 @@ const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, max
                 params: {
                     page: toPage,
                     per_page: perPage,
+                    ...params,
                 },
             })
 
             if (!_.isEmpty(response.data)) {
                 setPage(response.data.pagination.current_page)
+                setTotalPages(response.data.pagination.total_pages)
                 setPayload(response.data.payload)
             }
         } catch (error) {

@@ -36,6 +36,8 @@ const StyledCol = styled(({
     textAlign,
     transition,
     gap,
+    fontFamily,
+    fontSize,
     ...props
 }) => <ReactstrapCol {...props}/>)`
     ${({ position }) => position ? `position: ${position};` : ``}
@@ -73,6 +75,8 @@ const StyledCol = styled(({
     ${({ backgroundPosition }) => backgroundPosition ? `background-position: ${backgroundPosition};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
     ${({ gap }) => gap ? `gap: ${gap};` : ``}
+    ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
+    ${({ fontSize }) => fontSize ? `font-size: ${fontSize};` : ``}
 
     ${({ transition }) => transition ? `transition: ${transition};` : ``}
 `

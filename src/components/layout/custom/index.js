@@ -27,6 +27,7 @@ export { default as CreateCharacterButton } from "./CreateCharacterButton"
 export { default as AffiliatedSubscriptionCard } from "./AffiliatedSubscriptionCard"
 export { default as ConnectedPagination } from "./ConnectedPagination"
 export { default as ConnectedPaginatedTable } from "./ConnectedPaginatedTable"
+export { default as ConnectedPaginatedCardsDisplay } from "./ConnectedPaginatedCardsDisplay"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"
