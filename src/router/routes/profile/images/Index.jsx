@@ -14,7 +14,12 @@ import {
     Container,
     TitleH2,
     ConnectedPaginatedCardsDisplay,
+    ExpandableImageModal,
+    UserImageForm,
+    ImageInput,
 } from 'components'
+
+import noImage from 'images/layout/generic/noImage.png'
 
 const Images = () => {
     const { formatDateTime, translate } = useContext(I18nContext)
@@ -40,7 +45,38 @@ const Images = () => {
                                 alignItems="center"
                                 className="unselectable"
                             >
+                                <UserImageForm
+                                    defaultValues={{
+                                        image: null,
+                                    }}
+                                >
+                                    {({ register, errors, backendErrors, fetcher, setValue, backendSuccess }) => (
+                                        <Row>
+                                            <Col>
+                                                <Row>
+                                                    <Col>
+                                                        <ImageInput
+                                                            register={register}
+                                                            setValue={setValue}
+                                                            errors={errors}
+                                                            backendErrors={backendErrors}
+                                                            additiveImageProps={{
+                                                                marginLeft: '3rem'
+                                                            }}
+                                                            defaultImage={noImage}
+                                                        />
+                                                    </Col>
+                                                </Row>
 
+                                                <Row>
+                                                    <Col>
+                                                        <UserImageForm.SubmitButton marginLeft="2.5rem" width="200px" />
+                                                    </Col>
+                                                </Row>
+                                            </Col>
+                                        </Row>
+                                    )}
+                                </UserImageForm>
                             </Container>
                         </StoneTabletTwoBoard>
                     </Col>
@@ -75,9 +111,11 @@ const Images = () => {
                                         <ConnectedPaginatedCardsDisplay endpoint={`${[process.env.REACT_APP_BACKEND_HOST]}/images`}>
                                             {({ payload, isLoading }) => (
                                                 <Row>
-                                                    <Col>
-                                                    
-                                                    </Col>
+                                                    {_.map(payload, (image, index) => (
+                                                        <Col key={index}>
+                                                            <ExpandableImageModal image={image.image} />
+                                                        </Col>
+                                                    ))}
                                                 </Row>
                                             )}
                                         </ConnectedPaginatedCardsDisplay>

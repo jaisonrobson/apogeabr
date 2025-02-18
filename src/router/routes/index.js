@@ -20,7 +20,9 @@ const ROUTES = {
     USER_PROFILE_CHARACTERS_UPDATE_SUBMIT: { path: "/user/profile/characters/update/submit/", nickname: "Personagens"},
     USER_PROFILE_AFFILIATED: { path: "/user/profile/affiliated/", nickname: "Afiliado"},
     USER_PROFILE_IMAGES: { path: "/user/profile/images/", nickname: "Imagens"},
+    USER_PROFILE_IMAGES_SUBMIT: { path: "/user/profile/images/submit/", nickname: "Imagens"},
     USER_PROFILE_VIDEOS: { path: "/user/profile/videos/", nickname: "Videos"},
+    USER_PROFILE_VIDEOS_SUBMIT: { path: "/user/profile/videos/submit/", nickname: "Videos"},
     USER_REGISTER: { path: "/user/register/", nickname: "Registro"},
     USER_REGISTER_SUBMIT: { path: "/user/register/submit/", nickname: "Registro"},
 }

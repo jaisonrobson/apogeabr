@@ -28,6 +28,7 @@ export { default as AffiliatedSubscriptionCard } from "./AffiliatedSubscriptionC
 export { default as ConnectedPagination } from "./ConnectedPagination"
 export { default as ConnectedPaginatedTable } from "./ConnectedPaginatedTable"
 export { default as ConnectedPaginatedCardsDisplay } from "./ConnectedPaginatedCardsDisplay"
+export { default as ExpandableImageModal } from "./ExpandableImageModal"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"

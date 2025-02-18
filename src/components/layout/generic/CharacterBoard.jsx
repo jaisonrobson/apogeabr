@@ -143,7 +143,7 @@ const CharacterOptions = ({ characterId }) => {
                     <Icon icon={faPenToSquare} />
                 </HoverableButton>
 
-                <Modal ButtonComponent={CharacterDeleteButton}>
+                <Modal Component={CharacterDeleteButton}>
                     {({ isOpen, toggle }) => (
                         <Fragment>
                             <Modal.Body>

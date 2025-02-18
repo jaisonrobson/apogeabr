@@ -4,7 +4,7 @@ import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
 import { FormattedInput } from 'components'
 
-const ImageInput = ({ register, setValue, errors, backendErrors, defaultImage = userNoAvatarImage, ...props }) => (
+const ImageInput = ({ register, setValue, errors, backendErrors, defaultImage = userNoAvatarImage, additiveImageProps = {}, ...props }) => (
     <FormattedInput
         register={register}
         setValue={setValue}
@@ -22,13 +22,14 @@ const ImageInput = ({ register, setValue, errors, backendErrors, defaultImage = 
             onHover: {
                 opacity: '0.5',
                 animation: {
-                    property: 'loginButtonAnimation 0.5s linear 0s infinite alternate',
-                    corpse: `@keyframes loginButtonAnimation {
+                    property: 'imageInputAnimation 0.5s linear 0s infinite alternate',
+                    corpse: `@keyframes imageInputAnimation {
                         0%  {transform: scale3d(1,1,1);}
                         100%  {transform: scale3d(1.03,1.03,1.03); background-color: lightgray; border-radius: 8px}
                     }`
                 },
             },
+            ...additiveImageProps,
         }}
         minWidth="0px"
         width="auto"

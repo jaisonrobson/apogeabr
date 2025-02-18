@@ -33,6 +33,7 @@ import {
     userRegister,
     userProfileCharacterCreationSubmit,
     userProfileCharacterUpdateSubmit,
+    userImageSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -140,11 +141,29 @@ const router = createBrowserRouter([
                             },
                             {
                                 path: ROUTES.USER_PROFILE_IMAGES.path,
-                                element: <ProfileImages />,
+                                children: [
+                                    {
+                                        index: true,
+                                        element: <ProfileImages />,
+                                    },
+                                    {
+                                        path: ROUTES.USER_PROFILE_IMAGES_SUBMIT.path,
+                                        action: userImageSubmit,
+                                    },
+                                ],
                             },
                             {
                                 path: ROUTES.USER_PROFILE_VIDEOS.path,
-                                element: <ProfileVideos />,
+                                children: [
+                                    {
+                                        index: true,
+                                        element: <ProfileVideos />,
+                                    },
+                                    {
+                                        path: ROUTES.USER_PROFILE_VIDEOS_SUBMIT.path,
+                                        // action: userConfigurationSubmit,
+                                    },
+                                ],
                             },
                         ],
                     },

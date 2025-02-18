@@ -22,7 +22,8 @@ const Body = ({ children, ...props }) => (
 )
 
 const Modal = ({
-    ButtonComponent = Button,
+    Component = Button,
+    componentProps = {},
     children,
     ...props
 }) => {
@@ -32,7 +33,7 @@ const Modal = ({
 
     return (
         <Fragment>
-            <ButtonComponent onClick={toggle} />
+            <Component onClick={toggle} {...componentProps} />
 
             <ReactstrapModal isOpen={isOpen} toggle={toggle} fade={true} {...props}>
                 {children({ isOpen, toggle })}

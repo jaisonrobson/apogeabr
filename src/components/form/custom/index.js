@@ -13,3 +13,4 @@ export { default as UserConfigurationSensitiveInputs } from './UserConfiguration
 export { default as FetcherForm } from './FetcherForm'
 export { default as TimedRedirect } from './TimedRedirect'
 export { default as AffiliatedSubscriptionButton } from './AffiliatedSubscriptionButton'
+export { default as UserImageForm } from './UserImageForm'
