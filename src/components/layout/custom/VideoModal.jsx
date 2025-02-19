@@ -1,7 +1,7 @@
 import React, { useRef, forwardRef } from 'react'
 import styled from 'styled-components'
 
-import { ModalCover, Button } from 'components'
+import { withModalCover, Button } from 'components'
 
 const BackgroundWrapper = styled(({ display, innerRef, ...props }) => <div ref={innerRef} {...props} />)`
     ${({ display }) => display ? `display: block;` : 'display: none;'}
@@ -67,4 +67,4 @@ const VideoModal = ({ showModal, onClose }) => {
     )
 }
 
-export default ModalCover(VideoModal)
+export default withModalCover(VideoModal)

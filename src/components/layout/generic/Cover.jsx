@@ -44,7 +44,7 @@ const StyledP = styled.p`
 `
 
 const Cover = ({ title, caption, image, width, height, onClick }) => (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onClick} style={{ width: width, height: height }}>
         <GradientOverlay width={width} height={height} />
 
         <CaptionOverlay width={width} height={height}>

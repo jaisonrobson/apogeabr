@@ -167,7 +167,7 @@ const FetcherForm = ({
             {
                 defaultForm
                     ? (
-                        <SubmissionInfo fetcher={fetcher} />
+                        <SubmissionInfo fetcher={fetcher} success={backendSuccess} />
                     )
                     : null
             }

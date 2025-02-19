@@ -21,18 +21,36 @@ const withModalCover = (WrappedComponent) => withModalContextConsumer(
         onClose = () => this.setState({ ...this.state, showModal: false })
     
         render() {
-            const { modal, ...passingProps } = this.props
+            const {
+                modal,
+                title,
+                caption,
+                image,
+                width,
+                height,
+                onClick,
+                ...passingProps
+            } = this.props
 
             return (
             <Fragment>
                 {this.state.refNode && this.state.showModal && createPortal(
-                    <WrappedComponent showModal={this.state.showModal} onClose={this.onClose} />,
+                    <WrappedComponent
+                        showModal={this.state.showModal}
+                        onClose={this.onClose}
+                        image={image}
+                        {...passingProps}
+                    />,
                     this.state.refNode
                 )}
 
                 <Cover
-                    onClick={this.onOpen}
-                    {...passingProps}
+                    title={title}
+                    caption={caption}
+                    image={image}
+                    width={width}
+                    height={height}
+                    onClick={this.onOpen}                    
                 />
             </Fragment>
             )

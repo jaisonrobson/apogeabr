@@ -23,7 +23,7 @@ import noImage from 'images/layout/generic/noImage.png'
 
 const Images = () => {
     const { formatDateTime, translate } = useContext(I18nContext)
-    
+
     return (
         <Row>
             <Col display="flex" flexDirection="column" gap="2rem">
@@ -110,10 +110,24 @@ const Images = () => {
                                     >
                                         <ConnectedPaginatedCardsDisplay endpoint={`${[process.env.REACT_APP_BACKEND_HOST]}/images`}>
                                             {({ payload, isLoading }) => (
-                                                <Row>
+                                                <Row
+                                                    display="flex"
+                                                    alignItems='center'
+                                                    justifyContent='center'
+                                                    gap="2rem"
+                                                    marginBottom="1rem"
+                                                >
                                                     {_.map(payload, (image, index) => (
                                                         <Col key={index}>
-                                                            <ExpandableImageModal image={image.image} />
+                                                            <ExpandableImageModal
+                                                                width="300px"
+                                                                height="200px"
+                                                                image={image.image}
+                                                                imageProps={{
+                                                                    width: '100%',
+                                                                    height: '100%'
+                                                                }}
+                                                            />
                                                         </Col>
                                                     ))}
                                                 </Row>

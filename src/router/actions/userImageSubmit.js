@@ -19,6 +19,10 @@ const action = async ({ request }) => {
             }
         })
 
+        setTimeout(() => {
+            window.location.reload()
+        }, 1500)
+
         return redirect(`${ROUTES.USER_PROFILE_IMAGES.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
     } catch (error) {
         const resultingError = error?.response?.data || { message: error.message }
