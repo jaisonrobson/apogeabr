@@ -14,3 +14,13 @@ export const typeAsDescription = (typeNumber) => {
             return "newbie"
     }
 }
+
+export const getYouTubeThumbnail = (url) => {
+    // Regex para extrair o ID do vídeo
+    const videoIdMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/)([^#\&\?]*))/);
+    if (videoIdMatch && videoIdMatch[1]) {
+        const videoId = videoIdMatch[1];
+        return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    }
+    return null; // Retorna null se o link não for válido
+}

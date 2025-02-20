@@ -34,6 +34,7 @@ import {
     userProfileCharacterCreationSubmit,
     userProfileCharacterUpdateSubmit,
     userImageSubmit,
+    userVideoSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -161,7 +162,7 @@ const router = createBrowserRouter([
                                     },
                                     {
                                         path: ROUTES.USER_PROFILE_VIDEOS_SUBMIT.path,
-                                        // action: userConfigurationSubmit,
+                                        action: userVideoSubmit,
                                     },
                                 ],
                             },

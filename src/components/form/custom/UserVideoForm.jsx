@@ -5,7 +5,7 @@ import ROUTES from 'router/routes'
 
 import { FetcherForm, Input } from 'components'
 
-import { userImageValidation } from 'validations'
+import { youtubeLinkValidation } from 'validations'
 
 const SubmitButton = (props) => (
     <Input
@@ -28,15 +28,15 @@ const SubmitButton = (props) => (
     />
 )
 
-const userImageValidationSchema = z.object({
-    image: userImageValidation,
+const userVideoValidationSchema = z.object({
+    link: youtubeLinkValidation,
 })
 
-const UserImageForm = ({ children, ...props }) => (
+const UserVideoForm = ({ children, ...props }) => (
     <FetcherForm
-        allowedProperties={['image']}
-        validationSchema={userImageValidationSchema}
-        action={ROUTES.USER_PROFILE_IMAGES_SUBMIT.path}
+        allowedProperties={['link']}
+        validationSchema={userVideoValidationSchema}
+        action={ROUTES.USER_PROFILE_VIDEOS_SUBMIT.path}
         onlyTouchedFields={true}
         {...props}
     >
@@ -45,7 +45,7 @@ const UserImageForm = ({ children, ...props }) => (
     </FetcherForm>
 )
 
-UserImageForm.SubmitButton = SubmitButton
-UserImageForm.SubmissionInfo = FetcherForm.SubmissionInfo
+UserVideoForm.SubmitButton = SubmitButton
+UserVideoForm.SubmissionInfo = FetcherForm.SubmissionInfo
 
-export default UserImageForm
+export default UserVideoForm

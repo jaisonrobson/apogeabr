@@ -29,6 +29,7 @@ export { default as ConnectedPagination } from "./ConnectedPagination"
 export { default as ConnectedPaginatedTable } from "./ConnectedPaginatedTable"
 export { default as ConnectedPaginatedCardsDisplay } from "./ConnectedPaginatedCardsDisplay"
 export { default as ExpandableImageModal } from "./ExpandableImageModal"
+export { default as ExpandableVideoModal } from "./ExpandableVideoModal"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"
