@@ -17,6 +17,7 @@ import {
     UserVideoForm,
     ImageInput,
     FormattedInput,
+    Span,
 } from 'components'
 
 import noImage from 'images/layout/generic/noImage.png'
@@ -33,8 +34,8 @@ const Videos = () => {
                         sm="12"
                         md="8"
                         lg="6"
-                        xl="4"
-                        xxl="2"
+                        xl="6"
+                        xxl="6"
                         minWidth="425px"
                     >
                         <StoneTabletTwoBoard>
@@ -54,20 +55,39 @@ const Videos = () => {
                                         <Row>
                                             <Col>
                                                 <Row>
-                                                    <Col>
-                                                        <FormattedInput
-                                                            register={register}
-                                                            name="link"
-                                                            label="Link:"
-                                                            errorMessage={errors?.name?.message}
-                                                            fontFamily="arial"
-                                                        />
+                                                    <Col
+                                                        display="flex"
+                                                        justifyContent="center"
+                                                    >
+                                                        <Span>Link: </Span>
                                                     </Col>
                                                 </Row>
 
                                                 <Row>
                                                     <Col>
-                                                        <UserVideoForm.SubmitButton marginLeft="2.5rem" width="200px" />
+                                                        <FormattedInput
+                                                            marginLeft="15px"
+                                                            minWidth="300px"
+                                                            register={register}
+                                                            name="link"
+                                                            errorMessage={errors?.name?.message}
+                                                            fontFamily="arial"
+                                                            inputContainerProps={{
+                                                                width: '100%',
+                                                                marginLeft:"15px",
+                                                                padding: "0",
+                                                            }}
+                                                        />
+                                                    </Col>
+                                                </Row>
+
+                                                <Row>
+                                                    <Col
+                                                        display="flex"
+                                                        justifyContent="center"
+                                                        alignItems="center"
+                                                    >
+                                                        <UserVideoForm.SubmitButton width="200px" />
                                                     </Col>
                                                 </Row>
                                             </Col>
@@ -119,12 +139,15 @@ const Videos = () => {
                                                             <ExpandableVideoModal
                                                                 width="300px"
                                                                 height="200px"
+                                                                border="none"
                                                                 image={getYouTubeThumbnail(video.link)}
                                                                 url={video.link}
                                                                 videoProps={{
                                                                     width: '100%',
-                                                                    height: '100%'
+                                                                    height: '100%',
+                                                                    border:"none",
                                                                 }}
+                                                                
                                                             />
                                                         </Col>
                                                     ))}

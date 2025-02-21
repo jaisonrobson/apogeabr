@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from 'react'
+import React, { useRef, forwardRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { withModalCover, Button, Row, Col, Video, Overlay } from 'components'
@@ -14,6 +14,7 @@ const BackgroundWrapper = styled(({ display, innerRef, ...props }) => <div ref={
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.80); /* Black w/ opacity */
+    border: none;
 `
 
 const BackgroundReffered = forwardRef((props, ref) => (<BackgroundWrapper innerRef={ref} {...props} />))
@@ -21,7 +22,7 @@ const BackgroundReffered = forwardRef((props, ref) => (<BackgroundWrapper innerR
 const ContentWrapper = styled(({ width, height, ...props }) => <div {...props} />)`
     margin: 10vh auto;
     padding: 20px;
-    //border: 1px solid #888;
+    border: none;
     ${({ width }) => width ? `width: ${width};` : `width: 80%;`}
     ${({ height }) => height ? `height: ${height};` : `height: 80%;`}
     background-color: rgba(0,0,0,0.80); /* Black w/ opacity */
@@ -32,6 +33,7 @@ const Close = styled.span`
     float: right;
     font-size: 28px;
     font-weight: bold;
+    border: none;
 
     &:hover,
     &:focus {
@@ -43,6 +45,11 @@ const Close = styled.span`
 
 const ExpandableVideoModal = ({ showModal, onClose, children, url, videoProps = {}, ...props }) => {
     const modalRef = useRef(null)
+    const [isReady, setIsReady] = useState(false)
+
+    const onReady = () => {
+        setIsReady(true)
+    }
 
     const onClick = (event) => {
         if (modalRef && modalRef.current && event.target === modalRef.current)
@@ -51,10 +58,10 @@ const ExpandableVideoModal = ({ showModal, onClose, children, url, videoProps = 
 
     return (
         <BackgroundReffered ref={modalRef} onClick={onClick} display={showModal}>
-            <ContentWrapper {...props} style={{ backgroundColor: `transparent`, padding: 0 }} onClick={onClose}>
+            <ContentWrapper {...props} style={{ backgroundColor: `transparent`, padding: 0, border: 'none' }} onClick={onClose}>
                 <Close onClick={onClose}>&times;</Close>
 
-                <Video url={url} {...videoProps} />
+                <Video url={url} volume={0} muted={true} onReady={onReady} {...videoProps} />
             </ContentWrapper>
         </BackgroundReffered>
     )

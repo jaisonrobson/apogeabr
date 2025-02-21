@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player/lazy'
 
 import ROUTES from 'router/routes'
 
-const VideoPlayer = ({ url, ...props }) => (
+const VideoPlayer = ({ url, onReady = () => {}, ...props }) => (
     <ReactPlayer
         width="100%"
         height={'500px'}
@@ -14,9 +14,11 @@ const VideoPlayer = ({ url, ...props }) => (
                 playerVars: {
                     controls: 1,
                     fs: 1,
+                    autoplay: 1,
                 },
             }
         }}
+        onReady={onReady}
         {...props}
     />
 )
@@ -29,8 +31,6 @@ const StyledVideoPlayer = styled(({
     marginTop,
     marginBottom,
     minWidth,
-    width,
-    height,
     overflowWrap,
     boxShadow,
     border,
@@ -58,8 +58,6 @@ const StyledVideoPlayer = styled(({
     ${({ marginBottom }) => marginBottom ? `margin-bottom: ${marginBottom};` : ``}
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
     ${({ minWidth }) => minWidth ? `min-width: ${minWidth};` : ``}
-    ${({ width }) => width ? `width: ${width};` : ``}
-    ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
     ${({ border }) => border ? `border: ${border};` : `border: 2px solid gray;`}
