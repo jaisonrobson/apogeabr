@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, forwardRef } from 'react'
 import { useNavigate, useRouteLoaderData } from 'react-router-dom'
-import { initParticlesEngine } from "@tsparticles/react"
-import { loadAll } from "@tsparticles/all"
 
-import { withReducerContext, withModalContext, withParticlesContext, ParticlesContext, withI18nContext } from 'contexts'
+import { withModalContext, withI18nContext } from 'contexts'
 
 import Sidebar from './Sidebar'
 import Content from './Content'
@@ -16,18 +14,12 @@ import { ScrollToTopButton, CollapsibleSidebar, StoneTabletSidebar } from 'compo
 const Index = forwardRef(({children, ...props}, ref) => {
     const navigate = useNavigate()
     const session = useRouteLoaderData("root")
-    const { setIsInitialized } = useContext(ParticlesContext)
 
     useEffect(() => {
         if (!session?.token)
             navigate(ROUTES.HOME.path)
 
-        initParticlesEngine(async (engine) => {
-            await loadAll(engine)
-        }).then(() => {
-            setIsInitialized(true)
-        })
-    }, [session?.token, navigate, setIsInitialized])
+    }, [session?.token, navigate])
 
     return (
         <div ref={ref} {...props} className="index bg-primary">
@@ -42,12 +34,8 @@ const Index = forwardRef(({children, ...props}, ref) => {
     )
 })
 
-export default withReducerContext(
-    withI18nContext(
-        withParticlesContext(
-            withModalContext(
-                Index
-            )
-        )
+export default withI18nContext(
+    withModalContext(
+        Index
     )
 )
