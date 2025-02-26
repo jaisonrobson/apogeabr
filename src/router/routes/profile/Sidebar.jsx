@@ -106,7 +106,7 @@ const Sidebar = () => (
 
                     <NavItem width="100%" margin="7px 0px">
                         <NavLink
-                            to={ROUTES.USER_PROFILE_CONFIGURATION.path}
+                            to={ROUTES.USER_PROFILE_PAYMENTS.path}
                             display="flex"
                             justifyContent="space-evenly"
                             alignItems="center"

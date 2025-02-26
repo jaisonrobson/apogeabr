@@ -14,6 +14,7 @@ import Login from './router/routes/login/Index'
 import Register from './router/routes/register/Index'
 import Profile from './router/routes/profile/Index'
 import ProfileOverview from './router/routes/profile/overview/Index'
+import ProfilePayments from './router/routes/profile/payments/Index'
 import ProfileConfiguration from './router/routes/profile/configuration/Index'
 import ProfileCharacters from './router/routes/profile/characters/Index'
 import ProfileCharactersCreate from './router/routes/profile/characters/Create'
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_PROFILE_OVERVIEW.path,
                                 element: <ProfileOverview />,
+                            },
+                            {
+                                path: ROUTES.USER_PROFILE_PAYMENTS.path,
+                                element: <ProfilePayments />,
                             },
                             {
                                 path: ROUTES.USER_PROFILE_CONFIGURATION.path,

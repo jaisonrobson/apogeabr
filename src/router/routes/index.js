@@ -11,6 +11,7 @@ const ROUTES = {
     USER_LOGIN_SUBMIT: { path: "/user/login/submit/", nickname: "Acesso"},
     USER_PROFILE: { path: "/user/profile/", nickname: "Perfil"},
     USER_PROFILE_OVERVIEW: { path: "/user/profile/overview/", nickname: "Geral"},
+    USER_PROFILE_PAYMENTS: { path: "/user/profile/payments/", nickname: "Pagamentos"},
     USER_PROFILE_CONFIGURATION: { path: "/user/profile/configuration/", nickname: "Configurações"},
     USER_PROFILE_CONFIGURATION_SUBMIT: { path: "/user/profile/configuration/submit/", nickname: "Configurações"},
     USER_PROFILE_CHARACTERS: { path: "/user/profile/characters/", nickname: "Personagens"},
