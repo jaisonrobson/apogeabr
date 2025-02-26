@@ -9,7 +9,7 @@ import ROUTES from 'router/routes'
 
 import { Dropdown, Image, Span, Icon } from 'components'
 
-const UserDropdown = ({ togglerProperties = {}, noProfile = false, ...props }) => {
+const UserDropdown = ({ togglerProperties = {}, noProfile = false, noAdmin = false, ...props }) => {
     const navigate = useNavigate()
     const { user } = useRouteLoaderData("root")
 
@@ -19,6 +19,10 @@ const UserDropdown = ({ togglerProperties = {}, noProfile = false, ...props }) =
 
     const onEnterProfile = () => {
         navigate(ROUTES.USER_PROFILE_OVERVIEW.path)
+    }
+
+    const onEnterAdminPanel = () => {
+        navigate(ROUTES.USER_ADMIN_PANEL_OVERVIEW.path)
     }
 
     const onLogout = () => {
@@ -68,6 +72,16 @@ const UserDropdown = ({ togglerProperties = {}, noProfile = false, ...props }) =
                     ? (
                         <Dropdown.Item onClick={onEnterProfile}>
                             Perfil
+                        </Dropdown.Item>
+                    )
+                    : null
+                }
+
+                {
+                    !noAdmin && user.privilege.value >= 5
+                    ? (
+                        <Dropdown.Item onClick={onEnterAdminPanel}>
+                            Painel do Admin
                         </Dropdown.Item>
                     )
                     : null

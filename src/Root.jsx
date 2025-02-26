@@ -22,6 +22,8 @@ import ProfileCharactersUpdate from './router/routes/profile/characters/Update'
 import ProfileAffiliated from './router/routes/profile/affiliated/Index'
 import ProfileImages from './router/routes/profile/images/Index'
 import ProfileVideos from './router/routes/profile/videos/Index'
+import AdminPanel from './router/routes/adminpanel/Index'
+import AdminPanelOverview from './router/routes/adminpanel/overview/Index'
 
 import {
     sessionLoader,
@@ -183,6 +185,20 @@ const router = createBrowserRouter([
                     },
                 ],
             },
+            {
+                path: ROUTES.USER_ADMIN_PANEL.path,
+                element: <AdminPanel />,
+                children: [
+                    {
+                        index: true,
+                        element: <AdminPanelOverview />,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_OVERVIEW.path,
+                        element: <AdminPanelOverview />,
+                    },
+                ],
+            }
         ],
     },      
 ])

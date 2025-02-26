@@ -24,6 +24,8 @@ const ROUTES = {
     USER_PROFILE_IMAGES_SUBMIT: { path: "/user/profile/images/submit/", nickname: "Imagens"},
     USER_PROFILE_VIDEOS: { path: "/user/profile/videos/", nickname: "Videos"},
     USER_PROFILE_VIDEOS_SUBMIT: { path: "/user/profile/videos/submit/", nickname: "Videos"},
+    USER_ADMIN_PANEL: { path: "/user/admin_panel/", nickname: "Admin Panel"},
+    USER_ADMIN_PANEL_OVERVIEW: { path: "/user/admin_panel/overview/", nickname: "Geral"},
     USER_REGISTER: { path: "/user/register/", nickname: "Registro"},
     USER_REGISTER_SUBMIT: { path: "/user/register/submit/", nickname: "Registro"},
 }
