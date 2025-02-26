@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { NavItem as ReactstrapNavItem } from 'reactstrap'
 
 const StyledNavItem = styled(({
+    zIndex,
     padding,
     paddingTop,
     paddingBottom,
@@ -37,6 +38,7 @@ const StyledNavItem = styled(({
     innerRef,
     ...props
 }) => <ReactstrapNavItem ref={innerRef} {...props} />)`
+    ${({ zIndex }) => zIndex ? `z-index: ${zIndex};` : ``}
     ${({ flex }) => flex ? `flex: ${flex};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}

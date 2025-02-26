@@ -9,7 +9,7 @@ import Top from './Top'
 
 import ROUTES from 'router/routes'
 
-import { ScrollToTopButton, CollapsibleSidebar, StoneTabletSidebar } from 'components'
+import { ScrollToTopButton, CollapsibleSidebar, MarbleTabletSidebar } from 'components'
 
 const Index = forwardRef(({children, ...props}, ref) => {
     const navigate = useNavigate()
@@ -25,7 +25,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
 
     return (
         <div ref={ref} {...props} className="index bg-primary">
-            <CollapsibleSidebar customSidebar={StoneTabletSidebar} sidebarChildren={<Sidebar />}>
+            <CollapsibleSidebar customSidebar={MarbleTabletSidebar} sidebarChildren={<Sidebar />}>
                 <Top />
 
                 <Content />

@@ -5,6 +5,7 @@ import { NavLink as ReactRouterNavLink } from 'react-router-dom'
 import ROUTES from 'router/routes'
 
 const StyledNavLink = styled(({
+    zIndex,
     animation,
     textShadow,
     width,
@@ -27,6 +28,7 @@ const StyledNavLink = styled(({
     onHover = {},
     ...props
 }) => <ReactRouterNavLink {...props} />)`
+    ${({ zIndex }) => zIndex ? `z-index: ${zIndex};` : ''};
     ${({ display }) => display ? `display: ${display};` : ''};
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ''};
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ''};
