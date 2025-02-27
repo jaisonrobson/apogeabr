@@ -4,7 +4,7 @@ import { useRouteLoaderData } from 'react-router-dom'
 import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
 import {
-    StoneTabletTwoBoard,
+    MarbleTabletBoard,
     Container,
     Row,
     Col,
@@ -28,13 +28,13 @@ const Overview = () => {
                 margin="0px 50px"
                 minWidth="300px"
             >
-                <StoneTabletTwoBoard padding="0px">
+                <MarbleTabletBoard padding="0px">
                     <Container
                         display="flex"
                         flexDirection="column"
                         justifyContent="center"
                         alignItems="center"
-                        className="unselectable"
+                        className="unselectable text-gray-200"
                         gap="7px"
                     >
                         <Row justifyContent="center">
@@ -59,7 +59,7 @@ const Overview = () => {
                             <Span>{user.country_code ? user.country_code : 'País não identificado'}</Span>
                         </Row>
                     </Container>
-                </StoneTabletTwoBoard>
+                </MarbleTabletBoard>
             </Col>
 
             <Col
@@ -72,13 +72,13 @@ const Overview = () => {
                 margin="0px 50px"
                 minWidth="550px"
             >
-                <StoneTabletTwoBoard>
+                <MarbleTabletBoard>
                     <Container
                         display="flex"
                         flexDirection="column"
                         justifyContent="center"
                         alignItems="center"
-                        className="unselectable"
+                        className="unselectable text-gray-200"
                     >
                         <Row>
                             <Col display="flex" flexDirection="column" gap="15px">
@@ -100,7 +100,7 @@ const Overview = () => {
                             </Col>
                         </Row>
                     </Container>
-                </StoneTabletTwoBoard>
+                </MarbleTabletBoard>
             </Col>
         </Row>        
     )

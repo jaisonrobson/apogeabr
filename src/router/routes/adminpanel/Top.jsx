@@ -12,7 +12,7 @@ import {
     Navbar,
     Nav,
     NavItem,
-    StoneTabletBoard,
+    MarbleTabletBoard,
     Container,
     TitleH2,
 } from 'components'
@@ -24,7 +24,7 @@ const Top = () => {
     return (
         <Navbar marginLeft={marginLeft} padding="0px 10rem" backgroundColor="transparent">
             {({ isShow }) => (
-                <StoneTabletBoard
+                <MarbleTabletBoard
                     width="100%"
                     height="100%"
                     cutPieces={[0, 1, 2]}
@@ -40,11 +40,11 @@ const Top = () => {
                                 alignItems="center"
                                 className="unselectable"
                             >
-                                <TitleH2 className='text-black' fontFamily='Papyrus'>{_.find(ROUTES, { path: addSlashIfNeeded(location.pathname) }).nickname || "Erro"}</TitleH2>
+                                <TitleH2 className='text-gray-300' fontFamily='Papyrus'>{_.find(ROUTES, { path: addSlashIfNeeded(location.pathname) }).nickname || "Erro"}</TitleH2>
                             </Container>
                         </NavItem>
                     </Nav>
-                </StoneTabletBoard>
+                </MarbleTabletBoard>
             )}
         </Navbar>
     )

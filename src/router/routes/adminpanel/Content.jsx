@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-import ProfileContentImage from 'images/layout/profile/profile_content.png'
+import AdminPanelContentImage from 'images/layout/adminpanel/adminpanel_content.jpg'
 
 import {
     Col,
@@ -14,7 +14,7 @@ import {
 const Content = () => (
     <SectionBackdrop
         height="100vh"
-        backgroundImage={`url(${ProfileContentImage})`}
+        backgroundImage={`url(${AdminPanelContentImage})`}
         gradientBackground="transparent"
         backgroundSize="cover"
         backgroundPosition="center"
@@ -23,7 +23,8 @@ const Content = () => (
         contentAlignmentProps={{ padding: '0', margin:"0" }}
     >
         <SectionBackdrop
-            backgroundImage={`url(${ProfileContentImage})`}
+            height="100vh"
+            backgroundImage={`url(${AdminPanelContentImage})`}
             gradientBackground="transparent"
             backgroundSize="cover"
             backgroundPosition="center"

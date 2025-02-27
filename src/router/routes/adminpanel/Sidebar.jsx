@@ -115,8 +115,7 @@ const Sidebar = () => (
                     direction="up"
                     noAdmin
                     togglerProperties={{
-                        color: 'white',
-                        
+                        color: 'white'
                     }}
                 />
             </Col>
