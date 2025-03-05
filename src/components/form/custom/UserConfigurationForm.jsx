@@ -9,7 +9,7 @@ import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
 import { FetcherForm, Input, FormattedInput, Row, Col } from 'components'
 
-import { loginPasswordValidation, userImageValidation, userPhoneNumberValidation, nameValidation } from 'validations'
+import { passwordValidation, loginValidation, userImageValidation, userPhoneNumberValidation, nameValidation } from 'validations'
 
 const SubmitButton = (props) => (
     <Input
@@ -39,9 +39,9 @@ const UserConfigurationForm = ({ children, ...props }) => {
         name: nameValidation.optional(),
         phone_number: userPhoneNumberValidation(user?.country_code).optional(),
         image: userImageValidation.optional(),
-        login: loginPasswordValidation.optional(),
-        password: loginPasswordValidation.optional(),
-        confirmPassword: loginPasswordValidation.optional(),
+        login: loginValidation.optional(),
+        password: passwordValidation.optional(),
+        confirmPassword: passwordValidation.optional(),
     }).superRefine(({ confirmPassword, password }, ctx) => {
         if (confirmPassword !== password) {
             ctx.addIssue({

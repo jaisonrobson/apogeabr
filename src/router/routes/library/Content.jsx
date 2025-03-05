@@ -116,7 +116,11 @@ const Content = () => (
                                 </Dropdown.Item>
 
                                 <Dropdown.Item>
-                                    Livros
+                                    Habilidades
+                                </Dropdown.Item>
+
+                                <Dropdown.Item>
+                                    Caracteristicas
                                 </Dropdown.Item>
 
                             </Dropdown.Menu>

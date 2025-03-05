@@ -5,12 +5,12 @@ import ROUTES from 'router/routes'
 
 import { FetcherForm, Input, FormattedInput, Row } from 'components'
 
-import { loginPasswordValidation, emailValidation } from 'validations'
+import { passwordValidation, loginValidation, emailValidation } from 'validations'
 
 const registerValidationSchema = z.object({
-    login: loginPasswordValidation,
-    password: loginPasswordValidation,
-    confirmPassword: loginPasswordValidation,
+    login: loginValidation,
+    password: passwordValidation,
+    confirmPassword: passwordValidation,
     email: emailValidation,
 }).superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
