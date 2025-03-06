@@ -24,6 +24,20 @@ import ProfileImages from './router/routes/profile/images/Index'
 import ProfileVideos from './router/routes/profile/videos/Index'
 import AdminPanel from './router/routes/adminpanel/Index'
 import AdminPanelOverview from './router/routes/adminpanel/overview/Index'
+import AdminPanelLibraryAndMap from './router/routes/adminpanel/libraryandmap/Index'
+import AdminPanelLibraryAndMapLanguages from './router/routes/adminpanel/libraryandmap/languages/Index'
+import AdminPanelLibraryAndMapIcons from './router/routes/adminpanel/libraryandmap/icons/Index'
+import AdminPanelLibraryAndMapLocations from './router/routes/adminpanel/libraryandmap/locations/Index'
+import AdminPanelLibraryAndMapTraits from './router/routes/adminpanel/libraryandmap/traits/Index'
+import AdminPanelLibraryAndMapEvents from './router/routes/adminpanel/libraryandmap/events/Index'
+import AdminPanelLibraryAndMapNatures from './router/routes/adminpanel/libraryandmap/natures/Index'
+import AdminPanelLibraryAndMapNpcs from './router/routes/adminpanel/libraryandmap/npcs/Index'
+import AdminPanelLibraryAndMapQuests from './router/routes/adminpanel/libraryandmap/quests/Index'
+import AdminPanelLibraryAndMapAbilities from './router/routes/adminpanel/libraryandmap/abilities/Index'
+import AdminPanelLibraryAndMapMonsters from './router/routes/adminpanel/libraryandmap/monsters/Index'
+import AdminPanelLibraryAndMapItemCategories from './router/routes/adminpanel/libraryandmap/itemcategories/Index'
+import AdminPanelLibraryAndMapItems from './router/routes/adminpanel/libraryandmap/items/Index'
+
 
 import {
     sessionLoader,
@@ -196,6 +210,60 @@ const router = createBrowserRouter([
                     {
                         path: ROUTES.USER_ADMIN_PANEL_OVERVIEW.path,
                         element: <AdminPanelOverview />,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP.path,
+                        element: <AdminPanelLibraryAndMap />,
+                        children: [
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES.path,
+                                element: <AdminPanelLibraryAndMapLanguages />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS.path,
+                                element: <AdminPanelLibraryAndMapIcons />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS.path,
+                                element: <AdminPanelLibraryAndMapLocations />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_TRAITS.path,
+                                element: <AdminPanelLibraryAndMapTraits />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_EVENTS.path,
+                                element: <AdminPanelLibraryAndMapEvents />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NATURES.path,
+                                element: <AdminPanelLibraryAndMapNatures />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NPCS.path,
+                                element: <AdminPanelLibraryAndMapNpcs />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_QUESTS.path,
+                                element: <AdminPanelLibraryAndMapQuests />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ABILITIES.path,
+                                element: <AdminPanelLibraryAndMapAbilities />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_MONSTERS.path,
+                                element: <AdminPanelLibraryAndMapMonsters />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMCATEGORIES.path,
+                                element: <AdminPanelLibraryAndMapItemCategories />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMS.path,
+                                element: <AdminPanelLibraryAndMapItems />,
+                            },
+                        ],
                     },
                 ],
             }

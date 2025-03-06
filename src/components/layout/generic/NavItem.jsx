@@ -29,7 +29,7 @@ const StyledNavItem = styled(({
     borderLeft,
     borderRight,
     fontFamily,
-    flex,
+    display,
     flexGrow,
     flexDirection,
     justifyContent,
@@ -39,7 +39,7 @@ const StyledNavItem = styled(({
     ...props
 }) => <ReactstrapNavItem ref={innerRef} {...props} />)`
     ${({ zIndex }) => zIndex ? `z-index: ${zIndex};` : ``}
-    ${({ flex }) => flex ? `flex: ${flex};` : ``}
+    ${({ display }) => display ? `display: ${display};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}

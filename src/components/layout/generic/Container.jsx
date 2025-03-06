@@ -16,6 +16,7 @@ const StyledContainer = styled(({
     marginBottom,
     width,
     height,
+    minHeight,
     justifyContent,
     flexDirection,
     flexGrow,
@@ -48,6 +49,7 @@ const StyledContainer = styled(({
 
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
+    ${({ minHeight }) => minHeight ? `min-height: ${minHeight};` : ``}
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
     ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}

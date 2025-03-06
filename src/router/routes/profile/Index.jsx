@@ -9,7 +9,9 @@ import Top from './Top'
 
 import ROUTES from 'router/routes'
 
-import { ScrollToTopButton, CollapsibleSidebar, StoneTabletSidebar } from 'components'
+import { ScrollToTopButton, LeftCollapsibleSidebar, StoneTabletSidebar, LeftCollapsible } from 'components'
+
+const LeftStoneTabletSidebar = (props) => <StoneTabletSidebar collapsibleComponent={LeftCollapsible} {...props}/>
 
 const Index = forwardRef(({children, ...props}, ref) => {
     const navigate = useNavigate()
@@ -23,13 +25,13 @@ const Index = forwardRef(({children, ...props}, ref) => {
 
     return (
         <div ref={ref} {...props} className="index bg-primary">
-            <CollapsibleSidebar customSidebar={StoneTabletSidebar} sidebarChildren={<Sidebar />}>
+            <LeftCollapsibleSidebar customSidebar={LeftStoneTabletSidebar} sidebarChildren={<Sidebar />}>
                 <Top />
 
                 <Content />
 
                 <ScrollToTopButton />
-            </CollapsibleSidebar>
+            </LeftCollapsibleSidebar>
         </div>
     )
 })

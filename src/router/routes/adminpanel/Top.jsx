@@ -6,7 +6,7 @@ import ROUTES from 'router/routes'
 
 import { addSlashIfNeeded } from 'util/string'
 
-import { CollapsibleContext } from 'contexts'
+import { FirstCollapsibleContext } from 'contexts'
 
 import {
     Navbar,
@@ -18,11 +18,11 @@ import {
 } from 'components'
 
 const Top = () => {
-    const { marginLeft } = useContext(CollapsibleContext)
+    const { marginLeft, marginRight } = useContext(FirstCollapsibleContext)
     const location = useLocation()
 
     return (
-        <Navbar marginLeft={marginLeft} padding="0px 10rem" backgroundColor="transparent">
+        <Navbar marginLeft={marginLeft} marginRight={marginRight} padding="0px 10rem" backgroundColor="transparent">
             {({ isShow }) => (
                 <MarbleTabletBoard
                     width="100%"

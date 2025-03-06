@@ -1,5 +1,5 @@
 import React from 'react'
-import { faCrown, faCircleUser, faGear, faPeopleGroup, faHouse, faHandshake, faImages, faPhotoFilm, faAddressCard, faMoneyBillWaveAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCrown, faHouse, faAddressCard, faBook } from '@fortawesome/free-solid-svg-icons'
 
 import ROUTES from 'router/routes'
 
@@ -11,6 +11,7 @@ import {
     NavItem,
     NavLink,
     Icon,
+    Span,
     UserDropdown,
 } from 'components'
 
@@ -29,11 +30,11 @@ const Sidebar = () => (
                     size="2x"
                 />
 
-                <span className="fs-1">
+                <Span className="fs-1" zIndex="1">
                     <strong>
                         Admin
                     </strong>
-                </span>
+                </Span>
             </Col>
         </Row>
 
@@ -101,6 +102,35 @@ const Sidebar = () => (
                             />
 
                             Geral
+                        </NavLink>
+                    </NavItem>
+
+                    <NavItem width="100%" margin="7px 0px" zIndex="1">
+                        <NavLink
+                            to={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP.path}
+                            display="flex"
+                            justifyContent="space-evenly"
+                            alignItems="center"
+                            opacity="1"
+                            color="white"
+                            hoverColor="gray"
+                            textShadow="1px 1px 8px white"
+                            hoverTextShadow="2px 2px 8px white"
+                            activeColor="gray"
+                            activeBackgroundColor="rgba(255,255,255,.7)"
+                            activeBorderRadius="10px"
+                            onHover={{ opacity: .5 }}
+                            className="unselectable"
+                            fontFamily="Retro Computer"
+                            fontSize="12px"
+                        >
+                            <Icon
+                                icon={faBook}
+                                color="inherit"
+                                size="2x"
+                            />
+
+                            Biblioteca & Mapa
                         </NavLink>
                     </NavItem>
                 </Nav>

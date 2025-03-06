@@ -6,7 +6,7 @@ import ROUTES from 'router/routes'
 
 import { addSlashIfNeeded } from 'util/string'
 
-import { CollapsibleContext } from 'contexts'
+import { FirstCollapsibleContext } from 'contexts'
 
 import {
     Navbar,
@@ -18,7 +18,7 @@ import {
 } from 'components'
 
 const Top = () => {
-    const { marginLeft } = useContext(CollapsibleContext)
+    const { marginLeft } = useContext(FirstCollapsibleContext)
     const location = useLocation()
 
     return (

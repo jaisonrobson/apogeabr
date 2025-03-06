@@ -17,6 +17,7 @@ const StyledOverlay = styled(({
     marginBottom,
     minWidth,
     background,
+    minHeight,
     ...props
 }) => <div {...props} />)`
     ${({ position }) => position ? `position: ${position};` : ''}
@@ -33,6 +34,7 @@ const StyledOverlay = styled(({
     ${({ marginBottom }) => marginBottom ? `margin-bottom: ${marginBottom};` : ``}
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
     ${({ minWidth }) => minWidth ? `min-width: ${minWidth};` : ``}
+    ${({ minHeight }) => minHeight ? `min-height: ${minHeight};` : ``}
     ${({ background }) => background ? `background: ${background};` : 'background: #00000050;'}
 `
 

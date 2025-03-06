@@ -45,8 +45,10 @@ const StyledRow = styled(({
     opacity,
     cursor,
     onHover = false,
+    zIndex,
     ...props
 }) => <ReactstrapRow {...props} />)`
+    ${({ zIndex }) => zIndex ? `z-index: ${zIndex};` : ``}
     ${({ transition }) => transition ? `transition: ${transition};` : ``}
 
     ${({ position }) => position ? `position: ${position};` : ``}

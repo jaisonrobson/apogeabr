@@ -23,7 +23,6 @@ const Content = () => (
         contentAlignmentProps={{ padding: '0', margin:"0" }}
     >
         <SectionBackdrop
-            height="100vh"
             backgroundImage={`url(${AdminPanelContentImage})`}
             gradientBackground="transparent"
             backgroundSize="cover"
