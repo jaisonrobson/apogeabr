@@ -66,10 +66,13 @@ const Top = () => {
                         session?.token
                         ? (
                             <UserDropdown
+                                light
                                 togglerProperties={{
-                                    color: "white",
                                     justifyContent: 'space-around',
                                     width: '200px',
+                                    onHover: {
+                                        color: 'gray',
+                                    },
                                 }}
                             />
                         )

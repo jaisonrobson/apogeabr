@@ -9,7 +9,7 @@ import ROUTES from 'router/routes'
 
 import { Dropdown, Image, Span, Icon } from 'components'
 
-const UserDropdown = ({ togglerProperties = {}, noProfile = false, noAdmin = false, ...props }) => {
+const UserDropdown = ({ togglerProperties = {}, light=false, noProfile = false, noAdmin = false, ...props }) => {
     const navigate = useNavigate()
     const { user } = useRouteLoaderData("root")
 
@@ -34,24 +34,33 @@ const UserDropdown = ({ togglerProperties = {}, noProfile = false, noAdmin = fal
     }
 
     return (
-        <Dropdown {...props}>
+        <Dropdown
+            backgroundColor={"undefined"}
+            color={!light ? "black" : "white"}
+            onHover={{
+                backgroundColor: "undefined",
+                color: !light ? "white" : "black",
+            }}
+            {...props}
+        >
             <Dropdown.Toggler
                 style={{
                     margin: 0,
                     padding: 0,
                 }}
                 width="100%"
-                color="black"
-                backgroundColor="transparent"
-                hoverColor="gray"
-                hoverBackgroundColor="transparent"
-                hoverOpacity=".5"
                 fontSize="12px"
                 componentColor="none"
                 display="flex"
                 flexDirection="row"
                 alignItems="center"
                 justifyContent="space-evenly"
+                color={!light ? "black" : "white"}
+                backgroundColor="undefined"
+                onHover={{
+                    backgroundColor: "undefined",
+                    color: !light ? "white" : "black",
+                }}
                 {...togglerProperties}
             >
                 <Image
@@ -66,7 +75,7 @@ const UserDropdown = ({ togglerProperties = {}, noProfile = false, noAdmin = fal
                 <Icon icon={faCaretDown} size="xl" color="inherit" marginTop="-4px" />
             </Dropdown.Toggler>
 
-            <Dropdown.Menu className="unselectable" style={{ width: '100%' }} dark>
+            <Dropdown.Menu className="unselectable" style={{ width: '100%' }}>
                 {
                     !noProfile
                     ? (

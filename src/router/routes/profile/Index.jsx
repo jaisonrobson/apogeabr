@@ -23,7 +23,7 @@ const Index = forwardRef(({children, ...props}, ref) => {
 
     }, [session?.token, navigate])
 
-    return (
+    return !session?.token ? null : (
         <div ref={ref} {...props} className="index bg-primary">
             <LeftCollapsibleSidebar customSidebar={LeftStoneTabletSidebar} sidebarChildren={<Sidebar />}>
                 <Top />

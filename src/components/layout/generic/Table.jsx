@@ -278,6 +278,8 @@ const StyledTableRow = styled(({
     borderRadius,
     background,
     backgroundColor,
+    oddBackgroundColor,
+    evenBackgroundColor,
     backgroundSize,
     color,
     borderBottom,
@@ -311,6 +313,7 @@ const StyledTableRow = styled(({
     ${({ border }) => border ? `border: ${border};` : ``}
     ${({ borderRadius }) => borderRadius ? `border-radius: ${borderRadius};` : ``}
     ${({ background }) => background ? `background: ${background};` : ``}    
+    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}    
     ${({ backgroundSize }) => backgroundSize ? `background-size: ${backgroundSize};` : ``}
     ${({ color }) => color ? `color: ${color};` : ``}
     ${({ borderBottom }) => borderBottom ? `border-bottom: ${borderBottom};` : ``}
@@ -326,11 +329,11 @@ const StyledTableRow = styled(({
     ${({ opacity }) => opacity ? `opacity: ${opacity};` : ``}
 
     &:nth-child(odd) {
-        ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #00000010;`}
+        ${({ oddBackgroundColor }) => oddBackgroundColor ? `background-color: ${oddBackgroundColor};` : `background-color: #00000010;`}
     }
 
     &:nth-child(even) {
-        ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #00000030;`}
+        ${({ evenBackgroundColor }) => evenBackgroundColor ? `background-color: ${evenBackgroundColor};` : `background-color: #00000030;`}
     }
 
     ${({ onHover }) => onHover ? `&:hover {
@@ -637,7 +640,17 @@ const TableBody = (props) => <StyledTableBody {...props} />
 const TableFooter = (props) => <StyledTableFooter {...props} />
 const TableColumnGroup = (props) => <colgroup {...props} />
 const TableColumn = (props) => <col {...props} />
-const TableRow = (props) => <StyledTableRow {...props} />
+const TableRow = ({ light, ...props }) => (
+    <StyledTableRow
+        oddBackgroundColor={light ? "#ffffff40" : "#00000010"}
+        evenBackgroundColor={light ? "#ffffff60" : "00000030"}
+        onHover={{
+            backgroundColor: light ? "#ffffff75" : "00000080",
+            color: light ? "black" : "white",
+        }}
+        {...props}
+    />
+)
 const TableCell = (props) => <StyledTableCell {...props} />
 const TableCellHeader = (props) => <StyledTableCellHeader {...props} />
 

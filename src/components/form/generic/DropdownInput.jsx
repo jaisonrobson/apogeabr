@@ -7,9 +7,12 @@ import { Dropdown, Image, Span, Icon } from 'components'
 
 const DropdownInput = ({
     togglerProperties = {},
+    menuProperties={},
+    itemProperties={},
     options = ["Option 1"],
     setValue = () => {},
     name,
+    light = false,
     ...props
 }) => {
     const [selectedOption, setSelectedOption] = useState(0)
@@ -21,24 +24,20 @@ const DropdownInput = ({
     }
 
     return (
-        <Dropdown {...props}>
+        <Dropdown light={light} {...props}>
             <Dropdown.Toggler
                 style={{
                     margin: 0,
                     padding: 0,
                 }}
                 width="100%"
-                color="black"
-                backgroundColor="#00000010"
-                hoverColor="gray"
-                hoverBackgroundColor="lightgray"
-                hoverOpacity=".5"
                 fontSize="12px"
                 componentColor="none"
                 display="flex"
                 flexDirection="row"
                 alignItems="center"
                 justifyContent="space-around"
+                light={light}
                 {...togglerProperties}
             >
                 <Span>{options[selectedOption]}</Span>
@@ -46,10 +45,20 @@ const DropdownInput = ({
                 <Icon icon={faCaretDown} size="xl" color="inherit" marginTop="-4px" />
             </Dropdown.Toggler>
 
-            <Dropdown.Menu className="unselectable" style={{ width: '100%' }}>
+            <Dropdown.Menu
+                light={light}
+                className="unselectable"
+                style={{ width: '100%' }}
+                {...menuProperties}
+            >
                 {
                     _.map(options, (option, idx) => (
-                        <Dropdown.Item key={option} onClick={() => onSelect(idx)}>
+                        <Dropdown.Item
+                            light={light}
+                            key={option}
+                            onClick={() => onSelect(idx)}
+                            {...itemProperties}
+                        >
                             {option}
                         </Dropdown.Item>
                     ))

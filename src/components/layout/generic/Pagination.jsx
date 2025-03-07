@@ -280,7 +280,27 @@ const StyledPaginationLink = styled(({
 
 const Pagination = (props) => <StyledPagination {...props} />
 
-Pagination.Item = StyledPaginationItem
-Pagination.Link = StyledPaginationLink
+const PaginationItem = ({ light, ...props }) => (
+    <StyledPaginationItem
+        color={!light ? "black" : "white"}
+        backgroundColor={!light ? "#00000020" : "#ffffff20"}
+        {...props}
+    />
+)
+
+const PaginationLink = ({ light, ...props }) => (
+    <StyledPaginationLink
+        color={!light ? "black" : "white"}
+        backgroundColor={!light ? "#00000030" : "#ffffff30"}
+        onHover={{
+            color: !light ? "white" : "black",
+            backgroundColor: !light ? "#00000080" : "#ffffff80",
+        }}
+        {...props}
+    />
+)
+
+Pagination.Item = PaginationItem
+Pagination.Link = PaginationLink
 
 export default Pagination

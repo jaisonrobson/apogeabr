@@ -9,6 +9,8 @@ import { DefaultPaginationContext } from 'contexts'
 const PerPageDropdown = ({
     context = DefaultPaginationContext,
     endpoint,
+    containerStyle,
+    togglerProperties,
     options = [5, 10, 15, 20, 25, 35, 50],
     ...props
 }) => {
@@ -60,12 +62,13 @@ const PerPageDropdown = ({
                 maxHeight: '38px',
                 width: '100px',
                 minWidth:"200px",
-                backgroundColor: '#00000020',                
+                ...containerStyle,
             }}
             togglerProperties={{
                 height:"38px",
                 maxHeight: '38px',
                 fontSize: '14px',
+                ...togglerProperties,
             }}
             setValue={onSelect}
             options={options}
@@ -74,7 +77,14 @@ const PerPageDropdown = ({
     )
 }
 
-const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, maxNavigationalPagesPerDirection = 3, ...props }) => {
+const ConnectedPagination = ({
+    context = DefaultPaginationContext,
+    endpoint,
+    themeItemProps={light: false},
+    themeLinkProps={light: false},
+    maxNavigationalPagesPerDirection = 3,
+    ...props
+}) => {
     const {
         payload,
         page,
@@ -150,19 +160,19 @@ const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, max
 
     return (
         <Pagination {...props}>
-            <Pagination.Item disabled={page === 1}>
-                <Pagination.Link first onClick={() => onNavigate(1)} />
+            <Pagination.Item {...themeItemProps} disabled={page === 1}>
+                <Pagination.Link {...themeLinkProps} first onClick={() => onNavigate(1)} />
             </Pagination.Item>
 
-            <Pagination.Item disabled={page === 1}>
-                <Pagination.Link previous onClick={() => onNavigate(page - 1)} />
+            <Pagination.Item {...themeItemProps} disabled={page === 1}>
+                <Pagination.Link {...themeLinkProps} previous onClick={() => onNavigate(page - 1)} />
             </Pagination.Item>
 
             {_.times(maxNavigationalPagesPerDirection, (pageNumber) => (
                 (page - (pageNumber+1) > 0)
                     ? (
-                        <Pagination.Item key={page - (pageNumber+1)}>
-                            <Pagination.Link onClick={() => onNavigate((page - (pageNumber+1)))}>
+                        <Pagination.Item {...themeItemProps} key={page - (pageNumber+1)}>
+                            <Pagination.Link {...themeLinkProps} onClick={() => onNavigate((page - (pageNumber+1)))}>
                                 {page - (pageNumber+1)}
                             </Pagination.Link>
                         </Pagination.Item>
@@ -170,8 +180,8 @@ const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, max
                     : null
             )).reverse()}
 
-            <Pagination.Item className="active" disabled={true}>
-                <Pagination.Link>
+            <Pagination.Item {...themeItemProps} className="active" disabled={true}>
+                <Pagination.Link {...themeLinkProps}>
                     {page}
                 </Pagination.Link>
             </Pagination.Item>
@@ -179,8 +189,8 @@ const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, max
             {_.times(maxNavigationalPagesPerDirection, (pageNumber) => (
                 (page + (pageNumber+1) <= totalPages)
                     ? (
-                        <Pagination.Item key={page + (pageNumber+1)}>
-                            <Pagination.Link onClick={() => onNavigate((page + (pageNumber+1)))}>
+                        <Pagination.Item {...themeItemProps} key={page + (pageNumber+1)}>
+                            <Pagination.Link {...themeLinkProps} onClick={() => onNavigate((page + (pageNumber+1)))}>
                                 {page + (pageNumber+1)}
                             </Pagination.Link>
                         </Pagination.Item>
@@ -188,12 +198,12 @@ const ConnectedPagination = ({ context = DefaultPaginationContext, endpoint, max
                     : null
             ))}
 
-            <Pagination.Item disabled={page === totalPages}>
-                <Pagination.Link next onClick={() => onNavigate(page + 1)} />
+            <Pagination.Item {...themeItemProps} disabled={page === totalPages}>
+                <Pagination.Link {...themeLinkProps} next onClick={() => onNavigate(page + 1)} />
             </Pagination.Item>
 
-            <Pagination.Item disabled={page === totalPages}>
-                <Pagination.Link last onClick={() => onNavigate(totalPages)} />
+            <Pagination.Item {...themeItemProps} disabled={page === totalPages}>
+                <Pagination.Link {...themeLinkProps} last onClick={() => onNavigate(totalPages)} />
             </Pagination.Item>
         </Pagination>
     )

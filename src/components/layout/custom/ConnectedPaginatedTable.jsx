@@ -4,14 +4,14 @@ import { ConnectedPagination, Table, Row, Col } from 'components'
 
 import { withDefaultPaginationContext, DefaultPaginationContext } from 'contexts'
 
-const ConnectedPaginatedTable = ({ endpoint, children, ...props }) => {
+const ConnectedPaginatedTable = ({ endpoint, children, light = false, ...props }) => {
     const paginationProps = useContext(DefaultPaginationContext)
 
     return (
         <Row>
             <Row>
                 <Col>
-                    <Table {...props}>
+                    <Table color={!light ? "undefined" : "white"} {...props}>
                         {children(paginationProps)}
                     </Table>
                 </Col>
@@ -19,11 +19,20 @@ const ConnectedPaginatedTable = ({ endpoint, children, ...props }) => {
 
             <Row>
                 <Col display="flex" justifyContent="center">
-                    <ConnectedPagination context={DefaultPaginationContext} endpoint={endpoint} />
+                    <ConnectedPagination
+                        context={DefaultPaginationContext}
+                        endpoint={endpoint}
+                        themeItemProps={{ light }}
+                        themeLinkProps={{ light }}
+                    />  
                 </Col>
 
                 <Col display="flex" justifyContent="center">
-                    <ConnectedPagination.PerPageDropdown context={DefaultPaginationContext} endpoint={endpoint} />
+                    <ConnectedPagination.PerPageDropdown
+                        context={DefaultPaginationContext}
+                        endpoint={endpoint}
+                        light={light}
+                    />
                 </Col>
             </Row>
         </Row>

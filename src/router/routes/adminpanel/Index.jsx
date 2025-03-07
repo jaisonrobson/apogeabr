@@ -22,10 +22,9 @@ const Index = forwardRef(({children, ...props}, ref) => {
             navigate(ROUTES.HOME.path)
         else if (session?.user.privilege.value < 5)
             navigate(ROUTES.HOME.path)
-
     }, [session?.token, navigate])
 
-    return (
+    return session?.user.privilege.value < 5 ? null : (
         <div ref={ref} {...props} className="index bg-primary">
             <LeftCollapsibleSidebar customSidebar={LeftMarbleTabletSidebar} sidebarChildren={<Sidebar />} useControls>
                 <Top />

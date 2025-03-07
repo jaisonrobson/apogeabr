@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { faLanguage, faIcons, faLocationDot, faSitemap, faCalendar, faWind, faUsers, faQuestion, faFire, faSpaghettiMonsterFlying, faList, faGavel } from '@fortawesome/free-solid-svg-icons'
+import { useRouteLoaderData } from 'react-router-dom'
 
 import { FirstCollapsibleContext, SecondCollapsibleContext } from 'contexts'
 
@@ -13,10 +14,10 @@ import {
     NavItem,
     NavLink,
     Icon,
-    UserDropdown,
 } from 'components'
 
 const Sidebar = () => {
+    const { user } = useRouteLoaderData("root")
     const { setMarginRight } = useContext(FirstCollapsibleContext)
     const { marginRight } = useContext(SecondCollapsibleContext)
 
@@ -46,36 +47,44 @@ const Sidebar = () => {
             <hr style={{ color: 'white' }} />
 
             <Row className="mb-auto">
-                <Col>
+                <Col>                    
                     <Nav display="flex" flexDirection="column">
-                        <NavItem width="100%" margin="7px 0px" zIndex="1">
-                            <NavLink
-                                to={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES.path}
-                                display="flex"
-                                justifyContent="space-evenly"
-                                alignItems="center"
-                                opacity="1"
-                                color="white"
-                                hoverColor="gray"
-                                textShadow="1px 1px 8px white"
-                                hoverTextShadow="2px 2px 8px white"
-                                activeColor="gray"
-                                activeBackgroundColor="rgba(255,255,255,.7)"
-                                activeBorderRadius="10px"
-                                onHover={{ opacity: .5 }}
-                                className="unselectable"
-                                fontFamily="Retro Computer"
-                                fontSize="12px"
-                            >
-                                <Icon
-                                    icon={faLanguage}
-                                    color="inherit"
-                                    size="2x"
-                                />
+                        {
+                            user?.privilege.value >= 20
+                            ? (
+                                <NavItem width="100%" margin="7px 0px" zIndex="1">
+                                    <NavLink
+                                        to={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES.path}
+                                        display="flex"
+                                        justifyContent="space-evenly"
+                                        alignItems="center"
+                                        opacity="1"
+                                        color="white"
+                                        hoverColor="gray"
+                                        textShadow="1px 1px 8px white"
+                                        hoverTextShadow="2px 2px 8px white"
+                                        activeColor="gray"
+                                        activeBackgroundColor="rgba(255,255,255,.7)"
+                                        activeBorderRadius="10px"
+                                        onHover={{ opacity: .5 }}
+                                        className="unselectable"
+                                        fontFamily="Retro Computer"
+                                        fontSize="12px"
+                                    >
+                                        <Icon
+                                            icon={faLanguage}
+                                            color="inherit"
+                                            size="2x"
+                                        />
 
-                                Idiomas
-                            </NavLink>
-                        </NavItem>
+                                        Idiomas
+                                    </NavLink>
+                                </NavItem>
+                            )
+                            : (
+                                null
+                            )
+                        }
 
                         <NavItem width="100%" margin="7px 0px" zIndex="1">
                             <NavLink
@@ -193,34 +202,38 @@ const Sidebar = () => {
                             </NavLink>
                         </NavItem>
 
-                        <NavItem width="100%" margin="7px 0px" zIndex="1">
-                            <NavLink
-                                to={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NATURES.path}
-                                display="flex"
-                                justifyContent="space-evenly"
-                                alignItems="center"
-                                opacity="1"
-                                color="white"
-                                hoverColor="gray"
-                                textShadow="1px 1px 8px white"
-                                hoverTextShadow="2px 2px 8px white"
-                                activeColor="gray"
-                                activeBackgroundColor="rgba(255,255,255,.7)"
-                                activeBorderRadius="10px"
-                                onHover={{ opacity: .5 }}
-                                className="unselectable"
-                                fontFamily="Retro Computer"
-                                fontSize="12px"
-                            >
-                                <Icon
-                                    icon={faWind}
-                                    color="inherit"
-                                    size="2x"
-                                />
+                        {
+                            user?.privilege.value < 20 ? null : (
+                                <NavItem width="100%" margin="7px 0px" zIndex="1">
+                                    <NavLink
+                                        to={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NATURES.path}
+                                        display="flex"
+                                        justifyContent="space-evenly"
+                                        alignItems="center"
+                                        opacity="1"
+                                        color="white"
+                                        hoverColor="gray"
+                                        textShadow="1px 1px 8px white"
+                                        hoverTextShadow="2px 2px 8px white"
+                                        activeColor="gray"
+                                        activeBackgroundColor="rgba(255,255,255,.7)"
+                                        activeBorderRadius="10px"
+                                        onHover={{ opacity: .5 }}
+                                        className="unselectable"
+                                        fontFamily="Retro Computer"
+                                        fontSize="12px"
+                                    >
+                                        <Icon
+                                            icon={faWind}
+                                            color="inherit"
+                                            size="2x"
+                                        />
 
-                                Naturezas
-                            </NavLink>
-                        </NavItem>
+                                        Naturezas
+                                    </NavLink>
+                                </NavItem>
+                            )
+                        }                        
 
                         <NavItem width="100%" margin="7px 0px" zIndex="1">
                             <NavLink
@@ -338,34 +351,36 @@ const Sidebar = () => {
                             </NavLink>
                         </NavItem>
 
-                        <NavItem width="100%" margin="7px 0px" zIndex="1">
-                            <NavLink
-                                to={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMCATEGORIES.path}
-                                display="flex"
-                                justifyContent="space-evenly"
-                                alignItems="center"
-                                opacity="1"
-                                color="white"
-                                hoverColor="gray"
-                                textShadow="1px 1px 8px white"
-                                hoverTextShadow="2px 2px 8px white"
-                                activeColor="gray"
-                                activeBackgroundColor="rgba(255,255,255,.7)"
-                                activeBorderRadius="10px"
-                                onHover={{ opacity: .5 }}
-                                className="unselectable"
-                                fontFamily="Retro Computer"
-                                fontSize="12px"
-                            >
-                                <Icon
-                                    icon={faList}
-                                    color="inherit"
-                                    size="2x"
-                                />
+                        { user?.privilege.value < 20 ? null : (
+                            <NavItem width="100%" margin="7px 0px" zIndex="1">
+                                <NavLink
+                                    to={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMCATEGORIES.path}
+                                    display="flex"
+                                    justifyContent="space-evenly"
+                                    alignItems="center"
+                                    opacity="1"
+                                    color="white"
+                                    hoverColor="gray"
+                                    textShadow="1px 1px 8px white"
+                                    hoverTextShadow="2px 2px 8px white"
+                                    activeColor="gray"
+                                    activeBackgroundColor="rgba(255,255,255,.7)"
+                                    activeBorderRadius="10px"
+                                    onHover={{ opacity: .5 }}
+                                    className="unselectable"
+                                    fontFamily="Retro Computer"
+                                    fontSize="12px"
+                                >
+                                    <Icon
+                                        icon={faList}
+                                        color="inherit"
+                                        size="2x"
+                                    />
 
-                                Categorias de Itens
-                            </NavLink>
-                        </NavItem>
+                                    Categorias de Itens
+                                </NavLink>
+                            </NavItem>
+                        )}
 
                         <NavItem width="100%" margin="7px 0px" zIndex="1">
                             <NavLink

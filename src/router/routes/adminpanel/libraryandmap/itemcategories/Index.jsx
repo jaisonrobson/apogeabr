@@ -1,5 +1,7 @@
-import React from 'react'
-import { useRouteLoaderData } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useNavigate, useRouteLoaderData } from 'react-router-dom'
+
+import ROUTES from 'router/routes'
 
 import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
 
@@ -14,7 +16,13 @@ import {
 } from 'components'
 
 const Overview = () => {
+    const navigate = useNavigate()
     const { user } = useRouteLoaderData("root")
+
+    useEffect(() => {
+        if (user.privilege.value < 20)
+            navigate(ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP.path)
+    }, [user, navigate])
 
     return (
         <Row justifyContent="center">

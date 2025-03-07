@@ -144,8 +144,11 @@ const Sidebar = () => (
                 <UserDropdown
                     direction="up"
                     noAdmin
+                    light
                     togglerProperties={{
-                        color: 'white'
+                        onHover: {
+                            color: 'gray',
+                        },
                     }}
                 />
             </Col>
