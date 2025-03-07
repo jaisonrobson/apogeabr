@@ -22,6 +22,7 @@ const StyledDiv = styled(({
     backgroundColor,
     display,
     flexDirection,
+    gap,
     flexGrow,
     justifyContent,
     alignItems,
@@ -50,6 +51,7 @@ const StyledDiv = styled(({
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
     ${({ justifyContent }) => justifyContent ? `justify-content: ${justifyContent};` : ``}
     ${({ alignItems }) => alignItems ? `align-items: ${alignItems};` : ``}
+    ${({ gap }) => gap ? `gap: ${gap};` : ``}
 
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}

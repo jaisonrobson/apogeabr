@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef, useRef, useState } from 'react'
 import styled from 'styled-components'
 import {
     Table as ReactstrapTable,
@@ -651,10 +651,24 @@ const TableRow = ({ light, ...props }) => (
         {...props}
     />
 )
-const TableCell = (props) => <StyledTableCell {...props} />
+const TableCell = ({ childrenAsFunction = false, children, ...props }) => {
+    const cellRef = useRef(null)
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+        <StyledTableCell
+            ref={cellRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            {...props}
+        >
+            {childrenAsFunction ? children({ isHovered }) : children}
+        </StyledTableCell>
+    )
+}
 const TableCellHeader = (props) => <StyledTableCellHeader {...props} />
 
-const Table = (props) => <StyledTable {...props} />
+const Table = forwardRef((props, ref) => <StyledTable innerRef={ref} {...props} />)
 
 Table.Header = TableHeader
 Table.Body = TableBody

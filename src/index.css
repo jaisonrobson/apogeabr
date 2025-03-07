@@ -33,3 +33,9 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.modal-content {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}

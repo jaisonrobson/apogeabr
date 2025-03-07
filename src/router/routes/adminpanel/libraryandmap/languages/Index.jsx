@@ -2,6 +2,7 @@ import React, { useEffect, Fragment, useContext } from 'react'
 import _ from 'lodash'
 import axios from "axios"
 import { useNavigate, useRouteLoaderData } from 'react-router-dom'
+import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 
 import ROUTES from 'router/routes'
 
@@ -21,7 +22,33 @@ import {
     UserImageForm,
     ImageInput,
     ConnectedPaginatedTable,
+    Icon,
+    Div,
+    Modal,
+    Span,
+    Button,
 } from 'components'
+
+const AddRecordTableCell = ({ headerCount, ...props }) => (
+    <Table.Cell colSpan={headerCount} childrenAsFunction {...props}>
+        {({ isHovered }) => (
+            <Div
+                width="100%"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                gap="15px"                                                                    
+            >
+                <Icon
+                    icon={faSquarePlus}
+                    color={isHovered ? "black" : "white"}
+                />
+
+                Adicionar novo registro
+            </Div>
+        )}
+    </Table.Cell>
+)
 
 const Overview = () => {
     const { formatDateTime, translate } = useContext(I18nContext)
@@ -52,13 +79,17 @@ const Overview = () => {
                                         alignItems='center'
                                         justifyContent='center'
                                     >
-                                        <ConnectedPaginatedTable light endpoint={`${[process.env.REACT_APP_BACKEND_HOST]}/subscriptions`}>
-                                            {({ payload, isLoading }) => (
+                                        <ConnectedPaginatedTable light endpoint={`${[process.env.REACT_APP_BACKEND_HOST]}/locales`}>
+                                            {({ payload, isLoading, headerCount }) => (
                                                 <Fragment>
                                                     <Table.Header>
                                                         <Table.Row light>
                                                             <Table.CellHeader>
                                                                 #
+                                                            </Table.CellHeader>
+
+                                                            <Table.CellHeader>
+                                                                Ações
                                                             </Table.CellHeader>
 
                                                             <Table.CellHeader>
@@ -70,47 +101,78 @@ const Overview = () => {
                                                             </Table.CellHeader>
 
                                                             <Table.CellHeader>
-                                                                Status
+                                                                Nome
                                                             </Table.CellHeader>
 
                                                             <Table.CellHeader>
-                                                                Tipo
-                                                            </Table.CellHeader>
-                                                            
-                                                            <Table.CellHeader>
-                                                                Ultimo pagamento bem sucedido
-                                                            </Table.CellHeader>
+                                                                Código
+                                                            </Table.CellHeader>                                                            
                                                         </Table.Row>
                                                     </Table.Header>
 
                                                     <Table.Body>
-                                                        {_.map(payload, (subscription, index) => (
-                                                            <Table.Row key={subscription.id}>
+                                                        {_.map(payload, (locale, index) => (
+                                                            <Table.Row key={locale.id} light>
                                                                 <Table.CellHeader>
-                                                                    {subscription.id}
+                                                                    {locale.id}
                                                                 </Table.CellHeader>
 
                                                                 <Table.Cell>
-                                                                    {formatDateTime(subscription.created_at)}
+                                                                    Ações
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>
-                                                                    {formatDateTime(subscription.updated_at)}
+                                                                    {formatDateTime(locale.created_at)}
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>
-                                                                    {translate(subscription.status)}
+                                                                    {formatDateTime(locale.updated_at)}
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>
-                                                                    {translate(typeAsDescription(subscription.level))}
+                                                                    {locale.name}
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>
-                                                                    {compareDates(subscription.last_successful_payment_date, "1970-01-01T00:00:00.000Z", (one, two) => one <= two) ? translate("never") : formatDateTime(subscription.last_successful_payment_date)}
+                                                                    {locale.countrycode}
                                                                 </Table.Cell>
                                                             </Table.Row>
                                                         ))}
+
+                                                        <Table.Row light>
+                                                            <Modal
+                                                                Component={AddRecordTableCell}
+                                                                componentProps={{ headerCount }}
+                                                                centered
+                                                                backdrop="static"
+                                                            >
+                                                                {({ isOpen, toggle }) => (
+                                                                    <Fragment>
+                                                                        <Modal.Body>
+                                                                            <Span fontFamily="Arial" fontSize="15px">
+                                                                                Voce deseja realmente remover o personagem?
+                                            
+                                                                                Esta ação é irreversível e você terá que validar o personagem novamente caso voce o recrie.
+                                                                            </Span>
+                                                                        </Modal.Body>
+                                            
+                                                                        <Modal.Footer>
+                                                                            <Container
+                                                                                display="flex"
+                                                                                flexDirection="row"
+                                                                                justifyContent="space-between"
+                                                                                alignItems="center"
+                                                                                width="100%"
+                                                                            >
+                                                                                    <Button color="white" onClick={toggle}>Cancelar</Button>
+
+                                                                                    <Button color="white" onClick={() => {}}>Cadastrar</Button>
+                                                                            </Container>
+                                                                        </Modal.Footer>
+                                                                    </Fragment>
+                                                                )}
+                                                            </Modal>                                                            
+                                                        </Table.Row>
                                                     </Table.Body>
                                                 </Fragment>
                                             )}
