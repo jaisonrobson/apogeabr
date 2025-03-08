@@ -13,6 +13,7 @@ import { passwordValidation, loginValidation, userImageValidation, userPhoneNumb
 
 const SubmitButton = (props) => (
     <Input
+        light
         width="400px"
         value='Atualizar'
         type="submit"

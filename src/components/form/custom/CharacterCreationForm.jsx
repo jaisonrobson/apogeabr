@@ -43,6 +43,7 @@ const characterCreationValidationSchema = z.object({
 
 const SubmitButton = (props) => (
     <Input
+        light
         minWidth="250px"
         width="400px"
         value='Criar Personagem'

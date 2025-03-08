@@ -9,6 +9,7 @@ import { userImageValidation } from 'validations'
 
 const SubmitButton = (props) => (
     <Input
+        light
         width="400px"
         value='Enviar'
         type="submit"

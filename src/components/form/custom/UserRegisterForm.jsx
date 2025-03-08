@@ -36,6 +36,7 @@ const UserRegisterForm = (props) => (
                 <FormattedInput register={register} name="email" label="Email:" errorMessage={errors.email?.message || backendErrors?.email?.[0]} fontFamily="arial"/>
 
                 <Input
+                    light
                     value='Registrar'
                     type="submit"
                     marginTop='15px'

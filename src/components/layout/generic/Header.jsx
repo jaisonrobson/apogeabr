@@ -19,8 +19,10 @@ const StyledHeader = styled(({
     flexDirection,
     alignItems,
     display,
+    color,
     backgroundColor,
     fontFamily,
+    textShadow,
     textAlign,
     HeaderComponent,
     ...props
@@ -37,8 +39,10 @@ const StyledHeader = styled(({
     ${({ paddingBottom }) => paddingBottom ? `padding-bottom: ${paddingBottom};` : ``}
     ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ``}
 
+    ${({ color }) => color ? `color: ${color};` : ``}
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
+    ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
 
     ${({ width }) => width ? `width: ${width};` : ``}
@@ -50,6 +54,13 @@ const StyledHeader = styled(({
 `
 
 const Component = (props) => <h2 {...props} />
-const Header = (props) => <StyledHeader HeaderComponent={Component} {...props} />
+const Header = ({ light = false, useTextShadow = false, ...props }) => (
+    <StyledHeader
+        textShadow={useTextShadow ? (light ? "0px 0px 5px black" : "0px 0px 5px white") : "undefined"}
+        color={light ? "white" : "black"}
+        HeaderComponent={Component}
+        {...props}
+    />
+)
 
 export default Header

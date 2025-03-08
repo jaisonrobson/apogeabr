@@ -16,6 +16,7 @@ const StyledInput = styled(({
     boxShadow,
     border,
     borderRadius,
+    color,
     backgroundColor,
     borderBottom,
     borderTop,
@@ -44,7 +45,8 @@ const StyledInput = styled(({
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
     ${({ border }) => border ? `border: ${border};` : `border: 0;`}
     ${({ borderRadius }) => borderRadius ? `border-radius: ${borderRadius};` : ``}
-    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #00000010;`}
+    ${({ color }) => color ? `color: ${color};` : ``}
+    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
     ${({ borderBottom }) => borderBottom ? `border-bottom: ${borderBottom};` : `border-bottom: 2px solid gray;`}
     ${({ borderTop }) => borderTop ? `border-top: ${borderTop};` : ``}
     ${({ borderLeft }) => borderLeft ? `border-left: ${borderLeft};` : ``}
@@ -72,10 +74,11 @@ const StyledInput = styled(({
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
-const Input = ({ validation, ...props }, ref) => (
+const Input = ({ validation, light, ...props }, ref) => (
     <StyledInput
-        backgroundColor={validation ? '#FFA5A560' : ''}
-        onHover={{ backgroundColor: 'lightgray' }}
+        color={light ? "black" : "white"}
+        backgroundColor={validation ? '#FFA5A560' : light ? "#FFFFFF60" : "#00000060"}
+        onHover={{ backgroundColor: light ? "#4D4D4D" : '#CFCFCF' }}
         innerRef={ref}
         {...props}
     />

@@ -27,6 +27,7 @@ const characterUpdateValidationSchema = z.object({
 
 const SubmitButton = (props) => (
     <Input
+        light
         minWidth="280px"
         width="400px"
         value='Atualizar Personagem'

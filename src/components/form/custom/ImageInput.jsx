@@ -1,10 +1,10 @@
 import React from 'react'
 
-import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
+import noImage from 'images/layout/generic/noImage.png'
 
 import { FormattedInput } from 'components'
 
-const ImageInput = ({ register, setValue, errors, backendErrors, defaultImage = userNoAvatarImage, additiveImageProps = {}, ...props }) => (
+const ImageInput = ({ register, setValue, errors, backendErrors, defaultImage = noImage, additiveImageProps = {}, ...props }) => (
     <FormattedInput
         register={register}
         setValue={setValue}

@@ -7,3 +7,6 @@ export { default as userPhoneNumberValidation } from './userPhoneNumberValidatio
 export { default as characterNumberValidation } from './characterNumberValidation'
 export { default as characterNameValidation } from './characterNameValidation'
 export { default as youtubeLinkValidation } from './youtubeLinkValidation'
+export { default as countryCodeValidation } from './countryCodeValidation'
+export { default as oneMegabyteImageValidation } from './oneMegabyteImageValidation'
+export { default as twoMegabytesImageValidation } from './twoMegabytesImageValidation'

@@ -374,9 +374,38 @@ const Modal = ({
     )
 }
 
-const ModalHeader = ({ light = false, ...props }) => <StyledModalHeader backgroundColor={ light ? "#DBDBDB90" : "#30303090" } color={light ? "black" : "white"} {...props} />
-const ModalBody = ({ light = false, ...props }) => <StyledModalBody backgroundColor={ light ? "#DBDBDB90" : "#30303090" } color={light ? "black" : "white"} {...props} />
-const ModalFooter = ({ light = false, ...props }) => <StyledModalFooter backgroundColor={ light ? "#DBDBDB90" : "#30303090" } color={light ? "black" : "white"} {...props} />
+const ModalHeader = ({ light = false, ...props }) => (
+    <StyledModalHeader
+        onHover={{
+            backgroundColor: light ? "#303030" : "#DBDBDB"
+        }}
+        backgroundColor={ light ? "#DBDBDB90" : "#30303090" }
+        color={light ? "black" : "white"}
+        {...props}
+    />
+)
+
+const ModalBody = ({ light = false, ...props }) => (
+    <StyledModalBody
+        onHover={{
+            backgroundColor: light ? "#303030" : "#DBDBDB"
+        }}
+        backgroundColor={ light ? "#DBDBDB90" : "#30303090" }
+        color={light ? "black" : "white"}
+        {...props}
+    />
+)
+
+const ModalFooter = ({ light = false, ...props }) => (
+    <StyledModalFooter
+    onHover={{
+        backgroundColor: light ? "#303030" : "#DBDBDB"
+    }}
+        backgroundColor={ light ? "#DBDBDB90" : "#30303090" }
+        color={light ? "black" : "white"}
+        {...props}
+    />
+)
 
 Modal.Header = ModalHeader
 Modal.Body = ModalBody

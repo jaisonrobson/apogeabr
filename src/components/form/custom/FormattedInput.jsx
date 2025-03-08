@@ -1,7 +1,7 @@
 import React, { useState, useRef, Fragment } from 'react'
 import parse from 'html-react-parser'
 
-import { Row, Col, Input, Image, DropdownInput } from 'components'
+import { Row, Col, Input, Image, DropdownInput, Span } from 'components'
 
 const FormattedInput = ({
     register,
@@ -13,6 +13,7 @@ const FormattedInput = ({
     type,
     defaultImage = undefined,
     imageProps = {},
+    light=false,
     inputContainerProps = {},
     ...props
 }) => {
@@ -66,6 +67,7 @@ const FormattedInput = ({
                             minWidth:"300px",
                         }}
                         setValue={setValue}
+                        light={light}
                         {...props}
                     />
                 )
@@ -79,7 +81,7 @@ const FormattedInput = ({
                         width="100%"
                         minWidth="300px"
                         type={type}
-                        
+                        light={light}                        
                         innerRef={(ref) => {
                             registerRef(ref)
                             fieldRef.current = ref
@@ -96,8 +98,10 @@ const FormattedInput = ({
                 {
                     label !== undefined
                         ? (
-                            <Col style={{ textAlign: 'center' }}>
-                                {label}
+                            <Col textAlign="center">
+                                <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"}>
+                                    {label}
+                                </Span>
                             </Col>
                         )
                         : null

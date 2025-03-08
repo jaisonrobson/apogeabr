@@ -39,6 +39,7 @@ const UserLoginForm = (props) => (
                 </Row>
 
                 <Input
+                    light
                     value='Entrar'
                     type="submit"
                     marginTop='15px'

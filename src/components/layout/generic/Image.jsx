@@ -11,8 +11,11 @@ const StyledImage = styled(({
     marginRight,
     marginTop,
     marginBottom,
+    maxWidth,
     minWidth,
     width,
+    maxHeight,
+    minHeight,
     height,
     overflowWrap,
     boxShadow,
@@ -44,8 +47,11 @@ const StyledImage = styled(({
     ${({ marginRight }) => marginRight ? `margin-right: ${marginRight};` : ``}
     ${({ marginBottom }) => marginBottom ? `margin-bottom: ${marginBottom};` : ``}
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
+    ${({ maxWidth }) => maxWidth ? `max-width: ${maxWidth};` : ``}
     ${({ minWidth }) => minWidth ? `min-width: ${minWidth};` : ``}
     ${({ width }) => width ? `width: ${width};` : ``}
+    ${({ maxHeight }) => maxHeight ? `max-height: ${maxHeight};` : ``}
+    ${({ minHeight }) => minHeight ? `min-height: ${minHeight};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
