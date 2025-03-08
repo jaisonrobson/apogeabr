@@ -12,8 +12,8 @@ const ErrorBoundary = () => {
         return (
             <Content>
                 <Row display="flex" flexDirection="column" justifyContent="center" alignItems="center" textAlign="center">
-                    <TitleH2>{error.status} {error.statusText}</TitleH2>
-                    <TitleH4>Envie essa mensagem para o administrador do website</TitleH4>
+                    <TitleH2 light>{error.status} {error.statusText}</TitleH2>
+                    <TitleH4 light>Envie essa mensagem para o administrador do website</TitleH4>
                     <p>{error.data}</p>
                 </Row>
             </Content>
@@ -32,7 +32,7 @@ const ErrorBoundary = () => {
         return (
             <Content>
                 <Row display="flex" flexDirection="column" justifyContent="center" alignItems="center" textAlign="center">
-                    <TitleH2>Erro anonimo</TitleH2>
+                    <TitleH2 light>Erro anonimo</TitleH2>
                 </Row>
             </Content>
         )
@@ -54,9 +54,9 @@ const Content = ({ children }) => (
             backgroundPosition="center"
             contentAlignmentProps={{ padding: '15rem' }}
         >
-            <TitleH2>Aconteceu algum problema</TitleH2>
+            <TitleH2 light>Aconteceu algum problema</TitleH2>
 
-            <TitleH4>Envie essa mensagem para o administrador do website</TitleH4>
+            <TitleH4 light>Envie essa mensagem para o administrador do website</TitleH4>
 
             <Container style={{ padding: '5rem' }} fluid>
                 <Row className="text-gray-300">

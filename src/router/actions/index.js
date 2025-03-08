@@ -5,3 +5,4 @@ export { default as userProfileCharacterCreationSubmit } from './userProfileChar
 export { default as userProfileCharacterUpdateSubmit } from './userProfileCharacterUpdateSubmit'
 export { default as userImageSubmit } from './userImageSubmit'
 export { default as userVideoSubmit } from './userVideoSubmit'
+export { default as adminLanguageCreateSubmit } from './adminLanguageCreateSubmit'

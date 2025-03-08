@@ -7,7 +7,7 @@ import ROUTES from 'router/routes'
 
 import { FetcherForm, Input } from 'components'
 
-import { nameValidation, countryCodeValidation, oneMegabyteImageValidation } from 'validations'
+import { countryNameValidation, countryCodeValidation, oneMegabyteImageValidation } from 'validations'
 
 const SubmitButton = (props) => (
     <Input
@@ -29,7 +29,7 @@ const SubmitButton = (props) => (
 )
 
 const validationSchema = z.object({
-    name: nameValidation,
+    name: countryNameValidation,
     countrycode: countryCodeValidation,
     image: oneMegabyteImageValidation,
 })
