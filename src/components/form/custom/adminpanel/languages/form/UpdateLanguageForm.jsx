@@ -34,20 +34,25 @@ const validationSchema = z.object({
     image: oneMegabyteImageValidation,
 })
 
-const CreateLanguageForm = ({ children, ...props }) => (
-    <FetcherForm
-        allowedProperties={['name', 'countrycode', 'image']}
-        validationSchema={validationSchema}
-        action={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_CREATE_SUBMIT.path}
-        defaultForm={false}
-        {...props}
-    >
-        {({ register, errors, backendErrors, fetcher, setValue, backendSuccess }) =>
-            children({ register, errors, backendErrors, fetcher, setValue, backendSuccess })}
-    </FetcherForm>
-)
+const UpdateLanguageForm = ({ children, localeId, ...props }) => {
+    const onSubmit = (data) => ({ ...data, locale_id: localeId })
 
-CreateLanguageForm.SubmitButton = SubmitButton
-CreateLanguageForm.SubmissionInfo = FetcherForm.SubmissionInfo
+    return (
+        <FetcherForm
+            allowedProperties={['name', 'countrycode', 'image', 'locale_id']}
+            enforceProperties={['locale_id']}
+            validationSchema={validationSchema}
+            action={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_UPDATE_SUBMIT.path}
+            defaultForm={false}
+            onSubmit={onSubmit}
+            {...props}
+        >
+            {(childrenProps) => children(childrenProps)}
+        </FetcherForm>
+    )
+}
 
-export default CreateLanguageForm
+UpdateLanguageForm.SubmitButton = SubmitButton
+UpdateLanguageForm.SubmissionInfo = FetcherForm.SubmissionInfo
+
+export default UpdateLanguageForm

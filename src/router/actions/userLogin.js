@@ -15,6 +15,10 @@ const action = async ({ request }) => {
 
         localStorage.setItem('token', response.data.token)
 
+        setTimeout(() => {
+            window.location.reload()
+        }, 1500)
+
         return redirect(ROUTES.HOME.path)
     } catch (error) {
         const resultingError = {

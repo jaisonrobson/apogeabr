@@ -221,7 +221,7 @@ const router = createBrowserRouter([
                                 element: <AdminPanelLibraryAndMapLanguages />,
                             },
                             {
-                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_SUBMIT.path,
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_CREATE_SUBMIT.path,
                                 action: adminLanguageCreateSubmit,
                             },
                             {

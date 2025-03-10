@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import { FormattedInput, ImageInput } from 'components'
 
-const LanguageFormInputs = ({ register, errors, backendErrors, setValue, ...props }) => (
+const LanguageFormInputs = ({ register, errors, backendErrors, setValue, reloadImage=false, ...props }) => (
     <Fragment>
         <FormattedInput
             register={register}
@@ -25,6 +25,7 @@ const LanguageFormInputs = ({ register, errors, backendErrors, setValue, ...prop
             setValue={setValue}
             errors={errors}
             backendErrors={backendErrors}
+            reloadImage={reloadImage}
             additiveImageProps={{
                 marginLeft: '3rem'
             }}

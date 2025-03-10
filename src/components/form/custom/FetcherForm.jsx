@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
 import { useFetcher, useSearchParams } from 'react-router-dom'
-import { useForm } from "react-hook-form"
+import { useForm, FormProvider } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import parse from 'html-react-parser'
@@ -39,27 +39,67 @@ const FetcherForm = ({
     defaultForm = true,
     onlyTouchedFields = false,
     defaultValues = {},
+    lateLoadingProps={},
+    lateLoadingTriggers=[],
+    lateLoadingValues= () => {},
     useFormProps = {},
     externalSchema,
     ...props
 }) => {
     const fetcher = useFetcher()
-    const [ searchParams ] = useSearchParams()
+    const [searchParams] = useSearchParams()
+    
+    const [resolvedDefaultValues, setResolvedDefaultValues] = useState(defaultValues)
+    const [isLoadingLateValues, setIsLoadingLateValues] = useState(true)
+    
     const {
         register,
         handleSubmit,
-        formState: { errors, touchedFields },
+        formState,
         trigger,
         getValues,
         setValue,
         setError,
-        clearErrors
+        clearErrors,
+        reset
     } = useForm({
         resolver: zodResolver(validationSchema),
         mode: "onChange",
-        defaultValues: defaultValues,
+        defaultValues: resolvedDefaultValues,
         ...useFormProps
     })
+
+    useEffect(() => {
+        if (!_.isEmpty(lateLoadingTriggers)) {
+            const isMatching = lateLoadingTriggers.every(
+                trigger =>
+                    Object.entries(trigger).every(
+                        ([key, value]) => _.isEqual(lateLoadingProps[key], value)
+                    )
+            )
+    
+            if (isMatching) {
+                // Função para resolver valores assíncronos dentro de defaultValues
+                const resolveAsyncDefaults = async () => {
+                    const resolvedValues = { ...lateLoadingValues() }
+    
+                    const entries = Object.entries(lateLoadingValues())
+                    for (const [key, value] of entries) {
+                        if (value instanceof Promise) {
+                            resolvedValues[key] = await value
+                        }
+                    }
+    
+                    setResolvedDefaultValues(resolvedValues)
+                    reset(resolvedValues) // Atualiza os valores do formulário
+                    
+                    setIsLoadingLateValues(false)
+                }
+    
+                resolveAsyncDefaults()
+            }
+        }
+    }, [defaultValues, reset, lateLoadingProps])
 
     const backendErrors = JSON.parse(searchParams.get("errors") || "{}")
     const backendSuccess = JSON.parse(searchParams.get("success") || "{}")
@@ -69,18 +109,16 @@ const FetcherForm = ({
 
         // Filtrar apenas os campos tocados, se `onlyTouchedFields` estiver habilitado
         if (onlyTouchedFields) {
-            const touchedKeys = Object.keys(touchedFields)
+            const touchedKeys = Object.keys(formState.touchedFields)
 
             const touchedValues = {}
             for (const field of touchedKeys) {
                 await trigger(field)
-
                 touchedValues[field] = getValues(field)
             }
 
-            //Se nenhum campo foi tocando, evitar o envio do formulario
-            if (_.isEmpty(touchedValues))
-                return false
+            //Se nenhum campo foi tocado, evitar o envio do formulário
+            if (_.isEmpty(touchedValues)) return false
 
             if (externalSchema) {
                 try {
@@ -101,9 +139,7 @@ const FetcherForm = ({
 
         // Permitir manipulação adicional dos dados através do `onSubmitParam`
         let mutatedData = onSubmitParam(dataToValidate)
-
-        if (!mutatedData)
-            mutatedData = dataToValidate
+        if (!mutatedData) mutatedData = dataToValidate
 
         // Restrição às propriedades permitidas, se configurado
         let result = {}
@@ -113,19 +149,16 @@ const FetcherForm = ({
                     result[property] = mutatedData[property]
                 }
             })
-        } else
-            result = mutatedData
+        } else result = mutatedData
 
         if (!_.isEmpty(enforceProperties) && !enforceJsonNotFalseyValues(result, enforceProperties)) {
             setError("customError", {
                 type: 'manual',
-                message: "Falha no envio do formulario, algum valor obrigatório não foi passado."
+                message: "Falha no envio do formulário, algum valor obrigatório não foi passado."
             })
 
-            return false //algum valor obrigatorio nao foi passado para o payload da requisicao
-        }
-        else
-            clearErrors("customError")
+            return false
+        } else clearErrors("customError")
 
         //Tratamento do resultado para que seja aceito passagem de campos do tipo arquivo
         const formData = new FormData()
@@ -133,12 +166,11 @@ const FetcherForm = ({
         // Adicione todos os campos ao FormData
         for (const key in result) {
             if (result[key] instanceof FileList) {
-            // Para campos de arquivo, adicione cada arquivo individualmente
+                // Para campos de arquivo, adicione cada arquivo individualmente
                 Array.from(result[key]).forEach((file) => {
                     formData.append(key, file) //Verificar uma abordagem melhor do que essa, pois esta sobreescrevendo a chave toda vez que um novo arquivo e encontrado no vetor
                 })
-            }
-            else {
+            } else {
                 formData.append(key, result[key])
             }
         }
@@ -158,19 +190,15 @@ const FetcherForm = ({
         <Row {...parentContainerProps}>
             <Row>
                 <Col>
-                    <Form {...props} onSubmit={handleSubmit(onSubmit)} method="POST">
-                        {children({ register, errors, backendErrors, fetcher, setValue, backendSuccess })}
-                    </Form>
+                    <FormProvider value={{ register, handleSubmit, formState, trigger, getValues, setValue, setError, clearErrors, reset }}>
+                        <Form {...props} onSubmit={handleSubmit(onSubmit)} method="POST">
+                            {children({ register, errors: formState.errors, backendErrors, fetcher, setValue, backendSuccess, isLoadingLateValues })}
+                        </Form>
+                    </FormProvider>
                 </Col>
             </Row>
 
-            {
-                defaultForm
-                    ? (
-                        <SubmissionInfo fetcher={fetcher} success={backendSuccess} />
-                    )
-                    : null
-            }
+            {defaultForm ? <SubmissionInfo fetcher={fetcher} success={backendSuccess} /> : null}
         </Row>
     )
 }

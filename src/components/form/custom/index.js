@@ -16,4 +16,5 @@ export { default as AffiliatedSubscriptionButton } from './AffiliatedSubscriptio
 export { default as UserImageForm } from './UserImageForm'
 export { default as UserVideoForm } from './UserVideoForm'
 export { default as CreateLanguageForm } from './adminpanel/languages/form/CreateLanguageForm'
+export { default as UpdateLanguageForm } from './adminpanel/languages/form/UpdateLanguageForm'
 export { default as LanguageFormInputs } from './adminpanel/languages/inputs/LanguageFormInputs'

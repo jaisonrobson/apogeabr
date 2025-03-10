@@ -1,5 +1,6 @@
-import React, { useState, useRef, Fragment } from 'react'
+import React, { useState, useRef, Fragment, useEffect } from 'react'
 import parse from 'html-react-parser'
+import { useFormContext } from "react-hook-form"
 
 import { Row, Col, Input, Image, DropdownInput, Span } from 'components'
 
@@ -15,16 +16,31 @@ const FormattedInput = ({
     imageProps = {},
     light=false,
     inputContainerProps = {},
+    reloadImage = false,
     ...props
 }) => {
     const fieldRef = useRef(null)
+    const { value: { getValues, setValue: contextSetValue, formState: { defaultValues } } } = useFormContext()
     const [ selectedImage, setSelectedImage ] = useState(undefined)
     const { ref: registerRef, ...registerRest } = register(name)
 
-    const onReceiveImage = (event) => {
+    useEffect(() => {
+        if (type === "image" && reloadImage)
+            onReceiveImage(getValues(name))
+    }, [reloadImage, defaultValues])
+
+    const onChange = (event) => {
         const image = event.target.files?.[0]
 
         setValue(name, image, { shouldDirty: true, shouldTouch: true })
+
+        setSelectedImage(image ? URL.createObjectURL(image) : undefined)
+    }
+
+    const onReceiveImage = async (file) => {
+        const image = await file
+
+        contextSetValue(name, image, { shouldDirty: true, shouldTouch: true })
 
         setSelectedImage(image ? URL.createObjectURL(image) : undefined)
     }
@@ -46,7 +62,7 @@ const FormattedInput = ({
                             validation={errorMessage}
                             type="file"
                             accept="image/*"
-                            onChange={onReceiveImage}                                        
+                            onChange={onChange}                                        
                             {...props}
                             height="0"
                             width="0"

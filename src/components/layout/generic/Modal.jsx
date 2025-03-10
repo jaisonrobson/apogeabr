@@ -352,28 +352,6 @@ const StyledModalBody = styled(({
 
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
-
-const Modal = ({
-    Component = Button,
-    componentProps = {},
-    children,
-    ...props
-}) => {
-    const [isOpen, setIsOpen] = useState(false)
-
-    const toggle = () => setIsOpen(oldValue => !oldValue)
-
-    return (
-        <Fragment>
-            <Component onClick={toggle} {...componentProps} />
-
-            <StyledModal isOpen={isOpen} toggle={toggle} fade={true} {...props}>
-                {children({ isOpen, toggle })}
-            </StyledModal>
-        </Fragment>
-    )
-}
-
 const ModalHeader = ({ light = false, ...props }) => (
     <StyledModalHeader
         onHover={{
@@ -406,6 +384,31 @@ const ModalFooter = ({ light = false, ...props }) => (
         {...props}
     />
 )
+
+const Modal = ({
+    Component = Button,
+    componentProps = {},
+    children,
+    ...props
+}) => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggle = (e) => {
+        e?.preventDefault()
+
+        setIsOpen(oldValue => !oldValue)
+    }
+
+    return (
+        <Fragment>
+            <Component onClick={toggle} {...componentProps} />
+
+            <StyledModal isOpen={isOpen} toggle={toggle} fade={true} {...props}>
+                {children({ isOpen, toggle })}
+            </StyledModal>
+        </Fragment>
+    )
+}
 
 Modal.Header = ModalHeader
 Modal.Body = ModalBody
