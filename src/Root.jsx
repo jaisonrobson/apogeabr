@@ -53,6 +53,7 @@ import {
     userImageSubmit,
     userVideoSubmit,
     adminLanguageCreateSubmit,
+    adminLanguageUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -223,6 +224,10 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_CREATE_SUBMIT.path,
                                 action: adminLanguageCreateSubmit,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_UPDATE_SUBMIT.path,
+                                action: adminLanguageUpdateSubmit,
                             },
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS.path,
