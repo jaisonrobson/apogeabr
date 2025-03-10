@@ -12,6 +12,7 @@ const StyledSpan = styled(({
     fontSize,
     textAlign,
     textShadow,
+    color,
     zIndex,
     ...props
 }) => <span {...props} />)`
@@ -26,6 +27,7 @@ const StyledSpan = styled(({
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ''}
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''}
     ${({ zIndex }) => zIndex ? `z-index: ${zIndex};` : ''}
+    ${({ color }) => color ? `color: ${color};` : ''}
 `
 
 const Span = (props) => <StyledSpan {...props} />
