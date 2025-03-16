@@ -1,6 +1,8 @@
 import React, { Fragment, useContext } from 'react'
 import _ from 'lodash'
 
+import ROUTES from 'router/routes'
+
 import { I18nContext } from 'contexts'
 
 import noImage from 'images/layout/generic/noImage.png'
@@ -15,7 +17,7 @@ import {
     Image,
     CreateIconFormModal,
     UpdateIconFormModal,
-    DeleteIconFormModal,
+    DeleteRecordModalButton,
 } from 'components'
 
 const Index = () => {
@@ -103,7 +105,10 @@ const Index = () => {
                                                                             alignItems="center"
                                                                             width="25px"
                                                                         >
-                                                                            <DeleteIconFormModal iconId={icon.id} />
+                                                                            <DeleteRecordModalButton
+                                                                                deleteEndpoint={`icons/${icon.id}`}
+                                                                                deleteRoutePath={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS.path}
+                                                                            />
                                                                         </Col>
                                                                     </Row>
                                                                 </Table.Cell>

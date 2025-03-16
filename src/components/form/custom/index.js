@@ -21,7 +21,6 @@ export { default as UserRegisterForm } from './register/forms/UserRegisterForm'
 //ICON
 export { default as CreateIconFormModal } from './adminpanel/icons/forms/Create'
 export { default as UpdateIconFormModal } from './adminpanel/icons/forms/Update'
-export { default as DeleteIconFormModal } from './adminpanel/icons/forms/Delete'
 export { default as IconFormInputs } from './adminpanel/icons/inputs/IconFormInputs'
 //LANGUAGE
 export { default as CreateLanguageForm } from './adminpanel/languages/forms/CreateLanguageForm'
@@ -35,3 +34,4 @@ export { default as FetcherForm } from './FetcherForm'
 export { default as TimedRedirect } from './TimedRedirect'
 export { default as RecordForm } from './RecordForm'
 export { default as RecordFormModal } from './RecordFormModal'
+export { default as DeleteRecordModalButton } from './DeleteRecordModalButton'
