@@ -16,6 +16,8 @@ import {
     LanguageFormInputs,
     Container,
     TitleH2,
+    Row,
+    Col,
 } from 'components'
 
 const EditRecordButton = (props) => (
@@ -52,7 +54,7 @@ const Update = ({ locale }) => (
                 lateLoadingTriggers={[{isOpen: true}]}
                 lateLoadingValues={() => ({
                     name: locale.name,
-                    image: urlToFile(locale.image),
+                    image: locale.image ? urlToFile(locale.image) : null,
                     countrycode: locale.countrycode,
                 })}
                 defaultValues={{
@@ -64,7 +66,11 @@ const Update = ({ locale }) => (
                 {({ register, errors, backendErrors, fetcher, setValue, backendSuccess, isLoadingLateValues }) => (
                     <Fragment>
                         <Modal.Header light display="flex" alignItems="center" justifyContent="center">
-                            <TitleH2 useTextShadow light>Editar Idioma</TitleH2>
+                            <Row>
+                                <Col>
+                                    <TitleH2 useTextShadow light>Editar Idioma</TitleH2>
+                                </Col>
+                            </Row>                            
                         </Modal.Header>
 
                         <Modal.Body light>
