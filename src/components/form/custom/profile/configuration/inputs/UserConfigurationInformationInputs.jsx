@@ -5,9 +5,10 @@ import { generatePhoneNumberExample } from 'util/countriesPhoneNumbers'
 
 import { FormattedInput } from 'components'
 
-const UserConfigurationInformationInputs = ({ register, errors, backendErrors, ...props }) => {
+const UserConfigurationInformationInputs = ({ register, errors, backendErrors, setValue, ...props }) => {
     const { user } = useRouteLoaderData("root")
-    
+    const { locales } = useRouteLoaderData("configuration")
+
     return (
         <Fragment>
             <FormattedInput
@@ -34,6 +35,18 @@ const UserConfigurationInformationInputs = ({ register, errors, backendErrors, .
                 name="email"
                 label="Email:"
                 errorMessage={errors?.email?.message || backendErrors?.email?.[0]}
+                fontFamily="arial"
+            />
+
+            <FormattedInput
+                register={register}
+                setValue={setValue}
+                name="locale_id"
+                label="Idioma:"
+                type="dropdown"
+                options={locales}
+                defaultValue={user.locale_id}
+                errorMessage={errors?.classtype?.message}
                 fontFamily="arial"
             />
         </Fragment>

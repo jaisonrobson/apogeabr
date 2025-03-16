@@ -455,6 +455,8 @@ const StyledTableCell = styled(({
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
+const StyledForwardedTableCell = forwardRef((props, ref) => <StyledTableCell innerRef={ref} {...props} />)
+
 const CenteredTH = ({ children, innerRef, ...props }) => (
     <th ref={innerRef} {...props}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -656,14 +658,14 @@ const TableCell = ({ childrenAsFunction = false, children, ...props }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <StyledTableCell
+        <StyledForwardedTableCell
             ref={cellRef}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             {...props}
         >
             {childrenAsFunction ? children({ isHovered }) : children}
-        </StyledTableCell>
+        </StyledForwardedTableCell>
     )
 }
 const TableCellHeader = (props) => <StyledTableCellHeader {...props} />

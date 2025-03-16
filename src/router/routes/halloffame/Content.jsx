@@ -32,7 +32,7 @@ const Content = () => {
                 contentAlignmentProps={{ paddingTop: '2rem' }}
             >
                 <Particles id='halloffame_top_particles' style={{ width: '100%', height: '11rem' }}>
-                    <TitleH2>Hall da Fama</TitleH2>
+                    <TitleH2 light>Hall da Fama</TitleH2>
                 </Particles>
             </SectionBackdrop>
 

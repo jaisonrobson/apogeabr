@@ -20,7 +20,7 @@ const Content = () => (
         >
             <Row>
                 <Col>
-                    <TitleH2>Mapa</TitleH2>
+                    <TitleH2 light>Mapa</TitleH2>
                 </Col>
             </Row>
         </SectionBackdrop>

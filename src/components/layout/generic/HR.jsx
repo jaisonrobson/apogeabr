@@ -37,6 +37,7 @@ const StyledHR = styled(({
     textShadow,
     transition,
     gap,
+    border,
     fontFamily,
     fontSize,
     ...props
@@ -62,6 +63,7 @@ const StyledHR = styled(({
     ${({ paddingBottom }) => paddingBottom ? `padding-bottom: ${paddingBottom};` : ``}
     ${({ paddingTop }) => paddingTop ? `padding-top: ${paddingTop};` : ``}
 
+    ${({ border }) => border ? `border: ${border};` : ``}
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ minWidth }) => minWidth ? `min-width: ${minWidth};` : ``}
     ${({ maxWidth }) => maxWidth ? `max-width: ${maxWidth};` : ``}
@@ -84,6 +86,14 @@ const StyledHR = styled(({
     ${({ transition }) => transition ? `transition: ${transition};` : ``}
 `
 
-const HR = ({ light = false, ...props }) => <StyledHR color={light ? "white" : "black"} {...props} />
+const HR = ({ light = false, height = undefined, border = undefined, backgroundColor = undefined, ...props }) => (
+    <StyledHR
+        color={light ? "white" : "black"}
+        backgroundColor={ backgroundColor ? backgroundColor : (height ? ( light ? "white" : "black" ) : undefined) }
+        height={height}
+        border={ height ? "none" : border }
+        {...props}
+    />
+)
 
 export default HR

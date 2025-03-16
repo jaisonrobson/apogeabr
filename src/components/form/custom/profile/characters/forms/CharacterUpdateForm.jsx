@@ -49,7 +49,7 @@ const SubmitButton = (props) => (
 )
 
 const CharacterUpdateForm = ({ children, characterId, ...props }) => {    
-    const onSubmit = (data) => ({ ...data, character_id: characterId })
+    const onBeforeSubmit = (data) => ({ ...data, character_id: characterId })
 
     return (
         <FetcherForm
@@ -75,7 +75,7 @@ const CharacterUpdateForm = ({ children, characterId, ...props }) => {
             validationSchema={characterUpdateValidationSchema}
             action={ROUTES.USER_PROFILE_CHARACTERS_UPDATE_SUBMIT.path}
             defaultForm={false}
-            onSubmit={onSubmit}
+            onBeforeSubmit={onBeforeSubmit}
             {...props}
         >
             {({ register, errors, backendErrors, fetcher, setValue, backendSuccess }) =>

@@ -22,8 +22,8 @@ import DeleteModalButton from './Delete'
 import UpdateModalButton from './Update'
 import CreateModalRecordTableCell from './Create'
 
-const Overview = () => {
-    const { formatDateTime, translate } = useContext(I18nContext)
+const Index = () => {
+    const { formatDateTime } = useContext(I18nContext)
     const navigate = useNavigate()
     const { user } = useRouteLoaderData("root")
 
@@ -119,7 +119,6 @@ const Overview = () => {
                                                                             width="25px"
                                                                         >
                                                                             <DeleteModalButton localeId={locale.id} />
-                                                                            
                                                                         </Col>
                                                                     </Row>
                                                                 </Table.Cell>
@@ -174,4 +173,4 @@ const Overview = () => {
     )
 }
 
-export default Overview
+export default Index

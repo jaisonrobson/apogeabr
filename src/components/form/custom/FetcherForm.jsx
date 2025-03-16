@@ -1,14 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
 import { useFetcher, useSearchParams } from 'react-router-dom'
-import { useForm, FormProvider } from "react-hook-form"
+import { useForm, FormProvider, useWatch } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import parse from 'html-react-parser'
 
-import { Form, Row, Col } from 'components'
+import { Form, Row, Col, Input } from 'components'
 
 import { enforceJsonNotFalseyValues } from 'util/array'
+
+const SubmitButton = ({ animationBackgroundColor = "lightgray", animationName = "defaultFormSubmitAnimation", ...props }) => (
+    <Input
+        value='Enviar'
+        type="submit"
+        backgroundColor='#00000060'
+        border='2px solid gray'
+        onHover={{
+            animation: {
+                property: `${animationName} 0.5s linear 0s infinite alternate`,
+                corpse: `@keyframes ${animationName} {
+                    0%  {transform: scale3d(1,1,1);}
+                    100%  {transform: scale3d(1.03,1.03,1.03); background-color: ${animationBackgroundColor}; border-radius: 8px}
+                }`
+            }
+        }}
+        {...props}
+    />
+)
 
 const SubmissionInfo = ({ fetcher, errors, success }) => (
     <Row>
@@ -28,7 +47,10 @@ const SubmissionInfo = ({ fetcher, errors, success }) => (
     </Row>
 )
 
+const defaultLateLoadingValues = () => {}
+
 const FetcherForm = ({
+    onBeforeSubmit : onBeforeSubmitParam = () => {},
     onSubmit : onSubmitParam = () => {},
     allowedProperties = [],
     enforceProperties = [],
@@ -41,7 +63,7 @@ const FetcherForm = ({
     defaultValues = {},
     lateLoadingProps={},
     lateLoadingTriggers=[],
-    lateLoadingValues= () => {},
+    lateLoadingValues = defaultLateLoadingValues,
     useFormProps = {},
     externalSchema,
     ...props
@@ -50,7 +72,8 @@ const FetcherForm = ({
     const [searchParams] = useSearchParams()
     
     const [resolvedDefaultValues, setResolvedDefaultValues] = useState(defaultValues)
-    const [isLoadingLateValues, setIsLoadingLateValues] = useState(true)
+    const [touchedFields, setTouchedFields] = useState({})
+    const [isLoadingLateValues, setIsLoadingLateValues] = useState(!_.isEqual(lateLoadingValues, defaultLateLoadingValues))
     
     const {
         register,
@@ -61,13 +84,15 @@ const FetcherForm = ({
         setValue,
         setError,
         clearErrors,
-        reset
+        reset,
+        control
     } = useForm({
         resolver: zodResolver(validationSchema),
         mode: "onChange",
         defaultValues: resolvedDefaultValues,
         ...useFormProps
     })
+    const currentFieldsValues = useWatch({ control })
 
     useEffect(() => {
         if (!_.isEmpty(lateLoadingTriggers)) {
@@ -101,6 +126,14 @@ const FetcherForm = ({
         }
     }, [defaultValues, reset, lateLoadingProps])
 
+    useEffect(() => {
+        const changedFieldsKeys = Object.keys(currentFieldsValues).filter(
+          (key) => currentFieldsValues[key] !== resolvedDefaultValues[key]
+        )
+
+        setTouchedFields(changedFieldsKeys)
+      }, [currentFieldsValues])
+
     const backendErrors = JSON.parse(searchParams.get("errors") || "{}")
     const backendSuccess = JSON.parse(searchParams.get("success") || "{}")
     
@@ -109,7 +142,7 @@ const FetcherForm = ({
 
         // Filtrar apenas os campos tocados, se `onlyTouchedFields` estiver habilitado
         if (onlyTouchedFields) {
-            const touchedKeys = Object.keys(formState.touchedFields)
+            const touchedKeys = touchedFields
 
             const touchedValues = {}
             for (const field of touchedKeys) {
@@ -137,8 +170,8 @@ const FetcherForm = ({
             dataToValidate = touchedValues
         }
 
-        // Permitir manipulação adicional dos dados através do `onSubmitParam`
-        let mutatedData = onSubmitParam(dataToValidate)
+        // Permitir manipulação adicional dos dados através do `onBeforeSubmitParam`
+        let mutatedData = onBeforeSubmitParam(dataToValidate)
         if (!mutatedData) mutatedData = dataToValidate
 
         // Restrição às propriedades permitidas, se configurado
@@ -175,13 +208,12 @@ const FetcherForm = ({
             }
         }
 
+        onSubmitParam()
+
         // Enviar os dados filtrados e validados ao backend
         return fetcher.submit(formData, {
             method: "POST",
             encType: 'multipart/form-data',
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
             action: action,
         })
     }
@@ -203,6 +235,7 @@ const FetcherForm = ({
     )
 }
 
+FetcherForm.SubmitButton = SubmitButton
 FetcherForm.SubmissionInfo = SubmissionInfo
 
 export default FetcherForm

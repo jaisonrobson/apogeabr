@@ -53,18 +53,18 @@ const UserConfigurationForm = ({ children, ...props }) => {
         }
     })
 
-    const onSubmit = (data) => ({ ...data, user_id: user?.id })
+    const onBeforeSubmit = (data) => ({ ...data, user_id: user?.id })
     
     return (
         <FetcherForm
-            allowedProperties={['name', 'login', 'password', 'phone_number', 'image', 'user_id']}
+            allowedProperties={['name', 'login', 'password', 'phone_number', 'image', 'user_id', 'locale_id']}
             enforceProperties={['user_id']}
             externalSchema={userUpdateValidationSchema}
             validationSchema={z.object({})}
             action={ROUTES.USER_PROFILE_CONFIGURATION_SUBMIT.path}
             defaultForm={false}
             onlyTouchedFields={true}
-            onSubmit={onSubmit}
+            onBeforeSubmit={onBeforeSubmit}
             {...props}
         >
             {({ register, errors, backendErrors, fetcher, setValue, backendSuccess }) =>

@@ -24,6 +24,7 @@ const StyledUncontrolledDropdown = styled(({
     maxHeight,
     overflowWrap,
     color,
+    fontFamily,
     backgroundColor,
     display,
     flexDirection,
@@ -75,6 +76,7 @@ const StyledUncontrolledDropdown = styled(({
     ${({ maxHeight }) => maxHeight ? `max-height: ${maxHeight};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ color }) => color ? `color: ${color};` : ``}
+    ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ''}
     ${({ background }) => background ? `background: ${background};` : ``}
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
     ${({ backgroundImage }) => backgroundImage ? `background-image: ${backgroundImage};` : ``}

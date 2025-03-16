@@ -37,7 +37,7 @@ const Content = () => (
         >
             <Row>
                 <Col>
-                    <TitleH2>Biblioteca</TitleH2>
+                    <TitleH2 light>Biblioteca</TitleH2>
                 </Col>
             </Row>
 

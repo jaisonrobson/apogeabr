@@ -25,6 +25,7 @@ const Configuration = () => {
                 confirmPassword: '',
                 phone_number: user?.phone_number || '',
                 image: user?.image || null,
+                locale_id: user?.locale_id || null,
             }}
         >
             {({ register, errors, backendErrors, fetcher, setValue, backendSuccess }) => (
@@ -68,7 +69,7 @@ const Configuration = () => {
                                 alignItems="flex-end"
                                 className="unselectable"
                             >
-                                <UserConfigurationInformationInputs register={register} errors={errors} backendErrors={backendErrors} />
+                                <UserConfigurationInformationInputs register={register} errors={errors} backendErrors={backendErrors} setValue={setValue} />
                             </Container>
                         </StoneTabletTwoBoard>
                     </Col>

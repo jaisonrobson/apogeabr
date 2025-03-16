@@ -9,13 +9,14 @@ const DropdownInput = ({
     togglerProperties = {},
     menuProperties={},
     itemProperties={},
-    options = ["Option 1"],
+    defaultValue = 0,
+    options = [{id: 0, name: "Option 1"}],
     setValue = () => {},
     name,
     light = false,
     ...props
 }) => {
-    const [selectedOption, setSelectedOption] = useState(0)
+    const [selectedOption, setSelectedOption] = useState(defaultValue)
 
     const onSelect = (value) => {
         setValue(name, value, { shouldDirty: true, shouldTouch: true })
@@ -40,7 +41,7 @@ const DropdownInput = ({
                 light={light}
                 {...togglerProperties}
             >
-                <Span>{options[selectedOption]}</Span>
+                <Span>{_.find(options, {id: selectedOption})?.name || _.first(options)?.name}</Span>
 
                 <Icon icon={faCaretDown} size="xl" color="inherit" marginTop="-4px" />
             </Dropdown.Toggler>
@@ -55,11 +56,11 @@ const DropdownInput = ({
                     _.map(options, (option, idx) => (
                         <Dropdown.Item
                             light={light}
-                            key={option}
-                            onClick={() => onSelect(idx)}
+                            key={option.id}
+                            onClick={() => onSelect(option.id)}
                             {...itemProperties}
                         >
-                            {option}
+                            {option.name}
                         </Dropdown.Item>
                     ))
                 }

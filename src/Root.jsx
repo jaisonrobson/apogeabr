@@ -42,6 +42,8 @@ import AdminPanelLibraryAndMapItems from './router/routes/adminpanel/libraryandm
 import {
     sessionLoader,
     charactersLoader,
+    configurationLoader,
+    adminpanelLibraryLoader,
 } from 'router/loaders'
 
 import {
@@ -54,6 +56,8 @@ import {
     userVideoSubmit,
     adminLanguageCreateSubmit,
     adminLanguageUpdateSubmit,
+    adminIconCreateSubmit,
+    adminIconUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -65,7 +69,7 @@ const router = createBrowserRouter([
     },
     {
         path: ROUTES.HOME.path,
-        loader: sessionLoader,        
+        loader: sessionLoader,
         id: "root",
         errorElement: <ErrorBoundary />,
         children: [
@@ -126,6 +130,8 @@ const router = createBrowserRouter([
                             },
                             {
                                 path: ROUTES.USER_PROFILE_CONFIGURATION.path,
+                                id: "configuration",
+                                loader: configurationLoader,
                                 element: <ProfileConfiguration />,
                             },                            
                             {
@@ -215,6 +221,8 @@ const router = createBrowserRouter([
                     },
                     {
                         path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP.path,
+                        id: "adminpanel_library",
+                        loader: adminpanelLibraryLoader,
                         element: <AdminPanelLibraryAndMap />,
                         children: [
                             {
@@ -232,6 +240,14 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS.path,
                                 element: <AdminPanelLibraryAndMapIcons />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS_CREATE_SUBMIT.path,
+                                action: adminIconCreateSubmit,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS_UPDATE_SUBMIT.path,
+                                action: adminIconUpdateSubmit,
                             },
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS.path,

@@ -11,7 +11,15 @@ const PerPageDropdown = ({
     endpoint,
     containerStyle,
     togglerProperties,
-    options = [5, 10, 15, 20, 25, 35, 50],
+    options = [
+        {id: 5, name: 5},
+        {id: 10, name: 10},
+        {id: 15, name: 15},
+        {id: 20, name: 20},
+        {id: 25, name: 25},
+        {id: 35, name: 35},
+        {id: 50, name: 50}
+    ],
     ...props
 }) => {
     const {
@@ -27,7 +35,7 @@ const PerPageDropdown = ({
     } = useContext(context)
 
     const onSelect = async (fakeParamOne, value, fakeParamThree) => {
-        setPerPage(options[value])
+        setPerPage(value)
 
         enableLoading()
 
@@ -39,7 +47,7 @@ const PerPageDropdown = ({
                 },
                 params: {
                     page: 1,
-                    per_page: options[value],
+                    per_page: value,
                     ...params,
                 },
             })
@@ -72,6 +80,7 @@ const PerPageDropdown = ({
             }}
             setValue={onSelect}
             options={options}
+            defaultValue={_.first(options).id}
             {...props}
         />
     )

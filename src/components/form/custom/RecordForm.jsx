@@ -1,13 +1,9 @@
 import React from 'react'
-import axios from 'axios'
 import * as z from 'zod'
-import { useRouteLoaderData } from 'react-router-dom'
 
 import ROUTES from 'router/routes'
 
 import { FetcherForm, Input } from 'components'
-
-import { countryNameValidation, countryCodeValidation, oneMegabyteImageValidation } from 'validations'
 
 const SubmitButton = ({ animationBackgroundColor = "lightblue", animationName = "languageSubmitAnimation", ...props }) => (
     <Input
@@ -28,23 +24,28 @@ const SubmitButton = ({ animationBackgroundColor = "lightblue", animationName = 
     />
 )
 
-const validationSchema = z.object({
-    name: countryNameValidation,
-    countrycode: countryCodeValidation,
-    image: oneMegabyteImageValidation,
-})
+const RecordForm = ({
+    children,
+    additionalValidations = {},
+    additionalAllowedProperties=[],
+    additionalEnforcedProperties=[],
+    additionalSubmitValues={},
+    ...props
+}) => {
+    const validationSchema = z.object({
+        ...additionalValidations,
+    })
 
-const UpdateLanguageForm = ({ children, localeId, ...props }) => {
-    const onSubmit = (data) => ({ ...data, locale_id: localeId })
+    const onBeforeSubmit = (data) => ({ ...data, ...additionalSubmitValues})
 
     return (
         <FetcherForm
-            allowedProperties={['name', 'countrycode', 'image', 'locale_id']}
-            enforceProperties={['locale_id']}
+            allowedProperties={additionalAllowedProperties}
+            enforceProperties={additionalEnforcedProperties}
             validationSchema={validationSchema}
-            action={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_UPDATE_SUBMIT.path}
+            action={ROUTES.HOME.path}
             defaultForm={false}
-            onSubmit={onSubmit}
+            onBeforeSubmit={onBeforeSubmit}
             {...props}
         >
             {(childrenProps) => children(childrenProps)}
@@ -52,7 +53,7 @@ const UpdateLanguageForm = ({ children, localeId, ...props }) => {
     )
 }
 
-UpdateLanguageForm.SubmitButton = SubmitButton
-UpdateLanguageForm.SubmissionInfo = FetcherForm.SubmissionInfo
+RecordForm.SubmitButton = SubmitButton
+RecordForm.SubmissionInfo = FetcherForm.SubmissionInfo
 
-export default UpdateLanguageForm
+export default RecordForm

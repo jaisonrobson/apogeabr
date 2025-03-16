@@ -55,7 +55,7 @@ const Content = () => {
             >
                 <Row>
                     <Col>
-                        <TitleH2>Apresentação</TitleH2>                        
+                        <TitleH2 light>Apresentação</TitleH2>                        
                     </Col>
                 </Row>
 
@@ -75,7 +75,7 @@ const Content = () => {
             >
                 <Row>
                     <Col>
-                        <TitleH2>Comunicado</TitleH2>
+                        <TitleH2 light>Comunicado</TitleH2>
                     </Col>
                 </Row>
                 

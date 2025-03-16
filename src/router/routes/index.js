@@ -33,6 +33,8 @@ const ROUTES = {
     USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_CREATE_SUBMIT: { path: "/user/admin_panel/libraryandmap/languages/create/submit/", nickname: "B & M - Idiomas"},
     USER_ADMIN_PANEL_LIBRARYANDMAP_LANGUAGES_UPDATE_SUBMIT: { path: "/user/admin_panel/libraryandmap/languages/update/submit/", nickname: "B & M - Idiomas"},
     USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS: { path: "/user/admin_panel/libraryandmap/icons/", nickname: "B & M - Ícones"},
+    USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS_CREATE_SUBMIT: { path: "/user/admin_panel/libraryandmap/icons/create/submit/", nickname: "B & M - Ícones"},
+    USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS_UPDATE_SUBMIT: { path: "/user/admin_panel/libraryandmap/icons/update/submit/", nickname: "B & M - Ícones"},
     USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS: { path: "/user/admin_panel/libraryandmap/locations/", nickname: "B & M - Locais"},
     USER_ADMIN_PANEL_LIBRARYANDMAP_TRAITS: { path: "/user/admin_panel/libraryandmap/traits/", nickname: "B & M - Características"},
     USER_ADMIN_PANEL_LIBRARYANDMAP_EVENTS: { path: "/user/admin_panel/libraryandmap/events/", nickname: "B & M - Eventos"},

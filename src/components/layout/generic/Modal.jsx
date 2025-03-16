@@ -388,6 +388,7 @@ const ModalFooter = ({ light = false, ...props }) => (
 const Modal = ({
     Component = Button,
     componentProps = {},
+    onOpen = () => {},
     children,
     ...props
 }) => {
@@ -395,6 +396,8 @@ const Modal = ({
 
     const toggle = (e) => {
         e?.preventDefault()
+
+        onOpen()
 
         setIsOpen(oldValue => !oldValue)
     }

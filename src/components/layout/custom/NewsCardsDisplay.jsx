@@ -6,7 +6,7 @@ const NewsCardsDisplay = ({ payload }) => (
     <Container fluid>
         <Row>
             <Col>
-                <TitleH2 justifyContent="flex-start">Ultimos posts</TitleH2>
+                <TitleH2 justifyContent="flex-start" light>Ultimos posts</TitleH2>
             </Col>
         </Row>
 

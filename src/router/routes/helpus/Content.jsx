@@ -16,7 +16,7 @@ const Content = () => (
             backgroundPosition="50% 35%"
             contentAlignmentProps={{ paddingTop: '10rem' }}
         >
-            <TitleH2>Ajude nos</TitleH2>
+            <TitleH2 light>Ajude nos</TitleH2>
         </SectionBackdrop>
 
         <SectionBackdrop
