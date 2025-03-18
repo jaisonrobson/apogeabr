@@ -84,10 +84,10 @@ const StyledInput = styled(({
 
 const Input = ({ validation, light, ...props }, ref) => (
     <StyledInput
-        color={light ? "black" : "white"}
+        color={light ? "white" : "white"}
         backgroundColor={validation ? '#FFA5A560' : light ? "#FFFFFF60" : "#00000060"}
         onHover={{ backgroundColor: light ? "#4D4D4D" : '#CFCFCF' }}
-        placeholderStyles={{ color: light ? "black" : 'white' }}
+        placeholderStyles={{ color: light ? "white" : 'white' }}
         innerRef={ref}
         {...props}
     />

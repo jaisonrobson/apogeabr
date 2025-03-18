@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-import { Dropdown, Image, Span, Icon } from 'components'
+import { Dropdown, Span, Icon } from 'components'
 
 const DropdownInput = ({
     togglerProperties = {},

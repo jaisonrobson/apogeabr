@@ -39,7 +39,7 @@ const ElasticSearchInput = ({
     }, 1000)
 
     return () => clearTimeout(delayDebounce)
-  }, [query])
+  }, [query, searchEndpoint])
 
     return (
         <Fragment>
