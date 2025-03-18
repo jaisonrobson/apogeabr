@@ -9,6 +9,7 @@ import { DefaultPaginationContext } from 'contexts'
 const PerPageDropdown = ({
     context = DefaultPaginationContext,
     endpoint,
+    overwritedEndpoint = "",
     containerStyle,
     togglerProperties,
     options = [
@@ -40,7 +41,9 @@ const PerPageDropdown = ({
         enableLoading()
 
         try {
-            const response = await axios.get(endpoint, {
+            const currentEndpoint = overwritedEndpoint || endpoint
+
+            const response = await axios.get(currentEndpoint, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -89,6 +92,7 @@ const PerPageDropdown = ({
 const ConnectedPagination = ({
     context = DefaultPaginationContext,
     endpoint,
+    overwritedEndpoint = "",
     themeItemProps={light: false},
     themeLinkProps={light: false},
     maxNavigationalPagesPerDirection = 3,
@@ -112,7 +116,9 @@ const ConnectedPagination = ({
             enableLoading()
     
             try {
-                const response = await axios.get(endpoint, {
+                const currentEndpoint = overwritedEndpoint || endpoint
+
+                const response = await axios.get(currentEndpoint, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -137,13 +143,15 @@ const ConnectedPagination = ({
         }
 
         initialize()
-    }, [params])
+    }, [params, overwritedEndpoint, endpoint])
 
     const onNavigate = async (toPage) => {
         enableLoading()
 
         try {
-            const response = await axios.get(endpoint, {
+            const currentEndpoint = overwritedEndpoint || endpoint
+
+            const response = await axios.get(currentEndpoint, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,

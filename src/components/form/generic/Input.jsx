@@ -28,6 +28,7 @@ const StyledInput = styled(({
     flexGrow,
     innerRef,
     onHover = false,
+    placeholderStyles = false,
     animation = false,
     ...props
 }) => <input ref={innerRef} {...props} />)`
@@ -71,6 +72,13 @@ const StyledInput = styled(({
         ${onHover?.animation ? `animation: ${onHover?.animation?.property}; ${onHover?.animation?.corpse}` : ``}
     };`: ``}
 
+    ${({ placeholderStyles }) => placeholderStyles ? `&::placeholder {
+        ${placeholderStyles?.color ? `color: ${placeholderStyles?.color};` : ``}
+        ${placeholderStyles?.fontSize ? `font-size: ${placeholderStyles?.fontSize};` : ``}
+        ${placeholderStyles?.fontWeight ? `font-weight: ${placeholderStyles?.fontWeight};` : ``}
+        ${placeholderStyles?.opacity ? `opacity: ${placeholderStyles?.opacity};` : ``}
+    };`: ``}
+
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
@@ -79,6 +87,7 @@ const Input = ({ validation, light, ...props }, ref) => (
         color={light ? "black" : "white"}
         backgroundColor={validation ? '#FFA5A560' : light ? "#FFFFFF60" : "#00000060"}
         onHover={{ backgroundColor: light ? "#4D4D4D" : '#CFCFCF' }}
+        placeholderStyles={{ color: light ? "black" : 'white' }}
         innerRef={ref}
         {...props}
     />

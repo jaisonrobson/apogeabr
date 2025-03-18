@@ -4,7 +4,7 @@ import { ConnectedPagination, Table, Row, Col } from 'components'
 
 import { withDefaultPaginationContext, DefaultPaginationContext } from 'contexts'
 
-const ConnectedPaginatedTable = ({ endpoint, children, light = false, ...props }) => {
+const ConnectedPaginatedTable = ({ endpoint, overwritedEndpoint = "", children, light = false, ...props }) => {
     const paginationProps = useContext(DefaultPaginationContext)
     const tableRef = useRef()
     const [headerCount, setHeaderCount] = useState(0)
@@ -35,6 +35,7 @@ const ConnectedPaginatedTable = ({ endpoint, children, light = false, ...props }
                     <ConnectedPagination
                         context={DefaultPaginationContext}
                         endpoint={endpoint}
+                        overwritedEndpoint={overwritedEndpoint}
                         themeItemProps={{ light }}
                         themeLinkProps={{ light }}
                     />  
@@ -44,6 +45,7 @@ const ConnectedPaginatedTable = ({ endpoint, children, light = false, ...props }
                     <ConnectedPagination.PerPageDropdown
                         context={DefaultPaginationContext}
                         endpoint={endpoint}
+                        overwritedEndpoint={overwritedEndpoint}
                         light={light}
                     />
                 </Col>
