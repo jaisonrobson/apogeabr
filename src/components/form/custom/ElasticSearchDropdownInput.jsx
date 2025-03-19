@@ -48,12 +48,6 @@ const ElasticSearchDropdownInput = ({
                     },
                 })
 
-                const formattedResults = _.map(response.data, (item) => ({
-                    id: _.get(item, payloadIdPath, 0),
-                    name: _.get(item, payloadNamePath, "Busque uma opção"),
-                    value: item.payload,
-                }))
-
                 setResults(response.data.payload)
             } catch (error) {
                 console.error("Erro ao buscar registros:", error)
