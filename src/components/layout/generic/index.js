@@ -1,5 +1,8 @@
 export { default as Board } from './Board'
 export { default as Button } from './Button'
+export { default as ButtonGroup } from './ButtonGroup'
+export { default as RadioButtonsGroup } from './RadioButtonsGroup'
+export { default as CheckboxButtonsGroup } from './CheckboxButtonsGroup'
 export { default as Carousel } from './Carousel'
 export { default as CarouselMaterialUI } from './CarouselMaterialUI'
 export { default as Col } from './Col'

@@ -26,6 +26,10 @@ export { default as IconFormInputs } from './adminpanel/icons/inputs/IconFormInp
 export { default as CreateLanguageForm } from './adminpanel/languages/forms/CreateLanguageForm'
 export { default as UpdateLanguageForm } from './adminpanel/languages/forms/UpdateLanguageForm'
 export { default as LanguageFormInputs } from './adminpanel/languages/inputs/LanguageFormInputs'
+//LOCATION
+export { default as CreateLocationFormModal } from './adminpanel/locations/forms/Create'
+export { default as UpdateLocationFormModal } from './adminpanel/locations/forms/Update'
+export { default as LocationFormInputs } from './adminpanel/locations/inputs/LocationFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

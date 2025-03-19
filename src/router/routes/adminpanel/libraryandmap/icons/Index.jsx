@@ -77,7 +77,7 @@ const Index = () => {
                                                         {_.map(payload, (icon, index) => (
                                                             <Table.Row key={icon.id} light>
                                                                 <Table.CellHeader>
-                                                                    {`${icon.id}-${icon.icon_translation.locale_id}`}
+                                                                    {`${icon.id}`}
                                                                 </Table.CellHeader>
 
                                                                 <Table.Cell>

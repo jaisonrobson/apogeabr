@@ -4,13 +4,16 @@ import _ from 'lodash'
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-import { Dropdown, Span, Icon, Input } from 'components'
+import { Dropdown, Span, Icon, Input, Image } from 'components'
+
+import noImage from 'images/layout/generic/noImage.png'
 
 const ElasticSearchDropdownInput = ({
     togglerProperties = {},
     searchEndpoint="",
     payloadIdPath=["id"],
     payloadNamePath=["name"],
+    payloadImagePath=["image"],
     menuProperties={},
     itemProperties={},
     inputProps={},
@@ -45,15 +48,20 @@ const ElasticSearchDropdownInput = ({
                     },
                 })
 
-                setResults(response.data)
+                const formattedResults = _.map(response.data, (item) => ({
+                    id: _.get(item, payloadIdPath, 0),
+                    name: _.get(item, payloadNamePath, "Busque uma opção"),
+                    value: item.payload,
+                }))
+
+                setResults(response.data.payload)
             } catch (error) {
                 console.error("Erro ao buscar registros:", error)
             }
 
             setLoading(false)
         }
-    
-        // Debounce: Espera 500ms após a última digitação para buscar
+
         const delayDebounce = setTimeout(() => {
             if (query) {
                 fetchResults()
@@ -99,8 +107,12 @@ const ElasticSearchDropdownInput = ({
                 style={{ width: '100%' }}
                 {...menuProperties}
             >
-                <Dropdown.Item>
+                <Dropdown.Item
+                    toggle={false}
+                    onClick={(e) => e.preventDefault()}
+                >
                     <Input
+                        width="100%"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Realizar busca..."
@@ -112,12 +124,26 @@ const ElasticSearchDropdownInput = ({
                     !loading ? (
                         _.map(results, (option, idx) => (
                             <Dropdown.Item
-                                light={light}
                                 key={_.get(option, payloadIdPath)}
+                                light={light}
                                 onClick={() => onSelect(option)}
                                 {...itemProperties}
+                                display="flex"
+                                justifyContent="space-between"
                             >
                                 {_.get(option, payloadNamePath)}
+
+                                <Image
+                                    src={_.get(option, payloadImagePath) || noImage}
+                                    className="rounded-circle"
+                                    objectFit="contain"
+                                    width="25px"
+                                    minWidth="25px"
+                                    maxWidth="25px"
+                                    height="25px"
+                                    minHeight="25px"
+                                    maxHeight="25px"
+                                />
                             </Dropdown.Item>
                         ))
                     ) : null

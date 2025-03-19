@@ -1,8 +1,8 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { ButtonGroup as ReactstrapButtonGroup } from 'reactstrap'
 
-const StyledButton = styled(({
+const StyledButtonGroup = styled(({
     padding,
     margin,
     marginLeft,
@@ -31,7 +31,7 @@ const StyledButton = styled(({
     animation = false,
     active = false,
     ...props
-}) => <button ref={innerRef} {...props} />)`
+}) => <ReactstrapButtonGroup ref={innerRef} {...props} />)`
     ${({ padding }) => padding ? `padding: ${padding};` : ``}
     ${({ margin }) => margin ? `margin: ${margin};` : ``}
     ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ``}
@@ -43,9 +43,9 @@ const StyledButton = styled(({
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
-    ${({ border }) => border ? `border: ${border};` : `border: 2px solid gray;`}
+    ${({ border }) => border ? `border: ${border};` : ``}
     ${({ borderRadius }) => borderRadius ? `border-radius: ${borderRadius};` : ``}
-    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #00000030;`}
+    ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
     ${({ color }) => color ? `color: ${color};` : ``}
     ${({ borderBottom }) => borderBottom ? `border-bottom: ${borderBottom};` : ``}
     ${({ borderTop }) => borderTop ? `border-top: ${borderTop};` : ``}
@@ -77,24 +77,6 @@ const StyledButton = styled(({
     ${({ animation }) => animation ? `animation: ${animation?.property}; ${animation?.corpse}`: ``}
 `
 
-const Button = ({
-    to = undefined,
-    navigationOptions = {},
-    onClick: onClickParam = () => {},
-    ...props
-}) => {
-    const navigate = useNavigate()
+const ButtonGroup = (props) => <StyledButtonGroup {...props} />
 
-    const onClick = (e) => {
-        onClickParam(e)
-
-        if (to)
-            navigate(to, navigationOptions)
-    }
-
-    return (
-        <StyledButton type="button" {...props} onClick={onClick} />
-    )
-}
-
-export default Button
+export default ButtonGroup

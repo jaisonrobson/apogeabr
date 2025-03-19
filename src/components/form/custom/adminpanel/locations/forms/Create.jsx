@@ -7,13 +7,20 @@ import ROUTES from 'router/routes'
 
 import { extractIntoFlatArrayFieldByName, extractIntoFlatObjectFieldsByName } from 'util/json'
 
-import { alphabeticThreeHundredStringValidation, twoMegabytesImageValidation } from 'validations'
+import {
+    alphabeticThreeHundredStringValidation,
+    alphabeticFiveHundredStringValidation,
+    booleanValidation,
+    idValidation,
+    inGameMapCoordinatesValidation,
+    websiteMapCoordinatesValidation
+} from 'validations'
 
 import {
     Icon,
     Table,
     Div,
-    IconFormInputs,
+    LocationFormInputs,
     RecordFormModal,
 } from 'components'
 
@@ -47,16 +54,30 @@ const AddRecordTableCell = ({ headerCount, ...props }) => (
 
 const Create = ({ headerCount }) => (
     <RecordFormModal
-        title="Novo Ícone"
+        title="Novo Local"
         modalComponent={AddRecordTableCell}
         modalComponentProps={{ headerCount }}
         formComponentProps={({ dynamicFields, isOpen, fetchingPayload}) => ({
-            action: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS_CREATE_SUBMIT.path,
+            action: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS_CREATE_SUBMIT.path,
             defaultValues: {
-                image: null,
+                icon_id: 0,
+                iscity: 0,
+                webx: 0,
+                weby: 0,
+                webz: 0,
+                x: 0,
+                y: 0,
+                z: 0,
             },
             additionalValidations: ({
-                image: twoMegabytesImageValidation,
+                icon_id: idValidation.optional(),
+                iscity: booleanValidation.optional(),
+                webx: websiteMapCoordinatesValidation.optional(),
+                weby: websiteMapCoordinatesValidation.optional(),
+                webz: websiteMapCoordinatesValidation.optional(),
+                x: inGameMapCoordinatesValidation.optional(),
+                y: inGameMapCoordinatesValidation.optional(),
+                z: inGameMapCoordinatesValidation.optional(),
                 ...extractIntoFlatObjectFieldsByName({
                     initialData: dynamicFields,
                 }),
@@ -74,9 +95,19 @@ const Create = ({ headerCount }) => (
                     },
                 }),
             }),
-            additionalAllowedProperties: [...extractIntoFlatArrayFieldByName(dynamicFields), "image"],
+            additionalAllowedProperties: [
+                ...extractIntoFlatArrayFieldByName(dynamicFields),
+                "icon_id",
+                "iscity",
+                "webx",
+                "weby",
+                "webz",
+                "x",
+                "y",
+                "z",
+            ],
         })}
-        inputsComponent={IconFormInputs}
+        inputsComponent={LocationFormInputs}
         submitButtonProps={{
             color: "white",
             animationBackgroundColor: "lightblue",
@@ -111,6 +142,13 @@ const Create = ({ headerCount }) => (
                     label: 'Nome:',
                     value: locale.name,
                     validation: alphabeticThreeHundredStringValidation,
+                },
+                [`DIFY_description_${locale.id}`]: {
+                    type: 'textarea',
+                    name: `description_DIFY_${locale.id}`,
+                    label: 'Descrição:',
+                    value: locale.description,
+                    validation: alphabeticFiveHundredStringValidation,
                 },
             },
         })}

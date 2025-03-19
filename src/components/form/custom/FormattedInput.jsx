@@ -2,7 +2,16 @@ import React, { useState, useRef, Fragment, useEffect } from 'react'
 import parse from 'html-react-parser'
 import { useFormContext } from "react-hook-form"
 
-import { Row, Col, Input, Image, DropdownInput, Span } from 'components'
+import {
+    Row,
+    Col,
+    Input,
+    Image,
+    DropdownInput,
+    RadioButtonsGroupInput,
+    ElasticSearchDropdownInput,
+    Span,
+} from 'components'
 
 const FormattedInput = ({
     register,
@@ -83,6 +92,31 @@ const FormattedInput = ({
                             minWidth:"300px",
                         }}
                         setValue={setValue}
+                        light={light}
+                        {...props}
+                    />
+                )
+            case "elasticdropdown":
+                return (
+                    <ElasticSearchDropdownInput
+                        name={name}
+                        validation={errorMessage}
+                        containerStyle={{
+                            height:"28px",
+                            width:"100%",
+                            minWidth:"300px",
+                        }}
+                        setValue={setValue}
+                        light={light}
+                        {...props}
+                    />
+                )
+            case "radiobuttons":
+                return (
+                    <RadioButtonsGroupInput
+                        validation={errorMessage}
+                        setValue={setValue}
+                        name={name}
                         light={light}
                         {...props}
                     />

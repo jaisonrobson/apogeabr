@@ -9,3 +9,5 @@ export { default as adminLanguageCreateSubmit } from './adminpanel/languages/adm
 export { default as adminLanguageUpdateSubmit } from './adminpanel/languages/adminLanguageUpdateSubmit'
 export { default as adminIconCreateSubmit } from './adminpanel/icons/adminIconCreateSubmit'
 export { default as adminIconUpdateSubmit } from './adminpanel/icons/adminIconUpdateSubmit'
+export { default as adminLocationCreateSubmit } from './adminpanel/locations/adminLocationCreateSubmit'
+export { default as adminLocationUpdateSubmit } from './adminpanel/locations/adminLocationUpdateSubmit'

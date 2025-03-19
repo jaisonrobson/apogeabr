@@ -58,6 +58,8 @@ import {
     adminLanguageUpdateSubmit,
     adminIconCreateSubmit,
     adminIconUpdateSubmit,
+    adminLocationCreateSubmit,
+    adminLocationUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -252,6 +254,14 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS.path,
                                 element: <AdminPanelLibraryAndMapLocations />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS_CREATE_SUBMIT.path,
+                                action: adminLocationCreateSubmit,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS_UPDATE_SUBMIT.path,
+                                action: adminLocationUpdateSubmit,
                             },
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_TRAITS.path,
