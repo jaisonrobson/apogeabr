@@ -12,7 +12,7 @@ const IconFormInputs = ({ register, errors, backendErrors, setValue, isLoadingLa
             setValue={setValue}
             errors={errors}
             backendErrors={backendErrors}
-            reloadImage={!isLoadingLateValues}
+            reloadInformation={!isLoadingLateValues}
             additiveImageProps={{
                 marginLeft: '3rem'
             }}

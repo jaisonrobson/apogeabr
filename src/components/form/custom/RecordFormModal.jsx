@@ -27,6 +27,7 @@ const RecordFormModal = ({
     modalComponentProps = {},
     formComponent: FormComponent = RecordForm,
     formComponentProps = {},
+    doFormLateLoadInformations = false,
     inputsComponent: InputsComponent = () => null,
     cancelButtonProps = {},
     submitButtonProps = {},
@@ -143,6 +144,7 @@ const RecordFormModal = ({
                                         backendErrors={backendErrors}
                                         isLoadingLateValues={isLoadingLateValues}
                                         dynamicFields={dynamicFields}
+                                        doFormLateLoadInformations={doFormLateLoadInformations}                                        
                                     />
                                 </Modal.Body>
 

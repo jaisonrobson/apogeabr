@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import { useFormContext } from "react-hook-form"
 import axios from 'axios'
 import _ from 'lodash'
 
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+
+import { loadAction } from 'util/axios'
 
 import { Dropdown, Span, Icon, Input, Image } from 'components'
 
 import noImage from 'images/layout/generic/noImage.png'
 
 const ElasticSearchDropdownInput = ({
+    doFormLateLoadInformations,
+    reloadInformation,
+    defaultValueFetchEndpoint,
+    defaultValueResponsePayloadPath,
     togglerProperties = {},
     searchEndpoint="",
     payloadIdPath=["id"],
@@ -23,10 +30,27 @@ const ElasticSearchDropdownInput = ({
     light = false,
     ...props
 }) => {
+    const { value: { getValues } } = useFormContext()
     const [selectedOption, setSelectedOption] = useState(defaultValue)
     const [query, setQuery] = useState("")
     const [results, setResults] = useState([])
     const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (reloadInformation && doFormLateLoadInformations) {
+            const fetchInformation = async (id) => {
+                const result = await loadAction({
+                    actionMethod: "GET",
+                    actionRoute: `${defaultValueFetchEndpoint}/${id}`,
+                    responsePayloadPath: defaultValueResponsePayloadPath,
+                })
+        
+                setSelectedOption(result?.payload ? result.payload : defaultValue)
+            }
+
+            fetchInformation(getValues(name))
+        }
+    }, [reloadInformation])
 
     useEffect(() => {
         if (query.length < 2) {

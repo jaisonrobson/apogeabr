@@ -9,6 +9,7 @@ import ROUTES from 'router/routes'
 const action = async ({ request }) => {
     const form = await request.formData()
 
+    const image = form.get('image')
     const icon_id = form.get('icon_id')
     const iscity = form.get('iscity')
     const webx = form.get('webx')
@@ -21,6 +22,7 @@ const action = async ({ request }) => {
     const requestValues = Object.fromEntries(form.entries())
 
     const locationRequestPayload = { location: {
+        image,
         icon_id,
         iscity,
         webx,
@@ -30,8 +32,6 @@ const action = async ({ request }) => {
         y,
         z,
     } }
-
-    console.log("locationRequestPayload", locationRequestPayload)
 
     try {
         const locationResponse = await axios.post(`${process.env.REACT_APP_BACKEND_HOST}/locations`, locationRequestPayload, {
@@ -63,7 +63,9 @@ const action = async ({ request }) => {
             ...translationResponses.map(res => res.data)
         ]
 
-        return redirect(`${ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(successMessages))}`)
+        window.location.assign(
+            `${ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(successMessages))}`
+        )
     } catch (error) {
         const resultingError = error?.response?.data || { message: error.message }
 

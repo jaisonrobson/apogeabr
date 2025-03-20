@@ -5,7 +5,8 @@ import { redirect } from 'react-router-dom'
 export const loadAction = async ({
     actionMethod = "GET",
     actionRoute = "",
-    payload = undefined,
+    payload: requestPayload = undefined,
+    responsePayloadPath = ["data", "payload"],
 }) => {
     let result = { token: localStorage.getItem('token') }
 
@@ -18,10 +19,10 @@ export const loadAction = async ({
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${result.token}`,
                 },
-                ...(payload !== undefined ? { data: payload } : {})
+                ...(requestPayload !== undefined ? { data: requestPayload } : {})
             })
 
-            result = { ...result, payload: response.data.payload }
+            result = { ...result, payload: _.get(response, responsePayloadPath) }
         } catch (error) {
             result = { ...result, error: `Erro na requisição ${actionRoute}.` }
         }

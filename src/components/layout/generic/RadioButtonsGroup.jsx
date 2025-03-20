@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Col as ReactstrapCol } from 'reactstrap'
 import _ from 'lodash'
@@ -9,13 +9,20 @@ import {
 } from 'components'
 
 const RadioButtonsGroup = ({
+    defaultValue,
+    lateValue = undefined,
     options=[
         { label: "Não", value: 0 },
         { label: "Sim", value: 1 }
     ],
     onSelectOption: onSelectOptionParam
-}) => {
-    const [selectedValue, setSelectedValue] = useState(_.first(options))
+}) => {    
+    const [selectedValue, setSelectedValue] = useState(defaultValue || _.first(options))
+
+    useEffect(() => {
+        if (lateValue)
+            setSelectedValue(lateValue)
+    }, [lateValue])
 
     const onSelectOption = (value) => {
         setSelectedValue(value)

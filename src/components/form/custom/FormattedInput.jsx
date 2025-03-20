@@ -2,6 +2,8 @@ import React, { useState, useRef, Fragment, useEffect } from 'react'
 import parse from 'html-react-parser'
 import { useFormContext } from "react-hook-form"
 
+import { loadAction } from 'util/axios'
+
 import {
     Row,
     Col,
@@ -14,6 +16,8 @@ import {
 } from 'components'
 
 const FormattedInput = ({
+    defaultValueFetchEndpoint,
+    defaultValueResponsePayloadPath,
     register,
     setValue,
     name,
@@ -25,18 +29,18 @@ const FormattedInput = ({
     imageProps = {},
     light=false,
     inputContainerProps = {},
-    reloadImage = false,
+    reloadInformation = false,
     ...props
 }) => {
     const fieldRef = useRef(null)
     const { value: { getValues, setValue: contextSetValue, formState: { defaultValues } } } = useFormContext()
-    const [ selectedImage, setSelectedImage ] = useState(undefined)
+    const [ selectedImage, setSelectedImage ] = useState(undefined)    
     const { ref: registerRef, ...registerRest } = register(name)
 
     useEffect(() => {
-        if (type === "image" && reloadImage)
+        if (type === "image" && reloadInformation)
             onReceiveImage(getValues(name))
-    }, [reloadImage, defaultValues])
+    }, [reloadInformation, defaultValues])
 
     const onChange = (event) => {
         const image = event.target.files?.[0]
@@ -100,6 +104,8 @@ const FormattedInput = ({
                 return (
                     <ElasticSearchDropdownInput
                         name={name}
+                        defaultValueFetchEndpoint={defaultValueFetchEndpoint}
+                        defaultValueResponsePayloadPath={defaultValueResponsePayloadPath}
                         validation={errorMessage}
                         containerStyle={{
                             height:"28px",
@@ -107,6 +113,7 @@ const FormattedInput = ({
                             minWidth:"300px",
                         }}
                         setValue={setValue}
+                        reloadInformation={reloadInformation}
                         light={light}
                         {...props}
                     />
@@ -117,6 +124,7 @@ const FormattedInput = ({
                         validation={errorMessage}
                         setValue={setValue}
                         name={name}
+                        reloadInformation={reloadInformation}
                         light={light}
                         {...props}
                     />

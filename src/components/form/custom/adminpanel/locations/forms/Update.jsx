@@ -6,18 +6,27 @@ import { faPen } from '@fortawesome/free-solid-svg-icons'
 
 import { urlToFile } from 'util/image'
 import { extractIntoFlatArrayFieldByName, extractIntoFlatObjectFieldsByName, extractFromNestedObjectByFilters } from 'util/json'
-import { alphabeticThreeHundredStringValidation, twoMegabytesImageValidation } from 'validations'
+
+import {
+    alphabeticThreeHundredStringValidation,
+    alphabeticFiveHundredStringValidation,
+    booleanValidation,
+    idValidation,
+    inGameMapCoordinatesValidation,
+    websiteMapCoordinatesValidation,
+    twoMegabytesImageValidation,
+} from 'validations'
 
 import ROUTES from 'router/routes'
 
 import {
     Button, 
     Icon,
-    IconFormInputs,
+    LocationFormInputs,
     RecordFormModal,
 } from 'components'
 
-const EditRecordButton = ({ animationName = "iconEditAnimation", animatedBackgroundColor = "#FFFA85", ...props }) => (
+const EditRecordButton = ({ animationName = "locationEditAnimation", animatedBackgroundColor = "#FFFA85", ...props }) => (
     <Button
         color="white"
         backgroundColor='#00000060'
@@ -37,15 +46,24 @@ const EditRecordButton = ({ animationName = "iconEditAnimation", animatedBackgro
     </Button>
 )
 
-const Update = ({ icon }) => (
+const Update = ({ location }) => (
     <RecordFormModal
-        title="Atualizar Ícone"
+        title="Atualizar Local"
         modalComponent={EditRecordButton}
-        formComponentProps={({ dynamicFields, isOpen, fetchingPayload}) => ({
-            action: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS_UPDATE_SUBMIT.path,
+        doFormLateLoadInformations={true}
+        formComponentProps={({ dynamicFields, isOpen, fetchingPayload }) => ({
+            action: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS_UPDATE_SUBMIT.path,
             onlyTouchedFields: true,
             externalSchema: z.object({
                 image: twoMegabytesImageValidation.optional(),
+                icon_id: idValidation.optional(),
+                iscity: booleanValidation.optional(),
+                webx: websiteMapCoordinatesValidation.optional(),
+                weby: websiteMapCoordinatesValidation.optional(),
+                webz: websiteMapCoordinatesValidation.optional(),
+                x: inGameMapCoordinatesValidation.optional(),
+                y: inGameMapCoordinatesValidation.optional(),
+                z: inGameMapCoordinatesValidation.optional(),
                 ...extractIntoFlatObjectFieldsByName({
                     initialData: dynamicFields,
                 }),
@@ -53,11 +71,27 @@ const Update = ({ icon }) => (
             validationSchema: z.object({}),
             defaultValues: {
                 image: null,
+                icon_id: 0,
+                iscity: 0,
+                webx: 0,
+                weby: 0,
+                webz: 0,
+                x: 0,
+                y: 0,
+                z: 0,
             },
             lateLoadingProps: { isOpen },
             lateLoadingTriggers: [{ isOpen: true }],
             lateLoadingValues: () => ({
-                image: urlToFile(icon.image),
+                image: location.image ? urlToFile(location.image) : null,
+                icon_id: location.icon_id,
+                iscity: Number(location.iscity),
+                webx: location.webx,
+                weby: location.weby,
+                webz: location.webz,
+                x: location.x,
+                y: location.y,
+                z: location.z,
                 ...extractIntoFlatObjectFieldsByName({
                     initialData: dynamicFields,
                     byName: "name",
@@ -71,7 +105,7 @@ const Update = ({ icon }) => (
                 }),
             }),
             additionalSubmitValues: ({
-                id: icon.id,
+                id: location.id,
                 ...extractIntoFlatObjectFieldsByName({
                     initialData: dynamicFields,
                     byName: "name",
@@ -96,14 +130,28 @@ const Update = ({ icon }) => (
                     comparisonField: 'name',
                 }),
             }),
-            additionalAllowedProperties: [...extractIntoFlatArrayFieldByName(dynamicFields), "persisted", "non_persisted", "id", "image"],
+            additionalAllowedProperties: [
+                ...extractIntoFlatArrayFieldByName(dynamicFields),
+                "persisted",
+                "non_persisted",
+                "id",
+                "image",
+                "icon_id",
+                "iscity",
+                "webx",
+                "weby",
+                "webz",
+                "x",
+                "y",
+                "z",
+            ],
             additionalEnforcedProperties: ["id"]
         })}
-        inputsComponent={IconFormInputs}
+        inputsComponent={LocationFormInputs}
         submitButtonProps={{
             color: "white",
             animationBackgroundColor: "#FFFA85",
-            animationName: "iconEditSubmitAnimation",
+            animationName: "locationEditSubmitAnimation",
             value: "Alterar",
         }}
         fetchDynamicFields={true}
@@ -114,7 +162,7 @@ const Update = ({ icon }) => (
             },
             {
                 actionMethod: "GET",
-                actionRoute: `icons/${icon.id}/translations`,
+                actionRoute: `locations/${location.id}/translations`,
             }
         ]}
         fetchingRequestHelpers={[
@@ -124,28 +172,29 @@ const Update = ({ icon }) => (
         fetchingPayloadHelpers={[
             (data) => ({ locales: data.payload }),
             (data) => {
-                // Encontrar os `icon_id` únicos existentes na lista de ícones
-                const existingIconIds = _.uniq(_.map(data.payload, 'icon_id'))
+                // Encontrar os `ids` únicos existentes na lista de resultado do modelo em questao
+                const existingModelIds = _.uniq(_.map(data.payload, 'location_id'))
 
-                // Encontrar os locale_ids já presentes nos ícones
+                // Encontrar os locale_ids já presentes no modelo em questao
                 const existingLocaleIds = _.map(data.payload, 'locale_id')
 
                 // Filtrar os idiomas que ainda não estão no ícone
                 const missingLocales = _.filter(data.accumulatedPayload.locales, locale => !existingLocaleIds.includes(locale.id))
 
                 // Criar novos objetos vazios para os ids ausentes e adicionar à lista
-                const newIcons = _.flatMap(existingIconIds, iconIdIteratee => _.map(missingLocales, locale => ({
-                    icon_id: iconIdIteratee,
+                const newRecords = _.flatMap(existingModelIds, modelIdIteratee => _.map(missingLocales, locale => ({
+                    location_id: modelIdIteratee,
                     locale_id: locale.id,
                     name: "",
-                    composite_id: `${iconIdIteratee}-${locale.id}`,
+                    description: "",
+                    composite_id: `${modelIdIteratee}-${locale.id}`,
                     locale: locale,
                     isPersistedRecord: false,
                 }))
                 )
 
-                // Atualizar a lista de ícones com os novos registros
-                const result = _.concat(data.payload, newIcons)
+                // Atualizar a lista de resultado do modelo em questao com os novos registros
+                const result = _.concat(data.payload, newRecords)
 
                 return ({ ...result })
             }
@@ -169,10 +218,17 @@ const Update = ({ icon }) => (
                     validation: _.isEmpty(collective.name) ? alphabeticThreeHundredStringValidation : alphabeticThreeHundredStringValidation.optional(),
                     isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
                 },
+                [`DIFY_description_${collective.locale_id}`]: {
+                    type: 'textarea',
+                    name: `description_DIFY_${collective.locale_id}`,
+                    label: 'Descrição:',
+                    value: collective.description,
+                    validation: _.isEmpty(collective.description) ? alphabeticFiveHundredStringValidation : alphabeticFiveHundredStringValidation.optional(),
+                    isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
+                },
             },
         })}
-        light={true}
-    />
+        light={true} />
 )
 
 export default Update

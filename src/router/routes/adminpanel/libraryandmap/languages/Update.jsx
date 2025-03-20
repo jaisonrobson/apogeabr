@@ -74,7 +74,7 @@ const Update = ({ locale }) => (
                         </Modal.Header>
 
                         <Modal.Body light>
-                            <LanguageFormInputs register={register} setValue={setValue} errors={errors} backendErrors={backendErrors} reloadImage={!isLoadingLateValues} />
+                            <LanguageFormInputs register={register} setValue={setValue} errors={errors} backendErrors={backendErrors} reloadInformation={!isLoadingLateValues} />
                         </Modal.Body>
 
                         <Modal.Footer light>

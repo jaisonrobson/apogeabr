@@ -1,5 +1,5 @@
 import * as z from 'zod'
 
-const validation = z.number()
+const validation = z.coerce.number()
 
 export default validation

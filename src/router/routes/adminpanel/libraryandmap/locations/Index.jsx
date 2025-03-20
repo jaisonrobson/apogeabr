@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react'
 import _ from 'lodash'
 
 import ROUTES from 'router/routes'
@@ -96,7 +96,7 @@ const Index = () => {
                                                                             alignItems="center"
                                                                             width="25px"
                                                                         >
-                                                                            {/* <UpdateLocationFormModal location={location} /> */}
+                                                                            <UpdateLocationFormModal location={location} />
                                                                         </Col>
 
                                                                         <Col

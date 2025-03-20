@@ -13,7 +13,8 @@ import {
     booleanValidation,
     idValidation,
     inGameMapCoordinatesValidation,
-    websiteMapCoordinatesValidation
+    websiteMapCoordinatesValidation,
+    twoMegabytesImageValidation,
 } from 'validations'
 
 import {
@@ -60,6 +61,7 @@ const Create = ({ headerCount }) => (
         formComponentProps={({ dynamicFields, isOpen, fetchingPayload}) => ({
             action: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS_CREATE_SUBMIT.path,
             defaultValues: {
+                image: null,
                 icon_id: 0,
                 iscity: 0,
                 webx: 0,
@@ -70,6 +72,7 @@ const Create = ({ headerCount }) => (
                 z: 0,
             },
             additionalValidations: ({
+                image: twoMegabytesImageValidation.optional(),
                 icon_id: idValidation.optional(),
                 iscity: booleanValidation.optional(),
                 webx: websiteMapCoordinatesValidation.optional(),
@@ -97,6 +100,7 @@ const Create = ({ headerCount }) => (
             }),
             additionalAllowedProperties: [
                 ...extractIntoFlatArrayFieldByName(dynamicFields),
+                "image",
                 "icon_id",
                 "iscity",
                 "webx",

@@ -12,26 +12,33 @@ const action = async ({ request }) => {
     const persistedFields = _.split(form.get('persisted'), ',')
     const nonPersistedFields = _.split(form.get('non_persisted'), ',')
 
-    const image = form.get('image')
-    const iconId = form.get('id')
+    const locationId = form.get('id')
+    const iconId = form.get('icon_id')
 
     const allValues = Object.fromEntries(form.entries())
-    const filteredValues = _.omitBy(Object.fromEntries(form.entries()), (value, key) => key.includes("id") || key === "persisted" || key === "non_persisted")
+    const nonInitialRequestValues = filterEntries(allValues, "DIFY_")
+    const initialRequestValues = _.omitBy(
+        Object.fromEntries(form.entries()),
+        (value, key) => key.includes("id") || key === "persisted" || key === "non_persisted" || key in nonInitialRequestValues
+    )
+
+    if (iconId)
+        initialRequestValues["icon_id"] = iconId
 
     try {
         const requests = []
 
-        if (image) {
-            const iconRequestPayload = { icon: { image } }
+        if (!_.isEmpty(initialRequestValues)) {
+            const initialRequestPayload = { location: initialRequestValues }
 
-            const imageRequest = await axios.put(`${[process.env.REACT_APP_BACKEND_HOST]}/icons/${iconId}`, iconRequestPayload, {
+            const locationRequest = await axios.put(`${[process.env.REACT_APP_BACKEND_HOST]}/locations/${locationId}`, initialRequestPayload, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 }
             })
 
-            requests.push(imageRequest)
+            requests.push(locationRequest)
         }
 
         const requestGroups = groupData(
@@ -50,12 +57,12 @@ const action = async ({ request }) => {
 
         if (!_.isEmpty(onlyTouchedFieldsRequests)) {
             _.forEach(onlyTouchedFieldsRequests, async (value) => {
-                const requestPayload = { icon_translation: _.omit(value, "isPersistedField") }
+                const requestPayload = { location_translation: _.omit(value, "isPersistedField") }
 
                 const translationRequest = await axios.request({
                     url: value.isPersistedField
-                        ? `${process.env.REACT_APP_BACKEND_HOST}/icons/${iconId}/translations/${value.locale_id}`
-                        : `${process.env.REACT_APP_BACKEND_HOST}/icons/${iconId}/translations`,
+                        ? `${process.env.REACT_APP_BACKEND_HOST}/locations/${locationId}/translations/${value.locale_id}`
+                        : `${process.env.REACT_APP_BACKEND_HOST}/locations/${locationId}/translations`,
                     method: value.isPersistedField ? 'PUT' : 'POST',
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -70,11 +77,15 @@ const action = async ({ request }) => {
 
         const responses = await Promise.all(requests)
 
-        return redirect(`${ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS.path.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(responses.map(res => res.data)))}`)
+        window.location.assign(
+            `${ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS.path.slice(0, -1)}?success=${encodeURIComponent(
+                JSON.stringify(responses.map((res) => res.data))
+            )}`
+        )
     } catch (error) {
         const resultingError = error?.response?.data || { message: error.message }
 
-        return redirect(`${ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ICONS.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
+        return redirect(`${ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_LOCATIONS.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
     }
 }
 

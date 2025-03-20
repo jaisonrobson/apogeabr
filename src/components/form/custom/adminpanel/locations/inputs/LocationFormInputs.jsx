@@ -5,60 +5,27 @@ import { mountFormattedInputComponents } from 'util/json'
 
 import { FormattedInput, ImageInput, HR, Row, Col, Span } from 'components'
 
-const LocationFormInputs = ({ register, errors, backendErrors, setValue, isLoadingLateValues=false, dynamicFields={}, light=false, ...props }) => (
+const LocationFormInputs = ({
+    register,
+    errors,
+    backendErrors,
+    setValue,
+    doFormLateLoadInformations,
+    isLoadingLateValues=false,
+    dynamicFields={},
+    light=false,
+    ...props
+}) => (
     <Fragment>
-        <FormattedInput
+        <ImageInput
             register={register}
             setValue={setValue}
-            name="webx"
-            label="Posição mapa do site (X):"
-            errorMessage={errors?.webx?.message}
-            fontFamily="arial"
-        />
-
-        <FormattedInput
-            register={register}
-            setValue={setValue}
-            name="weby"
-            label="Posição mapa do site (Y):"
-            errorMessage={errors?.weby?.message}
-            fontFamily="arial"
-        />
-
-        <FormattedInput
-            register={register}
-            setValue={setValue}
-            name="webz"
-            label="Posição mapa do site (Z):"
-            errorMessage={errors?.webz?.message}
-            fontFamily="arial"
-        />
-
-        <FormattedInput
-            register={register}
-            setValue={setValue}
-            name="x"
-            label="Posição mapa do jogo (X):"
-            errorMessage={errors?.x?.message}
-            fontFamily="arial"
-        />
-
-        <FormattedInput
-            register={register}
-            setValue={setValue}
-            name="y"
-            label="Posição mapa do jogo (Y):"
-            errorMessage={errors?.y?.message}
-            fontFamily="arial"
-        />
-
-        <FormattedInput
-            register={register}
-            setValue={setValue}
-            name="z"
-            label="Posição mapa do jogo (Z):"
-            errorMessage={errors?.z?.message}
-            fontFamily="arial"
+            errors={errors}
+            backendErrors={backendErrors}
+            reloadInformation={!isLoadingLateValues}
+            additiveImageProps={{
+                marginLeft: '3rem'
+            }}
         />
 
         <FormattedInput
@@ -68,23 +35,89 @@ const LocationFormInputs = ({ register, errors, backendErrors, setValue, isLoadi
             label="É uma cidade?"
             errorMessage={errors?.iscity?.message}
             type="radiobuttons"
+            reloadInformation={!isLoadingLateValues}
+            doFormLateLoadInformations={doFormLateLoadInformations}
             fontFamily="arial"
         />
 
         <FormattedInput
             searchEndpoint={`${process.env.REACT_APP_BACKEND_HOST}/icons/search`}
+            defaultValueFetchEndpoint={`icons`}
+            defaultValueResponsePayloadPath={["data"]}
             payloadIdPath={["id"]}
             payloadNamePath={["icon_translation", "name"]}
             name="icon_id"
             label="Icone:"
-            errorMessage={errors?.iscity?.message}
+            errorMessage={errors?.icon_id?.message}
             type="elasticdropdown"
+            reloadInformation={!isLoadingLateValues}
+            doFormLateLoadInformations={doFormLateLoadInformations}
             fontFamily="arial"
             register={register}
             setValue={setValue}
             togglerProperties={{
                 color: 'white'
             }}
+        />
+
+        <FormattedInput
+            register={register}
+            setValue={setValue}
+            name="webx"
+            label="Posição mapa do site (X):"
+            errorMessage={errors?.webx?.message}
+            type="number"
+            fontFamily="arial"
+        />
+
+        <FormattedInput
+            register={register}
+            setValue={setValue}
+            name="weby"
+            label="Posição mapa do site (Y):"
+            errorMessage={errors?.weby?.message}
+            type="number"
+            fontFamily="arial"
+        />
+
+        <FormattedInput
+            register={register}
+            setValue={setValue}
+            name="webz"
+            label="Posição mapa do site (Z):"
+            errorMessage={errors?.webz?.message}
+            type="number"
+            fontFamily="arial"
+        />
+
+        <FormattedInput
+            register={register}
+            setValue={setValue}
+            name="x"
+            label="Posição mapa do jogo (X):"
+            errorMessage={errors?.x?.message}
+            type="number"
+            fontFamily="arial"
+        />
+
+        <FormattedInput
+            register={register}
+            setValue={setValue}
+            name="y"
+            label="Posição mapa do jogo (Y):"
+            errorMessage={errors?.y?.message}
+            type="number"
+            fontFamily="arial"
+        />
+
+        <FormattedInput
+            register={register}
+            setValue={setValue}
+            name="z"
+            label="Posição mapa do jogo (Z):"
+            errorMessage={errors?.z?.message}
+            type="number"
+            fontFamily="arial"
         />
 
         {mountFormattedInputComponents(
