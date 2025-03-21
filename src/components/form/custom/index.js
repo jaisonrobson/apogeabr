@@ -34,6 +34,10 @@ export { default as LocationFormInputs } from './adminpanel/locations/inputs/Loc
 export { default as CreateTraitFormModal } from './adminpanel/traits/forms/Create'
 export { default as UpdateTraitFormModal } from './adminpanel/traits/forms/Update'
 export { default as TraitFormInputs } from './adminpanel/traits/inputs/TraitFormInputs'
+//EVENTS
+export { default as CreateEventFormModal } from './adminpanel/events/forms/Create'
+export { default as UpdateEventFormModal } from './adminpanel/events/forms/Update'
+export { default as EventFormInputs } from './adminpanel/events/inputs/EventFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

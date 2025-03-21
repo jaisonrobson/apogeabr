@@ -1,8 +1,10 @@
 Futuro website wiki do jogo Apogea
 
-Problemas conhecidos:
+Afazeres/Problemas conhecidos:
 * Código não está totalmente otimizado
 * Biblioteca de particulas do canvas: `@tsparticles/react`, parece estar com algum problema de vazamento de memória, rever utilização no projeto.
+* Criar/corrigir os campos do tipo `textarea` dentro do componente `FormattedInput`
+* Adicionar informação visual de carregamento dos `Spinners` do reactstrap ao longo do projeto inteiro
 
 
 Proposta:

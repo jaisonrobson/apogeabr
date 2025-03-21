@@ -62,6 +62,8 @@ import {
     adminLocationUpdateSubmit,
     adminTraitCreateSubmit,
     adminTraitUpdateSubmit,
+    adminEventCreateSubmit,
+    adminEventUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -280,6 +282,14 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_EVENTS.path,
                                 element: <AdminPanelLibraryAndMapEvents />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_EVENTS_CREATE_SUBMIT.path,
+                                action: adminEventCreateSubmit,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_EVENTS_UPDATE_SUBMIT.path,
+                                action: adminEventUpdateSubmit,
                             },
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NATURES.path,

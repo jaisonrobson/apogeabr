@@ -1,109 +1,162 @@
-import React from 'react'
-import { useRouteLoaderData } from 'react-router-dom'
+import React, { Fragment, useContext, useEffect } from 'react'
+import _ from 'lodash'
 
-import userNoAvatarImage from 'images/layout/user/userNoAvatar.png'
+import ROUTES from 'router/routes'
+
+import { I18nContext } from 'contexts'
+
+import noImage from 'images/layout/generic/noImage.png'
 
 import {
-    StoneTabletTwoBoard,
-    Container,
+    Table,
     Row,
     Col,
+    MarbleTabletBoard,
+    Container,
     Image,
-    Span,
-    Date,
+    CreateEventFormModal,
+    UpdateEventFormModal,
+    DeleteRecordModalButton,
+    SearchableConnectedPaginatedTable,
 } from 'components'
 
-const Overview = () => {
-    const { user } = useRouteLoaderData("root")
+const Index = () => {
+    const { formatDateTime } = useContext(I18nContext)
 
     return (
-        <Row justifyContent="center">
-            <Col
-                xs="12"
-                sm="12"
-                md="8"
-                lg="6"
-                xl="4"
-                xxl="2"
-                margin="0px 50px"
-                minWidth="300px"
-            >
-                <StoneTabletTwoBoard padding="0px">
-                    <Container
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
-                        alignItems="center"
-                        className="unselectable"
-                        gap="7px"
-                    >
-                        <Row justifyContent="center">
-                            <Image
-                                src={user?.image || userNoAvatarImage}
-                                className="rounded-circle"
-                                objectFit="contain"
-                                width="150px"
-                                minWidth="150px"
-                            />
-                        </Row>
+        <Row>
+            <Col display="flex" flexDirection="column" gap="2rem">
+                <Row>
+                    <Col>
+                        <MarbleTabletBoard>
+                            <Container
+                                display="flex"
+                                flexDirection="column"
+                                justifyContent="center"
+                                alignItems="center"
+                                className="unselectable"
+                            >
+                                <Row width="100%" gap="2rem">
+                                    <Col>
+                                        <SearchableConnectedPaginatedTable
+                                            light
+                                            searchEndpoint={`${process.env.REACT_APP_BACKEND_HOST}/events/search`}
+                                            endpoint={`${[process.env.REACT_APP_BACKEND_HOST]}/events`}
+                                        >
+                                            {({ payload, headerCount }) => (
+                                                <Fragment>
+                                                    <Table.Header>
+                                                        <Table.Row light>
+                                                            <Table.CellHeader>
+                                                                #
+                                                            </Table.CellHeader>
 
-                        <Row>
-                            <Span>{user.name ? user.name : 'Usuário sem nome'}</Span>
-                        </Row>
+                                                            <Table.CellHeader>
+                                                                Ações
+                                                            </Table.CellHeader>
 
-                        <Row>
-                            <Span>{user.privilege ? user.privilege.name : 'Usuário'}</Span>
-                        </Row>
+                                                            <Table.CellHeader>
+                                                                Criação
+                                                            </Table.CellHeader>
 
-                        <Row>
-                            <Span>{user.country_code ? user.country_code : 'País não identificado'}</Span>
-                        </Row>
-                    </Container>
-                </StoneTabletTwoBoard>
+                                                            <Table.CellHeader>
+                                                                Última atualização
+                                                            </Table.CellHeader>
+
+                                                            <Table.CellHeader>
+                                                                Nome
+                                                            </Table.CellHeader>
+
+                                                            <Table.CellHeader>
+                                                                Imagem
+                                                            </Table.CellHeader>
+                                                        </Table.Row>
+                                                    </Table.Header>
+
+                                                    <Table.Body>
+                                                        {_.map(payload, (theEvent, index) => (
+                                                            <Table.Row key={theEvent.id} light>
+                                                                <Table.CellHeader>
+                                                                    {`${theEvent.id}`}
+                                                                </Table.CellHeader>
+
+                                                                <Table.Cell>
+                                                                    <Row
+                                                                        display="flex"
+                                                                        flexDirection="row"
+                                                                        justifyContent="center"
+                                                                        alignItems="center"
+                                                                        width="100px"
+                                                                        gap="0px"
+                                                                        padding="5px"
+                                                                    >
+                                                                        <Col
+                                                                            display="inline-flex"
+                                                                            justifyContent="center"
+                                                                            alignItems="center"
+                                                                            width="25px"
+                                                                        >
+                                                                            <UpdateEventFormModal theEvent={theEvent} />
+                                                                        </Col>
+
+                                                                        <Col
+                                                                            display="inline-flex"
+                                                                            justifyContent="center"
+                                                                            alignItems="center"
+                                                                            width="25px"
+                                                                        >
+                                                                            <DeleteRecordModalButton
+                                                                                deleteEndpoint={`events/${theEvent.id}`}
+                                                                                deleteRoutePath={ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_EVENTS.path}
+                                                                            />
+                                                                        </Col>
+                                                                    </Row>
+                                                                </Table.Cell>
+
+                                                                <Table.Cell>
+                                                                    {formatDateTime(theEvent.created_at)}
+                                                                </Table.Cell>
+
+                                                                <Table.Cell>
+                                                                    {formatDateTime(theEvent.updated_at)}
+                                                                </Table.Cell>
+
+                                                                <Table.Cell>
+                                                                    {theEvent.event_translation.name}
+                                                                </Table.Cell>
+
+                                                                <Table.Cell>
+                                                                    <Image
+                                                                        src={theEvent?.image || noImage}
+                                                                        className="rounded-circle"
+                                                                        objectFit="contain"
+                                                                        width="25px"
+                                                                        minWidth="25px"
+                                                                        maxWidth="25px"
+                                                                        height="25px"
+                                                                        minHeight="25px"
+                                                                        maxHeight="25px"
+                                                                    />
+                                                                </Table.Cell>
+                                                            </Table.Row>
+                                                        ))}
+
+                                                        <Table.Row light>
+                                                            <CreateEventFormModal headerCount={headerCount} />
+                                                        </Table.Row>
+                                                    </Table.Body>
+                                                </Fragment>
+                                            )}
+                                        </SearchableConnectedPaginatedTable>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </MarbleTabletBoard>
+                    </Col>
+                </Row>
             </Col>
-
-            <Col
-                xs="12"
-                sm="12"
-                md="12"
-                lg="10"
-                xl="6"
-                xxl="4"
-                margin="0px 50px"
-                minWidth="550px"
-            >
-                <StoneTabletTwoBoard>
-                    <Container
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
-                        alignItems="center"
-                        className="unselectable"
-                    >
-                        <Row>
-                            <Col display="flex" flexDirection="column" gap="15px">
-                                <Row>
-                                    <Span>{"Email: "+user.email}</Span>
-                                </Row>
-
-                                <Row>
-                                    <Span>{"Telefone: "+ (user.phone_number ? user.phone_number : "Sem telefone")}</Span>
-                                </Row>
-
-                                <Row>
-                                    <Span>{"Criado em: "}<Date date={user.created_at} /></Span>
-                                </Row>
-
-                                <Row>
-                                    <Span>{"Ultimo login: "}<Date date={user.last_logon} /></Span>
-                                </Row>
-                            </Col>
-                        </Row>
-                    </Container>
-                </StoneTabletTwoBoard>
-            </Col>
-        </Row>        
+        </Row>
     )
 }
 
-export default Overview
+export default Index

@@ -13,3 +13,5 @@ export { default as adminLocationCreateSubmit } from './adminpanel/locations/adm
 export { default as adminLocationUpdateSubmit } from './adminpanel/locations/adminLocationUpdateSubmit'
 export { default as adminTraitCreateSubmit } from './adminpanel/traits/adminTraitCreateSubmit'
 export { default as adminTraitUpdateSubmit } from './adminpanel/traits/adminTraitUpdateSubmit'
+export { default as adminEventCreateSubmit } from './adminpanel/events/adminEventCreateSubmit'
+export { default as adminEventUpdateSubmit } from './adminpanel/events/adminEventUpdateSubmit'
