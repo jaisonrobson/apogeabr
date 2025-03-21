@@ -30,6 +30,10 @@ export { default as LanguageFormInputs } from './adminpanel/languages/inputs/Lan
 export { default as CreateLocationFormModal } from './adminpanel/locations/forms/Create'
 export { default as UpdateLocationFormModal } from './adminpanel/locations/forms/Update'
 export { default as LocationFormInputs } from './adminpanel/locations/inputs/LocationFormInputs'
+//TRAITS
+export { default as CreateTraitFormModal } from './adminpanel/traits/forms/Create'
+export { default as UpdateTraitFormModal } from './adminpanel/traits/forms/Update'
+export { default as TraitFormInputs } from './adminpanel/traits/inputs/TraitFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

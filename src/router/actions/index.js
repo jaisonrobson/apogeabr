@@ -11,3 +11,5 @@ export { default as adminIconCreateSubmit } from './adminpanel/icons/adminIconCr
 export { default as adminIconUpdateSubmit } from './adminpanel/icons/adminIconUpdateSubmit'
 export { default as adminLocationCreateSubmit } from './adminpanel/locations/adminLocationCreateSubmit'
 export { default as adminLocationUpdateSubmit } from './adminpanel/locations/adminLocationUpdateSubmit'
+export { default as adminTraitCreateSubmit } from './adminpanel/traits/adminTraitCreateSubmit'
+export { default as adminTraitUpdateSubmit } from './adminpanel/traits/adminTraitUpdateSubmit'
