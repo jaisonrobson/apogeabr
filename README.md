@@ -1,6 +1,6 @@
 # 🌌 Futuro Website Wiki do Jogo **Apogea**
 
-Este projeto tem como objetivo centralizar todo o conteúdo do jogo **Apogea** em um website simples, acessível e de fácil navegação. A proposta é criar uma wiki não-oficial, organizada por administradores dedicados e curadores da comunidade.
+Este projeto tem como objetivo centralizar todo o conteúdo do jogo **Apogea** em um website simples, acessível e de fácil navegação. A proposta é criar uma wiki oficial, organizada por administradores dedicados e curadores da comunidade.
 
 ---
 
