@@ -15,3 +15,5 @@ export { default as adminTraitCreateSubmit } from './adminpanel/traits/adminTrai
 export { default as adminTraitUpdateSubmit } from './adminpanel/traits/adminTraitUpdateSubmit'
 export { default as adminEventCreateSubmit } from './adminpanel/events/adminEventCreateSubmit'
 export { default as adminEventUpdateSubmit } from './adminpanel/events/adminEventUpdateSubmit'
+export { default as adminNatureCreateSubmit } from './adminpanel/natures/adminNatureCreateSubmit'
+export { default as adminNatureUpdateSubmit } from './adminpanel/natures/adminNatureUpdateSubmit'

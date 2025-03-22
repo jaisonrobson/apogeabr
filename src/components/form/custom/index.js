@@ -38,6 +38,10 @@ export { default as TraitFormInputs } from './adminpanel/traits/inputs/TraitForm
 export { default as CreateEventFormModal } from './adminpanel/events/forms/Create'
 export { default as UpdateEventFormModal } from './adminpanel/events/forms/Update'
 export { default as EventFormInputs } from './adminpanel/events/inputs/EventFormInputs'
+//NATURES
+export { default as CreateNatureFormModal } from './adminpanel/natures/forms/Create'
+export { default as UpdateNatureFormModal } from './adminpanel/natures/forms/Update'
+export { default as NatureFormInputs } from './adminpanel/natures/inputs/NatureFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

@@ -64,6 +64,8 @@ import {
     adminTraitUpdateSubmit,
     adminEventCreateSubmit,
     adminEventUpdateSubmit,
+    adminNatureCreateSubmit,
+    adminNatureUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -294,6 +296,14 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NATURES.path,
                                 element: <AdminPanelLibraryAndMapNatures />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NATURES_CREATE_SUBMIT.path,
+                                action: adminNatureCreateSubmit,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NATURES_UPDATE_SUBMIT.path,
+                                action: adminNatureUpdateSubmit,
                             },
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NPCS.path,
