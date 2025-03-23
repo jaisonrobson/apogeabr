@@ -66,6 +66,8 @@ import {
     adminEventUpdateSubmit,
     adminNatureCreateSubmit,
     adminNatureUpdateSubmit,
+    adminNpcCreateSubmit,
+    adminNpcUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -308,6 +310,14 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NPCS.path,
                                 element: <AdminPanelLibraryAndMapNpcs />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NPCS_CREATE_SUBMIT.path,
+                                action: adminNpcCreateSubmit,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NPCS_UPDATE_SUBMIT.path,
+                                action: adminNpcUpdateSubmit,
                             },
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_QUESTS.path,

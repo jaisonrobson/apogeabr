@@ -42,6 +42,10 @@ export { default as EventFormInputs } from './adminpanel/events/inputs/EventForm
 export { default as CreateNatureFormModal } from './adminpanel/natures/forms/Create'
 export { default as UpdateNatureFormModal } from './adminpanel/natures/forms/Update'
 export { default as NatureFormInputs } from './adminpanel/natures/inputs/NatureFormInputs'
+//NPCS
+export { default as CreateNpcFormModal } from './adminpanel/npcs/forms/Create'
+export { default as UpdateNpcFormModal } from './adminpanel/npcs/forms/Update'
+export { default as NpcFormInputs } from './adminpanel/npcs/inputs/NpcFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

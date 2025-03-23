@@ -17,3 +17,5 @@ export { default as adminEventCreateSubmit } from './adminpanel/events/adminEven
 export { default as adminEventUpdateSubmit } from './adminpanel/events/adminEventUpdateSubmit'
 export { default as adminNatureCreateSubmit } from './adminpanel/natures/adminNatureCreateSubmit'
 export { default as adminNatureUpdateSubmit } from './adminpanel/natures/adminNatureUpdateSubmit'
+export { default as adminNpcCreateSubmit } from './adminpanel/npcs/adminNpcCreateSubmit'
+export { default as adminNpcUpdateSubmit } from './adminpanel/npcs/adminNpcUpdateSubmit'
