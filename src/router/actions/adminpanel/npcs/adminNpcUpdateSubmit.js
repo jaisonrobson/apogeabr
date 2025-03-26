@@ -16,7 +16,7 @@ const action = async ({ request }) => {
     const iconId = form.get('icon_id')
 
     const allValues = Object.fromEntries(form.entries())
-    const nonInitialRequestValues = filterEntries(allValues, "DIFY_")
+    const nonInitialRequestValues = filterEntries(allValues, ["DIFY_", "TMPFY_", "NESTEDDYNAMICFIELD"])
     const initialRequestValues = _.omitBy(
         Object.fromEntries(form.entries()),
         (value, key) => key.includes("id") || key === "persisted" || key === "non_persisted" || key in nonInitialRequestValues
@@ -75,6 +75,67 @@ const action = async ({ request }) => {
             })
         }
 
+        const temporaryFieldsRequestGroups = groupData(
+            filterEntries(allValues, "TMPFY_"),
+            "TMPFY",
+            ({ key, value, result: resultParam }) => {
+                let result = resultParam
+
+                result["isPersistedField"] = _.includes(persistedFields, key)
+
+                return result
+            }
+        )
+
+        if (!_.isEmpty(temporaryFieldsRequestGroups)) {
+            _.forEach(temporaryFieldsRequestGroups, async (value) => {
+                const requestPayload = { locations_npc: { npc_id: npcId, ...(_.omit(value, "isPersistedField")) } }
+
+                const locationsNpcRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/locations_npcs`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: requestPayload,
+                })
+
+                requests.push(locationsNpcRequest)
+            })
+        }
+
+        const nestedDynamicFieldsRequestGroups = groupData(
+            filterEntries(allValues, "NESTEDDYNAMICFIELD_"),
+            "NESTEDDYNAMICFIELD",
+            ({ key, value, result: resultParam }) => {
+                let result = resultParam
+
+                result["isPersistedField"] = _.includes(persistedFields, key)
+
+                return result
+            },
+            true
+        )
+
+        if (!_.isEmpty(nestedDynamicFieldsRequestGroups)) {
+            _.forEach(nestedDynamicFieldsRequestGroups, async (value) => {
+                const requestPayload = { locations_npc: { npc_id: npcId, ...(_.omit(value, "isPersistedField", "dependantValue")) } }
+
+                const locationsNpcRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/locations_npcs/${value.dependantValue}/${npcId}`,
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: requestPayload,
+                })
+
+                requests.push(locationsNpcRequest)
+            })
+        }
+
         const responses = await Promise.all(requests)
 
         window.location.assign(
@@ -87,6 +148,7 @@ const action = async ({ request }) => {
 
         return redirect(`${ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_NPCS.path.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
     }
+
 }
 
 export default action

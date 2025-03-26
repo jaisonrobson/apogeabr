@@ -64,6 +64,7 @@ const FetcherForm = ({
     lateLoadingProps={},
     lateLoadingTriggers=[],
     lateLoadingValues = defaultLateLoadingValues,
+    onAfterLateLoadValues = () => {},
     useFormProps = {},
     externalSchema,
     ...props
@@ -118,6 +119,7 @@ const FetcherForm = ({
                     setResolvedDefaultValues(resolvedValues)
                     reset(resolvedValues) // Atualiza os valores do formulário
                     
+                    onAfterLateLoadValues(reset)
                     setIsLoadingLateValues(false)
                 }
     

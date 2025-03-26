@@ -422,13 +422,13 @@ const Item = ({ light = false, ...props }) => (
     />
 )
 
-const Dropdown = ({ containerStyle, light = false, ...props }) => {
+const Dropdown = ({ containerStyle, light = false, disabled = false, ...props }) => {
     const ref = useRef(null)
     const { isOpen, setIsOpen } = useContext(FlagContext)
     const toggle = () => setIsOpen(!isOpen)
 
     useEffect(() => {
-        if (!isDesktop) return false
+        if (!isDesktop || disabled) return () => {}
 
         const over = () => setIsOpen(true)
         const leave = () => setIsOpen(false)
@@ -451,6 +451,7 @@ const Dropdown = ({ containerStyle, light = false, ...props }) => {
     return (
         <div ref={ref} style={containerStyle}>
             <StyledUncontrolledDropdown
+                disabled={disabled}
                 backgroundColor={!light ? '#00000020' : "#ffffff40"}
                 color={!light ? "black" : "white"}
                 onHover={{

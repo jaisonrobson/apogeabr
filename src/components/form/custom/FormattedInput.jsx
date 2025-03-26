@@ -30,6 +30,7 @@ const FormattedInput = ({
     light=false,
     inputContainerProps = {},
     reloadInformation = false,
+    doFormLateLoadInformations,
     ...props
 }) => {
     const fieldRef = useRef(null)
@@ -114,6 +115,7 @@ const FormattedInput = ({
                         }}
                         setValue={setValue}
                         reloadInformation={reloadInformation}
+                        doFormLateLoadInformations={doFormLateLoadInformations}
                         light={light}
                         {...props}
                     />

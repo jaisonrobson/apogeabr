@@ -17,13 +17,16 @@ Criar um website fã do jogo **Apogea** com todo o conteúdo do jogo de forma:
 
 ## 🛠️ Afazeres / Problemas Conhecidos
 
-| Status | Tarefa | Observações |
-|--------|--------|-------------|
-| 🔧 | **Código não está totalmente otimizado** | Melhorar performance geral |
-| 🧠 | **Revisar biblioteca de partículas** (`@tsparticles/react`) | Possível vazamento de memória; investigar e corrigir |
-| ✍️ | **Corrigir campos `textarea` no `FormattedInput`** | Ajustar criação/comportamento |
-| ⏳ | **Adicionar `Spinners` de carregamento (reactstrap)** | Implementar feedback visual em todo o projeto |
-| 🧭 | **Corrigir identificação de rota ativa no React Router** | Quando há URLs poluídas, os botões não refletem o estado atual |
+| ✅ | Status | Tarefa | Observações |
+|----|--------|--------|-------------|
+| ⬜ | 🔧 | **Código não está totalmente otimizado** | Melhorar performance geral |
+| ⬜ | 🧠 | **Revisar biblioteca de partículas** (`@tsparticles/react`) | Possível vazamento de memória; investigar e corrigir |
+| ⬜ | ✍️ | **Corrigir campos `textarea` no `FormattedInput`** | Ajustar criação/comportamento |
+| ⬜ | ⏳ | **Adicionar `Spinners` de carregamento (reactstrap)** | Implementar feedback visual em todo o projeto |
+| ⬜ | 🧭 | **Corrigir identificação de rota ativa no React Router** | Quando há URLs poluídas, os botões não refletem o estado atual |
+| ✅ | 💾 | **Implementar sistema de snapshot no formulário** | Criar código que gere e carregue _snapshots_ de campos chave-valor via Provider Context. O `saveSnapshot` salvará o estado atual, e o `loadSnapshot` restaurará os valores quando uma ação específica for disparada. |
+| ⬜ | 🔒 | **Restringir seleção de valores com `forbiddenIds` no Elasticsearch** | Implementar lógica que evita seleção/exibição de valores com base em `forbiddenIds`, refletindo a restrição de IDs compostos em relações N:N. Backend deve enviar essa informação, e o frontend deve validar. |
+
 
 ---
 

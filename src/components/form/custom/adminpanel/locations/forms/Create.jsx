@@ -5,7 +5,7 @@ import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 
 import ROUTES from 'router/routes'
 
-import { extractIntoFlatArrayFieldByName, extractIntoFlatObjectFieldsByName } from 'util/json'
+import { extractValuesByExactKeyNameIntoArray, extractIntoFlatObjectFieldsByName } from 'util/json'
 
 import {
     alphabeticThreeHundredStringValidation,
@@ -92,14 +92,14 @@ const Create = ({ headerCount }) => (
                     fieldName: "value",
                     validateFields: false,
                     validationFunction: (obj) => {
-                        if (obj.name.includes("id"))
+                        if (obj?.name?.includes("id"))
                             return true
                         return false
                     },
                 }),
             }),
             additionalAllowedProperties: [
-                ...extractIntoFlatArrayFieldByName(dynamicFields),
+                ...extractValuesByExactKeyNameIntoArray(dynamicFields),
                 "image",
                 "icon_id",
                 "iscity",

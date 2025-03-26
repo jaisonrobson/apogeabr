@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { redirect } from 'react-router-dom'
+import _ from 'lodash'
 import axios from 'axios'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
@@ -31,30 +32,48 @@ const DeleteButton = ({ animationName = "iconDeleteAnimation", animatedBackgroun
     </Button>
 )
 
-const DeleteRecordModalButton = ({ deleteEndpoint, deleteRoutePath }) => {
+const DeleteRecordModalButton = ({ deleteEndpoint = "", deleteRoutePath = "", onDelete: onDeleteParam = undefined, ...props }) => {
     const onDelete = async () => {
-        try {
-            const response = await axios.delete(`${[process.env.REACT_APP_BACKEND_HOST]}/${deleteEndpoint}`, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        if (!_.isEmpty(deleteEndpoint) || typeof deleteEndpoint === 'function') {
+            let endpoint = deleteEndpoint
+
+            if (typeof deleteEndpoint === 'function')
+                endpoint = deleteEndpoint()
+
+            try {
+                const response = await axios.delete(`${[process.env.REACT_APP_BACKEND_HOST]}/${endpoint}`, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    }
+                })
+    
+                if (!_.isEmpty(deleteRoutePath)) {
+                    redirect(`${deleteRoutePath.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
+    
+                    return window.location.reload()
                 }
-            })
-
-            redirect(`${deleteRoutePath.slice(0, -1)}?success=${encodeURIComponent(JSON.stringify(response.data))}`)
-
-            return window.location.reload()
-        } catch (error) {
-            const resultingError = error?.response?.data || { message: error.message }
-
-            redirect(`${deleteRoutePath.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
-
-            return window.location.reload()
+            } catch (error) {
+                const resultingError = error?.response?.data || { message: error.message }
+    
+                if (!_.isEmpty(deleteRoutePath)) {
+                    redirect(`${deleteRoutePath.slice(0, -1)}?errors=${encodeURIComponent(JSON.stringify(resultingError))}`)
+    
+                    return window.location.reload()
+                }
+            }
         }
+
+        if (onDeleteParam)
+            onDeleteParam()
     }
 
     return (
-        <Modal Component={DeleteButton} centered>
+        <Modal
+            Component={DeleteButton}
+            componentProps={props}
+            centered
+        >
             {({ isOpen, toggle }) => (
                 <Fragment>
                     <Modal.Body light>
@@ -92,7 +111,11 @@ const DeleteRecordModalButton = ({ deleteEndpoint, deleteRoutePath }) => {
                             </Button>
 
                             <Button
-                                onClick={onDelete}
+                                onClick={() => {
+                                    onDelete()
+
+                                    toggle()
+                                }}
                                 color="white"
                                 backgroundColor='#00000060'
                                 border='2px solid gray'

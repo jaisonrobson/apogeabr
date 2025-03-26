@@ -1,7 +1,8 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect, useContext } from 'react'
 import _ from 'lodash'
 
 import { loadAction } from 'util/axios'
+import { withFormDataContext, FormDataContext } from 'contexts'
 
 import {
     Modal,
@@ -29,6 +30,7 @@ const RecordFormModal = ({
     formComponentProps = {},
     doFormLateLoadInformations = false,
     inputsComponent: InputsComponent = () => null,
+    inputsComponentExtraProps = {},
     cancelButtonProps = {},
     submitButtonProps = {},
     fetchDynamicFields = false,
@@ -42,6 +44,8 @@ const RecordFormModal = ({
     fetchingDynamicFieldsHelper = () => ({}), // Auxilia na criacao dos campos dinamicos utilizando as informacoes finalizadas de payload
     light=false
 }) => {
+    const { isReloadingData, disableReloadData, lastFormValuesSnapshot } = useContext(FormDataContext)
+    const [temporaryFields, setTemporaryFields] = useState({})
     const [dynamicFields, setDynamicFields] = useState({})
     const [fetchingPayload, setFetchingPayload] = useState({})
     const [isLoadingFields, setIsLoadingFields] = useState(true)
@@ -49,7 +53,7 @@ const RecordFormModal = ({
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
-        if (fetchDynamicFields && isModalOpen) {
+        if (fetchDynamicFields && isModalOpen || isReloadingData) {
             const fetchData = async () => {
                 let newDynamicFields = {}
                 let accumulatedPayload = {}
@@ -98,11 +102,13 @@ const RecordFormModal = ({
                     setDynamicFields(newDynamicFields)
                     setIsLoadingFields(false)
                 }
+
+                disableReloadData()
             }
     
             fetchData()
         }        
-    }, [isModalOpen])
+    }, [isModalOpen, isReloadingData])
 
     const onOpenModal = () => {
         setIsModalOpen(oldValue => !oldValue)
@@ -124,7 +130,8 @@ const RecordFormModal = ({
                 return (
                     <FormComponent
                         onSubmit={() => toggle()}
-                        {...formComponentProps({ dynamicFields, isOpen, fetchingPayload })}
+                        onAfterLateLoadValues={(reset) => reset(lastFormValuesSnapshot)}
+                        {...formComponentProps({ dynamicFields, temporaryFields, isOpen, fetchingPayload })}
                     >
                         {({ register, errors, backendErrors, fetcher, setValue, backendSuccess, isLoadingLateValues }) => (
                             <Fragment>
@@ -144,7 +151,10 @@ const RecordFormModal = ({
                                         backendErrors={backendErrors}
                                         isLoadingLateValues={isLoadingLateValues}
                                         dynamicFields={dynamicFields}
-                                        doFormLateLoadInformations={doFormLateLoadInformations}                                        
+                                        temporaryFields={temporaryFields}
+                                        doFormLateLoadInformations={doFormLateLoadInformations}
+                                        setTemporaryFields={setTemporaryFields}
+                                        {...inputsComponentExtraProps}
                                     />
                                 </Modal.Body>
 
@@ -199,4 +209,4 @@ const RecordFormModal = ({
     )
 }
 
-export default RecordFormModal
+export default withFormDataContext(RecordFormModal)

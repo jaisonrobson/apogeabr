@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 
 import { urlToFile } from 'util/image'
-import { extractIntoFlatArrayFieldByName, extractIntoFlatObjectFieldsByName, extractFromNestedObjectByFilters } from 'util/json'
+import { extractValuesByExactKeyNameIntoArray, extractIntoFlatObjectFieldsByName, extractFromNestedObjectByFilters } from 'util/json'
 
 import {
     alphabeticThreeHundredStringValidation,
@@ -88,7 +88,7 @@ const Update = ({ trait }) => (
                     fieldName: "value",
                     validateFields: false,
                     validationFunction: (obj) => {
-                        if (obj.name.includes("id"))
+                        if (obj?.name?.includes("id"))
                             return true
                         return false
                     },
@@ -107,7 +107,7 @@ const Update = ({ trait }) => (
                 }),
             }),
             additionalAllowedProperties: [
-                ...extractIntoFlatArrayFieldByName(dynamicFields),
+                ...extractValuesByExactKeyNameIntoArray(dynamicFields),
                 "persisted",
                 "non_persisted",
                 "id",

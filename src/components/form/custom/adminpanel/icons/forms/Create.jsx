@@ -5,7 +5,7 @@ import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 
 import ROUTES from 'router/routes'
 
-import { extractIntoFlatArrayFieldByName, extractIntoFlatObjectFieldsByName } from 'util/json'
+import { extractValuesByExactKeyNameIntoArray, extractIntoFlatObjectFieldsByName } from 'util/json'
 
 import { alphabeticThreeHundredStringValidation, twoMegabytesImageValidation } from 'validations'
 
@@ -68,13 +68,13 @@ const Create = ({ headerCount }) => (
                     fieldName: "value",
                     validateFields: false,
                     validationFunction: (obj) => {
-                        if (obj.name.includes("id"))
+                        if (obj?.name?.includes("id"))
                             return true
                         return false
                     },
                 }),
             }),
-            additionalAllowedProperties: [...extractIntoFlatArrayFieldByName(dynamicFields), "image"],
+            additionalAllowedProperties: [...extractValuesByExactKeyNameIntoArray(dynamicFields), "image"],
         })}
         inputsComponent={IconFormInputs}
         submitButtonProps={{

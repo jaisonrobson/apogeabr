@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 
 import { urlToFile } from 'util/image'
-import { extractIntoFlatArrayFieldByName, extractIntoFlatObjectFieldsByName, extractFromNestedObjectByFilters } from 'util/json'
+import { extractValuesByExactKeyNameIntoArray, extractIntoFlatObjectFieldsByName, extractFromNestedObjectByFilters } from 'util/json'
 import { alphabeticThreeHundredStringValidation, twoMegabytesImageValidation } from 'validations'
 
 import ROUTES from 'router/routes'
@@ -78,7 +78,7 @@ const Update = ({ icon }) => (
                     fieldName: "value",
                     validateFields: false,
                     validationFunction: (obj) => {
-                        if (obj.name.includes("id"))
+                        if (obj?.name?.includes("id"))
                             return true
                         return false
                     },
@@ -96,7 +96,7 @@ const Update = ({ icon }) => (
                     comparisonField: 'name',
                 }),
             }),
-            additionalAllowedProperties: [...extractIntoFlatArrayFieldByName(dynamicFields), "persisted", "non_persisted", "id", "image"],
+            additionalAllowedProperties: [...extractValuesByExactKeyNameIntoArray(dynamicFields), "persisted", "non_persisted", "id", "image"],
             additionalEnforcedProperties: ["id"]
         })}
         inputsComponent={IconFormInputs}
