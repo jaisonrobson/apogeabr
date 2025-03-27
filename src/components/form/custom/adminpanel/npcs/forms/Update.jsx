@@ -246,8 +246,8 @@ const Update = ({ npc }) => (
                                 searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/locations/search`,
                                 defaultValueFetchEndpoint: `locations`,
                                 defaultValueResponsePayloadPath: ["data"],
-                                payloadIdPath: ["id"],
-                                payloadNamePath: ["location_translation", "name"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["location_translation", "name"],
                             },
                         },
                         [`NESTEDDYNAMICFIELD_visit_at_${nestedCollective.location_id}`]: {

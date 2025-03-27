@@ -109,10 +109,11 @@ const NpcFormInputs = ({
                             color: 'white'
                         },
                         searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/locations/search`,
+                        searchPayloadIdPath: ["id"],
+                        searchPayloadNamePath: ["location_translation", "name"],
                         defaultValueFetchEndpoint: `locations`,
                         defaultValueResponsePayloadPath: ["data"],
-                        payloadIdPath: ["id"],
-                        payloadNamePath: ["location_translation", "name"],
+                        forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/locations_npcs/forbidden_locations_by_npc?npc_id=${npc.id}`,
                     },
                 },
                 [`TMPFY_LOCATIONS_visit_at_${index}`]: {
@@ -170,8 +171,8 @@ const NpcFormInputs = ({
                 searchEndpoint={`${process.env.REACT_APP_BACKEND_HOST}/icons/search`}
                 defaultValueFetchEndpoint={`icons`}
                 defaultValueResponsePayloadPath={["data"]}
-                payloadIdPath={["id"]}
-                payloadNamePath={["icon_translation", "name"]}
+                searchPayloadIdPath={["id"]}
+                searchPayloadNamePath={["icon_translation", "name"]}
                 name="icon_id"
                 label="Icone:"
                 errorMessage={errors?.icon_id?.message}

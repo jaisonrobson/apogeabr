@@ -18,9 +18,10 @@ const ElasticSearchDropdownInput = ({
     defaultValueResponsePayloadPath,
     togglerProperties = {},
     searchEndpoint="",
-    payloadIdPath=["id"],
-    payloadNamePath=["name"],
-    payloadImagePath=["image"],
+    searchPayloadIdPath=["id"],
+    searchPayloadNamePath=["name"],
+    searchPayloadImagePath=["image"],
+    forbiddenEndpoint="",
     menuProperties={},
     itemProperties={},
     inputProps={},
@@ -44,7 +45,7 @@ const ElasticSearchDropdownInput = ({
                     actionRoute: `${defaultValueFetchEndpoint}/${id}`,
                     responsePayloadPath: defaultValueResponsePayloadPath,
                 })
-        
+
                 setSelectedOption(result?.payload ? result.payload : defaultValue)
             }
 
@@ -63,7 +64,7 @@ const ElasticSearchDropdownInput = ({
             setLoading(true)
 
             try {
-                const response = await axios.request({
+                let response = await axios.request({
                     url: `${searchEndpoint}?query=${query}`,
                     method: 'GET',
                     headers: {
@@ -71,6 +72,25 @@ const ElasticSearchDropdownInput = ({
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     },
                 })
+
+                if (!_.isEmpty(forbiddenEndpoint)) {
+                    const forbiddenResponse = await axios.request({
+                        url: forbiddenEndpoint,
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        },
+                    })
+
+                    const forbiddenIds = forbiddenResponse.data.payload
+                    const isForbidden = (obj) => forbiddenIds.includes(_.get(obj, searchPayloadIdPath))
+
+                    // Filtra apenas o primeiro nível do array
+                    const filteredResults = _.filter(response.data.payload, (item) => !isForbidden(item))
+
+                    response.data.payload = filteredResults
+                }
 
                 setResults(response.data.payload)
             } catch (error) {
@@ -90,7 +110,7 @@ const ElasticSearchDropdownInput = ({
     }, [query])
 
     const onSelect = (value) => {
-        setValue(name, _.get(value, payloadIdPath), { shouldDirty: true, shouldTouch: true })
+        setValue(name, _.get(value, searchPayloadIdPath), { shouldDirty: true, shouldTouch: true })
 
         setSelectedOption(value)
         setQuery("")
@@ -114,7 +134,7 @@ const ElasticSearchDropdownInput = ({
                 light={light}
                 {...togglerProperties}
             >
-                <Span>{_.get(selectedOption, payloadNamePath) || "Busque uma opção..."}</Span>
+                <Span>{_.get(selectedOption, searchPayloadNamePath) || "Busque uma opção..."}</Span>
 
                 <Icon icon={faCaretDown} size="xl" color="inherit" marginTop="-4px" />
             </Dropdown.Toggler>
@@ -142,17 +162,17 @@ const ElasticSearchDropdownInput = ({
                     !loading ? (
                         _.map(results, (option, idx) => (
                             <Dropdown.Item
-                                key={_.get(option, payloadIdPath)}
+                                key={_.get(option, searchPayloadIdPath)}
                                 light={light}
                                 onClick={() => onSelect(option)}
                                 {...itemProperties}
                                 display="flex"
                                 justifyContent="space-between"
                             >
-                                {_.get(option, payloadNamePath)}
+                                {_.get(option, searchPayloadNamePath)}
 
                                 <Image
-                                    src={_.get(option, payloadImagePath) || noImage}
+                                    src={_.get(option, searchPayloadImagePath) || noImage}
                                     className="rounded-circle"
                                     objectFit="contain"
                                     width="25px"
