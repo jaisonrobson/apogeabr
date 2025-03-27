@@ -11,12 +11,16 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
-          MESSAGE="📦 Nova atualizacao do projeto frontend **${{ github.repository }}** por **${{ github.actor }}**
+          MESSAGE=$(cat <<EOF
+📦 Nova atualização do projeto frontend **${{ github.repository }}** por **${{ github.actor }}**
 🌿 Branch: \`${{ github.ref_name }}\`
 🔗 [Ver commit no GitHub](${{ github.event.head_commit.url }})
-📝 Mensagem: _${{ github.event.head_commit.message }}_"
+📝 Mensagem: _${{ github.event.head_commit.message }}_
+EOF
+          )
 
+          # Enviar com segurança usando jq para escapar o conteúdo
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d "{\"content\": \"$MESSAGE\"}" \
+               -d "$(jq -n --arg content "$MESSAGE" '{content: $content}')" \
                $DISCORD_WEBHOOK
