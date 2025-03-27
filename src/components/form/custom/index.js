@@ -46,6 +46,10 @@ export { default as NatureFormInputs } from './adminpanel/natures/inputs/NatureF
 export { default as CreateNpcFormModal } from './adminpanel/npcs/forms/Create'
 export { default as UpdateNpcFormModal } from './adminpanel/npcs/forms/Update'
 export { default as NpcFormInputs } from './adminpanel/npcs/inputs/NpcFormInputs'
+//Quest
+export { default as CreateQuestFormModal } from './adminpanel/quests/forms/Create'
+export { default as UpdateQuestFormModal } from './adminpanel/quests/forms/Update'
+export { default as QuestFormInputs } from './adminpanel/quests/inputs/QuestFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

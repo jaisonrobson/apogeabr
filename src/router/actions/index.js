@@ -19,3 +19,5 @@ export { default as adminNatureCreateSubmit } from './adminpanel/natures/adminNa
 export { default as adminNatureUpdateSubmit } from './adminpanel/natures/adminNatureUpdateSubmit'
 export { default as adminNpcCreateSubmit } from './adminpanel/npcs/adminNpcCreateSubmit'
 export { default as adminNpcUpdateSubmit } from './adminpanel/npcs/adminNpcUpdateSubmit'
+export { default as adminQuestCreateSubmit } from './adminpanel/quests/adminQuestCreateSubmit'
+export { default as adminQuestUpdateSubmit } from './adminpanel/quests/adminQuestUpdateSubmit'
