@@ -128,18 +128,55 @@ export const mergeFieldArraysByKeys = (objectsArray, keysToMerge = []) => {
             {})
 }
 
-export const mountFormattedInputComponents = (initialData, componentFunction = () => {}, groupComponentFunction = (data, group) => data) =>
-    _.flatMap(initialData, (group) => {
-        return groupComponentFunction(
-            _.map(group, (dify) => {
-                if (_.isObject(dify) && dify.name && dify.type && dify.type !== undefined) {
-                    return componentFunction(dify)
-                }
-                return null
-            }).filter(Boolean),
-            group
-        )
-    })
+// export const mountFormattedInputComponents = (initialData, componentFunction = () => {}, groupComponentFunction = (data, group) => data) =>
+//     _.flatMap(initialData, (group) => {
+//         return groupComponentFunction(
+//             _.map(group, (dify) => {
+//                 if (_.isObject(dify) && dify.name && dify.type && dify.type !== undefined) {
+//                     return componentFunction(dify)
+//                 }
+//                 return null
+//             }).filter(Boolean),
+//             group
+//         )
+//     })
+
+export const mountFormattedInputComponents = (
+  initialData,
+  componentFunction = () => {},
+  groupComponentFunction = (data, group, depth) => data,
+  maxDepth = Infinity
+) => {
+  const renderRecursively = (data, currentDepth = 0) => {
+    if (!_.isObject(data) || currentDepth > maxDepth) return []
+
+    const inputs = []
+
+    for (const [key, value] of Object.entries(data)) {
+      if (_.isObject(value)) {
+        const isInputField = value.name && value.type
+
+        if (isInputField) {
+          inputs.push(componentFunction(value))
+        } else if (key.toLowerCase().includes("collective")) {
+          const nestedInputs = renderRecursively(value, currentDepth + 1)
+
+          if (currentDepth < maxDepth) {
+            inputs.push(groupComponentFunction(nestedInputs, value, currentDepth))
+          } else {
+            inputs.push(...nestedInputs)
+          }
+        } else {
+          inputs.push(...renderRecursively(value, currentDepth + 1))
+        }
+      }
+    }
+
+    return inputs
+  }
+
+  return renderRecursively(initialData)
+}
 
 export const filterEntries = (data, filter = "") => {
     const filters = Array.isArray(filter) ? filter : [filter]
@@ -148,6 +185,8 @@ export const filterEntries = (data, filter = "") => {
         filters.some(f => key.includes(f))
     )
 }
+
+
 
 export const groupData = (data, filter = "", mutationFunction = (data) => data.result, preserveIdAsDependantValue = false) => _.reduce(data, (result, value, key) => {
     const regex = new RegExp(`${filter}_(\\d+)`) // Constrói a regex dinamicamente
@@ -172,6 +211,83 @@ export const groupData = (data, filter = "", mutationFunction = (data) => data.r
     return result
 }, {})
 
+/**
+ * Agrupa dados por níveis definidos, renomeia chaves usando expressões regulares
+ * e permite mutações customizadas nos dados agrupados.
+ *
+ * @param {Object} data - Objeto de entrada com as chaves complexas.
+ * @param {string[]} groupLevels - Padrões de agrupamento, ex: ["TMPFY_", "TRANSLATION_"].
+ * @param {RegExp[]} keyCleaners - Expressões regulares para limpar nomes de chaves.
+ * @param {Function[]} [mutationFunctions=[]] - Funções de mutação por nível: ({ key, value, result }) => novoValor.
+ * @returns {Object} Objeto agrupado e com chaves finais limpas e mutações aplicadas.
+ */
+export const groupDataByLevels = (
+  data,
+  groupLevels,
+  keyCleaners,
+  mutationFunctions = []
+) => {
+  const result = {}
+
+  const mutationTracker = {} // marca quais níveis já foram mutados
+
+  _.forEach(_.toPairs(data), ([fullKey, originalValue]) => {
+    const path = []
+    let currentValue = originalValue
+
+    _.forEach(groupLevels, (level) => {
+      const match = fullKey.match(new RegExp(`${level}\\d+`))
+      if (match) {
+        path.push(match[0])
+      }
+    })
+
+    const cleanKey = _.reduce(keyCleaners, (key, regex) => key.replace(regex, ''), fullKey)
+    const parentPath = path.slice()
+    const currentObject = _.get(result, parentPath, {})
+
+    // 1. Aplica mutações do nível mais interno (ex: TRANSLATION_1)
+    const deepMutationFn = mutationFunctions?.[path.length - 1]
+    const mutatedInner = _.isFunction(deepMutationFn)
+      ? deepMutationFn({ key: fullKey, value: currentValue, result, currentObject })
+      : currentObject
+
+    // 2. Atualiza o valor limpo
+    mutatedInner[cleanKey] = currentValue
+    _.set(result, parentPath, mutatedInner)
+
+    // 3. Aplica mutação do nível mais externo (ex: NESTEDDYNAMICFIELD_2), apenas uma vez
+    const groupKey = path[0]
+    if (!mutationTracker[groupKey] && _.isFunction(mutationFunctions?.[0])) {
+      const outerPath = [groupKey]
+      const outerObject = _.get(result, outerPath, {})
+
+      const mutatedOuter = mutationFunctions[0]({
+        key: fullKey,
+        value: currentValue,
+        result,
+        currentObject: outerObject
+      })
+
+      _.set(result, outerPath, { ...outerObject, ...mutatedOuter })
+      mutationTracker[groupKey] = true
+    }
+  })
+
+  return result
+}
+
+
+export const deepMerge = (objects = []) => {
+  return objects.reduce((acc, curr) =>
+    _.mergeWith(acc, curr, (objValue, srcValue) => {
+      if (_.isPlainObject(objValue) && _.isPlainObject(srcValue)) {
+        return undefined // comportamento padrão: merge recursivo
+      }
+      return srcValue // sobrescreve valor existente com o novo
+    }), {})
+}
+
 // Remove os objetos aninhados apenas se os mesmos conterem "APENAS" os campos citados em `filters`.
 export const removeGroupsByFiltersExclusively = (initialData, filters = ["id"]) => (
     _.omitBy(initialData, obj => {
@@ -183,3 +299,15 @@ export const removeGroupsByFiltersExclusively = (initialData, filters = ["id"]) 
         )
     })
 )
+
+export const removeNestedGroupsByFiltersExclusively = (initialData, filters = ["id"]) => {
+  return _.mapValues(initialData, (nestedGroup) => {
+    if (_.isPlainObject(nestedGroup)) {
+      return _.omitBy(nestedGroup, obj => {
+        const objectKeys = _.keys(obj)
+        return _.every(objectKeys, key => filters.includes(key))
+      })
+    }
+    return nestedGroup
+  })
+}

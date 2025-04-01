@@ -26,8 +26,9 @@ const RenderCollectiveInputs = ({
     setValue,
     errors,
     light = false,
+    collectiveInputsSearchDepth = 1,
     deleteEndpoint = defaultAsFunction,
-	onRemoveCollectiveInputs = defaultAsFunction,
+    onRemoveCollectiveInputs = defaultAsFunction,
 }) => {
     const { value: { getValues } } = useFormContext()
     const { isReloadingData, enableReloadData, setSnapshot } = useContext(FormDataContext)
@@ -55,56 +56,67 @@ const RenderCollectiveInputs = ({
             type={dify.type}
             fontFamily="arial"
             {...(!_.isEmpty(dify?.extraProperties) ? dify.extraProperties : {})}
-            light={light}         
+            light={light}
             reloadInformation={reloadInformation}
             doFormLateLoadInformations={doFormLateLoadInformations}
         />
       ),
-      (groupedInputs, group) => !group?.collectiveName ? null : (
+      (groupedInputs, group, depth) => !group?.collectiveName ? null : (
         <Row key={group.collectiveName} margin="0px" padding="0px">
-          <Row display="flex" justifyContent={(providedRemoveFunction || providedRemoveEndpoint) ? "space-between" : "flex-start"}>
-            <Col>
-              <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"}>
-                {group.collectiveName}
-              </Span>
-            </Col>
+            <Row display="flex" justifyContent={(depth === 0 && (providedRemoveFunction || providedRemoveEndpoint)) ? "space-between" : "flex-start"}>
+                <Col>
+                    <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"}>
+                        {group.collectiveName}
+                    </Span>
+                </Col>
 
-            {!(providedRemoveFunction || providedRemoveEndpoint) ? null : (
-              <Col display="flex" justifyContent="flex-end" padding="0px">
-                <DeleteRecordModalButton
-                  margin="0px"
-                    marginBottom="5px"
-                  {...(providedRemoveEndpoint ? ({
-                    deleteEndpoint: () => deleteEndpoint(group),
-                    onDelete: () => {
-                        setSnapshot(getValues())
+                {depth !== 0 || !(providedRemoveFunction || providedRemoveEndpoint) ? null : (
+                <Col display="flex" justifyContent="flex-end" padding="0px">
+                    <DeleteRecordModalButton
+                        margin="0px"
+                            marginBottom="5px"
+                        {...(providedRemoveEndpoint
+                                ? ({
+                                deleteEndpoint: () => deleteEndpoint(group),
+                                onDelete: () => {
+                                    setSnapshot(getValues())
 
-                        enableReloadData()
-                    }
-                }) : {})}
-                  {...(providedRemoveFunction
-                    ? ({onDelete: () => {
-                        setSnapshot(getValues())
+                                    enableReloadData()
+                                }})
+                                : {}
+                            )
+                        }
+                        {...(providedRemoveFunction
+                            ? ({onDelete: () => {
+                                setSnapshot(getValues())
 
-                        onRemoveCollectiveInputs(group.collectiveId)
-                    }})
-                    : {})}
-                />
-              </Col>
-            )}
-          </Row>
+                                onRemoveCollectiveInputs(group.collectiveId)
+                            }})
+                            : {})
+                        }
+                    />
+                </Col>
+                )}
+            </Row>
   
-          <Row padding="0px" margin="0px">
-            <HR light={!light} height="2px" />
-          </Row>
+            <Row padding="0px" margin="0px">
+                <HR light={!light} height="2px" />
+            </Row>
 
-          <Row>
-            <Col>
-              {groupedInputs}
-            </Col>
+            <Row
+                padding="0px"
+                margin="0px"
+            >
+                <Col
+                    padding="0px"
+                    margin="0px"
+                >
+                    {groupedInputs}
+                </Col>
           </Row>
         </Row>
-      )
+      ),
+      collectiveInputsSearchDepth
     )
 }
 

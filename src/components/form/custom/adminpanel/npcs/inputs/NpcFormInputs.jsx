@@ -4,8 +4,6 @@ import _ from 'lodash'
 
 import { FormDataContext } from 'contexts'
 
-import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
-
 import { mountFormattedInputComponents } from 'util/json'
 import { idValidation, timeValidation } from 'validations'
 
@@ -16,47 +14,10 @@ import {
     Col,
     Span,
     ImageInput,
-    Button,
-    Div,
-    Icon,
     Accordion,
     RenderCollectiveInputs,
+    AddDynamicRecordButton,
 } from 'components'
-
-const AddDynamicRecordButton = ({ addRecordDescription = "novo registro", onClick }) => {
-    const [ isHovered, setIsHovered ] = useState(false)
-
-    const onMouseEnter = () => setIsHovered(true)
-    const onMouseLeave = () => setIsHovered(false)
-
-    return (
-        <Button
-            width="100%"
-            onHover={{
-                backgroundColor: "lightblue",
-            }}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            color={isHovered ? "black" : "white"}
-            onClick={onClick}
-        >
-            <Div
-                width="100%"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                gap="15px"                
-            >
-                <Icon
-                    icon={faSquarePlus}
-                    color={isHovered ? "black" : "white"}
-                />
-
-                Adicionar {addRecordDescription}
-            </Div>
-        </Button>
-    )
-}
 
 const NpcFormInputs = ({
     register,
@@ -254,7 +215,7 @@ const NpcFormInputs = ({
                         </Accordion.Item>
                     </Accordion>
                 )
-            }                
+            }
         </Fragment>
     )
 }

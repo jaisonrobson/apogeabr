@@ -291,7 +291,7 @@ const Update = ({ npc }) => (
                         },
                     },
                 })
-            }            
+            }
         }}
         light={true} />
 )
