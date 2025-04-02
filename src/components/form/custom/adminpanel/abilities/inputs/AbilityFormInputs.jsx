@@ -117,9 +117,9 @@ const AbilityFormInputs = ({
         />
 
         <FormattedInput
-            name="mindamage"
-            label="Dano minimo:"
-            errorMessage={errors?.mindamage?.message}
+            name="min"
+            label="Mínimo:"
+            errorMessage={errors?.min?.message}
             type="number"
             fontFamily="arial"
             register={register}
@@ -127,9 +127,9 @@ const AbilityFormInputs = ({
         />
 
         <FormattedInput
-            name="maxdamage"
-            label="Dano maximo:"
-            errorMessage={errors?.maxdamage?.message}
+            name="max"
+            label="Máximo:"
+            errorMessage={errors?.max?.message}
             type="number"
             fontFamily="arial"
             register={register}

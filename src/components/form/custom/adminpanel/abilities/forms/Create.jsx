@@ -68,8 +68,8 @@ const Create = ({ headerCount }) => (
                 health: 0,
                 duration: 0,
                 cooldown: 0,
-                mindamage: 0,
-                maxdamage: 0,
+                min: 0,
+                max: 0,
             },
             additionalValidations: ({
                 image: twoMegabytesImageValidation,
@@ -80,8 +80,8 @@ const Create = ({ headerCount }) => (
                 health: nonNegativeInfiniteIntegerNumber,
                 duration: nonNegativeInfiniteFloatNumber,
                 cooldown: nonNegativeInfiniteFloatNumber,
-                mindamage: nonNegativeInfiniteIntegerNumber,
-                maxdamage: nonNegativeInfiniteIntegerNumber,
+                min: nonNegativeInfiniteIntegerNumber,
+                max: nonNegativeInfiniteIntegerNumber,
                 ...extractIntoFlatObjectFieldsByName({
                     initialData: dynamicFields,
                 }),
@@ -109,8 +109,8 @@ const Create = ({ headerCount }) => (
                 "health",
                 "duration",
                 "cooldown",
-                "mindamage",
-                "maxdamage",
+                "min",
+                "max",
             ],
         })}
         inputsComponent={AbilityFormInputs}

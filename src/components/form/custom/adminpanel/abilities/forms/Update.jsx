@@ -62,8 +62,8 @@ const Update = ({ ability }) => (
                 health: nonNegativeInfiniteIntegerNumber.optional(),
                 duration: nonNegativeInfiniteFloatNumber.optional(),
                 cooldown: nonNegativeInfiniteFloatNumber.optional(),
-                mindamage: nonNegativeInfiniteIntegerNumber.optional(),
-                maxdamage: nonNegativeInfiniteIntegerNumber.optional(),
+                min: nonNegativeInfiniteIntegerNumber.optional(),
+                max: nonNegativeInfiniteIntegerNumber.optional(),
                 ...extractIntoFlatObjectFieldsByName({
                     initialData: dynamicFields,
                 }),
@@ -78,8 +78,8 @@ const Update = ({ ability }) => (
                 health: 0,
                 duration: 0,
                 cooldown: 0,
-                mindamage: 0,
-                maxdamage: 0,
+                min: 0,
+                max: 0,
             },
             lateLoadingProps: { isOpen },
             lateLoadingTriggers: [{ isOpen: true }],
@@ -92,8 +92,8 @@ const Update = ({ ability }) => (
                 health: ability.health,
                 duration: ability.duration,
                 cooldown: ability.cooldown,
-                mindamage: ability.mindamage,
-                maxdamage: ability.maxdamage,
+                min: ability.min,
+                max: ability.max,
                 ...extractIntoFlatObjectFieldsByName({
                     initialData: dynamicFields,
                     byName: "name",
@@ -145,8 +145,8 @@ const Update = ({ ability }) => (
                 "health",
                 "duration",
                 "cooldown",
-                "mindamage",
-                "maxdamage"
+                "min",
+                "max"
             ],
             additionalEnforcedProperties: ["id"]
         })}
