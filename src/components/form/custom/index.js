@@ -50,6 +50,10 @@ export { default as NpcFormInputs } from './adminpanel/npcs/inputs/NpcFormInputs
 export { default as CreateQuestFormModal } from './adminpanel/quests/forms/Create'
 export { default as UpdateQuestFormModal } from './adminpanel/quests/forms/Update'
 export { default as QuestFormInputs } from './adminpanel/quests/inputs/QuestFormInputs'
+//Ability
+export { default as CreateAbilityFormModal } from './adminpanel/abilities/forms/Create'
+export { default as UpdateAbilityFormModal } from './adminpanel/abilities/forms/Update'
+export { default as AbilityFormInputs } from './adminpanel/abilities/inputs/AbilityFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

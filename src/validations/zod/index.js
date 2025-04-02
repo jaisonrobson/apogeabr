@@ -18,4 +18,5 @@ export { default as inGameMapCoordinatesValidation } from './inGameMapCoordinate
 export { default as websiteMapCoordinatesValidation } from './websiteMapCoordinatesValidation'
 export { default as idValidation } from './idValidation'
 export { default as nonNegativeInfiniteIntegerNumber } from './nonNegativeInfiniteIntegerNumber'
+export { default as nonNegativeInfiniteFloatNumber } from './nonNegativeInfiniteFloatNumber'
 export { default as timeValidation } from './timeValidation'

@@ -21,3 +21,5 @@ export { default as adminNpcCreateSubmit } from './adminpanel/npcs/adminNpcCreat
 export { default as adminNpcUpdateSubmit } from './adminpanel/npcs/adminNpcUpdateSubmit'
 export { default as adminQuestCreateSubmit } from './adminpanel/quests/adminQuestCreateSubmit'
 export { default as adminQuestUpdateSubmit } from './adminpanel/quests/adminQuestUpdateSubmit'
+export { default as adminAbilityCreateSubmit } from './adminpanel/abilities/adminAbilityCreateSubmit'
+export { default as adminAbilityUpdateSubmit } from './adminpanel/abilities/adminAbilityUpdateSubmit'

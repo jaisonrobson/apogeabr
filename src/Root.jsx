@@ -70,6 +70,8 @@ import {
     adminNpcUpdateSubmit,
     adminQuestCreateSubmit,
     adminQuestUpdateSubmit,
+    adminAbilityCreateSubmit,
+    adminAbilityUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -336,6 +338,14 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ABILITIES.path,
                                 element: <AdminPanelLibraryAndMapAbilities />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ABILITIES_CREATE_SUBMIT.path,
+                                action: adminAbilityCreateSubmit,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ABILITIES_UPDATE_SUBMIT.path,
+                                action: adminAbilityUpdateSubmit,
                             },
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_MONSTERS.path,
