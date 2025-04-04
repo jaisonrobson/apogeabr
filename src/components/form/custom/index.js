@@ -54,6 +54,10 @@ export { default as QuestFormInputs } from './adminpanel/quests/inputs/QuestForm
 export { default as CreateAbilityFormModal } from './adminpanel/abilities/forms/Create'
 export { default as UpdateAbilityFormModal } from './adminpanel/abilities/forms/Update'
 export { default as AbilityFormInputs } from './adminpanel/abilities/inputs/AbilityFormInputs'
+//Monster
+export { default as CreateMonsterFormModal } from './adminpanel/monsters/forms/Create'
+export { default as UpdateMonsterFormModal } from './adminpanel/monsters/forms/Update'
+export { default as MonsterFormInputs } from './adminpanel/monsters/inputs/MonsterFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

@@ -127,6 +127,7 @@ const FormattedInput = ({
                         setValue={setValue}
                         name={name}
                         reloadInformation={reloadInformation}
+                        doFormLateLoadInformations={doFormLateLoadInformations}
                         light={light}
                         {...props}
                     />

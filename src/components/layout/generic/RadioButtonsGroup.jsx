@@ -21,7 +21,7 @@ const RadioButtonsGroup = ({
 
     useEffect(() => {
         if (lateValue)
-            setSelectedValue(lateValue)
+            setSelectedValue(_.find(options, { value: lateValue?.value || 0 }))
     }, [lateValue])
 
     const onSelectOption = (value) => {

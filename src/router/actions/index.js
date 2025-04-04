@@ -23,3 +23,5 @@ export { default as adminQuestCreateSubmit } from './adminpanel/quests/adminQues
 export { default as adminQuestUpdateSubmit } from './adminpanel/quests/adminQuestUpdateSubmit'
 export { default as adminAbilityCreateSubmit } from './adminpanel/abilities/adminAbilityCreateSubmit'
 export { default as adminAbilityUpdateSubmit } from './adminpanel/abilities/adminAbilityUpdateSubmit'
+export { default as adminMonsterCreateSubmit } from './adminpanel/monsters/adminMonsterCreateSubmit'
+export { default as adminMonsterUpdateSubmit } from './adminpanel/monsters/adminMonsterUpdateSubmit'
