@@ -25,3 +25,5 @@ export { default as adminAbilityCreateSubmit } from './adminpanel/abilities/admi
 export { default as adminAbilityUpdateSubmit } from './adminpanel/abilities/adminAbilityUpdateSubmit'
 export { default as adminMonsterCreateSubmit } from './adminpanel/monsters/adminMonsterCreateSubmit'
 export { default as adminMonsterUpdateSubmit } from './adminpanel/monsters/adminMonsterUpdateSubmit'
+export { default as adminItemCategoryCreateSubmit } from './adminpanel/itemcategories/adminItemCategoryCreateSubmit'
+export { default as adminItemCategoryUpdateSubmit } from './adminpanel/itemcategories/adminItemCategoryUpdateSubmit'

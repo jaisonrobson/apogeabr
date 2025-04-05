@@ -74,6 +74,8 @@ import {
     adminAbilityUpdateSubmit,
     adminMonsterCreateSubmit,
     adminMonsterUpdateSubmit,
+    adminItemCategoryCreateSubmit,
+    adminItemCategoryUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -364,6 +366,14 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMCATEGORIES.path,
                                 element: <AdminPanelLibraryAndMapItemCategories />,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMCATEGORIES_CREATE_SUBMIT.path,
+                                action: adminItemCategoryCreateSubmit,
+                            },
+                            {
+                                path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMCATEGORIES_UPDATE_SUBMIT.path,
+                                action: adminItemCategoryUpdateSubmit,
                             },
                             {
                                 path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMS.path,
