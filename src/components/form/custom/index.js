@@ -62,6 +62,10 @@ export { default as MonsterFormInputs } from './adminpanel/monsters/inputs/Monst
 export { default as CreateItemCategoryFormModal } from './adminpanel/itemcategories/forms/Create'
 export { default as UpdateItemCategoryFormModal } from './adminpanel/itemcategories/forms/Update'
 export { default as ItemCategoryFormInputs } from './adminpanel/itemcategories/inputs/ItemCategoryFormInputs'
+//Items
+export { default as CreateItemFormModal } from './adminpanel/items/forms/Create'
+export { default as UpdateItemFormModal } from './adminpanel/items/forms/Update'
+export { default as ItemFormInputs } from './adminpanel/items/inputs/ItemFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'
