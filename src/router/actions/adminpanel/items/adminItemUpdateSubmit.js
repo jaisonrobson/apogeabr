@@ -32,11 +32,11 @@ const action = async ({ request }) => {
     if (itemCategoryId)
         initialRequestValues["item_category_id"] = itemCategoryId
 
-    const temporaryItemQuestsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_"))
+    const temporaryItemQuestsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_ITEMQUESTS_"))
 
     const temporaryItemQuestsValues = groupData(
-        filterEntries(temporaryItemQuestsRequestValues, "TMPFY_"),
-        "TMPFY"
+        filterEntries(temporaryItemQuestsRequestValues, "TMPFY_ITEMQUESTS"),
+        "TMPFY_ITEMQUESTS"
     )
 
     const dynamicItemQuestsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_NESTEDDYNAMICFIELD_"))
@@ -50,6 +50,75 @@ const action = async ({ request }) => {
             const itemQuestId = key.match(/NESTEDDYNAMICFIELD_ITEMQUESTS_(\d+)/)?.[1]
 
             finalResult["itemQuestId"] = itemQuestId
+
+            return finalResult
+        }
+    )
+
+    const temporaryItemMonstersRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_ITEMMONSTERS_"))
+
+    const temporaryItemMonstersValues = groupData(
+        filterEntries(temporaryItemMonstersRequestValues, "TMPFY_ITEMMONSTERS"),
+        "TMPFY_ITEMMONSTERS"
+    )
+
+    const dynamicItemMonstersRequestValues = _.pickBy(allValues, (value, key) => key.includes("_NESTEDDYNAMICFIELD_ITEMMONSTERS_"))
+
+    const dynamicItemMonstersValues = groupData(
+        dynamicItemMonstersRequestValues,
+        "NESTEDDYNAMICFIELD_ITEMMONSTERS",
+        ({ key, value, result }) => {
+            let finalResult = result
+
+            const itemMonsterId = key.match(/NESTEDDYNAMICFIELD_ITEMMONSTERS_(\d+)/)?.[1]
+
+            finalResult["itemMonsterId"] = itemMonsterId
+
+            return finalResult
+        }
+    )
+
+    const temporaryItemNpcBuysRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_ITEMNPCBUYS_"))
+
+    const temporaryItemNpcBuysValues = groupData(
+        filterEntries(temporaryItemNpcBuysRequestValues, "TMPFY_ITEMNPCBUYS"),
+        "TMPFY_ITEMNPCBUYS"
+    )
+
+    const dynamicItemNpcBuysRequestValues = _.pickBy(allValues, (value, key) => key.includes("_NESTEDDYNAMICFIELD_ITEMNPCBUYS_"))
+
+    const dynamicItemNpcBuysValues = groupData(
+        dynamicItemNpcBuysRequestValues,
+        "NESTEDDYNAMICFIELD_ITEMNPCBUYS",
+        ({ key, value, result }) => {
+            let finalResult = result
+
+            const itemNpcBuyId = key.match(/NESTEDDYNAMICFIELD_ITEMNPCBUYS_(\d+)/)?.[1]
+
+            finalResult["itemNpcBuyId"] = itemNpcBuyId
+
+            return finalResult
+        }
+    )
+
+    const temporaryItemNpcSellsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_ITEMNPCSELLS_"))
+
+    const temporaryItemNpcSellsValues = groupData(
+        filterEntries(temporaryItemNpcSellsRequestValues, "TMPFY_ITEMNPCSELLS"),
+        "TMPFY_ITEMNPCSELLS"
+    )
+
+    const dynamicItemNpcSellsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_NESTEDDYNAMICFIELD_ITEMNPCSELLS_"))
+
+    const dynamicItemNpcSellsValues = groupData(
+        dynamicItemNpcSellsRequestValues,
+        "NESTEDDYNAMICFIELD_ITEMNPCSELLS",
+        ({ key, value, result }) => {
+            let finalResult = result
+
+            const itemNpcSellId = key.match(/NESTEDDYNAMICFIELD_ITEMNPCSELLS_(\d+)/)?.[1]
+
+            finalResult["itemNpcSellId"] = itemNpcSellId
 
             return finalResult
         }
@@ -140,6 +209,120 @@ const action = async ({ request }) => {
                 })
 
                 requests.push(itemQuestRequest)
+            })
+        }
+
+        if (!_.isEmpty(temporaryItemMonstersValues)) {
+            _.forEach(temporaryItemMonstersValues, async (itemMonsterObject) => {
+                const itemMonsterRequestPayload = { item_monster: itemMonsterObject }
+
+                const itemMonsterRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/monsters`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: itemMonsterRequestPayload,
+                })
+
+                requests.push(itemMonsterRequest)
+            })
+        }
+
+        const onlyTouchedDynamicItemMonstersFields = removeNestedGroupsByFiltersExclusively(dynamicItemMonstersValues, ["itemMonsterId"])
+
+        if (!_.isEmpty(onlyTouchedDynamicItemMonstersFields)) {
+            _.forEach(onlyTouchedDynamicItemMonstersFields, async (dynamicItemMonsterField) => {
+                const requestPayload = { item_monster: _.omit(dynamicItemMonsterField, ["itemMonsterId"]) }
+
+                const itemMonsterRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/monsters/${dynamicItemMonsterField.itemMonsterId}`,
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: requestPayload,
+                })
+
+                requests.push(itemMonsterRequest)
+            })
+        }
+
+        if (!_.isEmpty(temporaryItemNpcBuysValues)) {
+            _.forEach(temporaryItemNpcBuysValues, async (itemNpcBuyObject) => {
+                const itemNpcBuyRequestPayload = { item_npc_buy: itemNpcBuyObject }
+
+                const itemNpcBuyRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/npcs_buy`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: itemNpcBuyRequestPayload,
+                })
+
+                requests.push(itemNpcBuyRequest)
+            })
+        }
+
+        const onlyTouchedDynamicItemNpcBuysFields = removeNestedGroupsByFiltersExclusively(dynamicItemNpcBuysValues, ["itemNpcBuyId"])
+
+        if (!_.isEmpty(onlyTouchedDynamicItemNpcBuysFields)) {
+            _.forEach(onlyTouchedDynamicItemNpcBuysFields, async (dynamicItemNpcBuyField) => {
+                const requestPayload = { item_npc_buy: _.omit(dynamicItemNpcBuyField, ["itemNpcBuyId"]) }
+
+                const itemNpcBuyRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/npcs_buy/${dynamicItemNpcBuyField.itemNpcBuyId}`,
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: requestPayload,
+                })
+
+                requests.push(itemNpcBuyRequest)
+            })
+        }
+
+        if (!_.isEmpty(temporaryItemNpcSellsValues)) {
+            _.forEach(temporaryItemNpcSellsValues, async (itemNpcSellObject) => {
+                const itemNpcSellRequestPayload = { item_npc_sell: itemNpcSellObject }
+
+                const itemNpcSellRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/npcs_sell`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: itemNpcSellRequestPayload,
+                })
+
+                requests.push(itemNpcSellRequest)
+            })
+        }
+
+        const onlyTouchedDynamicItemNpcSellsFields = removeNestedGroupsByFiltersExclusively(dynamicItemNpcSellsValues, ["itemNpcSellId"])
+
+        if (!_.isEmpty(onlyTouchedDynamicItemNpcSellsFields)) {
+            _.forEach(onlyTouchedDynamicItemNpcSellsFields, async (dynamicItemNpcSellField) => {
+                const requestPayload = { item_npc_sell: _.omit(dynamicItemNpcSellField, ["itemNpcSellId"]) }
+
+                const itemNpcSellRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/npcs_sell/${dynamicItemNpcSellField.itemNpcSellId}`,
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: requestPayload,
+                })
+
+                requests.push(itemNpcSellRequest)
             })
         }
 

@@ -225,9 +225,24 @@ const Update = ({ item }) => (
             {
                 actionMethod: "GET",
                 actionRoute: `items/${item.id}/quests`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `items/${item.id}/monsters`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `items/${item.id}/npcs_buy`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `items/${item.id}/npcs_sell`,
             }
         ]}
         fetchingRequestHelpers={[
+            (data) => data.route,
+            (data) => data.route,
+            (data) => data.route,
             (data) => data.route,
             (data) => data.route,
             (data) => data.route
@@ -252,14 +267,18 @@ const Update = ({ item }) => (
                 const result = _.concat(data.payload, newRecords)
                 return ({ ...result })
             },
-            (data) => ({ ...data.accumulatedPayload, item_quests: { isNestedItemQuestsField: true, ...data.payload } })
+            (data) => ({ ...data.accumulatedPayload, item_quests: { isNestedItemQuestsField: true, ...data.payload } }),
+            (data) => ({ ...data.accumulatedPayload, item_monsters: { isNestedItemMonstersField: true, ...data.payload } }),
+            (data) => ({ ...data.accumulatedPayload, item_npc_buys: { isNestedItemNpcBuysField: true, ...data.payload } }),
+            (data) => ({ ...data.accumulatedPayload, item_npc_sells: { isNestedItemNpcSellsField: true, ...data.payload } })
         ]}
         fetchingDynamicFieldsHelper={(collective) => {
             if (collective?.isNestedItemQuestsField) {
                 const fieldsToIterate = _.omit(collective, ["isNestedItemQuestsField"])
-
-                return _.map(fieldsToIterate, (nestedCollective, key) => ({
-                    [`NESTEDDYNAMICFIELD_ITEMQUESTS_collective_${nestedCollective.quest_id}`]: {
+                const questsArray = Object.values(fieldsToIterate)
+                
+                return questsArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_ITEMQUESTS_collective_${nestedCollective.quest_id}`] = {
                         collectiveName: `Quest "${nestedCollective.quest.quest_translation.name}": `,
                         collectiveId: nestedCollective.quest_id,
                         [`NESTEDDYNAMICFIELD_ITEMQUESTS_quest_id_${nestedCollective.quest_id}`]: {
@@ -278,6 +297,7 @@ const Update = ({ item }) => (
                                 defaultValueResponsePayloadPath: ["data"],
                                 searchPayloadIdPath: ["id"],
                                 searchPayloadNamePath: ["quest_translation", "name"],
+                                forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_quests/forbidden_quests_by_item?item_id=${item.id}`,
                             },
                         },
                         [`NESTEDDYNAMICFIELD_ITEMQUESTS_quantity_${nestedCollective.quest_id}`]: {
@@ -285,14 +305,155 @@ const Update = ({ item }) => (
                             name: `quantity_NESTEDDYNAMICFIELD_ITEMQUESTS_${nestedCollective.quest_id}`,
                             label: 'Quantidade:',
                             value: nestedCollective?.quantity || 0,
-                            validation: _.isEmpty(nestedCollective?.quantity) ? nonNegativeInfiniteIntegerNumber : nonNegativeInfiniteIntegerNumber.optional(),
+                            validation: nonNegativeInfiniteIntegerNumber.optional(),
                             isPersistedRecord: true,
                             extraProperties: {
                                 defaultValue: 0,
                             },
                         },
-                    },
-                }))
+                    }
+                    return acc
+                }, {})
+            }
+
+            if (collective?.isNestedItemMonstersField) {
+                const fieldsToIterate = _.omit(collective, ["isNestedItemMonstersField"])
+                const monstersArray = Object.values(fieldsToIterate)
+                
+                return monstersArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_ITEMMONSTERS_collective_${nestedCollective.monster_id}`] = {
+                        collectiveName: `Monstro "${nestedCollective.monster.monster_translation.name}": `,
+                        collectiveId: nestedCollective.monster_id,
+                        [`NESTEDDYNAMICFIELD_ITEMMONSTERS_monster_id_${nestedCollective.monster_id}`]: {
+                            type: 'elasticdropdown',
+                            label: 'Monstro: ',
+                            name: `monster_id_NESTEDDYNAMICFIELD_ITEMMONSTERS_${nestedCollective.monster_id}`,
+                            value: nestedCollective.monster_id,
+                            validation: idValidation.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                togglerProperties: {
+                                    color: 'white'
+                                },
+                                searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/monsters/search`,
+                                defaultValueFetchEndpoint: `monsters`,
+                                defaultValueResponsePayloadPath: ["data"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["monster_translation", "name"],
+                                forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_monsters/forbidden_monsters_by_item?item_id=${item.id}`,
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_ITEMMONSTERS_minquantity_${nestedCollective.monster_id}`]: {
+                            type: 'number',
+                            name: `minquantity_NESTEDDYNAMICFIELD_ITEMMONSTERS_${nestedCollective.monster_id}`,
+                            label: 'Quantidade mínima:',
+                            value: nestedCollective?.minquantity || 0,
+                            validation: nonNegativeInfiniteIntegerNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_ITEMMONSTERS_maxquantity_${nestedCollective.monster_id}`]: {
+                            type: 'number',
+                            name: `maxquantity_NESTEDDYNAMICFIELD_ITEMMONSTERS_${nestedCollective.monster_id}`,
+                            label: 'Quantidade máxima:',
+                            value: nestedCollective?.maxquantity || 0,
+                            validation: nonNegativeInfiniteIntegerNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                    }
+                    return acc
+                }, {})
+            }
+
+            if (collective?.isNestedItemNpcBuysField) {
+                const fieldsToIterate = _.omit(collective, ["isNestedItemNpcBuysField"])
+                const npcsArray = Object.values(fieldsToIterate)
+                
+                return npcsArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_ITEMNPCBUYS_collective_${nestedCollective.npc_id}`] = {
+                        collectiveName: `NPC comprador "${nestedCollective.npc.npc_translation.name}": `,
+                        collectiveId: nestedCollective.npc_id,
+                        [`NESTEDDYNAMICFIELD_ITEMNPCBUYS_npc_id_${nestedCollective.npc_id}`]: {
+                            type: 'elasticdropdown',
+                            label: 'NPC: ',
+                            name: `npc_id_NESTEDDYNAMICFIELD_ITEMNPCBUYS_${nestedCollective.npc_id}`,
+                            value: nestedCollective.npc_id,
+                            validation: idValidation.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                togglerProperties: {
+                                    color: 'white'
+                                },
+                                searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/npcs/search`,
+                                defaultValueFetchEndpoint: `npcs`,
+                                defaultValueResponsePayloadPath: ["data"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["npc_translation", "name"],
+                                forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_npc_buys/forbidden_npcs_by_item?item_id=${item.id}`,
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_ITEMNPCBUYS_value_${nestedCollective.npc_id}`]: {
+                            type: 'number',
+                            name: `value_NESTEDDYNAMICFIELD_ITEMNPCBUYS_${nestedCollective.npc_id}`,
+                            label: 'Valor:',
+                            value: nestedCollective?.value || 0,
+                            validation: nonNegativeInfiniteFloatNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                    }
+                    return acc
+                }, {})
+            }
+
+            if (collective?.isNestedItemNpcSellsField) {
+                const fieldsToIterate = _.omit(collective, ["isNestedItemNpcSellsField"])
+                const npcsArray = Object.values(fieldsToIterate)
+                
+                return npcsArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_ITEMNPCSELLS_collective_${nestedCollective.npc_id}`] = {
+                        collectiveName: `NPC vendedor "${nestedCollective.npc.npc_translation.name}": `,
+                        collectiveId: nestedCollective.npc_id,
+                        [`NESTEDDYNAMICFIELD_ITEMNPCSELLS_npc_id_${nestedCollective.npc_id}`]: {
+                            type: 'elasticdropdown',
+                            label: 'NPC: ',
+                            name: `npc_id_NESTEDDYNAMICFIELD_ITEMNPCSELLS_${nestedCollective.npc_id}`,
+                            value: nestedCollective.npc_id,
+                            validation: idValidation.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                togglerProperties: {
+                                    color: 'white'
+                                },
+                                searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/npcs/search`,
+                                defaultValueFetchEndpoint: `npcs`,
+                                defaultValueResponsePayloadPath: ["data"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["npc_translation", "name"],
+                                forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_npc_sells/forbidden_npcs_by_item?item_id=${item.id}`,
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_ITEMNPCSELLS_value_${nestedCollective.npc_id}`]: {
+                            type: 'number',
+                            name: `value_NESTEDDYNAMICFIELD_ITEMNPCSELLS_${nestedCollective.npc_id}`,
+                            label: 'Valor:',
+                            value: nestedCollective?.value || 0,
+                            validation: nonNegativeInfiniteFloatNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                    }
+                    return acc
+                }, {})
             }
 
             return {
@@ -345,4 +506,4 @@ const Update = ({ item }) => (
     />
 )
 
-export default Update 
+export default Update
