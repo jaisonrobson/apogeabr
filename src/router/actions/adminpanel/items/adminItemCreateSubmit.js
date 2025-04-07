@@ -46,11 +46,11 @@ const action = async ({ request }) => {
             })
         })
 
-        const translationResponses = await Promise.all(translationRequests)
+        const responses = await Promise.all([initialRequestResponse, ...translationRequests])
 
         const successMessages = [
             initialRequestResponse.data,
-            ...translationResponses.map(res => res.data)
+            ...responses.slice(1).map(res => res.data)
         ]
 
         window.location.assign(

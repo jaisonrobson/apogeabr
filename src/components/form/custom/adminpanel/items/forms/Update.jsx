@@ -204,6 +204,7 @@ const Update = ({ item }) => (
         inputsComponent={ItemFormInputs}
         inputsComponentExtraProps={{
             item: item,
+            displayTemporaryFields: true,
         }}
         submitButtonProps={{
             color: "white",
@@ -220,25 +221,23 @@ const Update = ({ item }) => (
             {
                 actionMethod: "GET",
                 actionRoute: `items/${item.id}/translations`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `items/${item.id}/quests`,
             }
         ]}
         fetchingRequestHelpers={[
+            (data) => data.route,
             (data) => data.route,
             (data) => data.route
         ]}
         fetchingPayloadHelpers={[
             (data) => ({ locales: data.payload }),
             (data) => {
-                // Encontrar os `ids` únicos existentes na lista de resultado do modelo em questao
                 const existingModelIds = _.uniq(_.map(data.payload, 'item_id'))
-
-                // Encontrar os locale_ids já presentes no modelo em questao
                 const existingLocaleIds = _.map(data.payload, 'locale_id')
-
-                // Filtrar os idiomas que ainda não estão no ícone
                 const missingLocales = _.filter(data.accumulatedPayload.locales, locale => !existingLocaleIds.includes(locale.id))
-
-                // Criar novos objetos vazios para os ids ausentes e adicionar à lista
                 const newRecords = _.flatMap(existingModelIds, modelIdIteratee => _.map(missingLocales, locale => ({
                     item_id: modelIdIteratee,
                     locale_id: locale.id,
@@ -249,55 +248,99 @@ const Update = ({ item }) => (
                     composite_id: `${modelIdIteratee}-${locale.id}`,
                     locale: locale,
                     isPersistedRecord: false,
-                }))
-                )
-
-                // Atualizar a lista de resultado do modelo em questao com os novos registros
+                })))
                 const result = _.concat(data.payload, newRecords)
-
                 return ({ ...result })
-            }
-        ]}
-        fetchingDynamicFieldsHelper={(collective) => ({
-            [`DIFY_collective_${collective.locale.id}`]: {
-                collectiveName: collective.locale.name,
-                [`DIFY_locale_id_${collective.locale.id}`]: {
-                    type: undefined,
-                    label: '',
-                    name: `locale_id_DIFY_${collective.locale.id}`,
-                    value: collective.locale.id,
-                    validation: undefined,
-                },
-                [`DIFY_name_${collective.locale.id}`]: {
-                    type: 'text',
-                    name: `name_DIFY_${collective.locale.id}`,
-                    label: 'Nome:',
-                    value: collective.name,
-                    validation: _.isEmpty(collective.name) ? alphabeticThreeHundredStringValidation : alphabeticThreeHundredStringValidation.optional(),
-                },
-                [`DIFY_description_${collective.locale.id}`]: {
-                    type: 'textarea',
-                    name: `description_DIFY_${collective.locale.id}`,
-                    label: 'Descrição:',
-                    value: collective.description,
-                    validation: _.isEmpty(collective.description) ? alphabeticFiveHundredStringValidation : alphabeticFiveHundredStringValidation.optional(),
-                },
-                [`DIFY_attributesinfo_${collective.locale.id}`]: {
-                    type: 'textarea',
-                    name: `attributesinfo_DIFY_${collective.locale.id}`,
-                    label: 'Informações de Atributos:',
-                    value: collective.attributesinfo,
-                    validation: _.isEmpty(collective.attributesinfo) ? alphabeticFiveHundredStringValidation : alphabeticFiveHundredStringValidation.optional(),
-                },
-                [`DIFY_notes_${collective.locale.id}`]: {
-                    type: 'textarea',
-                    name: `notes_DIFY_${collective.locale.id}`,
-                    label: 'Notas:',
-                    value: collective.notes,
-                    validation: _.isEmpty(collective.notes) ? alphabeticFiveHundredStringValidation : alphabeticFiveHundredStringValidation.optional(),
-                },
             },
-        })}
+            (data) => ({ ...data.accumulatedPayload, item_quests: { isNestedItemQuestsField: true, ...data.payload } })
+        ]}
+        fetchingDynamicFieldsHelper={(collective) => {
+            if (collective?.isNestedItemQuestsField) {
+                const fieldsToIterate = _.omit(collective, ["isNestedItemQuestsField"])
+
+                return _.map(fieldsToIterate, (nestedCollective, key) => ({
+                    [`NESTEDDYNAMICFIELD_ITEMQUESTS_collective_${nestedCollective.quest_id}`]: {
+                        collectiveName: `Quest "${nestedCollective.quest.quest_translation.name}": `,
+                        collectiveId: nestedCollective.quest_id,
+                        [`NESTEDDYNAMICFIELD_ITEMQUESTS_quest_id_${nestedCollective.quest_id}`]: {
+                            type: 'elasticdropdown',
+                            label: 'Quest: ',
+                            name: `quest_id_NESTEDDYNAMICFIELD_ITEMQUESTS_${nestedCollective.quest_id}`,
+                            value: nestedCollective.quest_id,
+                            validation: idValidation.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                togglerProperties: {
+                                    color: 'white'
+                                },
+                                searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/quests/search`,
+                                defaultValueFetchEndpoint: `quests`,
+                                defaultValueResponsePayloadPath: ["data"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["quest_translation", "name"],
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_ITEMQUESTS_quantity_${nestedCollective.quest_id}`]: {
+                            type: 'number',
+                            name: `quantity_NESTEDDYNAMICFIELD_ITEMQUESTS_${nestedCollective.quest_id}`,
+                            label: 'Quantidade:',
+                            value: nestedCollective?.quantity || 0,
+                            validation: _.isEmpty(nestedCollective?.quantity) ? nonNegativeInfiniteIntegerNumber : nonNegativeInfiniteIntegerNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                    },
+                }))
+            }
+
+            return {
+                [`DIFY_collective_${collective.composite_id}`]: {
+                    collectiveName: collective.locale.name,
+                    [`DIFY_locale_id_${collective.locale_id}`]: {
+                        type: undefined,
+                        label: '',
+                        name: `locale_id_DIFY_${collective.locale_id}`,
+                        value: collective.locale_id,
+                        validation: undefined,
+                        isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
+                    },
+                    [`DIFY_name_${collective.locale_id}`]: {
+                        type: 'text',
+                        name: `name_DIFY_${collective.locale_id}`,
+                        label: 'Nome:',
+                        value: collective.name || '',
+                        validation: _.isEmpty(collective.name) ? alphabeticThreeHundredStringValidation : alphabeticThreeHundredStringValidation.optional(),
+                        isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
+                    },
+                    [`DIFY_description_${collective.locale_id}`]: {
+                        type: 'textarea',
+                        name: `description_DIFY_${collective.locale_id}`,
+                        label: 'Descrição:',
+                        value: collective.description || '',
+                        validation: _.isEmpty(collective.description) ? alphabeticFiveHundredStringValidation : alphabeticFiveHundredStringValidation.optional(),
+                        isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
+                    },
+                    [`DIFY_attributesinfo_${collective.locale_id}`]: {
+                        type: 'textarea',
+                        name: `attributesinfo_DIFY_${collective.locale_id}`,
+                        label: 'Informações de Atributos:',
+                        value: collective.attributesinfo || '',
+                        validation: _.isEmpty(collective.attributesinfo) ? alphabeticFiveHundredStringValidation : alphabeticFiveHundredStringValidation.optional(),
+                        isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
+                    },
+                    [`DIFY_notes_${collective.locale_id}`]: {
+                        type: 'textarea',
+                        name: `notes_DIFY_${collective.locale_id}`,
+                        label: 'Notas:',
+                        value: collective.notes || '',
+                        validation: _.isEmpty(collective.notes) ? alphabeticFiveHundredStringValidation : alphabeticFiveHundredStringValidation.optional(),
+                        isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
+                    },
+                },
+            }
+        }}
         light={true}
     />
 )

@@ -32,6 +32,29 @@ const action = async ({ request }) => {
     if (itemCategoryId)
         initialRequestValues["item_category_id"] = itemCategoryId
 
+    const temporaryItemQuestsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_"))
+
+    const temporaryItemQuestsValues = groupData(
+        filterEntries(temporaryItemQuestsRequestValues, "TMPFY_"),
+        "TMPFY"
+    )
+
+    const dynamicItemQuestsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_NESTEDDYNAMICFIELD_"))
+
+    const dynamicItemQuestsValues = groupData(
+        dynamicItemQuestsRequestValues,
+        "NESTEDDYNAMICFIELD_ITEMQUESTS",
+        ({ key, value, result }) => {
+            let finalResult = result
+
+            const itemQuestId = key.match(/NESTEDDYNAMICFIELD_ITEMQUESTS_(\d+)/)?.[1]
+
+            finalResult["itemQuestId"] = itemQuestId
+
+            return finalResult
+        }
+    )
+
     try {
         const requests = []
 
@@ -63,12 +86,14 @@ const action = async ({ request }) => {
         const onlyTouchedTranslationFields = removeGroupsByFiltersExclusively(translationGroups, ["id", "isPersistedField"])
 
         if (!_.isEmpty(onlyTouchedTranslationFields)) {
-            _.forEach(onlyTouchedTranslationFields, async (translationField) => {
-                const requestPayload = { item_translation: _.omit(translationField, ["isPersistedField"]) }
+            _.forEach(onlyTouchedTranslationFields, async (value) => {
+                const requestPayload = { item_translation: _.omit(value, "isPersistedField") }
 
                 const translationRequest = await axios.request({
-                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/translations/${translationField.locale_id}`,
-                    method: 'PUT',
+                    url: value.isPersistedField
+                        ? `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/translations/${value.locale_id}`
+                        : `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/translations`,
+                    method: value.isPersistedField ? 'PUT' : 'POST',
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -77,6 +102,44 @@ const action = async ({ request }) => {
                 })
 
                 requests.push(translationRequest)
+            })
+        }
+
+        if (!_.isEmpty(temporaryItemQuestsValues)) {
+            _.forEach(temporaryItemQuestsValues, async (itemQuestObject) => {
+                const itemQuestRequestPayload = { item_quest: itemQuestObject }
+
+                const itemQuestRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/quests`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: itemQuestRequestPayload,
+                })
+
+                requests.push(itemQuestRequest)
+            })
+        }
+
+        const onlyTouchedDynamicItemQuestsFields = removeNestedGroupsByFiltersExclusively(dynamicItemQuestsValues, ["itemQuestId"])
+
+        if (!_.isEmpty(onlyTouchedDynamicItemQuestsFields)) {
+            _.forEach(onlyTouchedDynamicItemQuestsFields, async (dynamicItemQuestField) => {
+                const requestPayload = { item_quest: _.omit(dynamicItemQuestField, ["itemQuestId"]) }
+
+                const itemQuestRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemId}/quests/${dynamicItemQuestField.itemQuestId}`,
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: requestPayload,
+                })
+
+                requests.push(itemQuestRequest)
             })
         }
 
