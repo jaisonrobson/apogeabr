@@ -219,9 +219,14 @@ const Update = ({ quest }) => (
             {
                 actionMethod: "GET",
                 actionRoute: `quests/${quest.id}/quest_steps/full_index`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `item_quests/by_quest/${quest.id}`,
             }
         ]}
         fetchingRequestHelpers={[
+            (data) => data.route,
             (data) => data.route,
             (data) => data.route,
             (data) => data.route
@@ -254,7 +259,8 @@ const Update = ({ quest }) => (
 
                 return ({ ...result })
             },
-            (data) => ({ ...data.accumulatedPayload, quest_steps: { isNestedQuestStepsField: true, ...data.payload } })
+            (data) => ({ ...data.accumulatedPayload, quest_steps: { isNestedQuestStepsField: true, ...data.payload } }),
+            (data) => ({ ...data.accumulatedPayload, quest_items: { isNestedQuestItemsField: true, ...data.payload } })
         ]}
         fetchingDynamicFieldsHelper={(collective) => {
             if (collective?.isNestedQuestStepsField) {
@@ -355,29 +361,47 @@ const Update = ({ quest }) => (
                         })))
                     },
                 }))
-            }
-            else {
-                return ({
-                    [`DIFY_collective_${collective.composite_id}`]: {
-                        collectiveName: collective.locale.name,
-                        [`DIFY_locale_id_${collective.locale_id}`]: {
-                            type: undefined,
-                            label: '',
-                            name: `locale_id_DIFY_${collective.locale_id}`,
-                            value: collective.locale_id,
-                            validation: undefined,
-                            isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
+            } else if (collective?.isNestedQuestItemsField) {
+                const fieldsToIterate = _.omit(collective, ["isNestedQuestItemsField"])
+                const questItemsArray = Object.values(fieldsToIterate)
+                
+                return questItemsArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_QUESTITEMS_collective_${nestedCollective.item_id}`] = {
+                        collectiveName: `Item "${nestedCollective.item.item_translation.name}": `,
+                        collectiveId: nestedCollective.item_id,
+                        [`NESTEDDYNAMICFIELD_QUESTITEMS_item_id_${nestedCollective.item_id}`]: {
+                            type: 'elasticdropdown',
+                            label: 'Item: ',
+                            name: `item_id_NESTEDDYNAMICFIELD_QUESTITEMS_${nestedCollective.item_id}`,
+                            value: nestedCollective.item_id,
+                            validation: idValidation.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                togglerProperties: {
+                                    color: 'white'
+                                },
+                                searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/items/search`,
+                                defaultValueFetchEndpoint: `items`,
+                                defaultValueResponsePayloadPath: ["data"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["item_translation", "name"],
+                                forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/items/forbidden_items_by_quest?quest_id=${quest.id}`,
+                            },
                         },
-                        [`DIFY_name_${collective.locale_id}`]: {
-                            type: 'text',
-                            name: `name_DIFY_${collective.locale_id}`,
-                            label: 'Nome:',
-                            value: collective.name,
-                            validation: _.isEmpty(collective.name) ? alphabeticThreeHundredStringValidation : alphabeticThreeHundredStringValidation.optional(),
-                            isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
+                        [`NESTEDDYNAMICFIELD_QUESTITEMS_quantity_${nestedCollective.item_id}`]: {
+                            type: 'number',
+                            name: `quantity_NESTEDDYNAMICFIELD_QUESTITEMS_${nestedCollective.item_id}`,
+                            label: 'Quantidade:',
+                            value: nestedCollective.quantity,
+                            validation: nonNegativeInfiniteIntegerNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: nestedCollective.quantity
+                            },
                         },
-                    },
-                })
+                    }
+                    return acc
+                }, {})
             }
         }}
         light={true} />
