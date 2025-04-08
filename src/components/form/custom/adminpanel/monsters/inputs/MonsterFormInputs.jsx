@@ -45,6 +45,7 @@ const MonsterFormInputs = ({
     const { value: { getValues } } = useFormContext()
     const { setSnapshot } = useContext(FormDataContext)
     const [ temporaryMonsterAbilityFieldsCounter, setTemporaryMonsterAbilityFieldsCounter ] = useState(1)
+    const [ temporaryMonsterItemFieldsCounter, setTemporaryMonsterItemFieldsCounter ] = useState(1)
 
     const removeMonsterAbilityField = (collectiveIdToRemove) => {
         setTemporaryFields(oldFields => {
@@ -59,16 +60,29 @@ const MonsterFormInputs = ({
         })
     }
 
+    const removeMonsterItemField = (collectiveIdToRemove) => {
+        setTemporaryFields(oldFields => {
+            const collective = oldFields.TMPFY_MONSTERITEMS_collective || {}
+    
+            const filtered = _.omitBy(collective, value => value.collectiveId === collectiveIdToRemove)
+    
+            return {
+                ...oldFields,
+                TMPFY_MONSTERITEMS_collective: filtered
+            }
+        })
+    }
+
     const addMonsterAbilityField = () => {
         const index = temporaryMonsterAbilityFieldsCounter
 
         const newFields = {
-            [`TMPFY_collective_${index}`]: {
+            [`TMPFY_MONSTERABILITIES_collective_${index}`]: {
                 collectiveName: `Nova habilidade +${index}:`,
                 collectiveId: index,
                 [`TMPFY_MONSTERABILITIES_ability_id_${index}`]: {
                     type: 'elasticdropdown',
-                    name: `ability_id_TMPFY_${index}`,
+                    name: `ability_id_TMPFY_MONSTERABILITIES_${index}`,
                     label: 'Habilidade:',
                     value: 0,
                     validation: idValidation,
@@ -86,7 +100,7 @@ const MonsterFormInputs = ({
                 },
                 [`TMPFY_MONSTERABILITIES_min_${index}`]: {
                     type: 'number',
-                    name: `min_TMPFY_${index}`,
+                    name: `min_TMPFY_MONSTERABILITIES_${index}`,
                     label: 'Minimo:',
                     value: 0,
                     validation: nonNegativeInfiniteIntegerNumber,
@@ -97,7 +111,7 @@ const MonsterFormInputs = ({
                 },
                 [`TMPFY_MONSTERABILITIES_max_${index}`]: {
                     type: 'number',
-                    name: `max_TMPFY_${index}`,
+                    name: `max_TMPFY_MONSTERABILITIES_${index}`,
                     label: 'Maximo:',
                     value: 0,
                     validation: nonNegativeInfiniteIntegerNumber,
@@ -108,7 +122,7 @@ const MonsterFormInputs = ({
                 },
                 [`TMPFY_MONSTERABILITIES_duration_${index}`]: {
                     type: 'number',
-                    name: `duration_TMPFY_${index}`,
+                    name: `duration_TMPFY_MONSTERABILITIES_${index}`,
                     label: 'Duração:',
                     value: 0,
                     validation: nonNegativeInfiniteFloatNumber,
@@ -120,7 +134,7 @@ const MonsterFormInputs = ({
                 },
                 [`TMPFY_MONSTERABILITIES_cooldown_${index}`]: {
                     type: 'number',
-                    name: `cooldown_TMPFY_${index}`,
+                    name: `cooldown_TMPFY_MONSTERABILITIES_${index}`,
                     label: 'Recarga:',
                     value: 0,
                     validation: nonNegativeInfiniteFloatNumber,
@@ -156,6 +170,79 @@ const MonsterFormInputs = ({
         })
 
         setTemporaryMonsterAbilityFieldsCounter(oldValue => (oldValue + 1))
+    }
+
+    const addMonsterItemField = () => {
+        const index = temporaryMonsterItemFieldsCounter
+
+        const newFields = {
+            [`TMPFY_MONSTERITEMS_collective_${index}`]: {
+                collectiveName: `Novo item +${index}:`,
+                collectiveId: index,
+                [`TMPFY_MONSTERITEMS_item_id_${index}`]: {
+                    type: 'elasticdropdown',
+                    name: `item_id_TMPFY_MONSTERITEMS_${index}`,
+                    label: 'Item:',
+                    value: 0,
+                    validation: idValidation,
+                    isPersistedRecord: false,
+                    extraProperties: {
+                        togglerProperties: {
+                            color: 'white'
+                        },
+                        searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/items/search`,
+                        searchPayloadIdPath: ["id"],
+                        searchPayloadNamePath: ["item_translation", "name"],
+                        defaultValueFetchEndpoint: `items`,
+                        defaultValueResponsePayloadPath: ["data"],
+                        forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_monsters/forbidden_items_by_monster?monster_id=${monster.id}`,
+                    },
+                },
+                [`TMPFY_MONSTERITEMS_minquantity_${index}`]: {
+                    type: 'number',
+                    name: `minquantity_TMPFY_MONSTERITEMS_${index}`,
+                    label: 'Quantidade mínima:',
+                    value: 0,
+                    validation: nonNegativeInfiniteIntegerNumber,
+                    isPersistedRecord: false,
+                    extraProperties: {
+                        defaultValue: 0,
+                    },
+                },
+                [`TMPFY_MONSTERITEMS_maxquantity_${index}`]: {
+                    type: 'number',
+                    name: `maxquantity_TMPFY_MONSTERITEMS_${index}`,
+                    label: 'Quantidade máxima:',
+                    value: 0,
+                    validation: nonNegativeInfiniteIntegerNumber,
+                    isPersistedRecord: false,
+                    extraProperties: {
+                        defaultValue: 0,
+                    },
+                },
+            }
+        }
+
+        setSnapshot(getValues())
+    
+        setTemporaryFields(oldValue => {
+            const updated = { ...oldValue }
+    
+            if (updated.TMPFY_MONSTERITEMS_collective) {
+                updated.TMPFY_MONSTERITEMS_collective = {
+                    ...updated.TMPFY_MONSTERITEMS_collective,
+                    ...newFields,
+                }
+            } else {
+                updated.TMPFY_MONSTERITEMS_collective = {
+                    ...newFields,
+                }
+            }
+    
+            return updated
+        })
+
+        setTemporaryMonsterItemFieldsCounter(oldValue => (oldValue + 1))
     }
 
     return (
@@ -220,6 +307,7 @@ const MonsterFormInputs = ({
                 setValue={setValue} />
 
             <RenderCollectiveInputs
+                extractCollectives="DIFY"
                 collectiveInputs={dynamicFields}
                 register={register}
                 setValue={setValue}
@@ -275,6 +363,58 @@ const MonsterFormInputs = ({
                                     errors={errors}
                                     light={light}
                                     onRemoveCollectiveInputs={removeMonsterAbilityField}
+                                    reloadInformation={false}
+                                    doFormLateLoadInformations={doFormLateLoadInformations}
+                                    collectiveInputsSearchDepth={2} />
+                            </Row>
+                        </Accordion.Body>
+                    </Accordion.Item>
+
+                    <Accordion.Item>
+                        <Accordion.Header targetId="2">
+                            <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"}>
+                                Itens que Dropam
+                            </Span>
+                        </Accordion.Header>
+
+                        <Accordion.Body accordionId="2">
+                            <Row>
+                                <Row padding="0px" margin="0px">
+                                    <HR light={!light} height="2px" />
+                                </Row>
+
+                                <Row>
+                                    <Col>
+                                        <AddDynamicRecordButton
+                                            addRecordDescription="Item que Dropa"
+                                            onClick={addMonsterItemField} />
+                                    </Col>
+                                </Row>
+
+                                <Row padding="0px" margin="0px" marginTop="15px">
+                                    <HR light={!light} height="2px" />
+                                </Row>
+
+                                <RenderCollectiveInputs
+                                    extractCollectives="NESTEDDYNAMICFIELD_MONSTERITEMS_collective"
+                                    collectiveInputsSearchDepth={2}
+                                    collectiveInputs={dynamicFields}
+                                    register={register}
+                                    errors={errors}
+                                    light={light}
+                                    setValue={setValue}
+                                    reloadInformation={!isLoadingLateValues}
+                                    doFormLateLoadInformations={doFormLateLoadInformations}
+                                    deleteEndpoint={(group) => `items/${group.collectiveId}/monsters/${monster.id}`} />
+
+                                <RenderCollectiveInputs
+                                    collectiveKeyPath={["TMPFY_MONSTERITEMS_collective"]}
+                                    collectiveInputs={temporaryFields}
+                                    register={register}
+                                    setValue={setValue}
+                                    errors={errors}
+                                    light={light}
+                                    onRemoveCollectiveInputs={removeMonsterItemField}
                                     reloadInformation={false}
                                     doFormLateLoadInformations={doFormLateLoadInformations}
                                     collectiveInputsSearchDepth={2} />

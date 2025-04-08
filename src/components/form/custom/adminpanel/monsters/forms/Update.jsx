@@ -202,9 +202,14 @@ const Update = ({ monster }) => (
             {
                 actionMethod: "GET",
                 actionRoute: `monsters/${monster.id}/abilities`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `item_monsters/by_monster/${monster.id}`,
             }
         ]}
         fetchingRequestHelpers={[
+            (data) => data.route,
             (data) => data.route,
             (data) => data.route,
             (data) => data.route
@@ -212,16 +217,9 @@ const Update = ({ monster }) => (
         fetchingPayloadHelpers={[
             (data) => ({ locales: data.payload }),
             (data) => {
-                // Encontrar os `ids` únicos existentes na lista de resultado do modelo em questao
                 const existingModelIds = _.uniq(_.map(data.payload, 'monster_id'))
-
-                // Encontrar os locale_ids já presentes no modelo em questao
                 const existingLocaleIds = _.map(data.payload, 'locale_id')
-
-                // Filtrar os idiomas que ainda não estão no ícone
                 const missingLocales = _.filter(data.accumulatedPayload.locales, locale => !existingLocaleIds.includes(locale.id))
-
-                // Criar novos objetos vazios para os ids ausentes e adicionar à lista
                 const newRecords = _.flatMap(existingModelIds, modelIdIteratee => _.map(missingLocales, locale => ({
                     monster_id: modelIdIteratee,
                     locale_id: locale.id,
@@ -229,22 +227,20 @@ const Update = ({ monster }) => (
                     composite_id: `${modelIdIteratee}-${locale.id}`,
                     locale: locale,
                     isPersistedRecord: false,
-                }))
-                )
-
-                // Atualizar a lista de resultado do modelo em questao com os novos registros
+                })))
                 const result = _.concat(data.payload, newRecords)
-
                 return ({ ...result })
             },
-            (data) => ({ ...data.accumulatedPayload, monster_abilities: { isNestedMonsterAbilitiesField: true, ...data.payload } })
+            (data) => ({ ...data.accumulatedPayload, monster_abilities: { isNestedMonsterAbilitiesField: true, ...data.payload } }),
+            (data) => ({ ...data.accumulatedPayload, monster_items: { isNestedMonsterItemsField: true, ...data.payload } })
         ]}
         fetchingDynamicFieldsHelper={(collective) => {
             if (collective?.isNestedMonsterAbilitiesField) {
                 const fieldsToIterate = _.omit(collective, ["isNestedMonsterAbilitiesField"])
-
-                return _.map(fieldsToIterate, (nestedCollective, key) => ({
-                    [`NESTEDDYNAMICFIELD_MONSTERABILITIES_collective_${nestedCollective.ability_id}`]: {
+                const abilitiesArray = Object.values(fieldsToIterate)
+                
+                return abilitiesArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_MONSTERABILITIES_collective_${nestedCollective.ability_id}`] = {
                         collectiveName: `Habilidade "${nestedCollective.ability.ability_translation.name}": `,
                         collectiveId: nestedCollective.ability_id,
                         [`NESTEDDYNAMICFIELD_MONSTERABILITIES_ability_id_${nestedCollective.ability_id}`]: {
@@ -311,8 +307,61 @@ const Update = ({ monster }) => (
                                 step: "0.01",
                             },
                         },
-                    },
-                }))
+                    }
+                    return acc
+                }, {})
+            } else if (collective?.isNestedMonsterItemsField) {
+                const fieldsToIterate = _.omit(collective, ["isNestedMonsterItemsField"])
+                const itemsArray = Object.values(fieldsToIterate)
+                
+                return itemsArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_MONSTERITEMS_collective_${nestedCollective.item_id}`] = {
+                        collectiveName: `Item "${nestedCollective.item.item_translation.name}": `,
+                        collectiveId: nestedCollective.item_id,
+                        [`NESTEDDYNAMICFIELD_MONSTERITEMS_item_id_${nestedCollective.item_id}`]: {
+                            type: 'elasticdropdown',
+                            label: 'Item: ',
+                            name: `item_id_NESTEDDYNAMICFIELD_MONSTERITEMS_${nestedCollective.item_id}`,
+                            value: nestedCollective.item_id,
+                            validation: idValidation.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                togglerProperties: {
+                                    color: 'white'
+                                },
+                                searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/items/search`,
+                                defaultValueFetchEndpoint: `items`,
+                                defaultValueResponsePayloadPath: ["data"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["item_translation", "name"],
+                                forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_monsters/forbidden_items_by_monster?monster_id=${monster.id}`,
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_MONSTERITEMS_minquantity_${nestedCollective.item_id}`]: {
+                            type: 'number',
+                            name: `minquantity_NESTEDDYNAMICFIELD_MONSTERITEMS_${nestedCollective.item_id}`,
+                            label: 'Quantidade mínima:',
+                            value: nestedCollective?.minquantity || 0,
+                            validation: nonNegativeInfiniteIntegerNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_MONSTERITEMS_maxquantity_${nestedCollective.item_id}`]: {
+                            type: 'number',
+                            name: `maxquantity_NESTEDDYNAMICFIELD_MONSTERITEMS_${nestedCollective.item_id}`,
+                            label: 'Quantidade máxima:',
+                            value: nestedCollective?.maxquantity || 0,
+                            validation: nonNegativeInfiniteIntegerNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                    }
+                    return acc
+                }, {})
             } else {
                 return ({
                     [`DIFY_collective_${collective.composite_id}`]: {

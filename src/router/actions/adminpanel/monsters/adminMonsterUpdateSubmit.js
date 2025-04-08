@@ -32,14 +32,14 @@ const action = async ({ request }) => {
     if (iconId)
         initialRequestValues["icon_id"] = iconId
 
-    const temporaryMonsterAbilitiesRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_"))
+    const temporaryMonsterAbilitiesRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_MONSTERABILITIES_"))
 
     const temporaryMonsterAbilitiesValues = groupData(
-        filterEntries(temporaryMonsterAbilitiesRequestValues, "TMPFY_"),
-        "TMPFY"
+        filterEntries(temporaryMonsterAbilitiesRequestValues, "TMPFY_MONSTERABILITIES"),
+        "TMPFY_MONSTERABILITIES"
     )
 
-    const dynamicMonsterAbilitiesRequestValues = _.pickBy(allValues, (value, key) => key.includes("_NESTEDDYNAMICFIELD_"))
+    const dynamicMonsterAbilitiesRequestValues = _.pickBy(allValues, (value, key) => key.includes("_NESTEDDYNAMICFIELD_MONSTERABILITIES_"))
 
     const dynamicMonsterAbilitiesValues = groupData(
         dynamicMonsterAbilitiesRequestValues,
@@ -50,6 +50,29 @@ const action = async ({ request }) => {
             const monsterAbilityId = key.match(/NESTEDDYNAMICFIELD_MONSTERABILITIES_(\d+)/)?.[1]
 
             finalResult["monsterAbilityId"] = monsterAbilityId
+
+            return finalResult
+        }
+    )
+
+    const temporaryMonsterItemsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_TMPFY_MONSTERITEMS_"))
+
+    const temporaryMonsterItemsValues = groupData(
+        filterEntries(temporaryMonsterItemsRequestValues, "TMPFY_MONSTERITEMS"),
+        "TMPFY_MONSTERITEMS"
+    )
+
+    const dynamicMonsterItemsRequestValues = _.pickBy(allValues, (value, key) => key.includes("_NESTEDDYNAMICFIELD_MONSTERITEMS_"))
+
+    const dynamicMonsterItemsValues = groupData(
+        dynamicMonsterItemsRequestValues,
+        "NESTEDDYNAMICFIELD_MONSTERITEMS",
+        ({ key, value, result }) => {
+            let finalResult = result
+
+            const monsterItemId = key.match(/NESTEDDYNAMICFIELD_MONSTERITEMS_(\d+)/)?.[1]
+
+            finalResult["monsterItemId"] = monsterItemId
 
             return finalResult
         }
@@ -140,6 +163,44 @@ const action = async ({ request }) => {
                 })
 
                 requests.push(monsterAbilityRequest)
+            })
+        }
+
+        if (!_.isEmpty(temporaryMonsterItemsValues)) {
+            _.forEach(temporaryMonsterItemsValues, async (monsterItemObject) => {
+                const monsterItemRequestPayload = { item_monster: { ...monsterItemObject, monster_id: monsterId } }
+
+                const monsterItemRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${monsterItemObject.item_id}/monsters`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: monsterItemRequestPayload,
+                })
+
+                requests.push(monsterItemRequest)
+            })
+        }
+
+        const onlyTouchedDynamicMonsterItemsFields = removeNestedGroupsByFiltersExclusively(dynamicMonsterItemsValues, ["monsterItemId"])
+
+        if (!_.isEmpty(onlyTouchedDynamicMonsterItemsFields)) {
+            _.forEach(onlyTouchedDynamicMonsterItemsFields, async (dynamicMonsterItemField) => {
+                const requestPayload = { item_monster: _.omit(dynamicMonsterItemField, ["monsterItemId"]) }
+
+                const monsterItemRequest = await axios.request({
+                    url: `${process.env.REACT_APP_BACKEND_HOST}/items/${dynamicMonsterItemField.monsterItemId}/monsters/${monsterId}`,
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: requestPayload,
+                })
+
+                requests.push(monsterItemRequest)
             })
         }
 
