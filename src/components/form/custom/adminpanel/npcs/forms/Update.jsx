@@ -19,6 +19,7 @@ import {
     idValidation,
     twoMegabytesImageValidation,
     timeValidation,
+    nonNegativeInfiniteFloatNumber,
 } from 'validations'
 
 import ROUTES from 'router/routes'
@@ -186,9 +187,19 @@ const Update = ({ npc }) => (
             {
                 actionMethod: "GET",
                 actionRoute: `locations_npcs/?npc_id=${npc.id}`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `item_npc_buys/by_npc/${npc.id}`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `item_npc_sells/by_npc/${npc.id}`,
             }
         ]}
         fetchingRequestHelpers={[
+            (data) => data.route,
+            (data) => data.route,
             (data) => data.route,
             (data) => data.route,
             (data) => data.route
@@ -196,46 +207,38 @@ const Update = ({ npc }) => (
         fetchingPayloadHelpers={[
             (data) => ({ locales: data.payload }),
             (data) => {
-                // Encontrar os `ids` únicos existentes na lista de resultado do modelo em questao
                 const existingModelIds = _.uniq(_.map(data.payload, 'npc_id'))
-
-                // Encontrar os locale_ids já presentes no modelo em questao
                 const existingLocaleIds = _.map(data.payload, 'locale_id')
-
-                // Filtrar os idiomas que ainda não estão no ícone
                 const missingLocales = _.filter(data.accumulatedPayload.locales, locale => !existingLocaleIds.includes(locale.id))
-
-                // Criar novos objetos vazios para os ids ausentes e adicionar à lista
-                const newRecords = _.flatMap(existingModelIds, modelIdIteratee =>
-                    _.map(missingLocales, locale => ({
-                        npc_id: modelIdIteratee,
-                        locale_id: locale.id,
-                        name: "",
-                        description: "",
-                        composite_id: `${modelIdIteratee}-${locale.id}`,
-                        locale: locale,
-                        isPersistedRecord: false,
-                    }))
-                )
-
-                // Atualizar a lista de resultado do modelo em questao com os novos registros
+                const newRecords = _.flatMap(existingModelIds, modelIdIteratee => _.map(missingLocales, locale => ({
+                    npc_id: modelIdIteratee,
+                    locale_id: locale.id,
+                    name: "",
+                    description: "",
+                    composite_id: `${modelIdIteratee}-${locale.id}`,
+                    locale: locale,
+                    isPersistedRecord: false,
+                })))
                 const result = _.concat(data.payload, newRecords)
-
                 return ({ ...result })
             },
-            (data) => ({ ...data.accumulatedPayload, locations: { isNestedLocationField: true, ...data.payload } })
+            (data) => ({ ...data.accumulatedPayload, locations: { isNestedLocationField: true, ...data.payload } }),
+            (data) => ({ ...data.accumulatedPayload, item_buys: { isNestedItemBuysField: true, ...data.payload } }),
+            (data) => ({ ...data.accumulatedPayload, item_sells: { isNestedItemSellsField: true, ...data.payload } })
         ]}
         fetchingDynamicFieldsHelper={(collective) => {
             if (collective?.isNestedLocationField) {
                 const fieldsToIterate = _.omit(collective, ["isNestedLocationField"])
-
-                return _.map(fieldsToIterate, (nestedCollective, key) => ({
-                    [`NESTEDDYNAMICFIELD_collective_${nestedCollective.location_id}`]: {
+                const locationsArray = Object.values(fieldsToIterate)
+                
+                return locationsArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_LOCATIONS_collective_${nestedCollective.location_id}`] = {
                         collectiveName: `Local "${nestedCollective.location.location_translation.name}": `,
-                        [`NESTEDDYNAMICFIELD_location_id_${nestedCollective.location_id}`]: {
+                        collectiveId: nestedCollective.location_id,
+                        [`NESTEDDYNAMICFIELD_LOCATIONS_location_id_${nestedCollective.location_id}`]: {
                             type: 'elasticdropdown',
                             label: 'Local: ',
-                            name: `location_id_NESTEDDYNAMICFIELD_${nestedCollective.location_id}`,
+                            name: `location_id_NESTEDDYNAMICFIELD_LOCATIONS_${nestedCollective.location_id}`,
                             value: nestedCollective.location_id,
                             validation: idValidation.optional(),
                             isPersistedRecord: true,
@@ -250,19 +253,104 @@ const Update = ({ npc }) => (
                                 searchPayloadNamePath: ["location_translation", "name"],
                             },
                         },
-                        [`NESTEDDYNAMICFIELD_visit_at_${nestedCollective.location_id}`]: {
+                        [`NESTEDDYNAMICFIELD_LOCATIONS_visit_at_${nestedCollective.location_id}`]: {
                             type: 'time',
-                            name: `visit_at_NESTEDDYNAMICFIELD_${nestedCollective.location_id}`,
+                            name: `visit_at_NESTEDDYNAMICFIELD_LOCATIONS_${nestedCollective.location_id}`,
                             label: 'Aparece às:',
                             value: formatToHourMinute(nestedCollective.visit_at),
                             validation: _.isEmpty(nestedCollective.visit_at) ? timeValidation : timeValidation.optional(),
                             isPersistedRecord: true,
                         },
-                    },
-                }))
+                    }
+                    return acc
+                }, {})
+            }
+            else if (collective?.isNestedItemBuysField) {
+                const fieldsToIterate = _.omit(collective, ["isNestedItemBuysField"])
+                const itemsArray = Object.values(fieldsToIterate)
+                
+                return itemsArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_ITEMBUYS_collective_${nestedCollective.item_id}`] = {
+                        collectiveName: `Item "${nestedCollective.item.item_translation.name}": `,
+                        collectiveId: nestedCollective.item_id,
+                        [`NESTEDDYNAMICFIELD_ITEMBUYS_item_id_${nestedCollective.item_id}`]: {
+                            type: 'elasticdropdown',
+                            label: 'Item: ',
+                            name: `item_id_NESTEDDYNAMICFIELD_ITEMBUYS_${nestedCollective.item_id}`,
+                            value: nestedCollective.item_id,
+                            validation: idValidation.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                togglerProperties: {
+                                    color: 'white'
+                                },
+                                searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/items/search`,
+                                defaultValueFetchEndpoint: `items`,
+                                defaultValueResponsePayloadPath: ["data"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["item_translation", "name"],
+                                forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_npc_buys/forbidden_items_by_npc?npc_id=${npc.id}`,
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_ITEMBUYS_value_${nestedCollective.item_id}`]: {
+                            type: 'number',
+                            name: `value_NESTEDDYNAMICFIELD_ITEMBUYS_${nestedCollective.item_id}`,
+                            label: 'Valor:',
+                            value: nestedCollective.value,
+                            validation: nonNegativeInfiniteFloatNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                    }
+                    return acc
+                }, {})
+            }
+            else if (collective?.isNestedItemSellsField) {
+                const fieldsToIterate = _.omit(collective, ["isNestedItemSellsField"])
+                const itemsArray = Object.values(fieldsToIterate)
+                
+                return itemsArray.reduce((acc, nestedCollective) => {
+                    acc[`NESTEDDYNAMICFIELD_ITEMSELLS_collective_${nestedCollective.item_id}`] = {
+                        collectiveName: `Item "${nestedCollective.item.item_translation.name}": `,
+                        collectiveId: nestedCollective.item_id,
+                        [`NESTEDDYNAMICFIELD_ITEMSELLS_item_id_${nestedCollective.item_id}`]: {
+                            type: 'elasticdropdown',
+                            label: 'Item: ',
+                            name: `item_id_NESTEDDYNAMICFIELD_ITEMSELLS_${nestedCollective.item_id}`,
+                            value: nestedCollective.item_id,
+                            validation: idValidation.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                togglerProperties: {
+                                    color: 'white'
+                                },
+                                searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/items/search`,
+                                defaultValueFetchEndpoint: `items`,
+                                defaultValueResponsePayloadPath: ["data"],
+                                searchPayloadIdPath: ["id"],
+                                searchPayloadNamePath: ["item_translation", "name"],
+                                forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_npc_sells/forbidden_items_by_npc?npc_id=${npc.id}`,
+                            },
+                        },
+                        [`NESTEDDYNAMICFIELD_ITEMSELLS_value_${nestedCollective.item_id}`]: {
+                            type: 'number',
+                            name: `value_NESTEDDYNAMICFIELD_ITEMSELLS_${nestedCollective.item_id}`,
+                            label: 'Valor:',
+                            value: nestedCollective.value,
+                            validation: nonNegativeInfiniteFloatNumber.optional(),
+                            isPersistedRecord: true,
+                            extraProperties: {
+                                defaultValue: 0,
+                            },
+                        },
+                    }
+                    return acc
+                }, {})
             }
             else {
-                return ({
+                return {
                     [`DIFY_collective_${collective.composite_id}`]: {
                         collectiveName: collective.locale.name,
                         [`DIFY_locale_id_${collective.locale_id}`]: {
@@ -290,7 +378,7 @@ const Update = ({ npc }) => (
                             isPersistedRecord: collective?.isPersistedRecord === false ? collective?.isPersistedRecord : true,
                         },
                     },
-                })
+                }
             }
         }}
         light={true} />
