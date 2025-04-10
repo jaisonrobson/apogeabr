@@ -11,7 +11,8 @@ import {
     idValidation,
     youtubeLinkValidation,
     alphabeticThreeHundredStringValidation,
-    alphabeticFiveHundredStringValidation
+    alphabeticFiveHundredStringValidation,
+    booleanValidation,
 } from 'validations'
 
 import {
@@ -46,6 +47,7 @@ const QuestFormInputs = ({
     const { setSnapshot } = useContext(FormDataContext)
     const [ temporaryQuestStepFieldsCounter, setTemporaryQuestStepFieldsCounter ] = useState(1)
     const [ temporaryQuestItemFieldsCounter, setTemporaryQuestItemFieldsCounter ] = useState(1)
+    const [ temporaryQuestStepItemFieldsCounter, setTemporaryQuestStepItemFieldsCounter ] = useState(1)
 
     const removeQuestStepField = (collectiveIdToRemove) => {
         setTemporaryFields(oldFields => {
@@ -261,6 +263,103 @@ const QuestFormInputs = ({
         setTemporaryQuestItemFieldsCounter(oldValue => (oldValue + 1))
     }
 
+    const removeQuestStepItemField = (questStepId, collectiveIdToRemove) => {
+        setTemporaryFields(oldFields => {
+            const collective = oldFields[`TMPFY_QUESTSTEP_${questStepId}_ITEMS_collective`] || {}
+    
+            const filtered = _.omitBy(collective, value => value.collectiveId === collectiveIdToRemove)
+    
+            return {
+                ...oldFields,
+                [`TMPFY_QUESTSTEP_${questStepId}_ITEMS_collective`]: filtered
+            }
+        })
+    }
+
+    const addQuestStepItemField = (questStepId) => {
+        const index = temporaryQuestStepItemFieldsCounter
+
+        const newFields = {
+            [`TMPFY_QUESTSTEP_${questStepId}_ITEMS_collective_${index}`]: {
+                collectiveName: `Novo item +${index}:`,
+                collectiveId: index,
+                [`TMPFY_QUESTSTEP_${questStepId}_ITEMS_item_id_${index}`]: {
+                    type: 'elasticdropdown',
+                    name: `item_id_TMPFY_QUESTSTEP_${questStepId}_ITEMS_${index}`,
+                    label: 'Item:',
+                    value: 0,
+                    validation: idValidation,
+                    isPersistedRecord: false,
+                    extraProperties: {
+                        togglerProperties: {
+                            color: 'white'
+                        },
+                        searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/items/search`,
+                        searchPayloadIdPath: ["id"],
+                        searchPayloadNamePath: ["item_translation", "name"],
+                        defaultValueFetchEndpoint: `items`,
+                        defaultValueResponsePayloadPath: ["data"],
+                        forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_quest_steps/forbidden_items_by_quest_step?quest_step_id=${questStepId}`,
+                    },
+                },
+                [`TMPFY_QUESTSTEP_${questStepId}_ITEMS_quantity_${index}`]: {
+                    type: 'number',
+                    name: `quantity_TMPFY_QUESTSTEP_${questStepId}_ITEMS_${index}`,
+                    label: 'Quantidade:',
+                    value: 1,
+                    validation: nonNegativeInfiniteIntegerNumber,
+                    isPersistedRecord: false,
+                    extraProperties: {
+                        defaultValue: 1,
+                    },
+                },
+                [`TMPFY_QUESTSTEP_${questStepId}_ITEMS_is_reward_${index}`]: {
+                    type: 'radiobuttons',
+                    name: `is_reward_TMPFY_QUESTSTEP_${questStepId}_ITEMS_${index}`,
+                    label: 'É recompensa:',
+                    value: { label: "Não", value: 0 },
+                    validation: booleanValidation,
+                    isPersistedRecord: false,
+                    extraProperties: {
+                        defaultValue: { label: "Não", value: 0 },
+                    },
+                },
+                [`TMPFY_QUESTSTEP_${questStepId}_ITEMS_is_requisite_${index}`]: {
+                    type: 'radiobuttons',
+                    name: `is_requisite_TMPFY_QUESTSTEP_${questStepId}_ITEMS_${index}`,
+                    label: 'É requisito:',
+                    value: { label: "Não", value: 0 },
+                    validation: booleanValidation,
+                    isPersistedRecord: false,
+                    extraProperties: {
+                        defaultValue: { label: "Não", value: 0 },
+                    },
+                },
+            }
+        }
+
+        setSnapshot(getValues())
+    
+        setTemporaryFields(oldValue => {
+            const updated = { ...oldValue }
+    
+            if (updated[`TMPFY_QUESTSTEP_${questStepId}_ITEMS_collective`]) {
+                updated[`TMPFY_QUESTSTEP_${questStepId}_ITEMS_collective`] = {
+                    ...updated[`TMPFY_QUESTSTEP_${questStepId}_ITEMS_collective`],
+                    ...newFields,
+                }
+            } else {
+                updated[`TMPFY_QUESTSTEP_${questStepId}_ITEMS_collective`] = {
+                    ...newFields,
+                }
+            }
+    
+            return updated
+        })
+
+        setTemporaryQuestStepItemFieldsCounter(oldValue => (oldValue + 1))
+    }
+
     return (
         <Fragment>
             <ImageInput
@@ -297,7 +396,7 @@ const QuestFormInputs = ({
                     <Accordion.Item>
                         <Accordion.Header targetId="1">
                             <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"}>
-                                Passos da Quest
+                                Passos
                             </Span>
                         </Accordion.Header>
 
@@ -329,7 +428,62 @@ const QuestFormInputs = ({
                                     setValue={setValue}
                                     reloadInformation={!isLoadingLateValues}
                                     doFormLateLoadInformations={doFormLateLoadInformations}
-                                    deleteEndpoint={(group) => `quests/${quest.id}/quest_steps/${group.collectiveId}`} />
+                                    deleteEndpoint={(group) => `quests/${quest.id}/quest_steps/${group.collectiveId}`}
+                                    renderAdditionalContent={(group) => (
+                                        <Accordion>
+                                            <Accordion.Item>
+                                                <Accordion.Header targetId={`quest_step_items_${group.collectiveId}`}>
+                                                    <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"}>
+                                                        Itens do Passo
+                                                    </Span>
+                                                </Accordion.Header>
+
+                                                <Accordion.Body accordionId={`quest_step_items_${group.collectiveId}`}>
+                                                    <Row>
+                                                        <Row padding="0px" margin="0px">
+                                                            <HR light={!light} height="2px" />
+                                                        </Row>
+
+                                                        <Row>
+                                                            <Col>
+                                                                <AddDynamicRecordButton
+                                                                    addRecordDescription="Item"
+                                                                    onClick={() => addQuestStepItemField(group.collectiveId)} />
+                                                            </Col>
+                                                        </Row>
+
+                                                        <Row padding="0px" margin="0px" marginTop="15px">
+                                                            <HR light={!light} height="2px" />
+                                                        </Row>
+
+                                                        <RenderCollectiveInputs
+                                                            extractCollectives={`NESTEDDYNAMICFIELD_QUESTSTEP_${group.collectiveId}_ITEMS_collective`}
+                                                            collectiveInputsSearchDepth={2}
+                                                            collectiveInputs={dynamicFields}
+                                                            register={register}
+                                                            errors={errors}
+                                                            light={light}
+                                                            setValue={setValue}
+                                                            reloadInformation={!isLoadingLateValues}
+                                                            doFormLateLoadInformations={doFormLateLoadInformations}
+                                                            deleteEndpoint={(itemGroup) => `items/${itemGroup.collectiveId}/quest_steps/${group.collectiveId}`} />
+
+                                                        <RenderCollectiveInputs
+                                                            collectiveKeyPath={[`TMPFY_QUESTSTEP_${group.collectiveId}_ITEMS_collective`]}
+                                                            collectiveInputs={temporaryFields}
+                                                            register={register}
+                                                            setValue={setValue}
+                                                            errors={errors}
+                                                            light={light}
+                                                            onRemoveCollectiveInputs={(itemGroup) => removeQuestStepItemField(group.collectiveId, itemGroup.collectiveId)}
+                                                            reloadInformation={false}
+                                                            doFormLateLoadInformations={doFormLateLoadInformations}
+                                                            collectiveInputsSearchDepth={2} />
+                                                    </Row>
+                                                </Accordion.Body>
+                                            </Accordion.Item>
+                                        </Accordion>
+                                    )} />
 
                                 <RenderCollectiveInputs
                                     collectiveKeyPath={["TMPFY_QUESTSTEPS_collective"]}
@@ -349,7 +503,7 @@ const QuestFormInputs = ({
                     <Accordion.Item>
                         <Accordion.Header targetId="2">
                             <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"}>
-                                Recompensa de Quest
+                                Recompensas
                             </Span>
                         </Accordion.Header>
 

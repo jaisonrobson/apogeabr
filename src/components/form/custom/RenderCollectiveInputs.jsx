@@ -29,12 +29,14 @@ const RenderCollectiveInputs = ({
     collectiveInputsSearchDepth = 1,
     deleteEndpoint = defaultAsFunction,
     onRemoveCollectiveInputs = defaultAsFunction,
+    renderAdditionalContent = defaultAsFunction,
 }) => {
     const { value: { getValues } } = useFormContext()
     const { isReloadingData, enableReloadData, setSnapshot } = useContext(FormDataContext)
     const [collectiveData, setCollectiveData] = useState({})
     const providedRemoveFunction = !_.isEqual(onRemoveCollectiveInputs, defaultAsFunction)
     const providedRemoveEndpoint = !_.isEqual(deleteEndpoint, defaultAsFunction)
+    const providedAdditionalContent = !_.isEqual(renderAdditionalContent, defaultAsFunction)
 
     useEffect(() => {
         if (extractCollectives)
@@ -74,7 +76,7 @@ const RenderCollectiveInputs = ({
                 <Col display="flex" justifyContent="flex-end" padding="0px">
                     <DeleteRecordModalButton
                         margin="0px"
-                            marginBottom="5px"
+                        marginBottom="5px"
                         {...(providedRemoveEndpoint
                                 ? ({
                                 deleteEndpoint: () => deleteEndpoint(group),
@@ -113,7 +115,21 @@ const RenderCollectiveInputs = ({
                 >
                     {groupedInputs}
                 </Col>
-          </Row>
+            </Row>
+
+            {depth === 0 && providedAdditionalContent ? (
+                <Row
+                    padding="0px"
+                    margin="0px"
+                >
+                    <Col
+                        padding="0px"
+                        margin="0px"
+                    >
+                        {renderAdditionalContent(group)}
+                    </Col>
+                </Row>
+            ) : null}
         </Row>
       ),
       collectiveInputsSearchDepth

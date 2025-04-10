@@ -20,6 +20,7 @@ import {
     twoMegabytesImageValidation,
     youtubeLinkValidation,
     nonNegativeInfiniteIntegerNumber,
+    booleanValidation,
 } from 'validations'
 
 import ROUTES from 'router/routes'
@@ -223,9 +224,14 @@ const Update = ({ quest }) => (
             {
                 actionMethod: "GET",
                 actionRoute: `item_quests/by_quest/${quest.id}`,
+            },
+            {
+                actionMethod: "GET",
+                actionRoute: `item_quest_steps/by_quest/${quest.id}`,
             }
         ]}
         fetchingRequestHelpers={[
+            (data) => data.route,
             (data) => data.route,
             (data) => data.route,
             (data) => data.route,
@@ -260,7 +266,32 @@ const Update = ({ quest }) => (
                 return ({ ...result })
             },
             (data) => ({ ...data.accumulatedPayload, quest_steps: { isNestedQuestStepsField: true, ...data.payload } }),
-            (data) => ({ ...data.accumulatedPayload, quest_items: { isNestedQuestItemsField: true, ...data.payload } })
+            (data) => ({ ...data.accumulatedPayload, quest_items: { isNestedQuestItemsField: true, ...data.payload } }),
+            (data) => {
+                const questSteps = data.accumulatedPayload.quest_steps
+                const questStepItems = data.payload
+
+                const updatedQuestSteps = _.mapValues(questSteps, (questStep) => {
+                    if (questStep.isNestedQuestStepsField) {
+                        return questStep
+                    }
+
+                    const stepItems = _.filter(questStepItems, { quest_step_id: questStep.id })
+                    
+                    return {
+                        ...questStep,
+                        item_quest_steps: {
+                            isNestedQuestStepItemsField: true,
+                            ...stepItems
+                        }
+                    }
+                })
+
+                return {
+                    ...data.accumulatedPayload,
+                    quest_steps: updatedQuestSteps
+                }
+            }
         ]}
         fetchingDynamicFieldsHelper={(collective) => {
             if (collective?.isNestedQuestStepsField) {
@@ -360,6 +391,67 @@ const Update = ({ quest }) => (
                             },
                         })))
                     },
+                    ...(nestedCollective.item_quest_steps?.isNestedQuestStepItemsField ? _.mapValues(
+                        _.omit(nestedCollective.item_quest_steps, ["isNestedQuestStepItemsField"]),
+                        (itemQuestStep) => ({
+                            [`NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_collective_${itemQuestStep.item_id}`]: {
+                                collectiveName: `Item "${itemQuestStep.item.item_translation.name}": `,
+                                collectiveId: itemQuestStep.item_id,
+                                [`NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_item_id_${itemQuestStep.item_id}`]: {
+                                    type: 'elasticdropdown',
+                                    label: 'Item: ',
+                                    name: `item_id_NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_${itemQuestStep.item_id}`,
+                                    value: itemQuestStep.item_id,
+                                    validation: idValidation.optional(),
+                                    isPersistedRecord: true,
+                                    extraProperties: {
+                                        togglerProperties: {
+                                            color: 'white'
+                                        },
+                                        searchEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/items/search`,
+                                        defaultValueFetchEndpoint: `items`,
+                                        defaultValueResponsePayloadPath: ["data"],
+                                        searchPayloadIdPath: ["id"],
+                                        searchPayloadNamePath: ["item_translation", "name"],
+                                        forbiddenEndpoint: `${process.env.REACT_APP_BACKEND_HOST}/item_quest_steps/forbidden_items_by_quest_step?quest_step_id=${nestedCollective.id}`,
+                                    },
+                                },
+                                [`NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_quantity_${itemQuestStep.item_id}`]: {
+                                    type: 'number',
+                                    name: `quantity_NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_${itemQuestStep.item_id}`,
+                                    label: 'Quantidade:',
+                                    value: itemQuestStep.quantity,
+                                    validation: nonNegativeInfiniteIntegerNumber.optional(),
+                                    isPersistedRecord: true,
+                                    extraProperties: {
+                                        defaultValue: itemQuestStep.quantity
+                                    },
+                                },
+                                [`NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_is_reward_${itemQuestStep.item_id}`]: {
+                                    type: 'radiobuttons',
+                                    name: `is_reward_NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_${itemQuestStep.item_id}`,
+                                    label: 'É recompensa:',
+                                    value: Number(itemQuestStep.is_reward),
+                                    validation: booleanValidation.optional(),
+                                    isPersistedRecord: true,
+                                    extraProperties: {
+                                        defaultValue: Number(itemQuestStep.is_reward)
+                                    },
+                                },
+                                [`NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_is_requisite_${itemQuestStep.item_id}`]: {
+                                    type: 'radiobuttons',
+                                    name: `is_requisite_NESTEDDYNAMICFIELD_QUESTSTEP_${nestedCollective.id}_ITEMS_${itemQuestStep.item_id}`,
+                                    label: 'É requisito:',
+                                    value: Number(itemQuestStep.is_requisite),
+                                    validation: booleanValidation.optional(),
+                                    isPersistedRecord: true,
+                                    extraProperties: {
+                                        defaultValue: Number(itemQuestStep.is_requisite)
+                                    },
+                                },
+                            }
+                        })
+                    ) : {})
                 }))
             } else if (collective?.isNestedQuestItemsField) {
                 const fieldsToIterate = _.omit(collective, ["isNestedQuestItemsField"])

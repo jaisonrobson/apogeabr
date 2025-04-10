@@ -77,6 +77,12 @@ const action = async ({ request }) => {
         (value, key) => key.includes("NESTEDDYNAMICFIELD_QUESTITEMS_")
     )
 
+    // Extrair campos dinâmicos dos itens dos passos da quest
+    const dynamicQuestStepItemsValues = _.pickBy(
+        allValues,
+        (value, key) => key.includes("NESTEDDYNAMICFIELD_QUESTSTEP_") && key.includes("_ITEMS_")
+    )
+
     // Agrupar valores temporários dos passos da quest
     const groupedTemporaryQuestStepsValues = groupData(
         temporaryQuestStepsValues,
@@ -131,6 +137,48 @@ const action = async ({ request }) => {
             const questItemId = key.match(/NESTEDDYNAMICFIELD_QUESTITEMS_(\d+)/)?.[1]
             return { ...result, questItemId }
         }
+    )
+
+    // Agrupar valores dinâmicos dos itens dos passos da quest
+    const groupedDynamicQuestStepItemsValues = groupDataByLevels(
+        dynamicQuestStepItemsValues,
+        ["NESTEDDYNAMICFIELD_QUESTSTEP_", "ITEMS_"],
+        [/(_NESTEDDYNAMICFIELD_QUESTSTEP_\d+)/, /(_ITEMS_\d+)/],
+        [
+            ({ key, currentObject }) => {
+                const questStepId = key.match(/NESTEDDYNAMICFIELD_QUESTSTEP_(\d+)/)?.[1]
+                return { ...currentObject, quest_step_id: questStepId }
+            },
+            ({ key, value, currentObject }) => {
+                const itemId = key.match(/ITEMS_(\d+)/)?.[1]
+                const fieldName = _.replace(key, /_NESTEDDYNAMICFIELD_QUESTSTEP_\d+_ITEMS_\d+/g, '')
+
+                return { ...currentObject, [fieldName]: value, item_id: itemId }
+            }
+        ]
+    )
+
+    // Extrair campos temporários dos itens dos passos da quest
+    const temporaryQuestStepItemsValues = _.pickBy(
+        allValues,
+        (value, key) => key.includes("TMPFY_QUESTSTEP_") && key.includes("_ITEMS_")
+    )
+
+    // Agrupar valores temporários dos itens dos passos da quest
+    const groupedTemporaryQuestStepItemsValues = groupDataByLevels(
+        temporaryQuestStepItemsValues,
+        ["TMPFY_QUESTSTEP_", "ITEMS_"],
+        [/(_TMPFY_QUESTSTEP_\d+)/, /(_ITEMS_\d+)/],
+        [
+            ({ key, currentObject }) => {
+                const questStepId = key.match(/TMPFY_QUESTSTEP_(\d+)/)?.[1]
+                return { ...currentObject, quest_step_id: questStepId }
+            },
+            ({ key, value, currentObject }) => {
+                const fieldName = _.replace(key, /_TMPFY_QUESTSTEP_\d+_ITEMS_\d+/g, '')
+                return { ...currentObject, [fieldName]: value }
+            }
+        ]
     )
 
     try {
@@ -353,6 +401,68 @@ const action = async ({ request }) => {
                 })
 
                 requests.push(questItemRequest)
+            })
+        }
+
+        // Processar itens dinâmicos dos passos da quest
+        if (!_.isEmpty(groupedDynamicQuestStepItemsValues)) {
+            // Iterar sobre cada quest step
+            _.forEach(groupedDynamicQuestStepItemsValues, async (questStepObject) => {
+                const questStepId = questStepObject.quest_step_id
+                const cleanQuestStepObject = _.omit(questStepObject, ["quest_step_id"])
+
+                // Iterar sobre cada item dentro do quest step
+                _.forEach(cleanQuestStepObject, async (itemObject, key) => {
+                    const questStepItemRequestPayload = {
+                        item_quest_step: {
+                            quest_step_id: questStepId,
+                            ...itemObject
+                        }
+                    }
+
+                    const questStepItemRequest = await axios.request({
+                        url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemObject.item_id}/quest_steps/${questStepId}`,
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        },
+                        data: questStepItemRequestPayload,
+                    })
+
+                    requests.push(questStepItemRequest)
+                })
+            })
+        }
+
+        // Processar itens temporários dos passos da quest
+        if (!_.isEmpty(groupedTemporaryQuestStepItemsValues)) {
+            // Iterar sobre cada quest step
+            _.forEach(groupedTemporaryQuestStepItemsValues, async (questStepObject) => {
+                const questStepId = questStepObject.quest_step_id
+                const cleanQuestStepObject = _.omit(questStepObject, ["quest_step_id"])
+
+                // Iterar sobre cada item dentro do quest step
+                _.forEach(cleanQuestStepObject, async (itemObject, key) => {
+                    const questStepItemRequestPayload = {
+                        item_quest_step: {
+                            quest_step_id: questStepId,
+                            ...itemObject
+                        }
+                    }
+
+                    const questStepItemRequest = await axios.request({
+                        url: `${process.env.REACT_APP_BACKEND_HOST}/items/${itemObject.item_id}/quest_steps`,
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        },
+                        data: questStepItemRequestPayload,
+                    })
+
+                    requests.push(questStepItemRequest)
+                })
             })
         }
 
