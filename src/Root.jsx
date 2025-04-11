@@ -37,13 +37,13 @@ import AdminPanelLibraryAndMapAbilities from './router/routes/adminpanel/library
 import AdminPanelLibraryAndMapMonsters from './router/routes/adminpanel/libraryandmap/monsters/Index'
 import AdminPanelLibraryAndMapItemCategories from './router/routes/adminpanel/libraryandmap/itemcategories/Index'
 import AdminPanelLibraryAndMapItems from './router/routes/adminpanel/libraryandmap/items/Index'
-
+import AdminPanelNews from './router/routes/adminpanel/news/Index'
 
 import {
     sessionLoader,
     charactersLoader,
     configurationLoader,
-    adminpanelLibraryLoader,
+    adminpanelLoader,
 } from 'router/loaders'
 
 import {
@@ -78,6 +78,8 @@ import {
     adminItemCategoryUpdateSubmit,
     adminItemCreateSubmit,
     adminItemUpdateSubmit,
+    adminNewsPostCreateSubmit,
+    adminNewsPostUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -229,10 +231,12 @@ const router = createBrowserRouter([
             },
             {
                 path: ROUTES.USER_ADMIN_PANEL.path,
+                id: "adminpanel",
+                loader: adminpanelLoader,
                 element: <AdminPanel />,
                 children: [
                     {
-                        index: true,
+                        index: true,                        
                         element: <AdminPanelOverview />,
                     },
                     {
@@ -240,9 +244,7 @@ const router = createBrowserRouter([
                         element: <AdminPanelOverview />,
                     },
                     {
-                        path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP.path,
-                        id: "adminpanel_library",
-                        loader: adminpanelLibraryLoader,
+                        path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP.path,                        
                         element: <AdminPanelLibraryAndMap />,
                         children: [
                             {
@@ -390,6 +392,18 @@ const router = createBrowserRouter([
                                 action: adminItemUpdateSubmit,
                             },
                         ],
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_NEWS.path,
+                        element: <AdminPanelNews />,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_NEWS_CREATE_SUBMIT.path,
+                        action: adminNewsPostCreateSubmit,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_NEWS_UPDATE_SUBMIT.path,
+                        action: adminNewsPostUpdateSubmit,
                     },
                 ],
             }

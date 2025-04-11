@@ -17,7 +17,7 @@ const NotFound = () => (
             backgroundPosition="center"
             contentAlignmentProps={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', height: '100%' }}
         >
-            <TitleH2>404 - Página não encontrada</TitleH2>
+            <TitleH2 className="text-white">404 - Página não encontrada</TitleH2>
 
             <TitleH4 marginTop="2rem">Verifique a URL e tente novamente</TitleH4>
         </SectionBackdrop>

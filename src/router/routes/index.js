@@ -65,6 +65,9 @@ const ROUTES = {
     USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMS: { path: "/user/admin_panel/libraryandmap/items/", nickname: "B & M - Itens"},
     USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMS_CREATE_SUBMIT: { path: "/user/admin_panel/libraryandmap/items/create/submit/", nickname: "B & M - Itens"},
     USER_ADMIN_PANEL_LIBRARYANDMAP_ITEMS_UPDATE_SUBMIT: { path: "/user/admin_panel/libraryandmap/items/update/submit/", nickname: "B & M - Itens"},
+    USER_ADMIN_PANEL_NEWS: { path: "/user/admin_panel/news/", nickname: "Notícias"},
+    USER_ADMIN_PANEL_NEWS_CREATE_SUBMIT: { path: "/user/admin_panel/news/create/submit/", nickname: "Notícias"},
+    USER_ADMIN_PANEL_NEWS_UPDATE_SUBMIT: { path: "/user/admin_panel/news/update/submit/", nickname: "Notícias"},
 }
 
 export default ROUTES

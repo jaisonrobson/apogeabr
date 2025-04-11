@@ -29,3 +29,5 @@ export { default as adminItemCategoryCreateSubmit } from './adminpanel/itemcateg
 export { default as adminItemCategoryUpdateSubmit } from './adminpanel/itemcategories/adminItemCategoryUpdateSubmit'
 export { default as adminItemCreateSubmit } from './adminpanel/items/adminItemCreateSubmit'
 export { default as adminItemUpdateSubmit } from './adminpanel/items/adminItemUpdateSubmit'
+export { default as adminNewsPostCreateSubmit } from './adminpanel/news/adminNewsPostCreateSubmit'
+export { default as adminNewsPostUpdateSubmit } from './adminpanel/news/adminNewsPostUpdateSubmit'

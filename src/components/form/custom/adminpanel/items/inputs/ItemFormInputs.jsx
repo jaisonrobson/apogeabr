@@ -41,7 +41,7 @@ const ItemFormInputs = ({
     light=false,
     ...props
 }) => {
-    const { locales } = useRouteLoaderData("adminpanel_library")
+    const { locales } = useRouteLoaderData("adminpanel")
     const { value: { getValues } } = useFormContext()
     const { setSnapshot } = useContext(FormDataContext)
     const [ temporaryItemQuestFieldsCounter, setTemporaryItemQuestFieldsCounter ] = useState(1)

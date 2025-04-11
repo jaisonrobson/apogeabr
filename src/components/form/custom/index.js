@@ -66,6 +66,10 @@ export { default as ItemCategoryFormInputs } from './adminpanel/itemcategories/i
 export { default as CreateItemFormModal } from './adminpanel/items/forms/Create'
 export { default as UpdateItemFormModal } from './adminpanel/items/forms/Update'
 export { default as ItemFormInputs } from './adminpanel/items/inputs/ItemFormInputs'
+//NEWS
+export { default as CreateNewsPostFormModal } from './adminpanel/news/forms/Create'
+export { default as UpdateNewsPostFormModal } from './adminpanel/news/forms/Update'
+export { default as NewsPostFormInputs } from './adminpanel/news/inputs/NewsPostFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'
