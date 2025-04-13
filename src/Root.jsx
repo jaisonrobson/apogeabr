@@ -44,6 +44,8 @@ import {
     charactersLoader,
     configurationLoader,
     adminpanelLoader,
+    newsLoader,
+    landingLoader,
 } from 'router/loaders'
 
 import {
@@ -97,10 +99,14 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
+                id: "landing",
+                loader: landingLoader,
                 element: <Landing />,
-            },            
+            },
             {
                 path: ROUTES.NEWS.path,
+                id: "news",
+                loader: newsLoader,
                 element: <News />,
             },
             {

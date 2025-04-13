@@ -134,11 +134,15 @@ const StyledDropdownToggle = styled(({
     flexGrow,
     justifyContent,
     alignItems,
+    margin,
+    padding,
     ...props
 }) => <DropdownToggle color={componentColor} {...props} />)`
     ${({ maxHeight }) => maxHeight ? `max-height: ${maxHeight};` : ''}
     ${({ height }) => height ? `height: ${height};` : ''}
     ${({ width }) => width ? `width: ${width};` : ''}
+    ${({ margin }) => margin ? `margin: ${margin};` : ''}
+    ${({ padding }) => padding ? `padding: ${padding};` : ''}
     ${({ color }) => color ? `color: ${color};` : ''}
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''}
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ''}

@@ -55,15 +55,7 @@ const StyledHorizontalScrollItem = styled(({ marginLeft, marginRight, itemSize, 
     ${({ marginRight }) => marginRight ? `margin-right: ${marginRight};` : ''}
 `
 
-const initialItems = [
-    {
-        genre: 'none',
-        title: 'none',
-        imageSrc: null,
-    }
-]
-
-const HorizontalScroll = ({ items = initialItems, children }) => {
+const HorizontalScroll = ({ items = [], children }) => {
     const ref = useRef(null)
     const leftIndicatorRef = useRef(null)
     const rightIndicatorRef = useRef(null)
@@ -126,7 +118,7 @@ const HorizontalScroll = ({ items = initialItems, children }) => {
             <StyledHorizontalScroll ref={ref}>
                 {items.map((item, index) => (
                     <StyledHorizontalScrollItem
-                        key={item.imageSrc}
+                        key={item.id}
                         marginLeft={index !== 0 ? '2rem' : '0'}
                     >
                         {children(item)}

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import _ from 'lodash'
+import { useRouteLoaderData } from 'react-router-dom'
 
 import StatementImage from 'images/layout/landing/statement.png'
 import PresentationImage from 'images/layout/landing/presentation.png'
@@ -20,6 +21,7 @@ import { ReducerContext } from 'contexts'
 import { randomSliceIntoNGivenValues } from 'util/array'
 
 const Content = () => {
+    const { news: newsPayload } = useRouteLoaderData("landing")
     const { movies } = useContext(ReducerContext)
 
     const [
@@ -44,7 +46,7 @@ const Content = () => {
                 </Col>
             </Row>
 
-            <NewsCardsDisplay payload={cardsPayload} />
+            <NewsCardsDisplay payload={newsPayload} />
             
             <SectionBackdrop
                 gradientBackground="linear-gradient(to bottom, #000000, #00000099 10%, #00000099 90%, #000000);"

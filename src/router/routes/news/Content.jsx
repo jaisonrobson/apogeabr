@@ -1,5 +1,8 @@
 import React, { useContext } from 'react'
 import _ from 'lodash'
+import { useRouteLoaderData } from 'react-router-dom'
+
+import ROUTES from 'router/routes'
 
 import NewsContentImage from 'images/layout/news/news_content.png'
 import NewsTopImage from 'images/layout/news/news_top.png'
@@ -16,34 +19,22 @@ import {
     NewsCardsDisplay,
     Nav,
     DrawerNavItem,
+    ElasticSearchDropdown,
 } from 'components'
-
-import { ReducerContext } from 'contexts'
-
-import { randomSliceIntoNGivenValues } from 'util/array'
-
-import { LoremIpsumParagraphs } from 'data/LoremIpsum'
 
 const NewsNavLink = (props) => (
     <NavLink {...props} color="#6c6456" textShadow="1px 1px #a99e89" hoverColor="white" hoverTextShadow="1px 1px 3px #000000" fontFamily="Celtic Garamond the 2nd" />
 )
 
 const Content = () => {
-    const { movies } = useContext(ReducerContext)
+    const { news: newsPayload, specificNews: specificNewsPayload } = useRouteLoaderData("news")
+    const shownNews = specificNewsPayload || _.first(newsPayload)
 
-    const [
-        carouselPayload,
-        cardsPayload,
-        postersPayload,
-    ] = randomSliceIntoNGivenValues(
-        movies,
-        [
-            3,
-            _.floor((movies.length - 4) / 2),
-            _.ceil((movies.length - 4) / 2),
-            1,
-        ],
-    )
+    const onSelectSearchedNews = (selectedId) => {
+        window.location.assign(
+            `${ROUTES.NEWS.path.slice(0, -1)}?id=${selectedId}`
+        )
+    }
 
     return (
         <Container fluid>
@@ -57,7 +48,7 @@ const Content = () => {
                     paddingTop: "8rem",
                 }}
             >
-                <NewsCardsDisplay payload={cardsPayload} />
+                <NewsCardsDisplay payload={newsPayload} />
             </SectionBackdrop>
 
             <SectionBackdrop
@@ -70,9 +61,13 @@ const Content = () => {
                 <Row>
                     <Col>
                         <PaperParchmentBoard style={{ fontSize: '18px', fontWeight: '100' }}>
-                            <TitleH2 className="text-black" textAlign="center" paddingBottom="1rem" fontFamily="Papyrus">Notícia</TitleH2>
+                            <TitleH2 className="text-black" textAlign="center" paddingBottom="1rem" fontFamily="Papyrus">{shownNews?.news_post_translation?.title || "Notícia não localizada"}</TitleH2>
 
-                            <LoremIpsumParagraphs />
+                            <Row>
+                                <Col>
+                                    {shownNews?.news_post_translation?.content || "Não foi possível carregar o conteúdo da notícia."}
+                                </Col>
+                            </Row>
                         </PaperParchmentBoard>
                     </Col>
 
@@ -82,85 +77,33 @@ const Content = () => {
                                 display="flex"
                                 flexDirection="column"
                                 className="justify-content-center"
-                                textAlign="center"                                
+                                textAlign="center"
                                 fontSize='18px'
                                 fontWeight='1000'
                             >
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 1
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 2
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 3
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 4
-                                    </NewsNavLink>
+                                <DrawerNavItem>                                    
+                                    <ElasticSearchDropdown
+                                        searchEndpoint={`${process.env.REACT_APP_BACKEND_HOST}/news_posts/search`}
+                                        searchPayloadIdPath={["id"]}
+                                        searchPayloadNamePath={["news_post_translation", "title"]}
+                                        searchPayloadImagePath ={["image"]}
+                                        fieldNamingLenght={15}
+                                        onChange={onSelectSearchedNews}
+                                        togglerProperties={{
+                                            padding: "0px 15px",
+                                        }}
+                                    />
                                 </DrawerNavItem>
 
                                 <hr style={{ width: '100%', borderWidth: '3px' }}/>
 
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 1
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 2
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 3
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 4
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <hr style={{ width: '100%', borderWidth: '3px' }}/>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 1
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 2
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 3
-                                    </NewsNavLink>
-                                </DrawerNavItem>
-
-                                <DrawerNavItem>
-                                    <NewsNavLink>
-                                        Noticia 4
-                                    </NewsNavLink>
-                                </DrawerNavItem>                                    
+                                {newsPayload.map((news) => (
+                                    <DrawerNavItem key={news.id}>
+                                        <NewsNavLink to={`${ROUTES.NEWS.path.slice(0, -1)}?id=${news.id}`}>
+                                            {news.news_post_translation?.title}
+                                        </NewsNavLink>
+                                    </DrawerNavItem>
+                                ))}
                             </Nav>
                         </WoodParchmentBoard>
                     </Col>

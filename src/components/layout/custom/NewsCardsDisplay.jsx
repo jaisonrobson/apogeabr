@@ -1,21 +1,34 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Container, Row, Col, TitleH2, CardsDisplay } from 'components'
 
-const NewsCardsDisplay = ({ payload }) => (
-    <Container fluid>
-        <Row>
-            <Col>
-                <TitleH2 justifyContent="flex-start" light>Ultimos posts</TitleH2>
-            </Col>
-        </Row>
+import { I18nContext } from 'contexts'
 
-        <Row>
-            <Col>
-                <CardsDisplay payload={payload} />
-            </Col>
-        </Row>
-    </Container>
-)
+const NewsCardsDisplay = ({ payload }) => {
+    const { formatDateTime } = useContext(I18nContext)
+
+    const formattedPayload = payload?.map(news => ({
+        id: news.id,
+        image: news.image,
+        caption: `${formatDateTime(news.created_at)} - ${news.created_by_name}`,
+        title: news.news_post_translation?.title || ''
+    })) || []
+
+    return (
+        <Container fluid>
+            <Row>
+                <Col>
+                    <TitleH2 justifyContent="flex-start" light>Ultimos posts</TitleH2>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col>
+                    <CardsDisplay payload={formattedPayload} />
+                </Col>
+            </Row>
+        </Container>
+    )
+}
 
 export default NewsCardsDisplay
