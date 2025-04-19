@@ -21,7 +21,7 @@ import { ReducerContext } from 'contexts'
 import { randomSliceIntoNGivenValues } from 'util/array'
 
 const Content = () => {
-    const { news: newsPayload } = useRouteLoaderData("landing")
+    const { news: newsPayload, presentations: presentationsPayload } = useRouteLoaderData("landing")
     const { movies } = useContext(ReducerContext)
 
     const [
@@ -47,26 +47,30 @@ const Content = () => {
             </Row>
 
             <NewsCardsDisplay payload={newsPayload} />
-            
-            <SectionBackdrop
-                gradientBackground="linear-gradient(to bottom, #000000, #00000099 10%, #00000099 90%, #000000);"
-                backgroundImage={`url(${PresentationImage})`}
-                backgroundSize="cover"
-                backgroundRepeat="repeat"
-                backgroundPosition="center"
-            >
-                <Row>
-                    <Col>
-                        <TitleH2 light>Apresentação</TitleH2>                        
-                    </Col>
-                </Row>
+            {
+                presentationsPayload.map((presentation) => (
+                    <SectionBackdrop
+                        key={presentation.id}
+                        gradientBackground="linear-gradient(to bottom, #000000, #00000099 10%, #00000099 90%, #000000);"
+                        backgroundImage={`url(${PresentationImage})`}
+                        backgroundSize="cover"
+                        backgroundRepeat="repeat"
+                        backgroundPosition="center"
+                    >
+                        <Row>
+                            <Col>
+                                <TitleH2 light>{presentation.presentation_translation.title}</TitleH2>
+                            </Col>
+                        </Row>
 
-                <Row>
-                    <Col>
-                        <GoldBoard contentClassName="text-gray-300" />                        
-                    </Col>
-                </Row>
-            </SectionBackdrop>
+                        <Row>
+                            <Col>
+                                <GoldBoard contentClassName="text-gray-300" children={presentation.presentation_translation.content} />
+                            </Col>
+                        </Row>
+                    </SectionBackdrop>
+                ))
+            }
 
             <SectionBackdrop
                 gradientBackground="linear-gradient(to bottom, #000000, #00000099 10%, #00000099 90%, #000000);"
