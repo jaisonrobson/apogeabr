@@ -68,6 +68,9 @@ const ROUTES = {
     USER_ADMIN_PANEL_NEWS: { path: "/user/admin_panel/news/", nickname: "Notícias"},
     USER_ADMIN_PANEL_NEWS_CREATE_SUBMIT: { path: "/user/admin_panel/news/create/submit/", nickname: "Notícias"},
     USER_ADMIN_PANEL_NEWS_UPDATE_SUBMIT: { path: "/user/admin_panel/news/update/submit/", nickname: "Notícias"},
+    USER_ADMIN_PANEL_PRESENTATIONS: { path: "/user/admin_panel/presentations/", nickname: "Apresentações"},
+    USER_ADMIN_PANEL_PRESENTATIONS_CREATE_SUBMIT: { path: "/user/admin_panel/presentations/create/submit/", nickname: "Apresentações"},
+    USER_ADMIN_PANEL_PRESENTATIONS_UPDATE_SUBMIT: { path: "/user/admin_panel/presentations/update/submit/", nickname: "Apresentações"},
 }
 
 export default ROUTES

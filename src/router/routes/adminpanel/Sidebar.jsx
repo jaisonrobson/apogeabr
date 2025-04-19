@@ -1,5 +1,5 @@
 import React from 'react'
-import { faCrown, faHouse, faAddressCard, faBook, faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faCrown, faHouse, faAddressCard, faBook, faNewspaper, faFlag } from '@fortawesome/free-solid-svg-icons'
 
 import ROUTES from 'router/routes'
 
@@ -160,6 +160,35 @@ const Sidebar = () => (
                             />
 
                             Notícias
+                        </NavLink>
+                    </NavItem>
+
+                    <NavItem width="100%" margin="7px 0px" zIndex="1">
+                        <NavLink
+                            to={ROUTES.USER_ADMIN_PANEL_PRESENTATIONS.path}
+                            display="flex"
+                            justifyContent="space-evenly"
+                            alignItems="center"
+                            opacity="1"
+                            color="white"
+                            hoverColor="gray"
+                            textShadow="1px 1px 8px white"
+                            hoverTextShadow="2px 2px 8px white"
+                            activeColor="gray"
+                            activeBackgroundColor="rgba(255,255,255,.7)"
+                            activeBorderRadius="10px"
+                            onHover={{ opacity: .5 }}
+                            className="unselectable"
+                            fontFamily="Retro Computer"
+                            fontSize="12px"
+                        >
+                            <Icon
+                                icon={faFlag}
+                                color="inherit"
+                                size="2x"
+                            />
+
+                            Apresentações
                         </NavLink>
                     </NavItem>
                 </Nav>

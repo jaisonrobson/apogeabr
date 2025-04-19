@@ -31,3 +31,5 @@ export { default as adminItemCreateSubmit } from './adminpanel/items/adminItemCr
 export { default as adminItemUpdateSubmit } from './adminpanel/items/adminItemUpdateSubmit'
 export { default as adminNewsPostCreateSubmit } from './adminpanel/news/adminNewsPostCreateSubmit'
 export { default as adminNewsPostUpdateSubmit } from './adminpanel/news/adminNewsPostUpdateSubmit'
+export { default as adminPresentationCreateSubmit } from './adminpanel/presentations/adminPresentationCreateSubmit'
+export { default as adminPresentationUpdateSubmit } from './adminpanel/presentations/adminPresentationUpdateSubmit'

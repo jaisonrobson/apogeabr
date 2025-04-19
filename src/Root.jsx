@@ -38,6 +38,7 @@ import AdminPanelLibraryAndMapMonsters from './router/routes/adminpanel/librarya
 import AdminPanelLibraryAndMapItemCategories from './router/routes/adminpanel/libraryandmap/itemcategories/Index'
 import AdminPanelLibraryAndMapItems from './router/routes/adminpanel/libraryandmap/items/Index'
 import AdminPanelNews from './router/routes/adminpanel/news/Index'
+import AdminPanelPresentations from './router/routes/adminpanel/presentations/Index'
 
 import {
     sessionLoader,
@@ -82,6 +83,8 @@ import {
     adminItemUpdateSubmit,
     adminNewsPostCreateSubmit,
     adminNewsPostUpdateSubmit,
+    adminPresentationCreateSubmit,
+    adminPresentationUpdateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -248,7 +251,7 @@ const router = createBrowserRouter([
                     {
                         path: ROUTES.USER_ADMIN_PANEL_OVERVIEW.path,
                         element: <AdminPanelOverview />,
-                    },
+                    },                    
                     {
                         path: ROUTES.USER_ADMIN_PANEL_LIBRARYANDMAP.path,                        
                         element: <AdminPanelLibraryAndMap />,
@@ -410,6 +413,18 @@ const router = createBrowserRouter([
                     {
                         path: ROUTES.USER_ADMIN_PANEL_NEWS_UPDATE_SUBMIT.path,
                         action: adminNewsPostUpdateSubmit,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_PRESENTATIONS.path,
+                        element: <AdminPanelPresentations />,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_PRESENTATIONS_CREATE_SUBMIT.path,
+                        action: adminPresentationCreateSubmit,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_PRESENTATIONS_UPDATE_SUBMIT.path,
+                        action: adminPresentationUpdateSubmit,
                     },
                 ],
             }
