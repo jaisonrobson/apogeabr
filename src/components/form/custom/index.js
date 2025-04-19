@@ -74,6 +74,10 @@ export { default as NewsPostFormInputs } from './adminpanel/news/inputs/NewsPost
 export { default as CreatePresentationFormModal } from './adminpanel/presentations/forms/Create'
 export { default as UpdatePresentationFormModal } from './adminpanel/presentations/forms/Update'
 export { default as PresentationFormInputs } from './adminpanel/presentations/inputs/PresentationFormInputs'
+//COMMUNIQUES
+export { default as CreateCommuniqueFormModal } from './adminpanel/communiques/forms/Create'
+export { default as UpdateCommuniqueFormModal } from './adminpanel/communiques/forms/Update'
+export { default as CommuniqueFormInputs } from './adminpanel/communiques/inputs/CommuniqueFormInputs'
 //  CRUD RECORD MODALS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'

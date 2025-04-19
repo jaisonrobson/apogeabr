@@ -21,7 +21,7 @@ import { ReducerContext } from 'contexts'
 import { randomSliceIntoNGivenValues } from 'util/array'
 
 const Content = () => {
-    const { news: newsPayload, presentations: presentationsPayload } = useRouteLoaderData("landing")
+    const { news: newsPayload, presentations: presentationsPayload, communiques: communiquesPayload } = useRouteLoaderData("landing")
     const { movies } = useContext(ReducerContext)
 
     const [
@@ -72,25 +72,30 @@ const Content = () => {
                 ))
             }
 
-            <SectionBackdrop
-                gradientBackground="linear-gradient(to bottom, #000000, #00000099 10%, #00000099 90%, #000000);"
-                backgroundImage={`url(${StatementImage})`}
-                backgroundSize="cover"
-                backgroundRepeat="repeat"
-                backgroundPosition="center"
-            >
-                <Row>
-                    <Col>
-                        <TitleH2 light>Comunicado</TitleH2>
-                    </Col>
-                </Row>
-                
-                <Row>
-                    <Col>
-                        <GoldBoard contentClassName="text-gray-300" />
-                    </Col>
-                </Row>
-            </SectionBackdrop>
+            {
+                communiquesPayload.map((communique) => (
+                    <SectionBackdrop
+                        key={communique.id}
+                        gradientBackground="linear-gradient(to bottom, #000000, #00000099 10%, #00000099 90%, #000000);"
+                        backgroundImage={`url(${StatementImage})`}
+                        backgroundSize="cover"
+                        backgroundRepeat="repeat"
+                        backgroundPosition="center"
+                    >
+                        <Row>
+                            <Col>
+                                <TitleH2 light>{communique.communique_translation.title}</TitleH2>
+                            </Col>
+                        </Row>
+                        
+                        <Row>
+                            <Col>
+                                <GoldBoard contentClassName="text-gray-300" children={communique.communique_translation.content} />
+                            </Col>
+                        </Row>
+                    </SectionBackdrop>
+                ))
+            }
         </Container>
     )
 }

@@ -71,6 +71,9 @@ const ROUTES = {
     USER_ADMIN_PANEL_PRESENTATIONS: { path: "/user/admin_panel/presentations/", nickname: "Apresentações"},
     USER_ADMIN_PANEL_PRESENTATIONS_CREATE_SUBMIT: { path: "/user/admin_panel/presentations/create/submit/", nickname: "Apresentações"},
     USER_ADMIN_PANEL_PRESENTATIONS_UPDATE_SUBMIT: { path: "/user/admin_panel/presentations/update/submit/", nickname: "Apresentações"},
+    USER_ADMIN_PANEL_COMMUNIQUES: { path: "/user/admin_panel/communiques/", nickname: "Comunicados"},
+    USER_ADMIN_PANEL_COMMUNIQUES_CREATE_SUBMIT: { path: "/user/admin_panel/communiques/create/submit/", nickname: "Comunicados"},
+    USER_ADMIN_PANEL_COMMUNIQUES_UPDATE_SUBMIT: { path: "/user/admin_panel/communiques/update/submit/", nickname: "Comunicados"},
 }
 
 export default ROUTES

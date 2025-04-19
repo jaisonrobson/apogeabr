@@ -33,3 +33,5 @@ export { default as adminNewsPostCreateSubmit } from './adminpanel/news/adminNew
 export { default as adminNewsPostUpdateSubmit } from './adminpanel/news/adminNewsPostUpdateSubmit'
 export { default as adminPresentationCreateSubmit } from './adminpanel/presentations/adminPresentationCreateSubmit'
 export { default as adminPresentationUpdateSubmit } from './adminpanel/presentations/adminPresentationUpdateSubmit'
+export { default as adminCommuniqueCreateSubmit } from './adminpanel/communiques/adminCommuniqueCreateSubmit'
+export { default as adminCommuniqueUpdateSubmit } from './adminpanel/communiques/adminCommuniqueUpdateSubmit'

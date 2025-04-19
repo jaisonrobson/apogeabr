@@ -14,7 +14,7 @@ const loadData = async ({ request }) => {
     }
 
     try {
-        const [newsResponse, presentationsResponse] = await Promise.all([
+        const [newsResponse, presentationsResponse, communiquesResponse] = await Promise.all([
             axios.get(`${process.env.REACT_APP_BACKEND_HOST}/news_posts`, {
                 headers,
                 params: {
@@ -28,6 +28,13 @@ const loadData = async ({ request }) => {
                     page: 1,
                     per_page: 10
                 }
+            }),
+            axios.get(`${process.env.REACT_APP_BACKEND_HOST}/communiques`, {
+                headers,
+                params: {
+                    page: 1,
+                    per_page: 10
+                }
             })
         ])
 
@@ -36,6 +43,8 @@ const loadData = async ({ request }) => {
             newsPagination: newsResponse.data.pagination,
             presentations: presentationsResponse.data.payload,
             presentationsPagination: presentationsResponse.data.pagination,
+            communiques: communiquesResponse.data.payload,
+            communiquesPagination: communiquesResponse.data.pagination,
             isAuthenticated: !!token
         }
     } catch (error) {
