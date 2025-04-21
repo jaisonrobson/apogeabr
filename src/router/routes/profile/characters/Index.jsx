@@ -46,8 +46,8 @@ const Characters = () => {
                                 omission: '...'
                               }),
                             classtype: character.classtype,
-                            isVerified: character.unique_validation_code.is_verified,
                         }}
+                        codeInfo={character.unique_validation_code}
                     />
                 ))
             }

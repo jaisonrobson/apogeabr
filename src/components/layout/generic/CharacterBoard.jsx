@@ -42,6 +42,7 @@ import {
     HoverableButton,
     Modal,
     Button,
+    Input,
 } from 'components'
 
 const getIconByClasstype = (classtype) => {
@@ -188,7 +189,10 @@ const CharacterBoard = ({
         capacity: 0,
         classNickname: 'Squire',
         classtype: 0,
-        isVerified: false,
+    },
+    codeInfo = {
+        code: "none",
+        is_verified: false,
     },
 }) => {
     const { isOpen, setIsOpen } = useContext(FlagContext)
@@ -226,11 +230,21 @@ const CharacterBoard = ({
                         }
                     }}
                     opacity="1"
-                    isVerified={characterInfo.isVerified}
+                    isVerified={codeInfo.is_verified}
                 />
 
                 <Collapse.Content width="100%">
                     <CharacterOptions characterId={characterInfo.id} />
+
+                    <Row>
+                        <Col>
+                            <Input
+                                value={codeInfo.code}
+                                readOnly
+                                textAlign="center"
+                            />
+                        </Col>
+                    </Row>
 
                     <Row padding="10px 0px" transition="0.5s">
                         <StoneTabletFourBoard padding="0px 24px" minWidth="250px" transition="0.5s">
@@ -239,7 +253,7 @@ const CharacterBoard = ({
                                 fontFamily="Retro Computer"
                             >
                                 <Col display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-                                    <Span>{characterInfo.name}</Span>
+                                    <Span textAlign="center">{characterInfo.name}</Span>
                                 </Col>
                             </Row>
 

@@ -40,6 +40,7 @@ import AdminPanelLibraryAndMapItems from './router/routes/adminpanel/libraryandm
 import AdminPanelNews from './router/routes/adminpanel/news/Index'
 import AdminPanelPresentations from './router/routes/adminpanel/presentations/Index'
 import AdminPanelCommuniques from './router/routes/adminpanel/communiques/Index'
+import AdminPanelCharacters from './router/routes/adminpanel/characters/Index'
 
 import {
     sessionLoader,
@@ -88,6 +89,7 @@ import {
     adminPresentationUpdateSubmit,
     adminCommuniqueCreateSubmit,
     adminCommuniqueUpdateSubmit,
+    adminCharacterValidateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -440,6 +442,14 @@ const router = createBrowserRouter([
                     {
                         path: ROUTES.USER_ADMIN_PANEL_COMMUNIQUES_UPDATE_SUBMIT.path,
                         action: adminCommuniqueUpdateSubmit,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_CHARACTERS.path,
+                        element: <AdminPanelCharacters />,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_CHARACTERS_VALIDATE_SUBMIT.path,
+                        action: adminCharacterValidateSubmit,
                     },
                 ],
             }

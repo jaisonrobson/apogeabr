@@ -25,6 +25,7 @@ const StyledInput = styled(({
     fontFamily,
     display,
     cursor,
+    textAlign,
     flexGrow,
     innerRef,
     onHover = false,
@@ -56,6 +57,7 @@ const StyledInput = styled(({
     ${({ display }) => display ? `display: ${display};` : ``}
     ${({ flexGrow }) => flexGrow ? `flex-grow: ${flexGrow};` : ``}
     ${({ cursor }) => cursor ? `cursor: ${cursor};` : ``}
+    ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
 
     ${({ onHover }) => onHover ? `&:hover {
         ${onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``}

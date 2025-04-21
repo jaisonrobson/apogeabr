@@ -28,6 +28,7 @@ const FormattedInput = ({
     defaultImage = undefined,
     imageProps = {},
     light=false,
+    labelProps = {},
     inputContainerProps = {},
     reloadInformation = false,
     doFormLateLoadInformations,
@@ -160,7 +161,7 @@ const FormattedInput = ({
                     label !== undefined
                         ? (
                             <Col textAlign="center">
-                                <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"}>
+                                <Span textShadow={light ? "0px 0px 5px black" : "0px 0px 5px white"} {...labelProps}>
                                     {label}
                                 </Span>
                             </Col>

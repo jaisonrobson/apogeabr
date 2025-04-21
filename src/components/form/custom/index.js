@@ -46,23 +46,23 @@ export { default as NatureFormInputs } from './adminpanel/natures/inputs/NatureF
 export { default as CreateNpcFormModal } from './adminpanel/npcs/forms/Create'
 export { default as UpdateNpcFormModal } from './adminpanel/npcs/forms/Update'
 export { default as NpcFormInputs } from './adminpanel/npcs/inputs/NpcFormInputs'
-//Quest
+//QUESTS
 export { default as CreateQuestFormModal } from './adminpanel/quests/forms/Create'
 export { default as UpdateQuestFormModal } from './adminpanel/quests/forms/Update'
 export { default as QuestFormInputs } from './adminpanel/quests/inputs/QuestFormInputs'
-//Ability
+//ABILITIES
 export { default as CreateAbilityFormModal } from './adminpanel/abilities/forms/Create'
 export { default as UpdateAbilityFormModal } from './adminpanel/abilities/forms/Update'
 export { default as AbilityFormInputs } from './adminpanel/abilities/inputs/AbilityFormInputs'
-//Monster
+//MONSTERS
 export { default as CreateMonsterFormModal } from './adminpanel/monsters/forms/Create'
 export { default as UpdateMonsterFormModal } from './adminpanel/monsters/forms/Update'
 export { default as MonsterFormInputs } from './adminpanel/monsters/inputs/MonsterFormInputs'
-//Monster
+//ITEM CATEGORIES
 export { default as CreateItemCategoryFormModal } from './adminpanel/itemcategories/forms/Create'
 export { default as UpdateItemCategoryFormModal } from './adminpanel/itemcategories/forms/Update'
 export { default as ItemCategoryFormInputs } from './adminpanel/itemcategories/inputs/ItemCategoryFormInputs'
-//Items
+//ITEMS
 export { default as CreateItemFormModal } from './adminpanel/items/forms/Create'
 export { default as UpdateItemFormModal } from './adminpanel/items/forms/Update'
 export { default as ItemFormInputs } from './adminpanel/items/inputs/ItemFormInputs'
@@ -79,6 +79,14 @@ export { default as CreateCommuniqueFormModal } from './adminpanel/communiques/f
 export { default as UpdateCommuniqueFormModal } from './adminpanel/communiques/forms/Update'
 export { default as CommuniqueFormInputs } from './adminpanel/communiques/inputs/CommuniqueFormInputs'
 //  CRUD RECORD MODALS <<<<----------
+
+//  ADMIN PANEL SIMPLE CRUD FORMS ---------->>>>
+
+//CHARACTERS
+export { default as CharacterValidationForm } from './adminpanel/characters/forms/Validate'
+export { default as CharacterValidationInputs } from './adminpanel/characters/inputs/CharacterValidationInputs'
+
+//  ADMIN PANEL SIMPLE CRUD FORMS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'
 export { default as ImageInput } from './ImageInput'

@@ -5,4 +5,4 @@ export const CLASSES_NICKNAMES = [
     {id: 3, name: "Mago"}
 ]
 
-export const getClassNicknameByNumber = (number) => CLASSES_NICKNAMES[number]
+export const getClassNicknameByNumber = (number) => CLASSES_NICKNAMES[number].name
