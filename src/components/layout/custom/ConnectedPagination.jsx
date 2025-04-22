@@ -21,6 +21,7 @@ const PerPageDropdown = ({
         {id: 35, name: 35},
         {id: 50, name: 50}
     ],
+    onRefresh = () => {},
     ...props
 }) => {
     const {
@@ -59,6 +60,7 @@ const PerPageDropdown = ({
                 setPage(response.data.pagination.current_page)
                 setTotalPages(response.data.pagination.total_pages)
                 setPayload(response.data.payload)
+                onRefresh(response.data.payload)
             }
         } catch (error) {
             console.error("Erro:", error)
@@ -96,6 +98,7 @@ const ConnectedPagination = ({
     themeItemProps={light: false},
     themeLinkProps={light: false},
     maxNavigationalPagesPerDirection = 3,
+    onRefresh = () => {},
     ...props
 }) => {
     const {
@@ -134,6 +137,7 @@ const ConnectedPagination = ({
                     setPage(response.data.pagination.current_page)
                     setTotalPages(response.data.pagination.total_pages)
                     setPayload(response.data.payload)
+                    onRefresh(response.data.payload)
                 }
             } catch (error) {
                 console.error("Erro:", error)
@@ -167,6 +171,7 @@ const ConnectedPagination = ({
                 setPage(response.data.pagination.current_page)
                 setTotalPages(response.data.pagination.total_pages)
                 setPayload(response.data.payload)
+                onRefresh(response.data.payload)
             }
         } catch (error) {
             console.error("Erro:", error)

@@ -16,10 +16,10 @@ import {
     Container,
     Image,
     SearchableConnectedPaginatedTable,
-    Input,
     Icon,
     CharacterValidationForm,
     CharacterValidationInputs,
+    CopyableDisabledInput,
 } from 'components'
 
 const Index = () => {
@@ -91,11 +91,9 @@ const Index = () => {
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>
-                                                                    <Input
-                                                                        value={character.name || '-'}
-                                                                        readOnly
-                                                                        textAlign="center"
-                                                                    />                                                                    
+                                                                    <CopyableDisabledInput
+                                                                        value={character.name}
+                                                                    />
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>

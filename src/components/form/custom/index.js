@@ -85,7 +85,6 @@ export { default as CommuniqueFormInputs } from './adminpanel/communiques/inputs
 //CHARACTERS
 export { default as CharacterValidationForm } from './adminpanel/characters/forms/Validate'
 export { default as CharacterValidationInputs } from './adminpanel/characters/inputs/CharacterValidationInputs'
-
 //  ADMIN PANEL SIMPLE CRUD FORMS <<<<----------
 
 export { default as FormattedInput } from './FormattedInput'
@@ -99,3 +98,5 @@ export { default as ElasticSearchDropdownInput } from './ElasticSearchDropdownIn
 export { default as ElasticSearchDropdown } from './ElasticSearchDropdown'
 export { default as RenderCollectiveInputs } from './RenderCollectiveInputs'
 export { default as AddDynamicRecordButton } from './AddDynamicRecordButton'
+export { default as CopyableDisabledInput } from './CopyableDisabledInput'
+export { default as SearchableFormConnectedPaginatedTable } from './SearchableFormConnectedPaginatedTable'

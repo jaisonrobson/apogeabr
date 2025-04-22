@@ -41,6 +41,7 @@ import AdminPanelNews from './router/routes/adminpanel/news/Index'
 import AdminPanelPresentations from './router/routes/adminpanel/presentations/Index'
 import AdminPanelCommuniques from './router/routes/adminpanel/communiques/Index'
 import AdminPanelCharacters from './router/routes/adminpanel/characters/Index'
+import AdminPanelVideos from './router/routes/adminpanel/videos/Index'
 
 import {
     sessionLoader,
@@ -90,6 +91,7 @@ import {
     adminCommuniqueCreateSubmit,
     adminCommuniqueUpdateSubmit,
     adminCharacterValidateSubmit,
+    adminVideoValidateSubmit,
 } from "router/actions"
 
 import ROUTES from 'router/routes'
@@ -450,6 +452,14 @@ const router = createBrowserRouter([
                     {
                         path: ROUTES.USER_ADMIN_PANEL_CHARACTERS_VALIDATE_SUBMIT.path,
                         action: adminCharacterValidateSubmit,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_VIDEOS.path,
+                        element: <AdminPanelVideos />,
+                    },
+                    {
+                        path: ROUTES.USER_ADMIN_PANEL_VIDEOS_VALIDATE_SUBMIT.path,
+                        action: adminVideoValidateSubmit,
                     },
                 ],
             }

@@ -36,3 +36,4 @@ export { default as adminPresentationUpdateSubmit } from './adminpanel/presentat
 export { default as adminCommuniqueCreateSubmit } from './adminpanel/communiques/adminCommuniqueCreateSubmit'
 export { default as adminCommuniqueUpdateSubmit } from './adminpanel/communiques/adminCommuniqueUpdateSubmit'
 export { default as adminCharacterValidateSubmit } from './adminpanel/characters/adminCharacterValidateSubmit'
+export { default as adminVideoValidateSubmit } from './adminpanel/videos/adminVideoValidateSubmit'
