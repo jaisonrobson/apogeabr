@@ -17,6 +17,7 @@ import {
     Row,
     SectionBackdrop,
     TitleH2,
+    Div,
  } from 'components'
 
 const Content = () => {
@@ -74,69 +75,84 @@ const Content = () => {
 
                     <Col
                         maxWidth='425px'
-                        backgroundImage={`url(${StoneWallImage})`}
-                        backgroundRepeat='no-repeat'
-                        backgroundSize='contain'
-                        padding='1rem'
-                        paddingLeft='1.5rem'
-                        paddingRight='1.5rem'
-                        marginTop='2rem'
+                        padding='0px'
+                        margin="0px"                        
                     >
-                        <Container
-                            fluid
-                            backgroundImage="linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.4) 90%, rgba(0,0,0,0) 99%)"
-                            marginTop="10px"
-                            padding="2rem"
+                        <Div
+                            backgroundImage={`url(${StoneWallImage})`}
+                            backgroundRepeat='no-repeat'
+                            backgroundSize='contain'
+                            padding='1rem'
+                            paddingLeft='1.5rem'
+                            paddingRight='1.5rem'
+                            marginTop='2rem'
+                            height='850px'
                         >
-                            <Row>
-                                <AdornedStoneWallBoard>
-                                    <h5 className='text-white unselectable' style={{ marginTop: '-25px', textShadow: '0px 0px 10px #000, 0px 0px 10px #000, 0px 0px 10px #000, 0px 0px 10px #000'  }}>Prestigiados</h5>
-                                    
-                                    <OrderedList className="text-gray-300 unselectable" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '500px' }}>
-                                        <OrderedList.Item style={{ marginTop: '30px', textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                            <Container
+                                fluid
+                                backgroundImage="linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.4) 90%, rgba(0,0,0,0) 99%)"
+                                marginTop="10px"
+                                padding="2rem"
+                            >
+                                <Row>
+                                    <AdornedStoneWallBoard>
+                                        <h5
+                                            className='text-white unselectable'
+                                            style={{
+                                                marginTop: '-35px',
+                                                textShadow: '0px 0px 10px #000, 0px 0px 10px #000, 0px 0px 10px #000, 0px 0px 10px #000',
+                                                textAlign: 'center',
+                                                lineHeight: '1.5'
+                                            }}
+                                        >
+                                            Prestigiados
+                                        </h5>
+                                        <OrderedList className="text-gray-300 unselectable" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '500px' }}>
+                                            <OrderedList.Item style={{ marginTop: '30px', textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
 
-                                        <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
-                                            Teste
-                                        </OrderedList.Item>
-                                    </OrderedList>
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+                                        </OrderedList>
 
-                                </AdornedStoneWallBoard>
-                            </Row>
-                        </Container>
+                                    </AdornedStoneWallBoard>
+                                </Row>
+                            </Container>
+                        </Div>
 
                         <Container
                             fluid
@@ -145,7 +161,7 @@ const Content = () => {
                             flexDirection='column'
                             justifyContent='space-around'
                             alignItems='center'
-                            height='500px'
+                            height='400px'
                         >
                             <Row>
                                 <h5
@@ -167,6 +183,82 @@ const Content = () => {
                                 </div>
                             </Row>
                         </Container>
+
+                        <Div
+                            backgroundImage={`url(${StoneWallImage})`}
+                            backgroundRepeat='no-repeat'
+                            backgroundSize='contain'
+                            padding='1rem'
+                            paddingLeft='1.5rem'
+                            paddingRight='1.5rem'
+                            height='850px'
+                        >
+                            <Container
+                                fluid
+                                backgroundImage="linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.4) 90%, rgba(0,0,0,0) 99%)"
+                                marginTop="10px"
+                                padding="2rem"
+                            >
+                                <Row>
+                                    <AdornedStoneWallBoard marginTop="-15px">
+                                        <h5
+                                            className='text-white unselectable'
+                                            style={{
+                                                marginTop: '-35px',
+                                                textShadow: '0px 0px 10px #000, 0px 0px 10px #000, 0px 0px 10px #000, 0px 0px 10px #000',
+                                                textAlign: 'center',
+                                                lineHeight: '1.5'
+                                            }}                                            
+                                        >
+                                            Maiores Doadores
+                                        </h5>
+                                        
+                                        <OrderedList className="text-gray-300 unselectable" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '500px' }}>
+                                            <OrderedList.Item style={{ marginTop: '30px', textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+
+                                            <OrderedList.Item style={{ textShadow: '0px 0px 5px #faed7d, 0px 0px 10px #000' }}>
+                                                Teste
+                                            </OrderedList.Item>
+                                        </OrderedList>
+
+                                    </AdornedStoneWallBoard>
+                                </Row>
+                            </Container>
+                        </Div>
                     </Col>
                 </Row>
             </SectionBackdrop>
