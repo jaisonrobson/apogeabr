@@ -29,6 +29,7 @@ const withModalCover = (WrappedComponent) => withModalContextConsumer(
                 width,
                 height,
                 onClick,
+                modalProps,
                 ...passingProps
             } = this.props
 
@@ -51,6 +52,7 @@ const withModalCover = (WrappedComponent) => withModalContextConsumer(
                     width={width}
                     height={height}
                     onClick={this.onOpen}                    
+                    {...modalProps}
                 />
             </Fragment>
             )

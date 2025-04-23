@@ -147,7 +147,9 @@ const Videos = () => {
                                                                     height: '100%',
                                                                     border:"none",
                                                                 }}
-                                                                
+                                                                modalProps={{
+                                                                    borderRadius: "20px",
+                                                                }}
                                                             />
                                                         </Col>
                                                     ))}

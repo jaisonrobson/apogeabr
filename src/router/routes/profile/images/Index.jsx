@@ -125,7 +125,12 @@ const Images = () => {
                                                                 image={image.image}
                                                                 imageProps={{
                                                                     width: '100%',
-                                                                    height: '100%'
+                                                                    height: '100%',
+                                                                    objectFit: 'cover',
+                                                                    borderRadius: '50px',
+                                                                }}
+                                                                modalProps={{
+                                                                    borderRadius: '20px',
                                                                 }}
                                                             />
                                                         </Col>

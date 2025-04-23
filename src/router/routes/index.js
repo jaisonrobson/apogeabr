@@ -78,6 +78,8 @@ const ROUTES = {
     USER_ADMIN_PANEL_CHARACTERS_VALIDATE_SUBMIT: { path: "/user/admin_panel/characters/validate/submit/", nickname: "Personagens"},
     USER_ADMIN_PANEL_VIDEOS: { path: "/user/admin_panel/videos/", nickname: "Vídeos"},
     USER_ADMIN_PANEL_VIDEOS_VALIDATE_SUBMIT: { path: "/user/admin_panel/videos/validate/submit/", nickname: "Vídeos"},
+    USER_ADMIN_PANEL_IMAGES: { path: "/user/admin_panel/images/", nickname: "Imagens"},
+    USER_ADMIN_PANEL_IMAGES_VALIDATE_SUBMIT: { path: "/user/admin_panel/images/validate/submit/", nickname: "Imagens"},
 }
 
 export default ROUTES

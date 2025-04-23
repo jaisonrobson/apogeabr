@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from 'react'
 import _ from 'lodash'
-import { faCertificate, faCheck, faXmark, faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faCertificate, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import ROUTES from 'router/routes'
 
@@ -15,15 +15,13 @@ import {
     MarbleTabletBoard,
     Container,
     SearchableFormConnectedPaginatedTable,
-    Input,
     Icon,
     CopyableDisabledInput,
-    ExpandableVideoModal,
+    Image,
     Button,
     CheckboxInput,
+    ExpandableImageModal,
 } from 'components'
-
-import { getYouTubeThumbnail } from 'util/string'
 
 const Index = () => {
     const { formatDateTime } = useContext(I18nContext)
@@ -46,22 +44,22 @@ const Index = () => {
                                         <Fragment>
                                             <SearchableFormConnectedPaginatedTable
                                                 light
-                                                searchEndpoint={`${process.env.REACT_APP_BACKEND_HOST}/videos/search`}
-                                                endpoint={`${process.env.REACT_APP_BACKEND_HOST}/videos`}
-                                                additionalAllowedProperties={(payload) => _.map(payload, (video) => `validate-${video.id}`)}
+                                                searchEndpoint={`${process.env.REACT_APP_BACKEND_HOST}/images/search`}
+                                                endpoint={`${process.env.REACT_APP_BACKEND_HOST}/images`}
+                                                additionalAllowedProperties={(payload) => _.map(payload, (image) => `validate-${image.id}`)}
                                                 additionalValidations={(payload) => {
                                                     const validations = {}
-                                                    _.forEach(payload, (video) => {
-                                                        validations[`validate-${video.id}`] = booleanValidation
+                                                    _.forEach(payload, (image) => {
+                                                        validations[`validate-${image.id}`] = booleanValidation
                                                     })
                                                     return validations
                                                 }}
                                                 formProps={{
-                                                    action: ROUTES.USER_ADMIN_PANEL_VIDEOS_VALIDATE_SUBMIT.path,
+                                                    action: ROUTES.USER_ADMIN_PANEL_IMAGES_VALIDATE_SUBMIT.path,
                                                     defaultValues: (payload) => {
                                                         const defaultValues = {}
-                                                        _.forEach(payload, (video) => {
-                                                            defaultValues[`validate-${video.id}`] = video.validated
+                                                        _.forEach(payload, (image) => {
+                                                            defaultValues[`validate-${image.id}`] = image.validated
                                                         })
                                                         return defaultValues
                                                     }
@@ -74,7 +72,7 @@ const Index = () => {
                                                                 color="white"
                                                                 height="70px"
                                                                 animationBackgroundColor="#B8FFC3"
-                                                                animationName="videoValidationSubmitAnimation"
+                                                                animationName="imageValidationSubmitAnimation"
                                                                 marginTop="3rem"
                                                                 fontFamily="Retro Computer"
                                                             />
@@ -113,11 +111,11 @@ const Index = () => {
                                                                 </Table.CellHeader>
 
                                                                 <Table.CellHeader>
-                                                                    URL do Vídeo
+                                                                    URL da Imagem
                                                                 </Table.CellHeader>
 
                                                                 <Table.CellHeader>
-                                                                    Vídeo
+                                                                    Imagem
                                                                 </Table.CellHeader>
 
                                                                 <Table.CellHeader>
@@ -127,10 +125,10 @@ const Index = () => {
                                                         </Table.Header>
 
                                                         <Table.Body>
-                                                            {_.map(payload, (video, index) => (
-                                                                <Table.Row key={video.id} light>
+                                                            {_.map(payload, (image, index) => (
+                                                                <Table.Row key={image.id} light>
                                                                     <Table.Cell>
-                                                                        {video.id}
+                                                                        {image.id}
                                                                     </Table.Cell>
 
                                                                     <Table.Cell>
@@ -150,43 +148,42 @@ const Index = () => {
                                                                                 width="25px"
                                                                             >
                                                                                 <CheckboxInput 
-                                                                                    name={`validate-${video.id}`}
+                                                                                    name={`validate-${image.id}`}
                                                                                     register={register}
-                                                                                    defaultChecked={video.validated}
+                                                                                    defaultChecked={image.validated}
                                                                                 />
                                                                             </Col>
                                                                         </Row>
                                                                     </Table.Cell>
 
                                                                     <Table.Cell>
-                                                                        {formatDateTime(video.created_at)}
+                                                                        {formatDateTime(image.created_at)}
                                                                     </Table.Cell>
 
                                                                     <Table.Cell>
-                                                                        {video?.user_name || '-'}
+                                                                        {image?.user_name || '-'}
                                                                     </Table.Cell>
 
                                                                     <Table.Cell>
-                                                                        {formatDateTime(video.updated_at)}
+                                                                        {formatDateTime(image.updated_at)}
                                                                     </Table.Cell>
 
                                                                     <Table.Cell>
                                                                         <CopyableDisabledInput
-                                                                            value={video.link}
+                                                                            value={image.image}
                                                                         />
                                                                     </Table.Cell>
 
                                                                     <Table.Cell>
-                                                                        <ExpandableVideoModal
+                                                                        <ExpandableImageModal
                                                                             width="80px"
                                                                             height="50px"
-                                                                            border="none"
-                                                                            image={getYouTubeThumbnail(video.link)}
-                                                                            url={video.link}
-                                                                            videoProps={{
+                                                                            image={image.image}
+                                                                            imageProps={{
                                                                                 width: '100%',
                                                                                 height: '100%',
-                                                                                border:"none",
+                                                                                borderRadius: "50px",
+                                                                                objectFit: 'cover',
                                                                             }}
                                                                             modalProps={{
                                                                                 borderRadius: "8px",
@@ -195,7 +192,7 @@ const Index = () => {
                                                                     </Table.Cell>
 
                                                                     <Table.Cell>
-                                                                        {video.validated
+                                                                        {image.validated
                                                                         ? (
                                                                             <Fragment>
                                                                                 <Icon icon={faCertificate} width="30px" height="30px" color="lightgreen" style={{ position: 'absolute' }} />

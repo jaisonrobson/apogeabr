@@ -1,37 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Image, Container, Row, Col } from 'components'
-
-const Wrapper = styled.div`
-    position: relative;
-    box-shadow: 0 12px 18px rgba(0,0,0,.28);
-    transition: transform .2s;
-
-    &:hover {
-        transform: scale(1.1);
-        box-shadow: 0 10px 10px rgba(0,0,0,.28);
-    }
-`
-
-const CaptionOverlay = styled(({ width, height, ...props }) => <div {...props} />)`
-    position: absolute;
-    z-index: 3;
-    ${({ width }) => width ? `width: ${width};` : ''}
-    ${({ height }) => height ? `height: ${height};` : ''}
-
-    &:hover {
-        background-color: #ffffff15;
-    }
-`
-
-const GradientOverlay = styled(({ width, height, ...props }) => <div {...props} />)`
-    position: absolute;
-    z-index: 2;
-    ${({ width }) => width ? `width: ${width};` : ''}
-    ${({ height }) => height ? `height: ${height};` : ''}
-    background: linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 35%, #000000 110%);
-`
+import { Image, Container, Row, Col, Div } from 'components'
 
 const StyledH4 = styled.h4`
     margin: 0;
@@ -43,11 +13,43 @@ const StyledP = styled.p`
     color: #FFFFFFA9;
 `
 
-const Cover = ({ title, caption, image, width, height, onClick }) => (
-    <Wrapper onClick={onClick} style={{ width: width, height: height }}>
-        <GradientOverlay width={width} height={height} />
+const Wrapper = Div
+const GradientOverlay = Div
+const CaptionOverlay = Div
 
-        <CaptionOverlay width={width} height={height}>
+const Cover = ({ title, caption, image, width, height, onClick, ...props }) => (
+    <Wrapper
+        position="relative"
+        boxShadow="0 12px 18px rgba(0,0,0,.28)"
+        transition="transform .2s"
+        onHover={{
+            transform: "scale(1.1)",
+            boxShadow: "0 10px 10px rgba(0,0,0,.28)",
+        }}
+        width={width}
+        height={height}
+        onClick={onClick}
+        {...props}
+    >
+        <GradientOverlay
+            position="absolute"
+            zIndex="2"
+            background="linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 35%, #000000 110%)"
+            width={width}
+            height={height}
+            {...props}
+        />
+
+        <CaptionOverlay
+            position="absolute"
+            zIndex="3"
+            width={width}
+            height={height}
+            onHover={{
+                backgroundColor: "#ffffff15",
+            }}
+            {...props}
+        >
             <Container
                 padding="0"
                 width="100%"
@@ -76,6 +78,7 @@ const Cover = ({ title, caption, image, width, height, onClick }) => (
             height={height}
             objectFit="cover"
             zIndex="1"
+            {...props}
         />
     </Wrapper>
 )

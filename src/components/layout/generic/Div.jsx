@@ -18,6 +18,7 @@ const StyledDiv = styled(({
     height,
     minHeight,
     maxHeight,
+    overflow,
     overflowWrap,
     backgroundColor,
     display,
@@ -33,6 +34,8 @@ const StyledDiv = styled(({
     textAlign,
     position,
     zIndex,
+    borderRadius,
+    boxShadow,
     top,
     left,
     right,
@@ -71,6 +74,7 @@ const StyledDiv = styled(({
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ minHeight }) => minHeight ? `min-height: ${minHeight};` : ``}
     ${({ maxHeight }) => maxHeight ? `max-height: ${maxHeight};` : ``}
+    ${({ overflow }) => overflow ? `overflow: ${overflow};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ background }) => background ? `background: ${background};` : ``}
     ${({ backgroundColor }) => backgroundColor ? `background-color: ${backgroundColor};` : ``}
@@ -81,6 +85,8 @@ const StyledDiv = styled(({
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
     ${({ position }) => position ? `position: ${position};` : ``}
     ${({ zIndex }) => zIndex ? `z-index: ${zIndex};` : ``}
+    ${({ borderRadius }) => borderRadius ? `border-radius: ${borderRadius};` : ``}
+    ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}
 
     ${({ top }) => top ? `top: ${top};` : ``}
     ${({ bottom }) => bottom ? `bottom: ${bottom};` : ``}
@@ -94,6 +100,7 @@ const StyledDiv = styled(({
     ${({ maskSize }) => maskSize ? `mask-size: ${maskSize};` : ``}
 
     ${({ onHover }) => onHover ? `&:hover {
+        ${onHover?.transform ? `transform: ${onHover?.transform};` : ``}
         ${onHover?.opacity ? `opacity: ${onHover?.opacity};` : ``}
         ${onHover?.backgroundColor ? `background-color: ${onHover?.backgroundColor};` : ``}
         ${onHover?.color ? `color: ${onHover?.color};` : ``}

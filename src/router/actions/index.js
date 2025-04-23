@@ -37,3 +37,4 @@ export { default as adminCommuniqueCreateSubmit } from './adminpanel/communiques
 export { default as adminCommuniqueUpdateSubmit } from './adminpanel/communiques/adminCommuniqueUpdateSubmit'
 export { default as adminCharacterValidateSubmit } from './adminpanel/characters/adminCharacterValidateSubmit'
 export { default as adminVideoValidateSubmit } from './adminpanel/videos/adminVideoValidateSubmit'
+export { default as adminImageValidateSubmit } from './adminpanel/images/adminImageValidateSubmit'
