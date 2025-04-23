@@ -177,9 +177,10 @@ const Content = () => {
                                 </h5>
                                 
                                 <div className='text-gray-400'>
-                                    <p>Faça uma doação de R$ 10,00 reais para deixar seu video de até 2 minutos na seção de videos.</p>
+                                    <p>Faça uma doação de R$ 10,00 reais para deixar seu video na seção de videos.</p>
                                     <p>Uma doação de R$ 5,00 reais para deixar sua foto na seção de screenshots.</p>
-                                    <p>Os maiores doadores aparecem no top 10 prestigiados.</p>
+                                    <p>Os maiores doadores aparecem no top 10 maiores doadores.</p>
+                                    <p>Os assinantes mais antigos aparecem no top 10 prestigiados.</p>
                                 </div>
                             </Row>
                         </Container>
