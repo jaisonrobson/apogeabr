@@ -33,6 +33,8 @@ export { default as SearchableConnectedPaginatedTable } from "./SearchableConnec
 export { default as ConnectedPaginatedCardsDisplay } from "./ConnectedPaginatedCardsDisplay"
 export { default as ExpandableImageModal } from "./ExpandableImageModal"
 export { default as ExpandableVideoModal } from "./ExpandableVideoModal"
+export { default as AnimatedMotionCard } from "./AnimatedMotionCard"
+export { default as DonationAnimatedMotionCard } from "./DonationAnimatedMotionCard"
 
 //Custom -> Boards
 export { default as WoodParchmentBoard } from "./WoodParchmentBoard"

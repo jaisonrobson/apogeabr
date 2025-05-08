@@ -22,6 +22,7 @@ const ROUTES = {
     USER_PROFILE_CHARACTERS_UPDATE: { path: "/user/profile/characters/update/", nickname: "Personagens"},
     USER_PROFILE_CHARACTERS_UPDATE_SUBMIT: { path: "/user/profile/characters/update/submit/", nickname: "Personagens"},
     USER_PROFILE_AFFILIATED: { path: "/user/profile/affiliated/", nickname: "Afiliado"},
+    USER_PROFILE_DONATIONS: { path: "/user/profile/donations/", nickname: "Doações"},
     USER_PROFILE_IMAGES: { path: "/user/profile/images/", nickname: "Imagens"},
     USER_PROFILE_IMAGES_SUBMIT: { path: "/user/profile/images/submit/", nickname: "Imagens"},
     USER_PROFILE_VIDEOS: { path: "/user/profile/videos/", nickname: "Videos"},

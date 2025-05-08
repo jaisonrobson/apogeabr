@@ -11,6 +11,7 @@ const StyledInput = styled(({
     marginBottom,
     minWidth,
     width,
+    maxWidth,
     height,
     overflowWrap,
     boxShadow,
@@ -42,6 +43,7 @@ const StyledInput = styled(({
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ``}
     ${({ minWidth }) => minWidth ? `min-width: ${minWidth};` : ``}
     ${({ width }) => width ? `width: ${width};` : ``}
+    ${({ maxWidth }) => maxWidth ? `max-width: ${maxWidth};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}
     ${({ overflowWrap }) => overflowWrap ? `overflow-wrap: ${overflowWrap};` : ``}
     ${({ boxShadow }) => boxShadow ? `box-shadow: ${boxShadow};` : ``}

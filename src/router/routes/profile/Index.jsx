@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, forwardRef } from 'react'
 import { useNavigate, useRouteLoaderData } from 'react-router-dom'
+import { initMercadoPago, Payment } from '@mercadopago/sdk-react'
 
 import { withModalContext, withI18nContext } from 'contexts'
 
@@ -10,6 +11,10 @@ import Top from './Top'
 import ROUTES from 'router/routes'
 
 import { ScrollToTopButton, LeftCollapsibleSidebar, StoneTabletSidebar, LeftCollapsible } from 'components'
+
+initMercadoPago(`${process.env.REACT_APP_MERCADO_PAGO_PUBLIC_KEY}`, {
+    locale: 'pt-BR'
+})
 
 const LeftStoneTabletSidebar = (props) => <StoneTabletSidebar collapsibleComponent={LeftCollapsible} {...props}/>
 

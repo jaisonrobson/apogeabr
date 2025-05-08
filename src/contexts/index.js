@@ -7,3 +7,4 @@ export { withCollapsibleContext, FirstCollapsibleContext, SecondCollapsibleConte
 export { withDefaultPaginationContext, DefaultPaginationContext } from './withDefaultPaginationContext'
 export { withI18nContext, I18nContext } from './withI18nContext'
 export { withFormDataContext, FormDataContext } from './withFormDataContext'
+export { withMercadoPagoBricksContext, MercadoPagoBricksContext } from './withMercadoPagoBricksContext'

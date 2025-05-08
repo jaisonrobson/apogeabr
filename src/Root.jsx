@@ -20,6 +20,7 @@ import ProfileCharacters from './router/routes/profile/characters/Index'
 import ProfileCharactersCreate from './router/routes/profile/characters/Create'
 import ProfileCharactersUpdate from './router/routes/profile/characters/Update'
 import ProfileAffiliated from './router/routes/profile/affiliated/Index'
+import ProfileDonations from './router/routes/profile/donations/Index'
 import ProfileImages from './router/routes/profile/images/Index'
 import ProfileVideos from './router/routes/profile/videos/Index'
 import AdminPanel from './router/routes/adminpanel/Index'
@@ -208,6 +209,10 @@ const router = createBrowserRouter([
                             {
                                 path: ROUTES.USER_PROFILE_AFFILIATED.path,
                                 element: <ProfileAffiliated />,
+                            },
+                            {
+                                path: ROUTES.USER_PROFILE_DONATIONS.path,
+                                element: <ProfileDonations />,
                             },
                             {
                                 path: ROUTES.USER_PROFILE_IMAGES.path,
