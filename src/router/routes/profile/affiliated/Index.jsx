@@ -246,7 +246,11 @@ const Affiliated = () => {
                                                             </Table.CellHeader>
 
                                                             <Table.CellHeader>
-                                                                Última atualização
+                                                                Última atualização interna
+                                                            </Table.CellHeader>
+
+                                                            <Table.CellHeader>
+                                                                Última atualização externa
                                                             </Table.CellHeader>
 
                                                             <Table.CellHeader>
@@ -276,6 +280,10 @@ const Affiliated = () => {
 
                                                                 <Table.Cell>
                                                                     {formatDateTime(subscription.updated_at)}
+                                                                </Table.Cell>
+
+                                                                <Table.Cell>
+                                                                    {formatDateTime(subscription.last_external_update_date)}
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>

@@ -244,7 +244,11 @@ const Donations = () => {
                                                             </Table.CellHeader>
 
                                                             <Table.CellHeader>
-                                                                Última atualização
+                                                                Última atualização interna
+                                                            </Table.CellHeader>
+
+                                                            <Table.CellHeader>
+                                                                Última atualização externa
                                                             </Table.CellHeader>
 
                                                             <Table.CellHeader>
@@ -274,6 +278,10 @@ const Donations = () => {
 
                                                                 <Table.Cell>
                                                                     {formatDateTime(donation.updated_at)}
+                                                                </Table.Cell>
+
+                                                                <Table.Cell>
+                                                                    {formatDateTime(donation.last_external_update_date)}
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>
