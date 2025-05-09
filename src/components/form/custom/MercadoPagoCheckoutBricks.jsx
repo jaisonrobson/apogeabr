@@ -192,7 +192,7 @@ import {
     }
 
     return (
-        <Container>
+        <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
             <Row>
                 <Col>
                     <Input
@@ -257,21 +257,46 @@ import {
     } = useContext(MercadoPagoBricksContext)
 
     return (
-        <Container>
+        <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
             <Row>
                 <Col>
-                    <Button onClick={() => setSelectedPaymentMethod('credit-card')}>
-                        <Icon icon={faCreditCard} />
-                        Outro método de pagamento
+                    <Button
+                        onClick={() => setSelectedPaymentMethod('credit-card')}
+                        onHover={{
+                            animation: {
+                                property: `donationPaymentSelectionAnimationButton 0.5s linear 0s infinite alternate`,
+                                corpse: `@keyframes donationPaymentSelectionAnimationButton {
+                                    0%  {transform: scale3d(1,1,1);}
+                                    100%  {transform: scale3d(1.03,1.03,1.03); background-color: #00000030; border-radius: 8px}
+                                }`
+                            }
+                        }}
+                        backgroundColor="#00000010"
+                        color="#000000"
+                    >
+                        <Icon icon={faCreditCard} color="#000000" margin="10px" />
+                        <p>Outro método de pagamento</p>
                     </Button>
                 </Col>
             </Row>
 
             <Row>
                 <Col>
-                    <Button onClick={() => setSelectedPaymentMethod('pix')}>
-                        <Icon icon={faPix} />
-                        Pagar com PIX
+                    <Button onClick={() => setSelectedPaymentMethod('pix')}
+                        onHover={{
+                            animation: {
+                                property: `donationPaymentSelectionAnimationButton 0.5s linear 0s infinite alternate`,
+                                corpse: `@keyframes donationPaymentSelectionAnimationButton {
+                                    0%  {transform: scale3d(1,1,1);}
+                                    100%  {transform: scale3d(1.03,1.03,1.03); background-color: #00000030; border-radius: 8px}
+                                }`
+                            }
+                        }}
+                        backgroundColor="#00000010"
+                        color="#000000"
+                    >
+                        <Icon icon={faPix} color="#000000" margin="10px" />
+                        <p>Pagar com PIX</p>
                     </Button>
                 </Col>
             </Row>
@@ -378,13 +403,17 @@ const MercadoPagoCheckoutBricks = ({
     }, [paymentData, endpoint])
 
     const handlePayment = async (param) => {
-        console.log("Dados do pagamento recebidos:", param)
-        setPaymentData(param)
-        setShowStatusScreen(true)
-
         try {
-            await axios.post(`${endpoint}/verify_payment`, 
-                { preference_id: preferenceId },
+            const response = await axios.post(`${endpoint}/create_credit_card_payment`,
+                {
+                    preference_id: preferenceId,
+                    transaction_amount: param.formData.transaction_amount,
+                    token: param.formData.token,
+                    email: param.formData.payer.email,
+                    cpf: param.formData.payer.identification.number,
+                    payment_method_id: param.formData.payment_method_id,
+                    installments: param.formData.installments,
+                },
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -392,12 +421,21 @@ const MercadoPagoCheckoutBricks = ({
                     }
                 }
             )
-            
-            setPaymentStatus('approved')
+
+            setPaymentData({
+                email: param.formData.payer.email,
+                cpf: param.formData.payer.identification.number,
+                paymentId: response.data.id,
+                paymentStatus: response.data.status,
+            })
+
+            setPaymentStatus(response.data.status)
+
+            setShowStatusScreen(true)
+            setShowPaymentData(true)            
         } catch (error) {
             console.error("Erro ao verificar pagamento:", error)
             setError("Erro ao processar pagamento. Por favor, tente novamente.")
-            setPaymentStatus('rejected')
         }
     }
 
@@ -439,7 +477,6 @@ const MercadoPagoCheckoutBricks = ({
                                             }}
                                             onSubmit={handlePayment}
                                             onReady={() => {
-                                                console.log("Brick pronto")
                                             }}
                                             onError={(error) => {
                                                 console.error("Erro no Brick:", error)
@@ -464,7 +501,6 @@ const MercadoPagoCheckoutBricks = ({
                                                     }
                                                 }}
                                                 onReady={() => {
-                                                    console.log("StatusScreen pronto")
                                                 }}
                                                 onError={(error) => {
                                                     console.error("Erro no StatusScreen:", error)
@@ -507,41 +543,49 @@ const MercadoPagoCheckoutBricks = ({
                                     <Div style={{ marginTop: '20px', textAlign: 'center' }}>
                                         <TitleH4 className="text-black">Dados do Pagamento:</TitleH4>
 
-                                        <Row>
-                                            <Col>
-                                                <p style={{ maxWidth: '90%' }}>
-                                                    <strong style={{paddingRight: '5px'}}>Email: </strong>
-                                                    {paymentData.email}
-                                                </p>
-                                            </Col>
-                                        </Row>
+                                        {paymentData.email ? (
+                                            <Row>
+                                                <Col>
+                                                    <p style={{ maxWidth: '90%' }}>
+                                                        <strong style={{paddingRight: '5px'}}>Email: </strong>
+                                                        {paymentData.email}
+                                                    </p>
+                                                </Col>
+                                            </Row>
+                                        ) : null}                                        
 
-                                        <Row>
-                                            <Col>
-                                                <p style={{ maxWidth: '90%' }}>
-                                                    <strong style={{paddingRight: '5px'}}>CPF: </strong>
-                                                    {paymentData.cpf}
-                                                </p>
-                                            </Col>
-                                        </Row>
+                                        {paymentData.cpf ? (
+                                            <Row>
+                                                <Col>
+                                                    <p style={{ maxWidth: '90%' }}>
+                                                        <strong style={{paddingRight: '5px'}}>CPF: </strong>
+                                                        {paymentData.cpf}
+                                                    </p>
+                                                </Col>
+                                            </Row>
+                                        ) : null}
 
-                                        <Row>
-                                            <Col>
-                                                <p style={{ maxWidth: '90%' }}>
-                                                    <strong style={{paddingRight: '5px'}}>Nome: </strong>
-                                                    {paymentData.first_name}
-                                                </p>
-                                            </Col>
-                                        </Row>
+                                        {paymentData.first_name ? (
+                                            <Row>
+                                                <Col>
+                                                    <p style={{ maxWidth: '90%' }}>
+                                                        <strong style={{paddingRight: '5px'}}>Nome: </strong>
+                                                        {paymentData.first_name}
+                                                    </p>
+                                                </Col>
+                                            </Row>
+                                        ) : null}
 
-                                        <Row>
-                                            <Col>
-                                                <p style={{ maxWidth: '90%' }}>
-                                                    <strong style={{paddingRight: '5px'}}>Sobrenome: </strong>
-                                                    {paymentData.last_name}
-                                                </p>
-                                            </Col>
-                                        </Row>
+                                        {paymentData.last_name ? (
+                                            <Row>
+                                                <Col>
+                                                    <p style={{ maxWidth: '90%' }}>
+                                                        <strong style={{paddingRight: '5px'}}>Sobrenome: </strong>
+                                                        {paymentData.last_name}
+                                                    </p>
+                                                </Col>
+                                            </Row>
+                                        ) : null}
                                     </Div>
                                 )}
                             </Col>

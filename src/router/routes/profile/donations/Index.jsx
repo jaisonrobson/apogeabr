@@ -78,12 +78,12 @@ const Donations = () => {
                                         justifyContent='center'
                                     >
                                         <DonationAnimatedMotionCard
-                                            cardTitle="R$ 2,00"
+                                            cardTitle="R$ 5,00"
                                             cardItems={[
                                                 "+1 Imagem no hall da fama",
                                                 "+50 Créditos"
                                             ]}
-                                            defaultAmount={2}
+                                            defaultAmount={5}
                                             cardBackground="linear-gradient(-45deg, #C9B091, #C99E6B, #544333)"
                                             cardImageBackground="linear-gradient(45deg, #C9B09160, #C99E6B60, #54433360)"
                                             cardBorder="1px solid #544333"

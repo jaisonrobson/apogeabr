@@ -9,6 +9,8 @@ const StyledIcon = styled(({
     marginTop,
     marginBottom,
     marginRight,
+    marginLeft,
+    margin,
     color,
     opacity,
     onHover = false,
@@ -22,7 +24,8 @@ const StyledIcon = styled(({
     ${({ marginTop }) => marginTop ? `margin-top: ${marginTop};` : ''}
     ${({ marginBottom }) => marginBottom ? `margin-bottom: ${marginBottom};` : ''}
     ${({ marginRight }) => marginRight ? `margin-right: ${marginRight};` : ''}
-
+    ${({ marginLeft }) => marginLeft ? `margin-left: ${marginLeft};` : ''}
+    ${({ margin }) => margin ? `margin: ${margin};` : ''}
     ${({ opacity }) => opacity ? `opacity: ${opacity};` : ''}
     ${({ color }) => color ? `color: ${color};` : ''}
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ''}
