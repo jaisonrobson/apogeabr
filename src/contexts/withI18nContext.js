@@ -14,10 +14,16 @@ i18n
   .use(initReactI18next) // Integrar com React
   .init({
     resources: {
+      "en": {
+        translation: enUSTranslations,
+      },
       "en-US": {
         translation: enUSTranslations,
       },
       "pt-BR": {
+        translation: ptBRTranslations,
+      },
+      "pt": {
         translation: ptBRTranslations,
       },
     },

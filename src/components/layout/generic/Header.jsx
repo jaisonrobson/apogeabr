@@ -24,6 +24,7 @@ const StyledHeader = styled(({
     fontFamily,
     textShadow,
     textAlign,
+    lineHeight,
     HeaderComponent,
     ...props
 }) => <HeaderComponent {...props} />)`    
@@ -44,6 +45,8 @@ const StyledHeader = styled(({
     ${({ fontFamily }) => fontFamily ? `font-family: ${fontFamily};` : ``}
     ${({ textShadow }) => textShadow ? `text-shadow: ${textShadow};` : ``}
     ${({ textAlign }) => textAlign ? `text-align: ${textAlign};` : ``}
+    ${({ lineHeight }) => lineHeight ? `line-height: ${lineHeight};` : ``}
+
 
     ${({ width }) => width ? `width: ${width};` : ``}
     ${({ height }) => height ? `height: ${height};` : ``}

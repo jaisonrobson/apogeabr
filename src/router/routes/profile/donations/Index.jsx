@@ -4,7 +4,6 @@ import { useLocation } from 'react-router'
 import axios from "axios"
 
 import { compareDates } from 'util/intl'
-import { typeAsDescription } from 'util/string'
 
 import { I18nContext } from 'contexts'
 

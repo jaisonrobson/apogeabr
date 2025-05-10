@@ -65,7 +65,7 @@ const AffiliatedSubscriptionButton = ({
       </Row>
 
       <Row>
-        <Col>
+        <Col textAlign="center">
           { !_.isEmpty(error) ? <Span>{error}</Span> : null }
         </Col>
       </Row>

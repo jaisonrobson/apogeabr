@@ -30,6 +30,7 @@ const AffiliatedSubscriptionCard = ({
     buttonHoverBackgroundColor="#FCA67750",
     buttonBorder="2px solid #B97A5740",
     image=null,
+    cardFooterChildren=null,
 }) => {
     const x = useMotionValue(0)
     const y = useMotionValue(0)
@@ -127,14 +128,16 @@ const AffiliatedSubscriptionCard = ({
                     ))}
                 </ListGroup>
 
-                <Card.Footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '2rem', paddingBottom: '1rem' }}>
-                    <AffiliatedSubscriptionButton
-                        level={level}
-                        color={buttonColor}
-                        backgroundColor={buttonBackgroundColor}
-                        hoverBackgroundColor={buttonHoverBackgroundColor}
-                        border={buttonBorder}
-                    />
+                <Card.Footer style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '2rem', paddingBottom: '1rem', gap: '10px' }}>
+                    {cardFooterChildren ? cardFooterChildren : (
+                        <AffiliatedSubscriptionButton
+                            level={level}
+                            color={buttonColor}
+                            backgroundColor={buttonBackgroundColor}
+                            hoverBackgroundColor={buttonHoverBackgroundColor}
+                            border={buttonBorder}
+                        />
+                    )}
                 </Card.Footer>
             </Card>
         </motion.div>

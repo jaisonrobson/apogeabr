@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 export const addSlashIfNeeded = (str) => _.endsWith(str, '/') ? str : str + '/'
 
-export const typeAsDescription = (typeNumber) => {
+export const subscriptionTypeAsDescription = (typeNumber) => {
     switch(typeNumber) {
         case 1:
             return "newbie"

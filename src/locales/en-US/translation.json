@@ -1,4 +1,5 @@
 {
+    "approved": "approved",
     "pending": "pending",
     "paid": "paid",
     "processing": "processing",

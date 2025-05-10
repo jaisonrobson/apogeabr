@@ -3,7 +3,7 @@ import _ from 'lodash'
 import axios from "axios"
 
 import { compareDates } from 'util/intl'
-import { typeAsDescription } from 'util/string'
+import { subscriptionTypeAsDescription } from 'util/string'
 
 import { I18nContext } from 'contexts'
 
@@ -95,7 +95,7 @@ const Images = () => {
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>
-                                                                    {translate(typeAsDescription(subscription.level))}
+                                                                    {translate(subscriptionTypeAsDescription(subscription.level))}
                                                                 </Table.Cell>
 
                                                                 <Table.Cell>
