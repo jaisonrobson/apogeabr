@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, Fragment } from 'react'
 import _ from 'lodash'
 import { useLocation, useRouteLoaderData } from 'react-router'
 import axios from "axios"
-import { faGear, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faGear, faXmark, faCheck, faTimes, faSpinner, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import { compareDates } from 'util/intl'
 import { subscriptionTypeAsDescription } from 'util/string'
@@ -22,6 +22,7 @@ import {
     ConnectedPaginatedTable,
     Icon,
     HoverableButton,
+    Div,
 } from 'components'
 
 import TowerImage from 'images/layout/profile/subscriptions/tower_1.png'
@@ -29,48 +30,305 @@ import BeggarImage from 'images/layout/profile/subscriptions/beggar.png'
 import BishopImage from 'images/layout/profile/subscriptions/bishop.png'
 import KingImage from 'images/layout/profile/subscriptions/king.png'
 
-const SubscribedCardActionButtons = ({ level }) => {
-    
-    return (
-        <Row>
-            <Col display="flex" gap="1rem">
-                <HoverableButton
-                    width="50px"
-                    height="50px"
-                    onHover={{
-                        animation: {
-                            property: `subscribeConfigurationActionButtonAnimation_${level} 0.5s linear 0s infinite alternate`,
-                            corpse: `@keyframes subscribeConfigurationActionButtonAnimation_${level} {
-                                0%  {transform: scale3d(1,1,1);}
-                                100%  {transform: scale3d(1.03,1.03,1.03); background-color: #FFFA85; border-radius: 8px}
-                            }`
-                        }
-                    }}
-                >
-                    <Icon icon={faGear} color="#FFFFFF" />
-                </HoverableButton>
+const CancellationInformation = ({ status, onClickBack }) => {
+    const { translate } = useContext(I18nContext)
 
-                <HoverableButton
-                    width="50px"
-                    height="50px"
-                    onHover={{
-                        animation: {
-                            property: `subscribeCancelActionButtonAnimation_${level} 0.5s linear 0s infinite alternate`,
-                            corpse: `@keyframes subscribeCancelActionButtonAnimation_${level} {
-                                0%  {transform: scale3d(1,1,1);}
-                                100%  {transform: scale3d(1.03,1.03,1.03); background-color: #ED8C8E; border-radius: 8px}
-                            }`
-                        }
-                    }}
-                >
-                    <Icon icon={faXmark} color="#FFFFFF" />
-                </HoverableButton>
-            </Col>
-        </Row>
+    const getStatusConfig = () => {
+        switch (status) {
+            case 'success':
+                return {
+                    color: '#28a745',
+                    title: 'Cancelamento Realizado!',
+                    message: 'Sua assinatura foi cancelada com sucesso.',
+                    icon: faCheck
+                }
+            case 'error':
+                return {
+                    color: '#dc3545',
+                    title: 'Erro no Cancelamento',
+                    message: 'Não foi possível cancelar sua assinatura. Por favor, tente novamente.',
+                    icon: faTimes
+                }
+            case 'pending':
+            default:
+                return {
+                    color: '#ffc107',
+                    title: 'Processando Cancelamento',
+                    message: 'Estamos processando seu pedido de cancelamento.',
+                    icon: faSpinner
+                }
+        }
+    }
+
+    const statusConfig = getStatusConfig()
+
+    return (
+        <Fragment>
+            <Row>
+                <Col display="flex" justifyContent="center" alignItems="center" marginTop="2rem">
+                    <HoverableButton
+                        width="75px"
+                        height="75px"
+                        onClick={onClickBack}
+                    >
+                        <Icon icon={faArrowLeft} color="#FFFFFF" />
+                    </HoverableButton>
+                </Col>
+            </Row>
+
+        <Row justifyContent="center" alignItems="center">
+            <Col
+                xs="12"
+                sm="12"
+                md="8"
+                lg="6"
+                xl="4"
+                xxl="2"
+                minWidth="800px"
+            >
+                <StoneTabletTwoBoard>
+                    <Container>
+                        <Row justifyContent="center" alignItems="center">
+                            <Col>
+                                <Div
+                                    style={{ 
+                                        textAlign: 'center',
+                                        padding: '2rem',
+                                        borderRadius: '8px',
+                                        backgroundColor: '#f8f9fa',
+                                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                                    }}
+                                >
+                                    <Div 
+                                        style={{ 
+                                            width: '80px',
+                                            height: '80px',
+                                            borderRadius: '50%',
+                                            backgroundColor: statusConfig.color,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            margin: '0 auto 2rem',
+                                            fontSize: '2rem'
+                                        }}
+                                    >
+                                        <Icon 
+                                            icon={statusConfig.icon} 
+                                            color="white"
+                                            size="2x"
+                                            spin={status === 'pending'}
+                                        />
+                                    </Div>
+
+                                    <TitleH4 
+                                        className="text-gray-800"
+                                        style={{ 
+                                            marginBottom: '1rem',
+                                        }}
+                                    >
+                                        {statusConfig.title}
+                                    </TitleH4>
+
+                                    <p style={{ 
+                                        color: '#6c757d',
+                                        fontSize: '1.1rem',
+                                        marginBottom: '1rem'
+                                    }}>
+                                        {statusConfig.message}
+                                    </p>
+
+                                    {status === 'pending' && (
+                                        <Div style={{ marginTop: '1rem' }}>
+                                            <p style={{ 
+                                                color: '#6c757d',
+                                                fontSize: '0.9rem',
+                                                fontStyle: 'italic'
+                                            }}>
+                                                Esta página será atualizada automaticamente
+                                            </p>
+                                        </Div>
+                                    )}
+                                </Div>
+                            </Col>
+                        </Row>
+                    </Container>
+                </StoneTabletTwoBoard>
+                </Col>
+            </Row>
+        </Fragment>
     )
 }
 
-const AlreadySubscribedCard = () => {
+const PaymentStatusInformation = ({ status, message, error, onClickBack }) => {
+    const { translate } = useContext(I18nContext)
+
+    const getStatusConfig = () => {
+        switch (status) {
+            case 'success':
+                return {
+                    color: '#28a745',
+                    title: 'Pagamento Realizado!',
+                    message: message || 'Sua assinatura foi ativada com sucesso.',
+                    icon: faCheck
+                }
+            case 'error':
+                return {
+                    color: '#dc3545',
+                    title: 'Erro no Pagamento',
+                    message: error || 'Não foi possível processar seu pagamento. Por favor, tente novamente.',
+                    icon: faTimes
+                }
+            case 'pending':
+            default:
+                return {
+                    color: '#ffc107',
+                    title: 'Processando Pagamento',
+                    message: 'Estamos processando seu pagamento.',
+                    icon: faSpinner
+                }
+        }
+    }
+
+    const statusConfig = getStatusConfig()
+
+    return (
+        <Fragment>
+            <Row>
+                <Col display="flex" justifyContent="center" alignItems="center" marginTop="2rem">
+                    <HoverableButton
+                        width="75px"
+                        height="75px"
+                        onClick={onClickBack}
+                    >
+                        <Icon icon={faArrowLeft} color="#FFFFFF" />
+                    </HoverableButton>
+                </Col>
+            </Row>
+
+            <Row justifyContent="center" alignItems="center">
+                <Col
+                    xs="12"
+                    sm="12"
+                    md="8"
+                    lg="6"
+                    xl="4"
+                    xxl="2"
+                    minWidth="800px"
+                >
+                    <StoneTabletTwoBoard>
+                        <Container>
+                            <Row justifyContent="center" alignItems="center">
+                                <Col>
+                                    <Div
+                                        style={{ 
+                                            textAlign: 'center',
+                                            padding: '2rem',
+                                            borderRadius: '8px',
+                                            backgroundColor: '#f8f9fa',
+                                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                                        }}
+                                    >
+                                        <Div 
+                                            style={{ 
+                                                width: '80px',
+                                                height: '80px',
+                                                borderRadius: '50%',
+                                                backgroundColor: statusConfig.color,
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                margin: '0 auto 2rem',
+                                                fontSize: '2rem'
+                                            }}
+                                        >
+                                            <Icon 
+                                                icon={statusConfig.icon} 
+                                                color="white"
+                                                size="2x"
+                                                spin={status === 'pending'}
+                                            />
+                                        </Div>
+
+                                        <TitleH4 
+                                            className="text-gray-800"
+                                            style={{ 
+                                                marginBottom: '1rem',
+                                            }}
+                                        >
+                                            {statusConfig.title}
+                                        </TitleH4>
+
+                                        <p style={{ 
+                                            color: '#6c757d',
+                                            fontSize: '1.1rem',
+                                            marginBottom: '1rem'
+                                        }}>
+                                            {statusConfig.message}
+                                        </p>
+
+                                        {status === 'pending' && (
+                                            <Div style={{ marginTop: '1rem' }}>
+                                                <p style={{ 
+                                                    color: '#6c757d',
+                                                    fontSize: '0.9rem',
+                                                    fontStyle: 'italic'
+                                                }}>
+                                                    Esta página será atualizada automaticamente
+                                                </p>
+                                            </Div>
+                                        )}
+                                    </Div>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </StoneTabletTwoBoard>
+                </Col>
+            </Row>
+        </Fragment>
+    )
+}
+
+const SubscribedCardActionButtons = ({ level, onClickConfiguration, onClickCancel }) => (
+    <Row>
+        <Col display="flex" gap="1rem">
+            <HoverableButton
+                width="50px"
+                height="50px"
+                onHover={{
+                    animation: {
+                        property: `subscribeConfigurationActionButtonAnimation_${level} 0.5s linear 0s infinite alternate`,
+                        corpse: `@keyframes subscribeConfigurationActionButtonAnimation_${level} {
+                            0%  {transform: scale3d(1,1,1);}
+                            100%  {transform: scale3d(1.03,1.03,1.03); background-color: #FFFA85; border-radius: 8px}
+                        }`
+                    }
+                }}
+                onClick={onClickConfiguration}
+            >
+                <Icon icon={faGear} color="#FFFFFF" />
+            </HoverableButton>
+
+            <HoverableButton
+                width="50px"
+                height="50px"
+                onHover={{
+                    animation: {
+                        property: `subscribeCancelActionButtonAnimation_${level} 0.5s linear 0s infinite alternate`,
+                        corpse: `@keyframes subscribeCancelActionButtonAnimation_${level} {
+                            0%  {transform: scale3d(1,1,1);}
+                            100%  {transform: scale3d(1.03,1.03,1.03); background-color: #ED8C8E; border-radius: 8px}
+                        }`
+                    }
+                }}
+                onClick={onClickCancel}
+            >
+                <Icon icon={faXmark} color="#FFFFFF" />
+            </HoverableButton>
+        </Col>
+    </Row>
+)
+
+const AlreadySubscribedCard = ({ onClickConfiguration, onClickCancel }) => {
     const { user } = useRouteLoaderData("root")
 
     switch (user?.current_subscription?.level) {
@@ -78,7 +336,7 @@ const AlreadySubscribedCard = () => {
             return (
                 <Row justifyContent="center" alignItems="center">
                     <LevelOneCardPlan
-                        cardFooterChildren={<SubscribedCardActionButtons level={user?.current_subscription?.level} />}
+                        cardFooterChildren={<SubscribedCardActionButtons level={user?.current_subscription?.level} onClickConfiguration={onClickConfiguration} onClickCancel={onClickCancel} />}
                         tabletHeaderChildren={<TitleH4 textAlign="center" lineHeight="1.5" className="text-gray-800">Assinatura ativa</TitleH4>}
                     />
                 </Row>
@@ -87,7 +345,7 @@ const AlreadySubscribedCard = () => {
             return (
                 <Row justifyContent="center" alignItems="center">
                     <LevelTwoCardPlan
-                        cardFooterChildren={<SubscribedCardActionButtons level={user?.current_subscription?.level} />}
+                        cardFooterChildren={<SubscribedCardActionButtons level={user?.current_subscription?.level} onClickConfiguration={onClickConfiguration} onClickCancel={onClickCancel} />}
                         tabletHeaderChildren={<TitleH4 textAlign="center" lineHeight="1.5" className="text-gray-800">Assinatura ativa</TitleH4>}
                     />
                 </Row>
@@ -96,7 +354,7 @@ const AlreadySubscribedCard = () => {
             return (
                 <Row justifyContent="center" alignItems="center">
                     <LevelThreeCardPlan
-                        cardFooterChildren={<SubscribedCardActionButtons level={user?.current_subscription?.level} />}
+                        cardFooterChildren={<SubscribedCardActionButtons level={user?.current_subscription?.level} onClickConfiguration={onClickConfiguration} onClickCancel={onClickCancel} />}
                         tabletHeaderChildren={<TitleH4 textAlign="center" lineHeight="1.5" className="text-gray-800">Assinatura ativa</TitleH4>}
                     />
                 </Row>
@@ -126,6 +384,7 @@ const CardPlan = ({
     image,
     cardFooterChildren,
     tabletHeaderChildren=null,
+    buttonText
 }) => (
     <Col
         xs="12"
@@ -170,6 +429,7 @@ const CardPlan = ({
                             buttonBorder={buttonBorder}
                             image={image}
                             cardFooterChildren={cardFooterChildren}
+                            buttonText={buttonText}
                         />
                     </Col>
                 </Row>
@@ -247,16 +507,32 @@ const LevelOneCardPlan = (props) => (
     />
 )
 
-const PlansCardsPresentation = () => {
+const PlansCardsPresentation = ({ onClickBack }) => {
     const { user } = useRouteLoaderData("root")
 
     return (
-        <Row className="row-cols-2" justifyContent="center" alignItems="center" gap="2rem">
-            {user?.current_subscription?.level === 1 ? null : <LevelOneCardPlan />}
+        <Row justifyContent="center" alignItems="center">
+            {user?.current_subscription ? (
+                <Row>
+                    <Col display="flex" justifyContent="center" alignItems="center" margin="2rem">
+                        <HoverableButton
+                            width="75px"
+                            height="75px"
+                            onClick={onClickBack}
+                        >
+                            <Icon icon={faArrowLeft} color="#FFFFFF" />
+                        </HoverableButton>
+                    </Col>
+                </Row>
+            ) : null}
 
-            {user?.current_subscription?.level === 2 ? null : <LevelTwoCardPlan />}
+            <Row className="row-cols-2" justifyContent="center" alignItems="center" gap="2rem">
+                {user?.current_subscription?.level === 1 ? null : <LevelOneCardPlan buttonText={user?.current_subscription ? "Mudar para este plano" : "Assinar"} />}
 
-            {user?.current_subscription?.level === 3 ? null : <LevelThreeCardPlan />}
+                {user?.current_subscription?.level === 2 ? null : <LevelTwoCardPlan buttonText={user?.current_subscription ? "Mudar para este plano" : "Assinar"} />}
+
+                {user?.current_subscription?.level === 3 ? null : <LevelThreeCardPlan buttonText={user?.current_subscription ? "Mudar para este plano" : "Assinar"} />}
+            </Row>
         </Row>
     )
 }
@@ -376,9 +652,12 @@ const SubscriptionsTablePresentation = () => {
 
 const Affiliated = () => {
     const { user } = useRouteLoaderData("root")
-    
+    const [showPlansCards, setShowPlansCards] = useState(false)
+    const [showCancellationInformation, setShowCancellationInformation] = useState(false)
+    const [cancellationStatus, setCancellationStatus] = useState('pending')
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
+    const [paymentStatus, setPaymentStatus] = useState('pending')
     const location = useLocation()
     const searchParams = new URLSearchParams(location.search)
     const preApprovalIdParam = searchParams.get('preapproval_id')
@@ -394,7 +673,18 @@ const Affiliated = () => {
                 })
     
                 setMessage(response.data.message)
+
+                if (response.data?.success) {
+                    setPaymentStatus('success')
+                    const timer = setTimeout(() => {
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                        window.location.reload()
+                    }, 5000)
+        
+                    return () => clearTimeout(timer)
+                }
             } catch (error) {
+                setPaymentStatus('error')
                 setError("Erro ao realizar assinatura.")
         
                 console.error("Erro:", error)
@@ -405,13 +695,65 @@ const Affiliated = () => {
             checkLastSubscription()
     }, [preApprovalIdParam])
 
+    useEffect(() => {
+        if (cancellationStatus === 'success') {
+            const timer = setTimeout(() => {
+                window.history.replaceState({}, document.title, window.location.pathname);
+                window.location.reload()
+            }, 1000)
+
+            return () => clearTimeout(timer)
+        }
+    }, [cancellationStatus])
+
+    const handleCancelSubscription = async () => {
+        setShowCancellationInformation(true)
+        setCancellationStatus('pending')
+
+        try {
+            const response = await axios.post(`${[process.env.REACT_APP_BACKEND_HOST]}/subscriptions/cancel`, {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                }
+            })
+
+            setCancellationStatus('success')
+            setMessage(response.data.message)
+        } catch (error) {
+            setCancellationStatus('error')
+            setError("Erro ao cancelar assinatura.")
+            console.error("Erro:", error)
+        }
+    }
+
     return (
         <Row>
             <Col display="flex" flexDirection="column" gap="2rem">
-                {user.current_subscription ? (
-                    <AlreadySubscribedCard />
+                {preApprovalIdParam ? (
+                    <PaymentStatusInformation 
+                        status={paymentStatus}
+                        message={message}
+                        error={error}
+                        onClickBack={() => {
+                            window.history.replaceState({}, document.title, window.location.pathname);
+                            window.location.reload()
+                        }}
+                    />
+                ) : showCancellationInformation ? (
+                    <CancellationInformation 
+                        status={cancellationStatus} 
+                        onClickBack={() => setShowCancellationInformation(false)}
+                    />
                 ) : (
-                    <PlansCardsPresentation />
+                    user.current_subscription && !showPlansCards ? (
+                        <AlreadySubscribedCard 
+                            onClickConfiguration={() => setShowPlansCards(true)} 
+                            onClickCancel={handleCancelSubscription} 
+                        />
+                    ) : (
+                        <PlansCardsPresentation onClickBack={() => setShowPlansCards(false)} />
+                    )
                 )}
 
                 <SubscriptionsTablePresentation />

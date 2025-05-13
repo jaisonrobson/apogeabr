@@ -31,6 +31,7 @@ const AffiliatedSubscriptionCard = ({
     buttonBorder="2px solid #B97A5740",
     image=null,
     cardFooterChildren=null,
+    buttonText,
 }) => {
     const x = useMotionValue(0)
     const y = useMotionValue(0)
@@ -136,6 +137,7 @@ const AffiliatedSubscriptionCard = ({
                             backgroundColor={buttonBackgroundColor}
                             hoverBackgroundColor={buttonHoverBackgroundColor}
                             border={buttonBorder}
+                            buttonText={buttonText}
                         />
                     )}
                 </Card.Footer>

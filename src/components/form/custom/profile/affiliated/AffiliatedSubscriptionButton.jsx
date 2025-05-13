@@ -10,6 +10,7 @@ const AffiliatedSubscriptionButton = ({
   backgroundColor="#FFFFFF20",
   hoverBackgroundColor="#FCA67750",
   border="2px solid #B97A5740",
+  buttonText="Assinar"
 }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -59,7 +60,7 @@ const AffiliatedSubscriptionButton = ({
                 }
             }}
           >
-            {loading ? "Processando..." : "Assinar"}
+            {loading ? "Processando..." : buttonText}
           </Button>
         </Col>
       </Row>
